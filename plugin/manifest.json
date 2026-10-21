@@ -1,0 +1,18 @@
+{
+  "name": "Сборщик ДС",
+  "id": "2c6c4c12-4418-4921-b805-5a9ae513879d",
+  "api": "1.0.0",
+  "main": "code.js",
+  "documentAccess": "dynamic-page",
+  "editorType": [
+    "figma"
+  ],
+  "isTool": true,
+  "relaunchButtons": [
+    {
+      "command": "2c6c4c12-4418-4921-b805-5a9ae513879d",
+      "name": "Сборщик ДС"
+    }
+  ],
+  "ui": "ui.html"
+}

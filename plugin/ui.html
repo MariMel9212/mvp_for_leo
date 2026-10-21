@@ -1,0 +1,294 @@
+<!doctype html>
+<html>
+<head>
+  <script>
+    try {
+      window.localStorage.getItem('x')
+    } catch (e) {
+      var store = new Map()
+      var shim = {
+        getItem: function (key) { return store.has(key) ? store.get(key) : null },
+        setItem: function (key, value) { store.set(key, String(value)) },
+        removeItem: function (key) { store.delete(key) },
+        clear: function () { store.clear() },
+        key: function (index) { return Array.from(store.keys())[index] || null },
+        get length() { return store.size },
+      }
+      Object.defineProperty(window, 'localStorage', { value: shim, configurable: true })
+    }
+  </script>
+  <style>
+    html, body { margin: 0; padding: 0; height: auto; min-height: 0; }
+    body { display: block; }
+    #plugin-root { height: auto; }
+    body > #plugin-root > fig-footer {
+      background-color: var(--figma-color-bg);
+      box-shadow: inset 0 1px 0 0 var(--figma-color-border);
+      border-radius: 0 0 var(--radius-large) var(--radius-large);
+    }
+    .hint, #status {
+      margin: 0;
+      color: var(--figma-color-text-secondary);
+      font-family: var(--font-family);
+      font-size: 11px;
+      line-height: 16px;
+    }
+    .hint { padding: 0 var(--spacer-2, 8px) var(--spacer-2, 8px); }
+    #status { white-space: normal; }
+    #status[data-tone="ok"] { color: var(--figma-color-text-success); }
+    #status[data-tone="error"] { color: var(--figma-color-text-danger); }
+    .panel { display: none; }
+    .panel.active { display: block; }
+  </style>
+</head>
+<body>
+  <div id="plugin-root">
+    <fig-content>
+      <fig-field>
+        <label>Система</label>
+        <fig-input-text id="system" value="DS"></fig-input-text>
+      </fig-field>
+      <fig-field>
+        <label>Шаг</label>
+        <fig-dropdown id="step">
+          <option value="palette" selected>1 · Палитра</option>
+          <option value="type">2 · Типографика</option>
+          <option value="space">3 · Отступы</option>
+          <option value="radius">4 · Радиусы</option>
+          <option value="elevation">5 · Тени</option>
+        </fig-dropdown>
+      </fig-field>
+      <p id="hint" class="hint"></p>
+
+      <div id="panel-palette" class="panel active">
+        <fig-group name="Палитра">
+          <fig-field>
+            <label>Роль</label>
+            <fig-input-text id="role" value="Brand"></fig-input-text>
+          </fig-field>
+          <fig-field>
+            <label>Цвет</label>
+            <fig-input-color id="seed" value="#266BEB" picker="figma-native"></fig-input-color>
+          </fig-field>
+          <fig-field>
+            <label>Шаги</label>
+            <fig-options id="steps" options="5, 9, 11" value="11"></fig-options>
+          </fig-field>
+        </fig-group>
+      </div>
+
+      <div id="panel-type" class="panel">
+        <fig-group name="Типографика">
+          <fig-field>
+            <label>Семейство</label>
+            <fig-input-text id="family" value="Inter"></fig-input-text>
+          </fig-field>
+          <fig-field>
+            <label>Текст</label>
+            <fig-dropdown id="text-style">
+              <option value="Regular" selected>Regular</option>
+              <option value="Medium">Medium</option>
+              <option value="Semi Bold">Semi Bold</option>
+              <option value="Bold">Bold</option>
+            </fig-dropdown>
+          </fig-field>
+          <fig-field>
+            <label>Заголовки</label>
+            <fig-dropdown id="display-style">
+              <option value="Regular">Regular</option>
+              <option value="Medium">Medium</option>
+              <option value="Semi Bold" selected>Semi Bold</option>
+              <option value="Bold">Bold</option>
+            </fig-dropdown>
+          </fig-field>
+          <fig-field>
+            <label>Размер</label>
+            <fig-input-number id="base-size" value="16" min="12" max="24"></fig-input-number>
+          </fig-field>
+          <fig-field>
+            <label>Коэффициент</label>
+            <fig-dropdown id="ratio">
+              <option value="1.125">1.125 · плотная</option>
+              <option value="1.2">1.2 · спокойная</option>
+              <option value="1.25" selected>1.25 · стандарт</option>
+              <option value="1.333">1.333 · крупная</option>
+            </fig-dropdown>
+          </fig-field>
+        </fig-group>
+      </div>
+
+      <div id="panel-space" class="panel">
+        <fig-group name="Отступы">
+          <fig-field>
+            <label>База, px</label>
+            <fig-input-number id="space-base" value="4" min="2" max="16"></fig-input-number>
+          </fig-field>
+          <fig-field>
+            <label>Ступеней</label>
+            <fig-slider id="space-count" text min="4" max="8" value="8"></fig-slider>
+          </fig-field>
+        </fig-group>
+      </div>
+
+      <div id="panel-radius" class="panel">
+        <fig-group name="Радиусы">
+          <fig-field>
+            <label>База, px</label>
+            <fig-input-number id="radius-base" value="4" min="2" max="16"></fig-input-number>
+          </fig-field>
+        </fig-group>
+      </div>
+
+      <div id="panel-elevation" class="panel">
+        <fig-group name="Тени">
+          <fig-field>
+            <label>Сила</label>
+            <fig-options id="strength" options="Мягкие, Обычные, Жёсткие" value="Обычные"></fig-options>
+          </fig-field>
+        </fig-group>
+      </div>
+    </fig-content>
+    <fig-footer sticky>
+      <label id="status" data-tone="idle">Результат появится на текущей странице.</label>
+      <fig-button id="run" type="submit">Построить палитру</fig-button>
+    </fig-footer>
+  </div>
+
+  <script>
+    var STEPS = {
+      palette: {
+        button: 'Построить палитру',
+        hint: '1 из 5. Шкала от базового цвета, стили, переменные и контраст с белым и чёрным. Другую роль, например Neutral, можно собрать следующим запуском.',
+      },
+      type: {
+        button: 'Собрать типографику',
+        hint: '2 из 5. Шесть стилей от подписи до дисплея. Имя семейства — как в Figma. У Inter полужирное начертание называется Semi Bold.',
+      },
+      space: {
+        button: 'Собрать отступы',
+        hint: '3 из 5. Шкала от половины базы до крупного шага. Повтор обновляет те же имена и не удаляет лишние ступени.',
+      },
+      radius: {
+        button: 'Собрать радиусы',
+        hint: '4 из 5. От острого угла до полного круга. База задаёт ступени xs–2xl, full всегда 999.',
+      },
+      elevation: {
+        button: 'Собрать тени',
+        hint: '5 из 5. Четыре уровня elevation и стили эффектов. Образцы стоят на сером поле.',
+      },
+    }
+
+    function post(message) {
+      parent.postMessage({ pluginMessage: message }, '*')
+    }
+
+    function field(id) {
+      var node = document.getElementById(id)
+      return node ? node.value : ''
+    }
+
+    function setField(id, value) {
+      var node = document.getElementById(id)
+      if (node && value != null && value !== '') node.value = value
+    }
+
+    function setStatus(tone, text) {
+      var status = document.getElementById('status')
+      status.textContent = text
+      status.setAttribute('data-tone', tone)
+    }
+
+    function showStep(step, updateControl) {
+      var current = STEPS[step] ? step : 'palette'
+      var keys = Object.keys(STEPS)
+      for (var index = 0; index < keys.length; index++) {
+        var panel = document.getElementById('panel-' + keys[index])
+        if (panel) panel.className = keys[index] === current ? 'panel active' : 'panel'
+      }
+      document.getElementById('hint').textContent = STEPS[current].hint
+      document.getElementById('run').textContent = STEPS[current].button
+      if (updateControl) setField('step', current)
+    }
+
+    function applyPrefs(prefs) {
+      if (!prefs) return
+      setField('system', prefs.system)
+      setField('role', prefs.role)
+      setField('seed', prefs.seed)
+      setField('steps', String(prefs.steps))
+      setField('family', prefs.family)
+      setField('text-style', prefs.textStyle)
+      setField('display-style', prefs.displayStyle)
+      setField('base-size', String(prefs.baseSize))
+      setField('ratio', String(prefs.ratio))
+      setField('space-base', String(prefs.spaceBase))
+      setField('space-count', String(prefs.spaceCount))
+      setField('radius-base', String(prefs.radiusBase))
+      setField('strength', prefs.strength)
+      showStep(prefs.step || 'palette', true)
+    }
+
+    function readPrefs() {
+      return {
+        system: field('system'),
+        role: field('role'),
+        seed: field('seed'),
+        steps: field('steps'),
+        family: field('family'),
+        textStyle: field('text-style'),
+        displayStyle: field('display-style'),
+        baseSize: field('base-size'),
+        ratio: field('ratio'),
+        spaceBase: field('space-base'),
+        spaceCount: field('space-count'),
+        radiusBase: field('radius-base'),
+        strength: field('strength'),
+      }
+    }
+
+    var busy = false
+    document.getElementById('step').addEventListener('change', function () {
+      showStep(field('step'), false)
+    })
+    document.getElementById('run').addEventListener('click', function () {
+      if (busy) return
+      var step = field('step') || 'palette'
+      setStatus('idle', 'Собираю…')
+      post({ type: 'run', step: step, prefs: readPrefs() })
+    })
+
+    onmessage = function (event) {
+      var message = event.data && event.data.pluginMessage
+      if (!message) return
+      if (message.type === 'prefs') applyPrefs(message.prefs)
+      if (message.type === 'status') setStatus(message.tone || 'idle', message.text || '')
+      if (message.type === 'busy') {
+        busy = !!message.busy
+        document.getElementById('run').disabled = busy
+      }
+    }
+
+    var lastReportedHeight = 0
+    var resizeFrame = 0
+    function reportHeight() {
+      var root = document.getElementById('plugin-root')
+      if (!root) return
+      var height = Math.ceil(root.getBoundingClientRect().height)
+      if (height && height !== lastReportedHeight) {
+        lastReportedHeight = height
+        post({ type: 'resize', height: height })
+      }
+    }
+    var root = document.getElementById('plugin-root')
+    if (root && typeof ResizeObserver !== 'undefined') {
+      new ResizeObserver(function () {
+        if (resizeFrame) cancelAnimationFrame(resizeFrame)
+        resizeFrame = requestAnimationFrame(reportHeight)
+      }).observe(root)
+    }
+
+    showStep('palette', false)
+    post({ type: 'ready' })
+  </script>
+</body>
+</html>
