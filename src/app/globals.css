@@ -7,7 +7,8 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: "SF Pro Text", "SF Pro Display", var(--font-source), sans-serif;
+  --font-sans: var(--font-pt-sans), sans-serif;
+  --font-weight-medium: 700;
   --font-mono: var(--font-geist-mono);
   --font-heading: var(--font-sans);
   --color-sidebar-ring: var(--sidebar-ring);
@@ -126,5 +127,6 @@
   }
   html {
     @apply font-sans;
+    font-synthesis: none;
   }
 }
