@@ -18,14 +18,14 @@ const buttonVariants = cva(
           "bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:hover:bg-destructive/30 dark:focus-visible:ring-destructive/40",
         link: "text-primary underline-offset-4 hover:underline",
         brand:
-          "bg-[#3dae57] text-white hover:bg-[#34964c] active:translate-y-0",
+          "border-[#3dae57] bg-[#3dae57] text-white hover:bg-transparent hover:text-[#3dae57] active:translate-y-0",
       },
       size: {
         default:
           "h-8 gap-1.5 px-2.5 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2",
         header:
-          "h-[31px] min-w-[146px] gap-0 rounded-[4px] px-3 py-2 text-[14px] leading-[1.1] font-normal tracking-[-0.5px]",
-        hero: "h-[48px] w-full gap-0 rounded-[12px] px-[10px] text-[14px] leading-[1.1] font-medium tracking-[-0.5px] text-[#f5f5f5]",
+          "h-auto gap-0 rounded-[4px] px-[15px] py-[6px] text-base leading-5 font-normal max-[1023px]:px-[10px] max-[1023px]:text-sm max-[767px]:px-[5px]",
+        hero: "h-12 w-full gap-0 rounded-[8px] border-2 px-[18px] py-[10px] text-base leading-5 font-medium min-[768px]:h-16 min-[768px]:w-auto min-[768px]:min-w-[356px] min-[768px]:rounded-[12px] min-[768px]:px-[30px] min-[768px]:py-[13px] min-[768px]:text-[20px]",
         xs: "h-6 gap-1 rounded-[min(var(--radius-md),10px)] px-2 text-xs in-data-[slot=button-group]:rounded-lg has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-3",
         sm: "h-7 gap-1 rounded-[min(var(--radius-md),12px)] px-2.5 text-[0.8rem] in-data-[slot=button-group]:rounded-lg has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-3.5",
         lg: "h-9 gap-1.5 px-2.5 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2",

@@ -16,26 +16,18 @@ export function Hero() {
   const [audience, setAudience] = useState<AudienceId>("relative");
 
   return (
-    <section
-      id="podbor"
-      className="flex flex-col items-start justify-center gap-10 bg-[#f4f4f4] px-4 py-14 min-[1280px]:h-[560px] min-[1280px]:gap-[48px] min-[1280px]:px-[190px] min-[1280px]:py-0"
-    >
-      <h1 className="w-full max-w-[622px] text-[32px] leading-[1.1] font-medium text-[rgba(17,17,17,0.9)] min-[720px]:text-[40px] min-[1280px]:w-[622px] min-[1280px]:text-[44px]">
-        <span className="text-[rgba(6,150,59,0.9)]">Проверенные ребцентра</span>
-        <br className="max-[1279px]:hidden" />
-        <span className="min-[1280px]:hidden"> </span>
-        для лечения и восстановления
-        <br className="max-[1279px]:hidden" />
-        <span className="min-[1280px]:hidden"> </span>
-        при зависимостях
-      </h1>
+    <section id="podbor" className="bg-[#f4f4f4]">
+      <div className="mx-auto w-full min-w-[320px] px-[15px] py-10 min-[576px]:max-w-[540px] min-[768px]:max-w-[720px] min-[768px]:pt-[85px] min-[768px]:pb-[72px] min-[992px]:max-w-[960px] min-[1200px]:max-w-[1140px]">
+        <h1 className="max-w-[640px] text-[24px] leading-[26px] font-medium text-[#141414] min-[768px]:text-[56px] min-[768px]:leading-[58px]">
+          <span className="text-[rgba(6,150,59,0.9)]">Проверенные ребцентра</span>{" "}
+          для лечения и восстановления при зависимостях
+        </h1>
 
-      <div className="flex w-full max-w-[339px] flex-col items-start gap-8 min-[1280px]:gap-[36px]">
-        <div className="flex w-full flex-col items-center gap-[10px]">
+        <div className="mt-8 flex w-full flex-col min-[768px]:mt-[35px] min-[768px]:inline-flex min-[768px]:w-auto">
           <div
             role="tablist"
             aria-label="Кому нужна помощь"
-            className="flex w-full gap-[2px] rounded-[8px] border border-[rgba(0,0,0,0.1)] bg-[#f7f7f7]"
+            className="flex h-12 w-full items-center rounded-[8px] border border-[#dae0e5] bg-[#f3f5f6] min-[768px]:h-14 min-[768px]:w-max min-[768px]:max-w-full min-[768px]:rounded-[12px]"
           >
             {audiences.map((item) => {
               const selected = audience === item.id;
@@ -47,8 +39,10 @@ export function Hero() {
                   aria-selected={selected}
                   onClick={() => setAudience(item.id)}
                   className={cn(
-                    "rounded-[8px] px-2.5 py-3 text-[13px] leading-[1.1] font-medium tracking-[-0.5px] whitespace-nowrap text-[rgba(17,17,17,0.9)] min-[400px]:px-[14px] min-[400px]:text-[14px]",
-                    selected ? "bg-white" : "opacity-40",
+                    "flex h-full min-w-0 flex-1 items-center justify-center px-2 text-[15px] leading-6 font-normal tracking-[-0.16px] whitespace-nowrap text-[#8497a6] transition-colors min-[390px]:px-4 min-[390px]:text-[16px] min-[768px]:px-5 min-[768px]:text-[18px] min-[768px]:tracking-[-0.28px]",
+                    selected
+                      ? "rounded-[9px] bg-white font-medium text-[#1a2833] min-[768px]:rounded-[12px] min-[768px]:leading-[22px]"
+                      : "hover:bg-white/20 hover:text-[#1a2833]",
                   )}
                 >
                   {item.label}
@@ -56,14 +50,13 @@ export function Hero() {
               );
             })}
           </div>
-          <p className="w-full text-center text-[14px] leading-[1.1] font-normal tracking-[-0.5px] text-[rgba(17,17,17,0.9)] opacity-40">
+          <p className="mt-1 mb-[30px] text-center text-[12px] leading-[18px] font-normal text-[#687077] min-[768px]:mt-0 min-[768px]:mb-[47px] min-[768px]:min-h-[30px] min-[768px]:text-[16px]">
             Бесплатная и анонимная консультация
           </p>
+          <Button variant="brand" size="hero" type="button">
+            Подобрать ребцентр
+          </Button>
         </div>
-
-        <Button variant="brand" size="hero" type="button">
-          Подобрать ребцентр
-        </Button>
       </div>
     </section>
   );

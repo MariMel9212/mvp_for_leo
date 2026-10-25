@@ -6,7 +6,7 @@ import { WhenToSeek } from "@/components/when-to-seek";
 
 export default function HomePage() {
   return (
-    <main className="mx-auto w-full bg-white pb-16 min-[1280px]:w-[1280px] min-[1280px]:pb-[120px]">
+    <main className="bg-white text-[#141414]">
       <SiteHeader />
       <Hero />
       <Stats />

@@ -1,34 +1,28 @@
 const stats = [
-  { value: "3 000 +", lines: ["семей получили", "профильную помощь"] },
-  { value: "6 000 +", lines: ["зависимых", "прошедших лечение"] },
-  { value: "30 +", lines: ["лицензированных", "организаций"] },
-  { value: "86%", lines: ["удачно подобранных", "учереждений"] },
+  { value: "3 000 +", label: "семей получили профильную помощь" },
+  { value: "6 000 +", label: "зависимых прошедших лечение" },
+  { value: "30 +", label: "лицензированных организаций" },
+  { value: "86%", label: "удачно подобранных учереждений" },
 ];
 
 export function Stats() {
   return (
-    <section className="mx-auto mt-12 grid w-full max-w-[900px] grid-cols-2 gap-x-6 gap-y-8 px-4 text-center leading-[1.1] tracking-[-0.5px] text-[#111] min-[1280px]:mt-[34px] min-[1280px]:flex min-[1280px]:w-[900px] min-[1280px]:justify-between min-[1280px]:px-0">
-      {stats.map((item) => (
-        <div
-          key={item.value}
-          className="mx-auto flex w-[160px] flex-col items-center"
-        >
-          <p className="w-full text-[26px] font-medium">{item.value}</p>
-          <p className="w-full text-[16px] font-normal opacity-40">
-            {item.lines.map((line, index) => (
-              <span key={line}>
-                {index > 0 && (
-                  <>
-                    <br className="max-[1279px]:hidden" />
-                    <span className="min-[1280px]:hidden"> </span>
-                  </>
-                )}
-                {line}
-              </span>
-            ))}
-          </p>
-        </div>
-      ))}
+    <section className="mx-auto w-full min-w-[320px] px-[15px] min-[576px]:max-w-[540px] min-[768px]:max-w-[720px] min-[992px]:max-w-[960px] min-[1200px]:max-w-[1140px]">
+      <div className="flex flex-wrap items-start">
+        {stats.map((item) => (
+          <div
+            key={item.value}
+            className="w-1/2 px-[5px] pt-6 pb-5 text-center min-[768px]:w-1/4"
+          >
+            <p className="text-[21px] leading-10 font-medium text-[#141414] min-[768px]:text-[32px]">
+              {item.value}
+            </p>
+            <p className="mx-auto max-w-[315px] text-[14px] leading-[1.2] text-[#a2adb8] min-[768px]:text-[20px]">
+              {item.label}
+            </p>
+          </div>
+        ))}
+      </div>
     </section>
   );
 }

@@ -3,48 +3,35 @@ import { Blob } from "@/components/blob";
 const topRow = [
   {
     src: "/illustrations/blob-1.svg",
-    lines: ["С зависимостью столкнулись Вы или", "ваш Близкий"],
-    widthClass: "min-[1280px]:w-[297px]",
+    text: "С зависимостью столкнулись Вы или ваш Близкий",
   },
   {
     src: "/illustrations/blob-2.svg",
-    lines: ["Пробовали бороться с зависимостью", "сами, но не получилость"],
-    widthClass: "min-[1280px]:w-[329px]",
+    text: "Пробовали бороться с зависимостью сами, но не получилость",
   },
 ];
 
-const placeholderLines = ["Тут некий фактик в 2 строки", "и текст подлинее"];
-
 const bottomRow = [
-  "/illustrations/blob-3.svg",
-  "/illustrations/blob-4.svg",
-  "/illustrations/blob-3.svg",
+  {
+    src: "/illustrations/blob-3.svg",
+    text: "Тут некий фактик в 2 строки и текст подлинее",
+  },
+  {
+    src: "/illustrations/blob-4.svg",
+    text: "Тут некий фактик в 2 строки и текст подлинее",
+  },
+  {
+    src: "/illustrations/blob-3.svg",
+    text: "Тут некий фактик в 2 строки и текст подлинее",
+  },
 ];
 
-function Reason({
-  src,
-  lines,
-  widthClass,
-}: {
-  src: string;
-  lines: string[];
-  widthClass: string;
-}) {
+function Reason({ src, text }: { src: string; text: string }) {
   return (
-    <div className={`flex w-full max-w-[329px] flex-col items-center gap-[15px] ${widthClass}`}>
+    <div className="flex w-full max-w-[329px] flex-col items-center gap-[15px]">
       <Blob src={src} />
-      <p className="w-full text-center text-[18px] leading-[1.1] font-medium tracking-[-0.5px] text-[#111]">
-        {lines.map((line, index) => (
-          <span key={line}>
-            {index > 0 && (
-              <>
-                <br className="max-[1279px]:hidden" />
-                <span className="min-[1280px]:hidden"> </span>
-              </>
-            )}
-            {line}
-          </span>
-        ))}
+      <p className="w-full text-center text-[16px] leading-[1.2] font-medium tracking-[-0.16px] text-[#141414] min-[768px]:text-[18px] min-[768px]:tracking-[-0.28px]">
+        {text}
       </p>
     </div>
   );
@@ -52,28 +39,19 @@ function Reason({
 
 export function WhenToSeek() {
   return (
-    <section className="mx-auto mt-16 flex w-full max-w-[901px] flex-col items-center gap-10 px-4 min-[1280px]:mt-[100px] min-[1280px]:w-[901px] min-[1280px]:gap-[52px] min-[1280px]:px-0">
-      <h2 className="w-full max-w-[525px] text-center text-[34px] leading-[1.1] font-medium tracking-[-0.5px] text-[rgba(17,17,17,0.9)] min-[1280px]:text-[46px]">
-        Когда стоит обратиться
-        <br className="max-[1279px]:hidden" />
-        <span className="min-[1280px]:hidden"> </span>
-        за помощью
+    <section className="mx-auto w-full min-w-[320px] px-[15px] py-12 min-[576px]:max-w-[540px] min-[768px]:max-w-[720px] min-[768px]:py-20 min-[992px]:max-w-[960px] min-[1200px]:max-w-[1140px]">
+      <h2 className="mb-8 max-w-[720px] text-left text-[24px] leading-[26px] font-medium text-[#141414] min-[768px]:mx-auto min-[768px]:mb-[70px] min-[768px]:text-center min-[768px]:text-[56px] min-[768px]:leading-[64px]">
+        Когда стоит обратиться за помощью
       </h2>
-
-      <div className="flex w-full flex-col gap-12 min-[1280px]:gap-[48px]">
-        <div className="flex w-full flex-col items-center gap-12 min-[1280px]:flex-row min-[1280px]:items-end min-[1280px]:justify-between min-[1280px]:px-[118px]">
+      <div className="mx-auto flex flex-col gap-12">
+        <div className="flex flex-col items-center gap-12 min-[768px]:flex-row min-[768px]:justify-center min-[768px]:gap-8 min-[1200px]:gap-16">
           {topRow.map((item) => (
             <Reason key={item.src} {...item} />
           ))}
         </div>
-        <div className="flex w-full flex-col items-center gap-12 min-[1280px]:flex-row min-[1280px]:items-end min-[1280px]:gap-0 min-[1280px]:pr-[5px] min-[1280px]:pl-[20px]">
-          {bottomRow.map((src, index) => (
-            <Reason
-              key={`${src}-${index}`}
-              src={src}
-              lines={placeholderLines}
-              widthClass="min-[1280px]:w-[292px]"
-            />
+        <div className="flex flex-col items-center gap-12 min-[768px]:flex-row min-[768px]:flex-wrap min-[768px]:justify-center min-[1200px]:flex-nowrap min-[1200px]:justify-between">
+          {bottomRow.map((item, index) => (
+            <Reason key={`${item.src}-${index}`} {...item} />
           ))}
         </div>
       </div>
