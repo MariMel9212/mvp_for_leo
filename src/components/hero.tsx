@@ -18,12 +18,13 @@ export function Hero() {
   return (
     <section id="podbor" className="bg-[#f4f4f4]">
       <div className="mx-auto w-full min-w-[320px] px-[15px] py-10 min-[576px]:max-w-[540px] min-[768px]:max-w-[720px] min-[768px]:pt-[85px] min-[768px]:pb-[180px] min-[992px]:max-w-[960px] min-[1200px]:max-w-[1140px]">
-        <h1 className="max-w-[640px] text-[24px] leading-[26px] font-medium text-[#141414] min-[768px]:text-[56px] min-[768px]:leading-[58px]">
-          <span className="text-[rgba(6,150,59,0.9)]">Проверенные ребцентра</span>
-          {" для\u00A0лечения и\u00A0восстановления при\u00A0зависимостях"}
-        </h1>
+        <div className="flex flex-col items-stretch gap-8 min-[768px]:items-start min-[768px]:gap-10">
+          <h1 className="max-w-[640px] text-[24px] leading-[26px] font-medium text-[#141414] min-[768px]:text-[56px] min-[768px]:leading-[58px]">
+            <span className="text-[rgba(6,150,59,0.9)]">Проверенные ребцентра</span>
+            {" для\u00A0лечения и\u00A0восстановления при\u00A0зависимостях"}
+          </h1>
 
-        <div className="mt-8 flex w-full flex-col min-[768px]:mt-[35px] min-[768px]:inline-flex min-[768px]:w-auto">
+          <div className="flex w-full flex-col gap-2 min-[768px]:w-max">
           <div
             role="tablist"
             aria-label="Кому нужна помощь"
@@ -55,9 +56,10 @@ export function Hero() {
               );
             })}
           </div>
-          <p className="mt-2 mb-[30px] text-center text-[12px] leading-[18px] font-normal text-[#687077] min-[768px]:mt-2 min-[768px]:mb-[47px] min-[768px]:min-h-[30px] min-[768px]:text-[16px]">
+          <p className="text-center text-[12px] leading-[18px] font-normal text-[#687077] min-[768px]:text-[16px]">
             Бесплатная и анонимная консультация
           </p>
+          </div>
           <Button variant="brand" size="hero" type="button">
             Подобрать ребцентр
           </Button>
