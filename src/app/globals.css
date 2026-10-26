@@ -129,14 +129,3 @@
     font-synthesis: none;
   }
 }
-
-@keyframes step-in {
-  from {
-    opacity: 0;
-    transform: translateY(18px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
