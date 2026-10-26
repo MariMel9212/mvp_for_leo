@@ -1,27 +1,23 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
+import { Google_Sans } from "next/font/google";
 import "./globals.css";
 
-const ptSans = localFont({
-  src: [
-    { path: "../fonts/PTSans-Regular.ttf", weight: "400", style: "normal" },
-    { path: "../fonts/PTSans-Italic.ttf", weight: "400", style: "italic" },
-    { path: "../fonts/PTSans-Bold.ttf", weight: "700", style: "normal" },
-    { path: "../fonts/PTSans-BoldItalic.ttf", weight: "700", style: "italic" },
-  ],
-  variable: "--font-pt-sans",
+const googleSans = Google_Sans({
+  subsets: ["cyrillic", "latin"],
+  weight: ["400", "500", "700"],
   display: "swap",
+  variable: "--font-google-sans",
 });
 
 export const metadata: Metadata = {
-  title: "Проверенные ребцентра",
+  title: "СвойЦентр — проверенные ребцентра",
   description:
     "Подбор проверенных реабилитационных центров для лечения и восстановления при зависимостях.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="ru" className={`${ptSans.variable} h-full antialiased`}>
+    <html lang="ru" className={`${googleSans.variable} h-full antialiased`}>
       <body className="min-h-full bg-white text-[#111]">{children}</body>
     </html>
   );

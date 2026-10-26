@@ -7,17 +7,17 @@ const stats = [
 
 export function Stats() {
   return (
-    <section className="mx-auto w-full min-w-[320px] px-[15px] min-[576px]:max-w-[540px] min-[768px]:max-w-[720px] min-[992px]:max-w-[960px] min-[1200px]:max-w-[1140px]">
-      <div className="flex flex-wrap items-start">
+    <section className="mx-auto mt-8 w-full max-w-[940px] px-4">
+      <div className="flex flex-wrap justify-between gap-y-6">
         {stats.map((item) => (
           <div
             key={item.value}
-            className="w-1/2 px-[5px] pt-6 pb-5 text-center min-[768px]:w-1/4"
+            className="w-[calc(50%-8px)] text-center min-[768px]:w-[160px]"
           >
-            <p className="text-[21px] leading-10 font-medium text-[#141414] min-[768px]:text-[32px]">
+            <p className="text-[26px] leading-[1.1] font-medium text-[#111]">
               {item.value}
             </p>
-            <p className="mx-auto max-w-[315px] text-[14px] leading-[1.2] text-[#a2adb8] min-[768px]:text-[20px]">
+            <p className="text-[16px] leading-[1.1] font-normal text-[#111] opacity-40">
               {item.label}
             </p>
           </div>

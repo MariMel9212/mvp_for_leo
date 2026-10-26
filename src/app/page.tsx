@@ -1,17 +1,17 @@
+import { Centers } from "@/components/centers";
 import { Hero } from "@/components/hero";
-import { HowWeMatch } from "@/components/how-we-match";
+import { HowItWorks } from "@/components/how-it-works";
 import { SiteHeader } from "@/components/site-header";
 import { Stats } from "@/components/stats";
-import { WhenToSeek } from "@/components/when-to-seek";
 
 export default function HomePage() {
   return (
-    <main className="bg-white text-[#141414]">
+    <main className="bg-white text-black">
       <SiteHeader />
       <Hero />
       <Stats />
-      <WhenToSeek />
-      <HowWeMatch />
+      <HowItWorks />
+      <Centers />
     </main>
   );
 }
