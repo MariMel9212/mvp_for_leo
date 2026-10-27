@@ -72,22 +72,20 @@ export function HeroGrass() {
           const stretch = depth * depth * depth * (0.18 + roll * roll) * 30;
           const stripY = (y + stretch) / TILE_H;
           const trail = Math.min(1, stretch / 30);
-          const endX = STRIP_LEFT + stripX * STRIP_WIDTH;
-          const onScreen = endX > -0.04 && endX < 1.04;
           const a = unit(seed++);
           const b = unit(seed++);
           const c = unit(seed++);
           particles.push({
             stripX,
             stripY,
-            fromX: onScreen ? a : endX + (a - 0.5) * 0.05,
-            fromY: onScreen ? 0.04 + b * 0.92 : 0.78 + b * 0.22,
+            fromX: (a - 0.5) * 16,
+            fromY: 8 + b * 18,
             height,
             phase: phase + origin * 0.001,
             appear: 0,
-            moveAt: a * 0.08,
-            travel: 1.15 + b * 0.55,
-            bow: (c - 0.5) * 36,
+            moveAt: a * 0.06,
+            travel: 0.7 + b * 0.35,
+            bow: (c - 0.5) * 8,
             trail,
           });
         }
@@ -120,13 +118,13 @@ export function HeroGrass() {
       const radius = 0.83 * pixelRatio;
       const r2 = radius * radius;
       const reach = Math.ceil(radius);
-      const swayScale = 9 * pixelRatio;
+      const swayScale = 6 * pixelRatio;
       const grassPx =
         Math.min(360, Math.max(220, (width / pixelRatio) * 0.215)) * pixelRatio;
       for (const particle of particles) {
         const appeared = reduce
           ? 1
-          : Math.min(1, 0.55 + (elapsed - particle.appear) / 0.2);
+          : Math.min(1, 0.9 + (elapsed - particle.appear) / 0.12);
         if (appeared <= 0) continue;
         const t = reduce
           ? 1
@@ -145,11 +143,9 @@ export function HeroGrass() {
         const endX = (STRIP_LEFT + particle.stripX * STRIP_WIDTH) * width;
         const tailPx = 52 * pixelRatio;
         const endY = height - tailPx - grassPx + particle.stripY * grassPx;
-        const startX = particle.fromX * width;
-        const startY = particle.fromY * height;
         const bow = Math.sin(eased * Math.PI) * particle.bow * pixelRatio;
-        const x = startX + (endX - startX) * eased + bow + sway;
-        const y = startY + (endY - startY) * eased;
+        const x = endX + (particle.fromX * pixelRatio + bow) * (1 - eased) + sway;
+        const y = endY + particle.fromY * pixelRatio * (1 - eased);
         const cx = x | 0;
         const cy = y | 0;
         const alpha = appeared * 132 * (1 - particle.trail * 0.78);
