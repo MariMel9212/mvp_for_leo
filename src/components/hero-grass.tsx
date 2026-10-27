@@ -64,11 +64,12 @@ export function HeroGrass() {
       }
     }
 
+    let pixelRatio = 1;
     const resize = () => {
       const rect = canvas.getBoundingClientRect();
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      canvas.width = Math.max(1, Math.round(rect.width * dpr));
-      canvas.height = Math.max(1, Math.round(rect.height * dpr));
+      pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = Math.max(1, Math.round(rect.width * pixelRatio));
+      canvas.height = Math.max(1, Math.round(rect.height * pixelRatio));
     };
     const observer = new ResizeObserver(resize);
     observer.observe(canvas);
@@ -86,7 +87,7 @@ export function HeroGrass() {
       const data = buffer.data;
       data.fill(0);
       const elapsed = (now - started) / 1000;
-      const radius = (0.83 * height) / TILE_H;
+      const radius = 0.83 * pixelRatio;
       const r2 = radius * radius;
       const reach = Math.ceil(radius);
       const swayScale = width * (TILE_W / STRIP_W) * 0.004;
