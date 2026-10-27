@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 
-const COUNT = 26000;
+const PER_COPY = 7000;
 
 type Particle = {
   homeX: number;
@@ -31,9 +31,11 @@ export function HeroGrass() {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const particles: Particle[] = [];
 
+    let scale = 1;
     const resize = () => {
       const rect = canvas.getBoundingClientRect();
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      scale = dpr;
       canvas.width = Math.max(1, Math.round(rect.width * dpr));
       canvas.height = Math.max(1, Math.round(rect.height * dpr));
     };
@@ -72,21 +74,6 @@ export function HeroGrass() {
       }
       if (!inkCount) return;
 
-      const stride = sw + 1;
-      const integral = new Uint32Array(stride * (sh + 1));
-      for (let y = 0; y < sh; y++) {
-        let row = 0;
-        for (let x = 0; x < sw; x++) {
-          row += ink[y * sw + x];
-          integral[(y + 1) * stride + x + 1] = integral[y * stride + x + 1] + row;
-        }
-      }
-      const area = (x0: number, y0: number, x1: number, y1: number) =>
-        integral[y1 * stride + x1] -
-        integral[y0 * stride + x1] -
-        integral[y1 * stride + x0] +
-        integral[y0 * stride + x0];
-
       const xs = new Int16Array(inkCount);
       const ys = new Int16Array(inkCount);
       const cumulative = new Float32Array(inkCount);
@@ -97,15 +84,11 @@ export function HeroGrass() {
       for (let y = 0; y < sh; y++) {
         for (let x = 0; x < sw; x++) {
           if (!ink[y * sw + x]) continue;
-          const x0 = Math.max(0, x - 3);
-          const y0 = Math.max(0, y - 3);
-          const x1 = Math.min(sw, x + 4);
-          const y1 = Math.min(sh, y + 4);
-          const density = area(x0, y0, x1, y1);
+          const height = (maxY - y) / span;
           xs[cursor] = x;
           ys[cursor] = y;
-          heights[cursor] = (maxY - y) / span;
-          total += 1 / Math.pow(density, 0.62);
+          heights[cursor] = height;
+          total += 0.035 + height ** 1.85;
           cumulative[cursor] = total;
           cursor += 1;
         }
@@ -123,19 +106,25 @@ export function HeroGrass() {
         return low;
       };
 
-      for (let i = 0; i < COUNT; i++) {
+      for (let i = 0; i < PER_COPY; i++) {
         const index = pick();
         const homeX = xs[index] / sw;
         const homeY = (ys[index] - minY) / span;
-        particles.push({
-          homeX,
-          homeY,
-          fromX: homeX + (Math.random() - 0.5) * 0.08,
-          fromY: 1.12 + Math.random() * 0.35,
-          height: heights[index],
-          phase: Math.random() * Math.PI * 2,
-          delay: Math.random() * 0.35,
-        });
+        const height = heights[index];
+        const phase = Math.random() * Math.PI * 2;
+        const delay = Math.random() * 0.28;
+        for (let copy = 0; copy < 2; copy++) {
+          const x = homeX * 0.5 + copy * 0.5;
+          particles.push({
+            homeX: x,
+            homeY,
+            fromX: x + (Math.random() - 0.5) * 0.04,
+            fromY: 1.08 + Math.random() * 0.22,
+            height,
+            phase: phase + copy * 1.4,
+            delay,
+          });
+        }
       }
 
       const started = performance.now();
@@ -150,13 +139,10 @@ export function HeroGrass() {
         const data = buffer.data;
         data.fill(0);
         const elapsed = (now - started) / 1000;
-        const radius = Math.max(1.15, width / 1300);
-        const r2 = radius * radius;
-        const reach = Math.ceil(radius);
         for (const particle of particles) {
           const t = reduce
             ? 1
-            : Math.min(1, Math.max(0, (elapsed - particle.delay) / 1.25));
+            : Math.min(1, Math.max(0, (elapsed - particle.delay) / 1.15));
           const eased = easeOut(t);
           if (eased <= 0) continue;
           const sway = reduce
@@ -165,15 +151,18 @@ export function HeroGrass() {
               particle.height *
               particle.height *
               width *
-              0.007;
+              0.004;
           const x =
             (particle.fromX + (particle.homeX - particle.fromX) * eased) * width +
             sway * eased;
           const y =
             (particle.fromY + (particle.homeY - particle.fromY) * eased) * height;
+          const radius = (0.85 + particle.height * 1.15) * scale;
+          const r2 = radius * radius;
+          const reach = Math.ceil(radius);
           const cx = x | 0;
           const cy = y | 0;
-          const alpha = (0.55 + 0.45 * eased) * 255;
+          const alpha = (0.12 + 0.88 * particle.height) * eased * 255;
           for (let dy = -reach; dy <= reach; dy++) {
             const py = cy + dy;
             if (py < 0 || py >= height) continue;
@@ -182,9 +171,10 @@ export function HeroGrass() {
               const px = cx + dx;
               if (px < 0 || px >= width) continue;
               const index = (py * width + px) * 4;
-              data[index] = 26;
-              data[index + 1] = 36;
-              data[index + 2] = 24;
+              if (data[index + 3] >= alpha) continue;
+              data[index] = 18;
+              data[index + 1] = 22;
+              data[index + 2] = 16;
               data[index + 3] = alpha;
             }
           }
