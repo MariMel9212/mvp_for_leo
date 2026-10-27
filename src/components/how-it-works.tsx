@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 const NAME = "Мария";
 const PHONE = "916 000-00-00";
 
-type Phase = "assemble" | "name" | "phone" | "send" | "leave";
+type Phase = "assemble" | "type-name" | "type-phone" | "leave";
 
 function wait(ms: number, timers: number[]) {
   return new Promise<void>((resolve) => {
@@ -27,6 +27,9 @@ export function HowItWorks() {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [pressed, setPressed] = useState(false);
+  const [hot, setHot] = useState<"name" | "phone" | null>(null);
+  const [cursorOn, setCursorOn] = useState(false);
+  const [clicking, setClicking] = useState(false);
   const [cursor, setCursor] = useState({ x: 300, y: 420 });
 
   useEffect(() => {
@@ -53,27 +56,39 @@ export function HowItWorks() {
     let cancelled = false;
     const timers: number[] = [];
 
-    const place = (target: HTMLElement | null) => {
+    const place = (target: HTMLElement | null, shiftX = 0, shiftY = 0) => {
       const stage = stageRef.current;
       if (!stage || !target) return;
       const bounds = stage.getBoundingClientRect();
       const spot = target.getBoundingClientRect();
+      const anchorX =
+        target === sendRef.current ? spot.width * 0.42 : Math.min(34, spot.width * 0.18);
       setCursor({
-        x: spot.left - bounds.left + spot.width * 0.5 - 6,
-        y: spot.top - bounds.top + spot.height * 0.45,
+        x: spot.left - bounds.left + anchorX + shiftX,
+        y: spot.top - bounds.top + spot.height * 0.42 + shiftY,
       });
     };
 
-    const placeCaret = () => {
-      const stage = stageRef.current;
-      const caret = stage?.querySelector("[data-caret]");
-      if (!stage || !caret) return;
-      const bounds = stage.getBoundingClientRect();
-      const spot = caret.getBoundingClientRect();
-      setCursor({
-        x: spot.left - bounds.left - 1,
-        y: spot.top - bounds.top + 1,
-      });
+    const click = async (target: HTMLElement | null, field: "name" | "phone" | null) => {
+      setCursorOn(false);
+      place(target, 34, 26);
+      await wait(40, timers);
+      if (cancelled) return;
+      setCursorOn(true);
+      await wait(70, timers);
+      place(target);
+      await wait(480, timers);
+      if (cancelled) return;
+      setClicking(true);
+      if (field) setHot(field);
+      if (field === null) setPressed(true);
+      await wait(130, timers);
+      setClicking(false);
+      setHot(null);
+      if (field === null) setPressed(false);
+      await wait(90, timers);
+      setCursorOn(false);
+      await wait(200, timers);
     };
 
     const run = async () => {
@@ -84,45 +99,35 @@ export function HowItWorks() {
         setName("");
         setPhone("");
         setPressed(false);
-        setCursor({ x: 320, y: 430 });
+        setHot(null);
+        setCursorOn(false);
+        setClicking(false);
         await wait(1500, timers);
         if (cancelled) return;
 
-        setPhase("name");
-        await wait(40, timers);
-        placeCaret();
-        await wait(480, timers);
+        await click(nameRef.current, "name");
+        if (cancelled) return;
+        setPhase("type-name");
         for (const letter of NAME) {
           if (cancelled) return;
           setName((value) => value + letter);
-          await wait(40, timers);
-          placeCaret();
-          await wait(70, timers);
+          await wait(110, timers);
         }
-        await wait(280, timers);
+        await wait(380, timers);
         if (cancelled) return;
 
-        setPhase("phone");
-        await wait(40, timers);
-        placeCaret();
-        await wait(480, timers);
+        await click(phoneRef.current, "phone");
+        if (cancelled) return;
+        setPhase("type-phone");
         for (const letter of PHONE) {
           if (cancelled) return;
           setPhone((value) => value + letter);
-          await wait(30, timers);
-          placeCaret();
-          await wait(50, timers);
+          await wait(75, timers);
         }
-        await wait(360, timers);
+        await wait(380, timers);
         if (cancelled) return;
 
-        setPhase("send");
-        place(sendRef.current);
-        await wait(560, timers);
-        setPressed(true);
-        await wait(140, timers);
-        setPressed(false);
-        await wait(180, timers);
+        await click(sendRef.current, null);
         if (cancelled) return;
 
         setPhase("leave");
@@ -138,13 +143,11 @@ export function HowItWorks() {
     };
   }, [reduced, shown]);
 
-  const cursorOn = phase === "name" || phase === "phone" || phase === "send";
-
   return (
     <section
       id="kak-rabotaet"
       ref={sectionRef}
-      className="relative mx-auto w-full max-w-[940px] overflow-x-clip px-4 pt-16 pb-8 min-[768px]:pt-24 min-[1440px]:max-w-[1180px] min-[1440px]:pt-28"
+      className="relative mx-auto w-full max-w-[940px] overflow-x-clip px-4 pt-20 pb-16 min-[768px]:pt-28 min-[768px]:pb-24 min-[1440px]:max-w-[1180px] min-[1440px]:pt-36 min-[1440px]:pb-28"
     >
       <div
         aria-hidden
@@ -170,11 +173,11 @@ export function HowItWorks() {
           </p>
         </div>
 
-        <div className="relative mx-auto w-full max-w-[464px] overflow-hidden rounded-[14px] bg-[#f7f7f7] px-[34px] py-[50px] min-[900px]:mx-0">
+        <div className="relative mx-auto flex min-h-[620px] w-full max-w-[464px] flex-col justify-center overflow-hidden rounded-[14px] bg-[#f7f7f7] px-[34px] py-16 min-[900px]:mx-0 min-[900px]:min-h-[700px] min-[1440px]:min-h-[760px]">
           <div
             ref={stageRef}
             className={cn(
-              "relative transition-[transform,opacity] duration-700 ease-in",
+              "relative w-full transition-[transform,opacity] duration-700 ease-in",
               phase === "leave" && "-translate-y-[120%] scale-[0.97] opacity-0",
             )}
           >
@@ -183,7 +186,7 @@ export function HowItWorks() {
               aria-hidden
               className="rounded-[18px] border border-black/8 bg-white px-7 pt-7 pb-6 shadow-[0_2px_4px_rgba(27,28,29,0.04)]"
             >
-              <div className="flex flex-col items-center gap-[7px] motion-safe:[animation:form-in_0.55s_ease_both]">
+              <div className="flex flex-col items-center gap-[7px] motion-safe:[animation:form-in_0.6s_ease_both]">
                 <div className="rounded-full border border-[#e4e5e7] bg-gradient-to-b from-[#e4e5e7]/50 to-transparent p-3.5">
                   <div className="grid size-12 place-items-center rounded-full border border-[#e2e4e9] bg-white shadow-[0_2px_4px_rgba(27,28,29,0.04)]">
                     <img src="/form/user.svg" alt="" className="size-[23px]" />
@@ -197,17 +200,21 @@ export function HowItWorks() {
               <img
                 src="/form/divider.svg"
                 alt=""
-                className="mt-5 block h-px w-full motion-safe:[animation:form-in_0.55s_ease_both] motion-safe:[animation-delay:80ms]"
+                className="mt-5 block h-px w-full motion-safe:[animation:form-in_0.6s_ease_both] motion-safe:[animation-delay:120ms]"
               />
 
               <div className="mt-4 flex flex-col gap-[11px]">
-                <label className="motion-safe:[animation:form-in_0.55s_ease_both] motion-safe:[animation-delay:140ms]">
+                <label className="motion-safe:[animation:form-in_0.6s_ease_both] motion-safe:[animation-delay:220ms]">
                   <span className="font-[family-name:var(--font-inter)] text-[13px] leading-[18px] font-medium tracking-[-0.08px] text-[#0a0d14]">
                     Имя
                   </span>
                   <div
                     ref={nameRef}
-                    className="mt-1 flex items-center rounded-[10px] border border-[#e2e4e9] bg-white py-2.5 pr-3 pl-[11px] shadow-[0_1px_2px_rgba(228,229,231,0.24)]"
+                    className={cn(
+                      "mt-1 flex items-center rounded-[10px] border border-[#e2e4e9] bg-white py-2.5 pr-3 pl-[11px] shadow-[0_1px_2px_rgba(228,229,231,0.24)] transition-[box-shadow,transform] duration-150",
+                      hot === "name" &&
+                        "scale-[0.985] shadow-[0_1px_2px_rgba(228,229,231,0.24),0_0_0_3px_rgba(17,171,9,0.14)]",
+                    )}
                   >
                     <span
                       className={cn(
@@ -221,19 +228,18 @@ export function HowItWorks() {
                       {name ? (
                         <span className="text-[#0a0d14]">
                           {name}
-                          {phase === "name" && <Caret />}
+                          {phase === "type-name" && <Caret />}
                         </span>
                       ) : (
                         <span className="text-[#868c98]">
                           Как к вам можно обращаться
-                          {phase === "name" && <Caret />}
                         </span>
                       )}
                     </span>
                   </div>
                 </label>
 
-                <div className="motion-safe:[animation:form-in_0.55s_ease_both] motion-safe:[animation-delay:200ms]">
+                <div className="motion-safe:[animation:form-in_0.6s_ease_both] motion-safe:[animation-delay:340ms]">
                   <p className="font-[family-name:var(--font-inter)] text-[13px] leading-[18px] font-medium tracking-[-0.08px] text-[#0a0d14]">
                     Способ связи
                     <span className="text-[#11ab09]">*</span>
@@ -248,27 +254,30 @@ export function HowItWorks() {
                   </div>
                 </div>
 
-                <label className="motion-safe:[animation:form-in_0.55s_ease_both] motion-safe:[animation-delay:260ms]">
+                <label className="motion-safe:[animation:form-in_0.6s_ease_both] motion-safe:[animation-delay:460ms]">
                   <span className="font-[family-name:var(--font-inter)] text-[13px] leading-[18px] font-medium tracking-[-0.08px] text-[#0a0d14]">
                     Номер телефона
                     <span className="text-[#11ab09]">*</span>
                   </span>
                   <div
                     ref={phoneRef}
-                    className="mt-1 rounded-[10px] border border-[#e2e4e9] bg-white px-[11px] py-2.5 shadow-[0_1px_2px_rgba(228,229,231,0.24)]"
+                    className={cn(
+                      "mt-1 rounded-[10px] border border-[#e2e4e9] bg-white px-[11px] py-2.5 shadow-[0_1px_2px_rgba(228,229,231,0.24)] transition-[box-shadow,transform] duration-150",
+                      hot === "phone" &&
+                        "scale-[0.985] shadow-[0_1px_2px_rgba(228,229,231,0.24),0_0_0_3px_rgba(17,171,9,0.14)]",
+                    )}
                   >
                     <span className="flex items-center font-[family-name:var(--font-inter)] text-[13px] leading-[18px] tracking-[-0.08px]">
                       {phone ? (
                         <>
-                          <span className="inline-block text-[#0a0d14] blur-[3.5px]">
+                          <span className="inline-block text-[#0a0d14] blur-[1.5px]">
                             {phone}
                           </span>
-                          {phase === "phone" && <Caret />}
+                          {phase === "type-phone" && <Caret />}
                         </>
                       ) : (
                         <span className="text-[#868c98]">
                           Контактный номер для связи
-                          {phase === "phone" && <Caret />}
                         </span>
                       )}
                     </span>
@@ -278,7 +287,7 @@ export function HowItWorks() {
                 <div
                   ref={sendRef}
                   className={cn(
-                    "mt-1 flex items-center justify-center rounded-[10px] border-0 px-[7px] py-[9px] transition-transform motion-safe:[animation:form-in_0.55s_ease_both] motion-safe:[animation-delay:320ms]",
+                    "mt-1 flex items-center justify-center rounded-[10px] border-0 px-[7px] py-[9px] transition-transform motion-safe:[animation:form-in_0.6s_ease_both] motion-safe:[animation-delay:580ms]",
                     pressed && "scale-[0.98]",
                   )}
                   style={{
@@ -299,10 +308,17 @@ export function HowItWorks() {
               <span
                 aria-hidden
                 className={cn(
-                  "pointer-events-none absolute z-10 drop-shadow-[0_1px_1px_rgba(0,0,0,0.25)] transition-[left,top,opacity] duration-500 ease-out",
+                  "pointer-events-none absolute z-10 origin-top-left drop-shadow-[0_1px_1px_rgba(0,0,0,0.25)]",
                   cursorOn ? "opacity-100" : "opacity-0",
+                  clicking && "scale-[0.82]",
                 )}
-                style={{ left: cursor.x, top: cursor.y }}
+                style={{
+                  left: cursor.x,
+                  top: cursor.y,
+                  transition: cursorOn
+                    ? "left 0.48s ease-out, top 0.48s ease-out, opacity 0.2s linear, transform 0.12s ease-out"
+                    : "opacity 0.18s linear",
+                }}
               >
                 <Cursor />
               </span>

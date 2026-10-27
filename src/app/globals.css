@@ -133,7 +133,7 @@
 @keyframes form-in {
   from {
     opacity: 0;
-    transform: translateY(12px);
+    transform: translateY(18px) scale(0.98);
   }
   to {
     opacity: 1;

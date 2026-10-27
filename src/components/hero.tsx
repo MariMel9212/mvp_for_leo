@@ -28,7 +28,7 @@ export function Hero() {
             <div
               role="tablist"
               aria-label="Кому нужна помощь"
-              className="flex w-full gap-1 rounded-[10px] bg-[#f6f8fa] p-[2px]"
+              className="flex h-[44px] w-full gap-1 rounded-[10px] bg-[#f6f8fa] p-[2px] min-[1440px]:h-[52px]"
             >
               {audiences.map((item) => {
                 const selected = audience === item.id;
@@ -40,7 +40,7 @@ export function Hero() {
                     aria-selected={selected}
                     onClick={() => setAudience(item.id)}
                     className={cn(
-                      "flex flex-1 items-center justify-center rounded-[8px] px-2 py-1.5 text-[14px] leading-5 font-medium tracking-[-0.084px] whitespace-nowrap transition-colors min-[1440px]:py-2 min-[1440px]:text-[16px]",
+                      "flex h-full flex-1 items-center justify-center rounded-[8px] px-2 text-[14px] leading-5 font-medium tracking-[-0.084px] whitespace-nowrap transition-colors min-[1440px]:text-[16px]",
                       selected
                         ? "bg-white text-[#0a0d14]"
                         : "text-[#868c98] hover:text-[#0a0d14]",
