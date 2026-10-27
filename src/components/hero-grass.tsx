@@ -3,6 +3,9 @@
 import { useEffect, useRef } from "react";
 
 const BANDS = 10;
+const COPIES = 3;
+const PER_COPY = 6300;
+const BAND_WEIGHT = [48, 110, 220, 520, 990, 1390, 1485, 1100, 720, 435];
 
 type Particle = {
   homeX: number;
@@ -89,27 +92,35 @@ export function HeroGrass() {
         }
       }
 
+      const weightSum = BAND_WEIGHT.reduce((sum, weight, band) => {
+        return bands[band].length ? sum + weight : sum;
+      }, 0);
+
       for (let band = 0; band < BANDS; band++) {
         const pool = bands[band];
-        if (!pool.length) continue;
-        const down = band / (BANDS - 1);
-        const spacing = 0.62 + down ** 1.15 * 2.3;
-        const count = Math.max(1, Math.round(pool.length / (spacing * spacing)));
+        if (!pool.length || weightSum === 0) continue;
+        const count = Math.max(1, Math.round((PER_COPY * BAND_WEIGHT[band]) / weightSum));
         for (let i = 0; i < count; i++) {
           const index = pool[(Math.random() * pool.length) | 0];
           const x = index % sw;
           const y = (index / sw) | 0;
-          const homeX = (x - minX + Math.random()) / spanX;
+          const localX = (x - minX + Math.random()) / spanX;
           const homeY = (y - minY + Math.random()) / spanY;
-          particles.push({
-            homeX,
-            homeY,
-            fromX: homeX + (Math.random() - 0.5) * 0.02,
-            fromY: 1.08 + Math.random() * 0.18,
-            height: (maxY - y) / spanY,
-            phase: Math.random() * Math.PI * 2,
-            delay: Math.random() * 0.28,
-          });
+          const height = (maxY - y) / spanY;
+          const phase = Math.random() * Math.PI * 2;
+          const delay = Math.random() * 0.22;
+          for (let copy = 0; copy < COPIES; copy++) {
+            const homeX = (localX + copy) / COPIES;
+            particles.push({
+              homeX,
+              homeY,
+              fromX: homeX + (Math.random() - 0.5) * 0.008,
+              fromY: 1.06 + Math.random() * 0.12,
+              height,
+              phase: phase + copy * 0.7,
+              delay,
+            });
+          }
         }
       }
 
@@ -143,7 +154,7 @@ export function HeroGrass() {
             sway * eased;
           const y =
             (particle.fromY + (particle.homeY - particle.fromY) * eased) * height;
-          const radius = 1.65 * scale;
+          const radius = 0.9 * scale;
           const r2 = radius * radius;
           const reach = Math.ceil(radius);
           const cx = x | 0;
@@ -157,9 +168,9 @@ export function HeroGrass() {
               const px = cx + dx;
               if (px < 0 || px >= width) continue;
               const index = (py * width + px) * 4;
-              data[index] = 20;
-              data[index + 1] = 24;
-              data[index + 2] = 18;
+              data[index] = 17;
+              data[index + 1] = 171;
+              data[index + 2] = 9;
               data[index + 3] = alpha;
             }
           }
