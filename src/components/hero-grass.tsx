@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 
-const COUNT = 12000;
+const COUNT = 26000;
 
 type Particle = {
   homeX: number;
@@ -42,10 +42,10 @@ export function HeroGrass() {
     resize();
 
     const img = new Image();
-    img.src = "/hero/grass.png";
+    img.src = "/hero/meadow.png";
     img.onload = () => {
       if (!loop.alive) return;
-      const sw = 520;
+      const sw = 1100;
       const sh = Math.max(1, Math.round((sw * img.height) / img.width));
       const sample = document.createElement("canvas");
       sample.width = sw;
@@ -55,40 +55,86 @@ export function HeroGrass() {
       sampleCtx.drawImage(img, 0, 0, sw, sh);
       const pixels = sampleCtx.getImageData(0, 0, sw, sh).data;
 
-      const spots: { x: number; y: number }[] = [];
+      const ink = new Uint8Array(sw * sh);
+      let inkCount = 0;
       let minY = sh;
       let maxY = 0;
       for (let y = 0; y < sh; y++) {
         for (let x = 0; x < sw; x++) {
           const i = (y * sw + x) * 4;
-          if (pixels[i] < 128) {
+          if (pixels[i + 3] > 24 && pixels[i] < 150) {
+            ink[y * sw + x] = 1;
+            inkCount += 1;
             if (y < minY) minY = y;
             if (y > maxY) maxY = y;
-            spots.push({ x, y });
           }
         }
       }
-      if (!spots.length) return;
+      if (!inkCount) return;
 
+      const stride = sw + 1;
+      const integral = new Uint32Array(stride * (sh + 1));
+      for (let y = 0; y < sh; y++) {
+        let row = 0;
+        for (let x = 0; x < sw; x++) {
+          row += ink[y * sw + x];
+          integral[(y + 1) * stride + x + 1] = integral[y * stride + x + 1] + row;
+        }
+      }
+      const area = (x0: number, y0: number, x1: number, y1: number) =>
+        integral[y1 * stride + x1] -
+        integral[y0 * stride + x1] -
+        integral[y1 * stride + x0] +
+        integral[y0 * stride + x0];
+
+      const xs = new Int16Array(inkCount);
+      const ys = new Int16Array(inkCount);
+      const cumulative = new Float32Array(inkCount);
+      let total = 0;
+      let cursor = 0;
       const span = Math.max(1, maxY - minY);
-      const heights = new Float32Array(spots.length);
-      for (let i = 0; i < spots.length; i++) {
-        heights[i] = (maxY - spots[i].y) / span;
+      const heights = new Float32Array(inkCount);
+      for (let y = 0; y < sh; y++) {
+        for (let x = 0; x < sw; x++) {
+          if (!ink[y * sw + x]) continue;
+          const x0 = Math.max(0, x - 3);
+          const y0 = Math.max(0, y - 3);
+          const x1 = Math.min(sw, x + 4);
+          const y1 = Math.min(sh, y + 4);
+          const density = area(x0, y0, x1, y1);
+          xs[cursor] = x;
+          ys[cursor] = y;
+          heights[cursor] = (maxY - y) / span;
+          total += 1 / Math.pow(density, 0.62);
+          cumulative[cursor] = total;
+          cursor += 1;
+        }
       }
 
+      const pick = () => {
+        const target = Math.random() * total;
+        let low = 0;
+        let high = cumulative.length - 1;
+        while (low < high) {
+          const mid = (low + high) >> 1;
+          if (cumulative[mid] < target) low = mid + 1;
+          else high = mid;
+        }
+        return low;
+      };
+
       for (let i = 0; i < COUNT; i++) {
-        const index = (Math.random() * spots.length) | 0;
-        const spot = spots[index];
-        const homeX = spot.x / sw;
-        const homeY = (spot.y - minY) / span;
+        const index = pick();
+        const homeX = xs[index] / sw;
+        const homeY = (ys[index] - minY) / span;
         particles.push({
           homeX,
           homeY,
-          fromX: homeX + (Math.random() - 0.5) * 0.16,
-          fromY: 1.2 + Math.random() * 0.5,
+          fromX: homeX + (Math.random() - 0.5) * 0.08,
+          fromY: 1.12 + Math.random() * 0.35,
           height: heights[index],
           phase: Math.random() * Math.PI * 2,
-          delay: Math.random() * 0.4,
+          delay: Math.random() * 0.35,
         });
       }
 
@@ -104,7 +150,7 @@ export function HeroGrass() {
         const data = buffer.data;
         data.fill(0);
         const elapsed = (now - started) / 1000;
-        const radius = Math.max(1.4, width / 900);
+        const radius = Math.max(1.15, width / 1300);
         const r2 = radius * radius;
         const reach = Math.ceil(radius);
         for (const particle of particles) {
@@ -119,7 +165,7 @@ export function HeroGrass() {
               particle.height *
               particle.height *
               width *
-              0.011;
+              0.007;
           const x =
             (particle.fromX + (particle.homeX - particle.fromX) * eased) * width +
             sway * eased;
@@ -160,8 +206,7 @@ export function HeroGrass() {
     <canvas
       ref={canvasRef}
       aria-hidden
-      className="block h-full w-full"
-      style={{ width: "100%", height: "100%" }}
+      className="absolute inset-0 block h-full w-full"
     />
   );
 }
