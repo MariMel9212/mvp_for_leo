@@ -20,13 +20,13 @@ export function Hero() {
     <section id="podbor" className="relative overflow-hidden bg-[#eee]">
       <div
         className="pointer-events-none absolute bottom-0"
-        style={{ left: "-34.84%", width: "169.55%", height: "clamp(156px, 14.375vw, 230px)" }}
+        style={{ left: "-34.84%", width: "169.55%", height: "clamp(220px, 21.5vw, 360px)" }}
       >
         <HeroGrass />
       </div>
       <div
         className="relative z-10 mx-auto w-full max-w-[940px] px-4 pt-12 min-[768px]:pt-[77px] min-[1440px]:max-w-[1180px] min-[1440px]:pt-[116px]"
-        style={{ paddingBottom: "clamp(104px, 9.77vw, 156px)" }}
+        style={{ paddingBottom: "clamp(148px, 14.6vw, 244px)" }}
       >
         <div className="flex flex-col items-center gap-8 text-center min-[768px]:gap-[34px] min-[1440px]:gap-12">
           <h1 className="max-w-[592px] text-[26px] leading-[1.1] font-medium text-black min-[768px]:text-[38px] min-[1440px]:max-w-[960px] min-[1440px]:text-[61px]">
