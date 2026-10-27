@@ -5,8 +5,43 @@ import { cn } from "@/lib/utils";
 
 const NAME = "Мария";
 const PHONE = "+7 916 000-00-00";
+const ANSWER = "Нужна помощь для близкого";
+const CENTER_NAMES = [
+  "Реабилитационный центр в Химках",
+  "Медикаментозная терапия",
+];
 
-type Phase = "assemble" | "type-name" | "type-phone";
+const STEPS = [
+  {
+    id: "request",
+    title: "Оставьте заявку",
+    body: (
+      <>
+        Укажите удобный для Вас способ связи и&nbsp;ваш контакт. Заявка на
+        сайте анонимна и&nbsp;конфедециальна
+      </>
+    ),
+  },
+  {
+    id: "situation",
+    title: "Расскажите о\u00a0ситуации",
+    body: (
+      <>
+        Коротко опишите, что происходит. Этого достаточно, чтобы подобрать
+        центр.
+      </>
+    ),
+  },
+  {
+    id: "centers",
+    title: "Подберём варианты",
+    body: <>Два центра, которые подходят под&nbsp;ваш запрос.</>,
+  },
+] as const;
+
+type StepId = (typeof STEPS)[number]["id"];
+type Phase = "assemble" | "type-name" | "type-phone" | "type-answer";
+type Field = "name" | "phone" | "answer";
 type Travel = "below" | "in" | "above";
 
 function wait(ms: number, timers: number[]) {
@@ -21,14 +56,17 @@ export function HowItWorks() {
   const nameRef = useRef<HTMLDivElement>(null);
   const phoneRef = useRef<HTMLDivElement>(null);
   const sendRef = useRef<HTMLDivElement>(null);
+  const answerRef = useRef<HTMLDivElement>(null);
   const [shown, setShown] = useState(false);
   const [reduced, setReduced] = useState(false);
   const [cycle, setCycle] = useState(0);
+  const [step, setStep] = useState<StepId>("request");
   const [phase, setPhase] = useState<Phase>("assemble");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
+  const [answer, setAnswer] = useState("");
   const [pressed, setPressed] = useState(false);
-  const [hot, setHot] = useState<"name" | "phone" | null>(null);
+  const [hot, setHot] = useState<Field | null>(null);
   const [cursorOn, setCursorOn] = useState(false);
   const [clicking, setClicking] = useState(false);
   const [cursor, setCursor] = useState({ x: 300, y: 420 });
@@ -72,7 +110,7 @@ export function HowItWorks() {
       });
     };
 
-    const click = async (target: HTMLElement | null, field: "name" | "phone" | null) => {
+    const click = async (target: HTMLElement | null, field: Field | null) => {
       setCursorOn(false);
       place(target, 34, 26);
       await wait(40, timers);
@@ -94,25 +132,37 @@ export function HowItWorks() {
       await wait(200, timers);
     };
 
+    const show = async (next: StepId) => {
+      setTravelOn(false);
+      setTravel("below");
+      setStep(next);
+      setCycle((value) => value + 1);
+      setPhase("assemble");
+      setName("");
+      setPhone("");
+      setAnswer("");
+      setPressed(false);
+      setHot(null);
+      setCursorOn(false);
+      setClicking(false);
+      await wait(220, timers);
+      if (cancelled) return;
+      setTravelOn(true);
+      await wait(40, timers);
+      setTravel("in");
+      await wait(next === "request" ? 1280 : 860, timers);
+    };
+
+    const hide = async () => {
+      setCursorOn(false);
+      setTravel("above");
+      await wait(820, timers);
+    };
+
     const run = async () => {
       await wait(50, timers);
       while (!cancelled) {
-        setTravelOn(false);
-        setTravel("below");
-        setCycle((value) => value + 1);
-        setPhase("assemble");
-        setName("");
-        setPhone("");
-        setPressed(false);
-        setHot(null);
-        setCursorOn(false);
-        setClicking(false);
-        await wait(60, timers);
-        if (cancelled) return;
-        setTravelOn(true);
-        await wait(40, timers);
-        setTravel("in");
-        await wait(1280, timers);
+        await show("request");
         if (cancelled) return;
 
         await click(nameRef.current, "name");
@@ -139,9 +189,29 @@ export function HowItWorks() {
 
         await click(sendRef.current, null);
         if (cancelled) return;
+        await hide();
+        if (cancelled) return;
 
-        setTravel("above");
-        await wait(820, timers);
+        await show("situation");
+        if (cancelled) return;
+        await click(answerRef.current, "answer");
+        if (cancelled) return;
+        setPhase("type-answer");
+        for (const letter of ANSWER) {
+          if (cancelled) return;
+          setAnswer((value) => value + letter);
+          await wait(78, timers);
+        }
+        await wait(640, timers);
+        if (cancelled) return;
+        await hide();
+        if (cancelled) return;
+
+        await show("centers");
+        if (cancelled) return;
+        await wait(1700, timers);
+        if (cancelled) return;
+        await hide();
       }
     };
 
@@ -151,6 +221,18 @@ export function HowItWorks() {
       for (const timer of timers) window.clearTimeout(timer);
     };
   }, [reduced, shown]);
+
+  const copy = STEPS.find((item) => item.id === step) ?? STEPS[0];
+  const motionClass =
+    reduced || travel === "in"
+      ? "translate-y-0"
+      : travel === "above"
+        ? "-translate-y-[920px]"
+        : "translate-y-[920px]";
+  const motionStyle = {
+    transition:
+      travelOn && !reduced ? "translate 0.75s cubic-bezier(0.4, 0, 0.2, 1)" : "none",
+  };
 
   return (
     <section
@@ -172,32 +254,24 @@ export function HowItWorks() {
       </h2>
 
       <div className="mt-12 flex flex-col items-start gap-10 min-[900px]:mt-16 min-[900px]:flex-row min-[900px]:items-center min-[900px]:justify-between">
-        <div className="max-w-[319px]">
-          <h3 className="text-[28px] leading-[1.1] font-medium text-black min-[1440px]:text-[34px]">
-            Оставьте заявку
-          </h3>
-          <p className="mt-3 text-[16px] leading-[1.35] font-normal text-black min-[1440px]:text-[18px]">
-            Укажите удобный для Вас способ связи и&nbsp;ваш контакт. Заявка на
-            сайте анонимна и&nbsp;конфедециальна
-          </p>
+        <div className="h-[132px] max-w-[319px] overflow-hidden min-[1440px]:h-[156px]">
+          <div className={motionClass} style={motionStyle}>
+            <h3 className="text-[28px] leading-[1.1] font-medium text-black min-[1440px]:text-[34px]">
+              {copy.title}
+            </h3>
+            <p className="mt-3 text-[16px] leading-[1.35] font-normal text-black min-[1440px]:text-[18px]">
+              {copy.body}
+            </p>
+          </div>
         </div>
 
         <div className="relative mx-auto flex min-h-[620px] w-full max-w-[464px] flex-col justify-center overflow-hidden rounded-[14px] bg-[#f7f7f7] px-[34px] py-16 min-[900px]:mx-0 min-[900px]:min-h-[700px] min-[1440px]:min-h-[760px]">
           <div
             ref={stageRef}
-            className={cn(
-              "relative w-full",
-              reduced || travel === "in"
-                ? "translate-y-0"
-                : travel === "above"
-                  ? "-translate-y-[180%]"
-                  : "translate-y-[180%]",
-            )}
-            style={{
-              transition:
-                travelOn && !reduced ? "translate 0.75s cubic-bezier(0.4, 0, 0.2, 1)" : "none",
-            }}
+            className={cn("relative w-full", motionClass)}
+            style={motionStyle}
           >
+            {step === "request" && (
             <article
               key={cycle}
               aria-hidden
@@ -320,8 +394,69 @@ export function HowItWorks() {
                 </div>
               </div>
             </article>
+            )}
 
-            {!reduced && (
+            {step === "situation" && (
+              <article
+                key={cycle}
+                aria-hidden
+                className="rounded-[18px] border border-black/8 bg-white px-7 py-8 shadow-[0_2px_4px_rgba(27,28,29,0.04)]"
+              >
+                <p className="text-[22px] leading-[1.3] font-medium text-[#0a0d14]">
+                  Что сейчас происходит?
+                </p>
+                <p className="mt-2 text-[14px] leading-[1.4] text-[#0a0d14]/45">
+                  Пара слов, без подробностей
+                </p>
+                <div
+                  ref={answerRef}
+                  className={cn(
+                    "mt-6 min-h-[96px] rounded-[10px] border border-[#e2e4e9] bg-white px-3 py-3 shadow-[0_1px_2px_rgba(228,229,231,0.24)] transition-[box-shadow,transform] duration-150",
+                    hot === "answer" &&
+                      "scale-[0.985] shadow-[0_1px_2px_rgba(228,229,231,0.24),0_0_0_3px_rgba(17,171,9,0.14)]",
+                  )}
+                >
+                  <span className="font-[family-name:var(--font-inter)] text-[15px] leading-[1.45] tracking-[-0.08px]">
+                    {answer ? (
+                      <span className="text-[#0a0d14]">
+                        {answer}
+                        {phase === "type-answer" && <Caret />}
+                      </span>
+                    ) : (
+                      <span className="text-[#868c98]">Напишите пару слов</span>
+                    )}
+                  </span>
+                </div>
+              </article>
+            )}
+
+            {step === "centers" && (
+              <article
+                key={cycle}
+                aria-hidden
+                className="rounded-[18px] border border-black/8 bg-white px-7 py-8 shadow-[0_2px_4px_rgba(27,28,29,0.04)]"
+              >
+                <p className="font-[family-name:var(--font-inter)] text-[13px] leading-[18px] font-medium tracking-[-0.08px] text-[#868c98]">
+                  Подходящие центры
+                </p>
+                <div className="mt-5 flex flex-col">
+                  {CENTER_NAMES.map((center, index) => (
+                    <p
+                      key={center}
+                      className={cn(
+                        "py-4 text-[21px] leading-[1.25] font-medium text-black motion-safe:[animation:form-in_0.6s_ease_both]",
+                        index > 0 && "border-t border-[#e2e4e9]",
+                      )}
+                      style={{ animationDelay: `${120 + index * 180}ms` }}
+                    >
+                      {center}
+                    </p>
+                  ))}
+                </div>
+              </article>
+            )}
+
+            {!reduced && step !== "centers" && (
               <span
                 aria-hidden
                 className={cn(
