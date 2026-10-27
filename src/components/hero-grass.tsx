@@ -114,7 +114,7 @@ export function HeroGrass() {
       const radius = 0.83 * pixelRatio;
       const r2 = radius * radius;
       const reach = Math.ceil(radius);
-      const swayScale = width * (TILE_W / STRIP_W) * 0.004;
+      const swayScale = width * (TILE_W / STRIP_W) * 0.0055;
       const grassPx =
         Math.min(360, Math.max(220, (width / pixelRatio) * 0.215)) * pixelRatio;
       for (const particle of particles) {
