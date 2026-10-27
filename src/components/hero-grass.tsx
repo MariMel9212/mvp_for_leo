@@ -7,19 +7,28 @@ const TILE_W = 727.1325073242188;
 const TILE_H = 184;
 const STRIP_W = 2170.313232421875;
 const COPIES = [0, 721.5904541015625, 1443.1807861328125];
+const STRIP_LEFT = -0.3484;
+const STRIP_WIDTH = 1.6955;
 
 type Particle = {
-  homeX: number;
-  homeY: number;
+  stripX: number;
+  stripY: number;
   fromX: number;
   fromY: number;
   height: number;
   phase: number;
-  delay: number;
+  appear: number;
+  moveAt: number;
+  bow: number;
 };
 
 function ease(t: number) {
-  return t * t * t * (t * (t * 6 - 15) + 10);
+  return t < 0.5 ? 4 * t * t * t : 1 - (-2 * t + 2) ** 3 / 2;
+}
+
+function unit(seed: number) {
+  const value = Math.sin(seed * 127.1) * 43758.5453;
+  return value - Math.floor(value);
 }
 
 export function HeroGrass() {
@@ -43,30 +52,35 @@ export function HeroGrass() {
     }
     const spanY = Math.max(1, maxY - minY);
 
+    let seed = 1;
     for (let i = 0; i < points.length; i += 2) {
       const x = points[i];
       const y = points[i + 1];
       const height = (maxY - y) / spanY;
       const phase = ((i * 17) % 628) / 100;
-      const drift = ((i * 17) % 1000) / 1000;
-      const lift = ((i * 41) % 1000) / 1000;
-      const stagger = ((i * 13) % 1000) / 1000;
       const places = [x];
       // The source silhouette has a bare column just right of center.
       // Stamp the neighboring blade into that column; the dots themselves stay the same.
       if (x >= 250 && x <= 360) places.push(x + 140);
       for (const placeX of places) {
         for (const origin of COPIES) {
-          const homeX = (origin + placeX) / STRIP_W;
-          const homeY = y / TILE_H;
+          const stripX = (origin + placeX) / STRIP_W;
+          const stripY = y / TILE_H;
+          const endX = STRIP_LEFT + stripX * STRIP_WIDTH;
+          const onScreen = endX > -0.04 && endX < 1.04;
+          const a = unit(seed++);
+          const b = unit(seed++);
+          const c = unit(seed++);
           particles.push({
-            homeX,
-            homeY,
-            fromX: homeX + (drift - 0.5) * 0.045,
-            fromY: homeY + 0.1 + lift * 0.14,
+            stripX,
+            stripY,
+            fromX: onScreen ? a : endX + (a - 0.5) * 0.05,
+            fromY: onScreen ? 0.04 + b * 0.92 : 0.78 + b * 0.22,
             height,
             phase: phase + origin * 0.001,
-            delay: height * 0.08 + stagger * 0.05,
+            appear: 0.12 + c * 0.7,
+            moveAt: 0.72 + a * 0.45,
+            bow: (b - 0.5) * 36,
           });
         }
       }
@@ -99,10 +113,16 @@ export function HeroGrass() {
       const r2 = radius * radius;
       const reach = Math.ceil(radius);
       const swayScale = width * (TILE_W / STRIP_W) * 0.004;
+      const grassPx =
+        Math.min(360, Math.max(220, (width / pixelRatio) * 0.215)) * pixelRatio;
       for (const particle of particles) {
+        const appeared = reduce
+          ? 1
+          : Math.min(1, Math.max(0, (elapsed - particle.appear) / 0.45));
+        if (appeared <= 0) continue;
         const t = reduce
           ? 1
-          : Math.min(1, Math.max(0, (elapsed - particle.delay) / 0.62));
+          : Math.min(1, Math.max(0, (elapsed - particle.moveAt) / 1.45));
         const eased = ease(t);
         const sway = reduce
           ? 0
@@ -111,11 +131,16 @@ export function HeroGrass() {
             particle.height *
             swayScale *
             eased;
-        const x = (particle.fromX + (particle.homeX - particle.fromX) * eased) * width + sway;
-        const y = (particle.fromY + (particle.homeY - particle.fromY) * eased) * height;
+        const endX = (STRIP_LEFT + particle.stripX * STRIP_WIDTH) * width;
+        const endY = height - grassPx + particle.stripY * grassPx;
+        const startX = particle.fromX * width;
+        const startY = particle.fromY * height;
+        const bow = Math.sin(eased * Math.PI) * particle.bow * pixelRatio;
+        const x = startX + (endX - startX) * eased + bow + sway;
+        const y = startY + (endY - startY) * eased;
         const cx = x | 0;
         const cy = y | 0;
-        const alpha = Math.min(1, 0.82 + t * 0.3) * 132;
+        const alpha = appeared * 132;
         for (let dy = -reach; dy <= reach; dy++) {
           const py = cy + dy;
           if (py < 0 || py >= height) continue;

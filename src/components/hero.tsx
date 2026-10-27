@@ -21,10 +21,7 @@ export function Hero() {
       id="podbor"
       className="relative overflow-hidden bg-gradient-to-b from-[#cee0f5] to-white"
     >
-      <div
-        className="pointer-events-none absolute bottom-0"
-        style={{ left: "-34.84%", width: "169.55%", height: "clamp(220px, 21.5vw, 360px)" }}
-      >
+      <div className="pointer-events-none absolute inset-0">
         <HeroGrass />
       </div>
       <div
