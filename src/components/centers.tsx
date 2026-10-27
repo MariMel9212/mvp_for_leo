@@ -1,37 +1,74 @@
+const centers = [
+  {
+    image: "/centers/himki.png",
+    name: "Ребцентр в Химках",
+    program: "Программа от 3 до 12 мес",
+  },
+  {
+    image: "/centers/zelenograd.png",
+    name: "Ребцентр в Зеленограде",
+    program: "Программа от 5 до 12 мес",
+  },
+  {
+    image: "/centers/timber.png",
+    name: "Ребцентр в Химках",
+    program: "Программа от 3 до 12 мес",
+  },
+  {
+    image: "/centers/log.png",
+    name: "Ребцентр в Химках",
+    program: "Программа от 3 до 12 мес",
+    price: "120 000",
+  },
+];
+
 export function Centers() {
   return (
-    <section className="mt-16 pb-20 min-[768px]:mt-[181px] min-[768px]:pb-28 min-[1440px]:mt-[200px] min-[1440px]:pb-36">
-      <div className="mx-auto w-full max-w-[940px] px-4 min-[1440px]:max-w-[1180px]">
-      <h2 className="text-[32px] leading-[1.1] font-medium text-black min-[768px]:text-[44px] min-[1440px]:text-[52px]">
+    <section className="mx-auto mt-16 w-full max-w-[940px] px-4 pb-20 min-[768px]:mt-[130px] min-[768px]:pb-28 min-[1440px]:max-w-[1180px] min-[1440px]:pb-36">
+      <h2 className="text-center text-[32px] leading-[1.1] font-medium text-black min-[768px]:text-[44px]">
         Проверенные учереждения
       </h2>
 
-      <div className="-mx-4 mt-8 flex gap-3 overflow-x-auto px-4 pb-1 min-[768px]:mx-0 min-[768px]:mt-[52px] min-[768px]:overflow-visible min-[768px]:px-0 min-[1440px]:mt-16 min-[1440px]:gap-[15px]">
-        <div className="h-[260px] w-[272px] shrink-0 overflow-hidden rounded-[6px] bg-[#e7e6e6] min-[768px]:h-[329px] min-[768px]:w-[345px] min-[1440px]:h-[413px] min-[1440px]:w-[433px]">
-          <img
-            src="/centers/himki.png"
-            alt="Ребцентр в Химках"
-            className="size-full object-cover"
-          />
-        </div>
-        <div className="h-[260px] w-[272px] shrink-0 bg-[#e7e6e6] min-[768px]:h-[329px] min-[768px]:w-[345px] min-[1440px]:h-[413px] min-[1440px]:w-[433px]" />
-        <div className="h-[260px] w-[272px] shrink-0 bg-[#e7e6e6] min-[768px]:h-[329px] min-[768px]:w-[345px] min-[1440px]:h-[413px] min-[1440px]:w-[433px]" />
-      </div>
-
-      <div className="mt-5 w-[272px] min-[768px]:w-[345px] min-[1440px]:mt-6 min-[1440px]:w-[433px]">
-        <p className="text-[20px] leading-[1.1] font-medium text-black min-[1440px]:text-[24px]">
-          Ребцентр в Химках
-        </p>
-        <p className="mt-1 text-[14px] leading-[1.1] font-normal text-black min-[1440px]:text-[16px]">
-          Программа от 3 до 12 мес
-        </p>
-        <button
-          type="button"
-          className="mt-[23px] inline-flex h-[34px] items-center justify-center rounded-[8px] bg-[rgba(120,216,112,0.1)] px-[10px] text-[16px] leading-[1.1] font-medium text-[rgba(17,17,17,0.9)] min-[1440px]:mt-7 min-[1440px]:h-[40px] min-[1440px]:px-4 min-[1440px]:text-[18px]"
-        >
-          Запросить цену
-        </button>
-      </div>
+      <div className="mt-8 grid grid-cols-1 gap-3 min-[768px]:mt-14 min-[768px]:grid-cols-2">
+        {centers.map((center) => (
+          <article
+            key={center.image}
+            className="relative aspect-[464/463] overflow-hidden rounded-[23px]"
+          >
+            <img
+              src={center.image}
+              alt={center.name}
+              className="absolute inset-0 size-full object-cover"
+            />
+            <div className="absolute inset-x-0 bottom-0 flex h-[97px] items-center justify-between gap-3 bg-gradient-to-b from-transparent to-black/80 px-4 pt-3.5">
+              <div className="min-w-0">
+                <p className="text-[20px] leading-[1.1] font-medium text-white">
+                  {center.name}
+                </p>
+                <p className="mt-1 text-[14px] leading-[1.1] font-normal text-white/80">
+                  {center.program}
+                </p>
+              </div>
+              {center.price ? (
+                <p className="flex shrink-0 items-end gap-1.5 whitespace-nowrap text-white">
+                  <span className="text-[20px] leading-[1.1] font-medium">
+                    {center.price}
+                  </span>
+                  <span className="text-[14px] leading-[1.1] opacity-80">
+                    ₽ / месяц
+                  </span>
+                </p>
+              ) : (
+                <button
+                  type="button"
+                  className="inline-flex h-[34px] shrink-0 items-center justify-center rounded-[8px] bg-[rgba(120,216,112,0.92)] px-[10px] text-[16px] leading-[1.1] font-medium text-[rgba(17,17,17,0.9)]"
+                >
+                  Запросить цену
+                </button>
+              )}
+            </div>
+          </article>
+        ))}
       </div>
     </section>
   );

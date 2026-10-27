@@ -6,7 +6,7 @@ export function SiteHeader() {
       <div className="mx-auto flex h-[64px] w-full max-w-[940px] items-center justify-between gap-6 px-4 min-[1440px]:h-[80px] min-[1440px]:max-w-[1180px]">
         <a
           href="#podbor"
-          className="shrink-0 text-[22px] leading-[1.1] font-bold tracking-[-0.5px] text-[#001800] min-[1440px]:text-[28px]"
+          className="shrink-0 text-[18px] leading-[1.1] font-bold tracking-[-0.5px] text-[#001800]"
           style={{
             fontFamily:
               '"SF Pro Display", "SF Pro Text", var(--font-google-sans), sans-serif',

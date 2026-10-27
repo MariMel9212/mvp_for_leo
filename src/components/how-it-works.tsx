@@ -248,7 +248,7 @@ export function HowItWorks() {
             </div>
           </div>
 
-          <div className="relative mx-auto w-full max-w-[329px] min-[900px]:mx-0 min-[1440px]:max-w-[390px]">
+          <div className="relative mx-auto w-[272px] max-w-full min-[900px]:mx-0">
           <div
             ref={stageRef}
             className={cn("relative w-full", motionClass)}
@@ -258,7 +258,7 @@ export function HowItWorks() {
             <article
               key={cycle}
               aria-hidden
-              className="rounded-[15px] border border-black/8 bg-white px-6 pt-6 pb-5 shadow-[0_1.5px_3px_rgba(27,28,29,0.04)]"
+              className="rounded-[15px] border border-black/8 bg-white px-5 pt-5 pb-4 shadow-[0_1.5px_3px_rgba(27,28,29,0.04)]"
             >
               <div className="flex flex-col items-center gap-[7px] motion-safe:[animation:form-in_0.6s_ease_both]">
                 <div className="rounded-full border border-[#e4e5e7] bg-gradient-to-b from-[#e4e5e7]/50 to-transparent p-3">
