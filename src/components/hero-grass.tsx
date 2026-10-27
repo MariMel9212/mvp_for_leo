@@ -48,7 +48,9 @@ export function HeroGrass() {
       const y = points[i + 1];
       const height = (maxY - y) / spanY;
       const phase = ((i * 17) % 628) / 100;
-      const delay = ((i * 13) % 100) / 400;
+      const drift = ((i * 17) % 1000) / 1000;
+      const lift = ((i * 41) % 1000) / 1000;
+      const stagger = ((i * 13) % 1000) / 1000;
       const places = [x];
       // The source silhouette has a bare column just right of center.
       // Stamp the neighboring blade into that column; the dots themselves stay the same.
@@ -60,11 +62,11 @@ export function HeroGrass() {
           particles.push({
             homeX,
             homeY,
-            fromX: homeX,
-            fromY: homeY + 0.18 + ((i * 7) % 50) / 400,
+            fromX: homeX + (drift - 0.5) * 0.09,
+            fromY: homeY + 0.32 + lift * 0.4,
             height,
             phase: phase + origin * 0.001,
-            delay,
+            delay: height * 0.45 + stagger * 0.2,
           });
         }
       }
@@ -100,19 +102,20 @@ export function HeroGrass() {
       for (const particle of particles) {
         const t = reduce
           ? 1
-          : Math.min(1, Math.max(0, (elapsed - particle.delay) / 0.9));
+          : Math.min(1, Math.max(0, (elapsed - particle.delay) / 1.15));
         const eased = easeOut(t);
         const sway = reduce
           ? 0
           : Math.sin(elapsed * 1.1 + particle.phase) *
             particle.height *
             particle.height *
-            swayScale;
-        const x = (particle.fromX + (particle.homeX - particle.fromX) * eased) * width + sway * eased;
+            swayScale *
+            eased;
+        const x = (particle.fromX + (particle.homeX - particle.fromX) * eased) * width + sway;
         const y = (particle.fromY + (particle.homeY - particle.fromY) * eased) * height;
         const cx = x | 0;
         const cy = y | 0;
-        const alpha = eased * 132;
+        const alpha = Math.min(1, 0.4 + t * 1.15) * 132;
         for (let dy = -reach; dy <= reach; dy++) {
           const py = cy + dy;
           if (py < 0 || py >= height) continue;
