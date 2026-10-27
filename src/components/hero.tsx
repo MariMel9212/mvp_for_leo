@@ -28,7 +28,7 @@ export function Hero() {
         className="relative z-10 mx-auto w-full max-w-[940px] px-4 min-[1440px]:max-w-[1180px]"
         style={{
           paddingTop: "clamp(108px, calc(7.5vw + 52px), 180px)",
-          paddingBottom: "clamp(110px, calc(21.5vw - 140px), 220px)",
+          paddingBottom: "clamp(140px, calc(21.5vw - 110px), 250px)",
         }}
       >
         <div
