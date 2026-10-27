@@ -115,9 +115,9 @@ export function HeroGrass() {
             const px = cx + dx;
             if (px < 0 || px >= width) continue;
             const index = (py * width + px) * 4;
-            data[index] = 17;
-            data[index + 1] = 171;
-            data[index + 2] = 9;
+            data[index] = 3;
+            data[index + 1] = 123;
+            data[index + 2] = 215;
             data[index + 3] = alpha;
           }
         }
