@@ -2,8 +2,7 @@
 
 import { useEffect, useRef } from "react";
 
-const PER_COPY = 9000;
-const BANDS = 10;
+const COUNT = 15000;
 
 type Particle = {
   homeX: number;
@@ -45,11 +44,11 @@ export function HeroGrass() {
     resize();
 
     const img = new Image();
-    img.src = "/hero/meadow.png";
+    img.src = "/hero/blades.png";
     img.onload = () => {
       if (!loop.alive) return;
-      const sw = 1100;
-      const sh = Math.max(1, Math.round((sw * img.height) / img.width));
+      const sw = img.width;
+      const sh = img.height;
       const sample = document.createElement("canvas");
       sample.width = sw;
       sample.height = sh;
@@ -63,11 +62,13 @@ export function HeroGrass() {
       let maxX = 0;
       let minY = sh;
       let maxY = 0;
+      let inkCount = 0;
       for (let y = 0; y < sh; y++) {
         for (let x = 0; x < sw; x++) {
           const i = (y * sw + x) * 4;
-          if (pixels[i + 3] > 24 && pixels[i] < 150) {
+          if (pixels[i + 3] > 40) {
             ink[y * sw + x] = 1;
+            inkCount += 1;
             if (x < minX) minX = x;
             if (x > maxX) maxX = x;
             if (y < minY) minY = y;
@@ -75,54 +76,103 @@ export function HeroGrass() {
           }
         }
       }
-      if (maxX < minX) return;
+      if (!inkCount) return;
 
-      const spanX = Math.max(1, maxX - minX);
-      const spanY = Math.max(1, maxY - minY);
-      const bands: number[][] = Array.from({ length: BANDS }, () => []);
+      const depth = new Int16Array(sw * sh);
+      depth.fill(-1);
+      const queue = new Int32Array(inkCount);
+      let head = 0;
+      let tail = 0;
+      const seed = (index: number) => {
+        depth[index] = 1;
+        queue[tail] = index;
+        tail += 1;
+      };
       for (let y = 0; y < sh; y++) {
         for (let x = 0; x < sw; x++) {
-          if (!ink[y * sw + x]) continue;
-          const height = (maxY - y) / spanY;
-          const band = Math.min(BANDS - 1, Math.floor((1 - height) * BANDS));
-          bands[band].push(y * sw + x);
+          const index = y * sw + x;
+          if (!ink[index]) continue;
+          const outside =
+            x === 0 ||
+            y === 0 ||
+            x === sw - 1 ||
+            y === sh - 1 ||
+            !ink[index - 1] ||
+            !ink[index + 1] ||
+            !ink[index - sw] ||
+            !ink[index + sw];
+          if (outside) seed(index);
+        }
+      }
+      while (head < tail) {
+        const index = queue[head];
+        head += 1;
+        const next = depth[index] + 1;
+        const x = index % sw;
+        const neighbors = [index - 1, index + 1, index - sw, index + sw];
+        for (let n = 0; n < 4; n++) {
+          const neighbor = neighbors[n];
+          if (n < 2 && ((n === 0 && x === 0) || (n === 1 && x === sw - 1))) continue;
+          if (neighbor < 0 || neighbor >= ink.length) continue;
+          if (!ink[neighbor] || depth[neighbor] >= 0) continue;
+          depth[neighbor] = next;
+          queue[tail] = neighbor;
+          tail += 1;
         }
       }
 
-      const bandWeight = bands.map((pixelsInBand, index) => {
-        if (!pixelsInBand.length) return 0;
-        const down = index / (BANDS - 1);
-        return 0.08 + (1 - down) ** 1.8;
-      });
-      const weightSum = bandWeight.reduce((sum, weight) => sum + weight, 0);
-      const copySpan = 0.76;
+      let maxDepth = 1;
+      for (let i = 0; i < depth.length; i++) {
+        if (depth[i] > maxDepth) maxDepth = depth[i];
+      }
 
-      const place = (index: number, copy: number) => {
-        const x = index % sw;
-        const y = (index / sw) | 0;
-        const localX = (x - minX + Math.random()) / spanX;
-        const homeX = localX * copySpan + copy * (1 - copySpan);
+      const spanX = Math.max(1, maxX - minX);
+      const spanY = Math.max(1, maxY - minY);
+      const xs = new Int16Array(inkCount);
+      const ys = new Int16Array(inkCount);
+      const cumulative = new Float32Array(inkCount);
+      let total = 0;
+      let cursor = 0;
+      for (let y = 0; y < sh; y++) {
+        for (let x = 0; x < sw; x++) {
+          const index = y * sw + x;
+          if (depth[index] < 1) continue;
+          const inside = depth[index] / maxDepth;
+          xs[cursor] = x;
+          ys[cursor] = y;
+          total += 0.015 + inside ** 1.65;
+          cumulative[cursor] = total;
+          cursor += 1;
+        }
+      }
+
+      const pick = () => {
+        const target = Math.random() * total;
+        let low = 0;
+        let high = cursor - 1;
+        while (low < high) {
+          const mid = (low + high) >> 1;
+          if (cumulative[mid] < target) low = mid + 1;
+          else high = mid;
+        }
+        return low;
+      };
+
+      for (let i = 0; i < COUNT; i++) {
+        const index = pick();
+        const x = xs[index];
+        const y = ys[index];
+        const homeX = (x - minX + Math.random()) / spanX;
         const homeY = (y - minY + Math.random()) / spanY;
         particles.push({
           homeX,
           homeY,
           fromX: homeX + (Math.random() - 0.5) * 0.03,
-          fromY: 1.08 + Math.random() * 0.2,
+          fromY: 1.08 + Math.random() * 0.18,
           height: (maxY - y) / spanY,
           phase: Math.random() * Math.PI * 2,
           delay: Math.random() * 0.28,
         });
-      };
-
-      for (let band = 0; band < BANDS; band++) {
-        const pool = bands[band];
-        if (!pool.length || weightSum === 0) continue;
-        const count = Math.round((PER_COPY * bandWeight[band]) / weightSum);
-        for (let i = 0; i < count; i++) {
-          const index = pool[(Math.random() * pool.length) | 0];
-          place(index, 0);
-          place(index, 1);
-        }
       }
 
       const started = performance.now();
