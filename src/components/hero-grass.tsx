@@ -86,7 +86,7 @@ export function HeroGrass() {
             phase: phase + origin * 0.001,
             appear: 0,
             moveAt: a * 0.08,
-            travel: 1.55 + b * 0.95,
+            travel: 1.15 + b * 0.55,
             bow: (c - 0.5) * 36,
             trail,
           });
@@ -120,7 +120,7 @@ export function HeroGrass() {
       const radius = 0.83 * pixelRatio;
       const r2 = radius * radius;
       const reach = Math.ceil(radius);
-      const swayScale = width * (TILE_W / STRIP_W) * 0.028;
+      const swayScale = 9 * pixelRatio;
       const grassPx =
         Math.min(360, Math.max(220, (width / pixelRatio) * 0.215)) * pixelRatio;
       for (const particle of particles) {
@@ -134,10 +134,10 @@ export function HeroGrass() {
         const eased = ease(t);
         const settled = reduce
           ? 1
-          : Math.min(1, Math.max(0, (t - 0.35) / 0.55));
+          : Math.min(1, Math.max(0, (t - 0.82) / 0.18));
         const sway = reduce
           ? 0
-          : Math.sin(elapsed * 1.35 + particle.phase) *
+          : Math.sin(elapsed * 1.15 + particle.phase) *
             particle.height *
             particle.height *
             swayScale *
