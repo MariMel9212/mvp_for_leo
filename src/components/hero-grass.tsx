@@ -93,7 +93,7 @@ export function HeroGrass() {
         const pool = bands[band];
         if (!pool.length) continue;
         const down = band / (BANDS - 1);
-        const spacing = 0.85 + down ** 1.7 * 16;
+        const spacing = 0.62 + down ** 1.15 * 2.3;
         const count = Math.max(1, Math.round(pool.length / (spacing * spacing)));
         for (let i = 0; i < count; i++) {
           const index = pool[(Math.random() * pool.length) | 0];
@@ -143,7 +143,7 @@ export function HeroGrass() {
             sway * eased;
           const y =
             (particle.fromY + (particle.homeY - particle.fromY) * eased) * height;
-          const radius = 1.35 * scale;
+          const radius = 1.65 * scale;
           const r2 = radius * radius;
           const reach = Math.ceil(radius);
           const cx = x | 0;
