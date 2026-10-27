@@ -381,34 +381,34 @@ export function HowItWorks() {
 
             {step === "situation" && (
               <div key={cycle} aria-hidden className="flex justify-center">
-                <div className="relative w-[248px] motion-safe:[animation:phone-ring_1.15s_ease-in-out_infinite]">
-                  <span className="absolute top-[92px] -left-[3px] h-7 w-[3px] rounded-l-sm bg-[#3a3a3c]" />
-                  <span className="absolute top-[132px] -left-[3px] h-11 w-[3px] rounded-l-sm bg-[#3a3a3c]" />
-                  <span className="absolute top-[186px] -left-[3px] h-11 w-[3px] rounded-l-sm bg-[#3a3a3c]" />
-                  <span className="absolute top-[150px] -right-[3px] h-16 w-[3px] rounded-r-sm bg-[#3a3a3c]" />
-                  <div className="rounded-[38px] bg-[#1c1c1e] p-[9px] shadow-[0_22px_48px_rgba(0,0,0,0.22)]">
-                    <div className="relative flex h-[452px] flex-col overflow-hidden rounded-[30px] bg-gradient-to-b from-[#3a3a3c] via-[#1c1c1e] to-[#0c0c0e] text-white">
-                      <div className="mx-auto mt-2.5 h-[22px] w-[88px] rounded-full bg-black" />
-                      <div className="mt-14 flex flex-col items-center px-5 text-center">
-                        <p className="text-[13px] leading-4 text-white/55">входящий вызов</p>
-                        <p className="mt-3 text-[32px] leading-[1.1] font-medium tracking-[-0.4px]">
+                <div className="relative w-[214px] motion-safe:[animation:phone-ring_1.15s_ease-in-out_infinite]">
+                  <span className="absolute top-[108px] -left-[3px] h-6 w-[3px] rounded-l-sm bg-[#3a3a3c]" />
+                  <span className="absolute top-[146px] -left-[3px] h-10 w-[3px] rounded-l-sm bg-[#3a3a3c]" />
+                  <span className="absolute top-[196px] -left-[3px] h-10 w-[3px] rounded-l-sm bg-[#3a3a3c]" />
+                  <span className="absolute top-[168px] -right-[3px] h-14 w-[3px] rounded-r-sm bg-[#3a3a3c]" />
+                  <div className="rounded-[34px] bg-[#1c1c1e] p-[7px] shadow-[0_22px_48px_rgba(0,0,0,0.22)]">
+                    <div className="relative flex h-[456px] flex-col overflow-hidden rounded-[28px] bg-gradient-to-b from-[#3a3a3c] via-[#1c1c1e] to-[#0c0c0e] text-white">
+                      <div className="mx-auto mt-2 h-[16px] w-[68px] rounded-full bg-black" />
+                      <div className="mt-12 flex flex-col items-center px-4 text-center">
+                        <p className="text-[11px] leading-4 text-white/55">входящий вызов</p>
+                        <p className="mt-2 text-[22px] leading-[1.15] font-medium tracking-[-0.3px]">
                           СвойЦентр
                         </p>
-                        <p className="mt-2 text-[14px] leading-5 text-white/50">мобильный</p>
+                        <p className="mt-1 text-[12px] leading-4 text-white/50">мобильный</p>
                       </div>
-                      <div className="mt-auto mb-10 flex items-start justify-between px-8">
-                        <div className="flex w-16 flex-col items-center gap-2">
-                          <span className="grid size-[62px] place-items-center rounded-full bg-[#ff3b30]">
+                      <div className="mt-auto mb-8 flex items-start justify-between px-6">
+                        <div className="flex w-14 flex-col items-center gap-1.5">
+                          <span className="grid size-11 place-items-center rounded-full bg-[#ff3b30]">
                             <Handset className="rotate-[135deg]" />
                           </span>
-                          <span className="text-[12px] leading-4 text-white/70">отклонить</span>
+                          <span className="text-[10px] leading-3 text-white/70">отклонить</span>
                         </div>
-                        <div className="flex w-16 flex-col items-center gap-2">
-                          <span className="relative grid size-[62px] place-items-center rounded-full bg-[#30d158]">
-                            <span className="absolute inset-0 rounded-full bg-[#30d158] motion-safe:animate-ping" />
+                        <div className="flex w-14 flex-col items-center gap-1.5">
+                          <span className="relative grid size-11 place-items-center rounded-full bg-[#30d158]">
+                            <span className="absolute inset-0 rounded-full bg-[#30d158]/70 motion-safe:animate-ping" />
                             <Handset className="relative" />
                           </span>
-                          <span className="text-[12px] leading-4 text-white/70">принять</span>
+                          <span className="text-[10px] leading-3 text-white/70">принять</span>
                         </div>
                       </div>
                     </div>
@@ -472,7 +472,7 @@ export function HowItWorks() {
 
 function Handset({ className }: { className?: string }) {
   return (
-    <svg width="26" height="26" viewBox="0 0 24 24" fill="white" aria-hidden className={className}>
+    <svg viewBox="0 0 24 24" fill="white" aria-hidden className={cn("size-[18px]", className)}>
       <path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 7a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .57 3.6 1 1 0 0 1-.25 1L6.6 10.8Z" />
     </svg>
   );
