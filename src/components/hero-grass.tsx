@@ -49,18 +49,24 @@ export function HeroGrass() {
       const height = (maxY - y) / spanY;
       const phase = ((i * 17) % 628) / 100;
       const delay = ((i * 13) % 100) / 400;
-      for (const origin of COPIES) {
-        const homeX = (origin + x) / STRIP_W;
-        const homeY = y / TILE_H;
-        particles.push({
-          homeX,
-          homeY,
-          fromX: homeX,
-          fromY: homeY + 0.18 + ((i * 7) % 50) / 400,
-          height,
-          phase: phase + origin * 0.001,
-          delay,
-        });
+      const places = [x];
+      // The source silhouette has a bare column just right of center.
+      // Stamp the neighboring blade into that column; the dots themselves stay the same.
+      if (x >= 250 && x <= 360) places.push(x + 140);
+      for (const placeX of places) {
+        for (const origin of COPIES) {
+          const homeX = (origin + placeX) / STRIP_W;
+          const homeY = y / TILE_H;
+          particles.push({
+            homeX,
+            homeY,
+            fromX: homeX,
+            fromY: homeY + 0.18 + ((i * 7) % 50) / 400,
+            height,
+            phase: phase + origin * 0.001,
+            delay,
+          });
+        }
       }
     }
 
