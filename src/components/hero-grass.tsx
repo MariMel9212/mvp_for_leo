@@ -106,7 +106,7 @@ export function HeroGrass() {
         const y = (particle.fromY + (particle.homeY - particle.fromY) * eased) * height;
         const cx = x | 0;
         const cy = y | 0;
-        const alpha = eased * 255;
+        const alpha = eased * 132;
         for (let dy = -reach; dy <= reach; dy++) {
           const py = cy + dy;
           if (py < 0 || py >= height) continue;
@@ -115,9 +115,9 @@ export function HeroGrass() {
             const px = cx + dx;
             if (px < 0 || px >= width) continue;
             const index = (py * width + px) * 4;
-            data[index] = 3;
-            data[index + 1] = 123;
-            data[index + 2] = 215;
+            data[index] = 118;
+            data[index + 1] = 170;
+            data[index + 2] = 96;
             data[index + 3] = alpha;
           }
         }
