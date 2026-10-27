@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 
 const NAME = "Мария";
 const PHONE = "+7 916 000-00-00";
-const ANSWER = "Нужна помощь для близкого";
+const SPOKEN = ["Нужна", " помощь", " для", " близкого"];
 const CENTER_NAMES = [
   "Реабилитационный центр в Химках",
   "Медикаментозная терапия",
@@ -25,12 +25,7 @@ const STEPS = [
   {
     id: "situation",
     title: "Расскажите о\u00a0ситуации",
-    body: (
-      <>
-        Коротко опишите, что происходит. Этого достаточно, чтобы подобрать
-        центр.
-      </>
-    ),
+    body: <>Менеджер звонит и&nbsp;уточняет, что происходит.</>,
   },
   {
     id: "centers",
@@ -40,8 +35,9 @@ const STEPS = [
 ] as const;
 
 type StepId = (typeof STEPS)[number]["id"];
-type Phase = "assemble" | "type-name" | "type-phone" | "type-answer";
-type Field = "name" | "phone" | "answer";
+type Phase = "assemble" | "type-name" | "type-phone";
+type Field = "name" | "phone";
+type CallBeat = "ring" | "talk" | "client";
 type Travel = "below" | "in" | "above";
 
 function wait(ms: number, timers: number[]) {
@@ -56,7 +52,6 @@ export function HowItWorks() {
   const nameRef = useRef<HTMLDivElement>(null);
   const phoneRef = useRef<HTMLDivElement>(null);
   const sendRef = useRef<HTMLDivElement>(null);
-  const answerRef = useRef<HTMLDivElement>(null);
   const [shown, setShown] = useState(false);
   const [reduced, setReduced] = useState(false);
   const [cycle, setCycle] = useState(0);
@@ -64,7 +59,8 @@ export function HowItWorks() {
   const [phase, setPhase] = useState<Phase>("assemble");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
-  const [answer, setAnswer] = useState("");
+  const [spoken, setSpoken] = useState("");
+  const [callBeat, setCallBeat] = useState<CallBeat>("ring");
   const [pressed, setPressed] = useState(false);
   const [hot, setHot] = useState<Field | null>(null);
   const [cursorOn, setCursorOn] = useState(false);
@@ -116,20 +112,20 @@ export function HowItWorks() {
       await wait(40, timers);
       if (cancelled) return;
       setCursorOn(true);
-      await wait(70, timers);
+      await wait(24, timers);
       place(target);
-      await wait(480, timers);
+      await wait(240, timers);
       if (cancelled) return;
       setClicking(true);
       if (field) setHot(field);
       if (field === null) setPressed(true);
-      await wait(130, timers);
+      await wait(90, timers);
       setClicking(false);
       setHot(null);
       if (field === null) setPressed(false);
-      await wait(90, timers);
+      await wait(40, timers);
       setCursorOn(false);
-      await wait(200, timers);
+      await wait(70, timers);
     };
 
     const show = async (next: StepId) => {
@@ -140,7 +136,8 @@ export function HowItWorks() {
       setPhase("assemble");
       setName("");
       setPhone("");
-      setAnswer("");
+      setSpoken("");
+      setCallBeat("ring");
       setPressed(false);
       setHot(null);
       setCursorOn(false);
@@ -194,15 +191,18 @@ export function HowItWorks() {
 
         await show("situation");
         if (cancelled) return;
-        await click(answerRef.current, "answer");
+        await wait(720, timers);
         if (cancelled) return;
-        setPhase("type-answer");
-        for (const letter of ANSWER) {
+        setCallBeat("talk");
+        await wait(860, timers);
+        if (cancelled) return;
+        setCallBeat("client");
+        for (const word of SPOKEN) {
           if (cancelled) return;
-          setAnswer((value) => value + letter);
-          await wait(78, timers);
+          setSpoken((value) => value + word);
+          await wait(260, timers);
         }
-        await wait(640, timers);
+        await wait(700, timers);
         if (cancelled) return;
         await hide();
         if (cancelled) return;
@@ -402,31 +402,47 @@ export function HowItWorks() {
                 aria-hidden
                 className="rounded-[18px] border border-black/8 bg-white px-7 py-8 shadow-[0_2px_4px_rgba(27,28,29,0.04)]"
               >
-                <p className="text-[22px] leading-[1.3] font-medium text-[#0a0d14]">
-                  Что сейчас происходит?
-                </p>
-                <p className="mt-2 text-[14px] leading-[1.4] text-[#0a0d14]/45">
-                  Пара слов, без подробностей
-                </p>
-                <div
-                  ref={answerRef}
-                  className={cn(
-                    "mt-6 min-h-[96px] rounded-[10px] border border-[#e2e4e9] bg-white px-3 py-3 shadow-[0_1px_2px_rgba(228,229,231,0.24)] transition-[box-shadow,transform] duration-150",
-                    hot === "answer" &&
-                      "scale-[0.985] shadow-[0_1px_2px_rgba(228,229,231,0.24),0_0_0_3px_rgba(17,171,9,0.14)]",
-                  )}
-                >
-                  <span className="font-[family-name:var(--font-inter)] text-[15px] leading-[1.45] tracking-[-0.08px]">
-                    {answer ? (
-                      <span className="text-[#0a0d14]">
-                        {answer}
-                        {phase === "type-answer" && <Caret />}
-                      </span>
-                    ) : (
-                      <span className="text-[#868c98]">Напишите пару слов</span>
+                <div className="flex items-center gap-3">
+                  <div
+                    className={cn(
+                      "grid size-14 shrink-0 place-items-center rounded-full",
+                      callBeat === "ring" ? "bg-[#f3f4f5]" : "bg-[#e7f8e4]",
                     )}
-                  </span>
+                  >
+                    <PhoneIcon ringing={callBeat === "ring"} />
+                  </div>
+                  <div>
+                    <p className="text-[20px] leading-[1.2] font-medium text-[#0a0d14]">
+                      Менеджер
+                    </p>
+                    <p className="mt-1 font-[family-name:var(--font-inter)] text-[13px] leading-[18px] text-[#868c98]">
+                      {callBeat === "ring" ? "Вызов…" : "На линии"}
+                    </p>
+                  </div>
                 </div>
+
+                {callBeat !== "ring" && (
+                  <div className="mt-6 flex flex-col gap-4">
+                    <div>
+                      <p className="font-[family-name:var(--font-inter)] text-[12px] leading-[16px] font-medium text-[#868c98]">
+                        Менеджер
+                      </p>
+                      <p className="mt-1 text-[16px] leading-[1.35] text-[#0a0d14]">
+                        Расскажите, что сейчас происходит?
+                      </p>
+                    </div>
+                    {callBeat === "client" && (
+                      <div>
+                        <p className="font-[family-name:var(--font-inter)] text-[12px] leading-[16px] font-medium text-[#11ab09]">
+                          Клиент
+                        </p>
+                        <p className="mt-1 text-[16px] leading-[1.35] text-[#0a0d14]">
+                          {spoken}
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                )}
               </article>
             )}
 
@@ -456,7 +472,7 @@ export function HowItWorks() {
               </article>
             )}
 
-            {!reduced && step !== "centers" && (
+            {!reduced && step === "request" && (
               <span
                 aria-hidden
                 className={cn(
@@ -468,7 +484,7 @@ export function HowItWorks() {
                   left: cursor.x,
                   top: cursor.y,
                   transition: cursorOn
-                    ? "left 0.48s ease-out, top 0.48s ease-out, opacity 0.2s linear, transform 0.12s ease-out"
+                    ? "left 0.22s ease-out, top 0.22s ease-out, opacity 0.16s linear, transform 0.1s ease-out"
                     : "opacity 0.18s linear",
                 }}
               >
@@ -480,6 +496,21 @@ export function HowItWorks() {
       </div>
 
     </section>
+  );
+}
+
+function PhoneIcon({ ringing }: { ringing: boolean }) {
+  return (
+    <svg
+      width="26"
+      height="26"
+      viewBox="0 0 24 24"
+      fill={ringing ? "#868C98" : "#11ab09"}
+      aria-hidden
+      className={ringing ? "origin-center motion-safe:animate-pulse" : undefined}
+    >
+      <path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 7a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .57 3.6 1 1 0 0 1-.25 1L6.6 10.8Z" />
+    </svg>
   );
 }
 
