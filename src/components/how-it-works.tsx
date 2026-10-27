@@ -5,7 +5,6 @@ import { cn } from "@/lib/utils";
 
 const NAME = "Мария";
 const PHONE = "+7 916 000-00-00";
-const SPOKEN = ["Нужна", " помощь", " для", " близкого"];
 const CENTER_NAMES = [
   "Реабилитационный центр в Химках",
   "Медикаментозная терапия",
@@ -25,7 +24,7 @@ const STEPS = [
   {
     id: "situation",
     title: "Расскажите о\u00a0ситуации",
-    body: <>Менеджер звонит и&nbsp;уточняет, что происходит.</>,
+    body: <>Вам звонит СвойЦентр, чтобы уточнить, что происходит.</>,
   },
   {
     id: "centers",
@@ -37,7 +36,6 @@ const STEPS = [
 type StepId = (typeof STEPS)[number]["id"];
 type Phase = "assemble" | "type-name" | "type-phone";
 type Field = "name" | "phone";
-type CallBeat = "ring" | "talk" | "client";
 type Travel = "below" | "in" | "above";
 
 function wait(ms: number, timers: number[]) {
@@ -59,8 +57,6 @@ export function HowItWorks() {
   const [phase, setPhase] = useState<Phase>("assemble");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
-  const [spoken, setSpoken] = useState("");
-  const [callBeat, setCallBeat] = useState<CallBeat>("ring");
   const [pressed, setPressed] = useState(false);
   const [hot, setHot] = useState<Field | null>(null);
   const [cursorOn, setCursorOn] = useState(false);
@@ -136,8 +132,6 @@ export function HowItWorks() {
       setPhase("assemble");
       setName("");
       setPhone("");
-      setSpoken("");
-      setCallBeat("ring");
       setPressed(false);
       setHot(null);
       setCursorOn(false);
@@ -191,18 +185,7 @@ export function HowItWorks() {
 
         await show("situation");
         if (cancelled) return;
-        await wait(720, timers);
-        if (cancelled) return;
-        setCallBeat("talk");
-        await wait(860, timers);
-        if (cancelled) return;
-        setCallBeat("client");
-        for (const word of SPOKEN) {
-          if (cancelled) return;
-          setSpoken((value) => value + word);
-          await wait(260, timers);
-        }
-        await wait(700, timers);
+        await wait(2400, timers);
         if (cancelled) return;
         await hide();
         if (cancelled) return;
@@ -397,53 +380,41 @@ export function HowItWorks() {
             )}
 
             {step === "situation" && (
-              <article
-                key={cycle}
-                aria-hidden
-                className="rounded-[18px] border border-black/8 bg-white px-7 py-8 shadow-[0_2px_4px_rgba(27,28,29,0.04)]"
-              >
-                <div className="flex items-center gap-3">
-                  <div
-                    className={cn(
-                      "grid size-14 shrink-0 place-items-center rounded-full",
-                      callBeat === "ring" ? "bg-[#f3f4f5]" : "bg-[#e7f8e4]",
-                    )}
-                  >
-                    <PhoneIcon ringing={callBeat === "ring"} />
-                  </div>
-                  <div>
-                    <p className="text-[20px] leading-[1.2] font-medium text-[#0a0d14]">
-                      Менеджер
-                    </p>
-                    <p className="mt-1 font-[family-name:var(--font-inter)] text-[13px] leading-[18px] text-[#868c98]">
-                      {callBeat === "ring" ? "Вызов…" : "На линии"}
-                    </p>
+              <div key={cycle} aria-hidden className="flex justify-center">
+                <div className="relative w-[248px] motion-safe:[animation:phone-ring_1.15s_ease-in-out_infinite]">
+                  <span className="absolute top-[92px] -left-[3px] h-7 w-[3px] rounded-l-sm bg-[#3a3a3c]" />
+                  <span className="absolute top-[132px] -left-[3px] h-11 w-[3px] rounded-l-sm bg-[#3a3a3c]" />
+                  <span className="absolute top-[186px] -left-[3px] h-11 w-[3px] rounded-l-sm bg-[#3a3a3c]" />
+                  <span className="absolute top-[150px] -right-[3px] h-16 w-[3px] rounded-r-sm bg-[#3a3a3c]" />
+                  <div className="rounded-[38px] bg-[#1c1c1e] p-[9px] shadow-[0_22px_48px_rgba(0,0,0,0.22)]">
+                    <div className="relative flex h-[452px] flex-col overflow-hidden rounded-[30px] bg-gradient-to-b from-[#3a3a3c] via-[#1c1c1e] to-[#0c0c0e] text-white">
+                      <div className="mx-auto mt-2.5 h-[22px] w-[88px] rounded-full bg-black" />
+                      <div className="mt-14 flex flex-col items-center px-5 text-center">
+                        <p className="text-[13px] leading-4 text-white/55">входящий вызов</p>
+                        <p className="mt-3 text-[32px] leading-[1.1] font-medium tracking-[-0.4px]">
+                          СвойЦентр
+                        </p>
+                        <p className="mt-2 text-[14px] leading-5 text-white/50">мобильный</p>
+                      </div>
+                      <div className="mt-auto mb-10 flex items-start justify-between px-8">
+                        <div className="flex w-16 flex-col items-center gap-2">
+                          <span className="grid size-[62px] place-items-center rounded-full bg-[#ff3b30]">
+                            <Handset className="rotate-[135deg]" />
+                          </span>
+                          <span className="text-[12px] leading-4 text-white/70">отклонить</span>
+                        </div>
+                        <div className="flex w-16 flex-col items-center gap-2">
+                          <span className="relative grid size-[62px] place-items-center rounded-full bg-[#30d158]">
+                            <span className="absolute inset-0 rounded-full bg-[#30d158] motion-safe:animate-ping" />
+                            <Handset className="relative" />
+                          </span>
+                          <span className="text-[12px] leading-4 text-white/70">принять</span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
-
-                {callBeat !== "ring" && (
-                  <div className="mt-6 flex flex-col gap-4">
-                    <div>
-                      <p className="font-[family-name:var(--font-inter)] text-[12px] leading-[16px] font-medium text-[#868c98]">
-                        Менеджер
-                      </p>
-                      <p className="mt-1 text-[16px] leading-[1.35] text-[#0a0d14]">
-                        Расскажите, что сейчас происходит?
-                      </p>
-                    </div>
-                    {callBeat === "client" && (
-                      <div>
-                        <p className="font-[family-name:var(--font-inter)] text-[12px] leading-[16px] font-medium text-[#11ab09]">
-                          Клиент
-                        </p>
-                        <p className="mt-1 text-[16px] leading-[1.35] text-[#0a0d14]">
-                          {spoken}
-                        </p>
-                      </div>
-                    )}
-                  </div>
-                )}
-              </article>
+              </div>
             )}
 
             {step === "centers" && (
@@ -499,16 +470,9 @@ export function HowItWorks() {
   );
 }
 
-function PhoneIcon({ ringing }: { ringing: boolean }) {
+function Handset({ className }: { className?: string }) {
   return (
-    <svg
-      width="26"
-      height="26"
-      viewBox="0 0 24 24"
-      fill={ringing ? "#868C98" : "#11ab09"}
-      aria-hidden
-      className={ringing ? "origin-center motion-safe:animate-pulse" : undefined}
-    >
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="white" aria-hidden className={className}>
       <path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 7a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .57 3.6 1 1 0 0 1-.25 1L6.6 10.8Z" />
     </svg>
   );
