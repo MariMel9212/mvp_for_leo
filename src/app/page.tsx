@@ -1,4 +1,3 @@
-import { Centers } from "@/components/centers";
 import { Hero } from "@/components/hero";
 import { HowItWorks } from "@/components/how-it-works";
 import { SiteHeader } from "@/components/site-header";
@@ -11,7 +10,6 @@ export default function HomePage() {
       <Hero />
       <Stats />
       <HowItWorks />
-      <Centers />
     </main>
   );
 }
