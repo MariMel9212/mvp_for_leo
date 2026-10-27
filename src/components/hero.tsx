@@ -17,7 +17,10 @@ export function Hero() {
   const [audience, setAudience] = useState<AudienceId>("relative");
 
   return (
-    <section id="podbor" className="relative overflow-hidden bg-[#eee]">
+    <section
+      id="podbor"
+      className="relative overflow-hidden bg-gradient-to-b from-[#cee0f5] to-white"
+    >
       <div
         className="pointer-events-none absolute bottom-0"
         style={{ left: "-34.84%", width: "169.55%", height: "clamp(220px, 21.5vw, 360px)" }}
@@ -25,10 +28,13 @@ export function Hero() {
         <HeroGrass />
       </div>
       <div
-        className="relative z-10 mx-auto w-full max-w-[940px] px-4 pt-12 min-[768px]:pt-[77px] min-[1440px]:max-w-[1180px] min-[1440px]:pt-[116px]"
-        style={{ paddingBottom: "clamp(148px, 14.6vw, 244px)" }}
+        className="relative z-10 mx-auto w-full max-w-[940px] px-4 min-[1440px]:max-w-[1180px]"
+        style={{
+          paddingTop: "clamp(88px, 16.1vw, 240px)",
+          paddingBottom: "clamp(157px, calc(18.92vw - 36px), 281px)",
+        }}
       >
-        <div className="flex flex-col items-center gap-8 text-center min-[768px]:gap-[34px] min-[1440px]:gap-12">
+        <div className="flex flex-col items-center gap-[34px] text-center">
           <h1 className="max-w-[592px] text-[26px] leading-[1.1] font-medium text-black min-[768px]:text-[38px] min-[1440px]:max-w-[960px] min-[1440px]:text-[61px]">
             Проверенные ребцентра для&nbsp;лечения и&nbsp;восстановления
             при&nbsp;зависимостях
@@ -66,7 +72,12 @@ export function Hero() {
             </p>
           </div>
 
-          <Button variant="brand" size="hero" type="button">
+          <Button
+            variant="brand"
+            size="hero"
+            type="button"
+            className="h-[46px] max-w-[320px] border-[#037bd7] bg-[#037bd7] text-[17px] hover:bg-[#026cb8] min-[1440px]:h-[46px] min-[1440px]:max-w-[320px] min-[1440px]:text-[17px]"
+          >
             Подобрать центр
           </Button>
         </div>
