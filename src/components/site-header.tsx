@@ -1,12 +1,12 @@
-import { Button } from "@/components/ui/button";
+const links = ["Про подбор", "Про подбор", "Про подбор", "Про подбор"];
 
 export function SiteHeader() {
   return (
     <header className="bg-white">
-      <div className="mx-auto flex h-[64px] w-full max-w-[940px] items-center justify-between px-4 min-[1440px]:h-[80px] min-[1440px]:max-w-[1180px]">
+      <div className="mx-auto flex h-[64px] w-full max-w-[940px] items-center justify-between gap-6 px-4 min-[1440px]:h-[80px] min-[1440px]:max-w-[1180px]">
         <a
           href="#podbor"
-          className="text-[26px] leading-none font-bold tracking-[-0.5px] text-[#059000] min-[1440px]:text-[34px]"
+          className="shrink-0 text-[26px] leading-none font-bold tracking-[-0.5px] text-[#001800] min-[1440px]:text-[34px]"
           style={{
             fontFamily:
               '"SF Pro Display", "SF Pro Text", var(--font-google-sans), sans-serif',
@@ -14,14 +14,22 @@ export function SiteHeader() {
         >
           СвойЦентр
         </a>
-        <Button
-          variant="brand"
-          size="header"
-          nativeButton={false}
-          render={<a href="#podbor" />}
+        <nav
+          aria-label="Разделы"
+          className="hidden min-w-0 items-center gap-[42px] text-[14px] leading-[1.1] font-medium text-[#111] min-[1100px]:flex"
+        >
+          {links.map((label, index) => (
+            <a key={index} href="#kak-rabotaet" className="whitespace-nowrap">
+              {label}
+            </a>
+          ))}
+        </nav>
+        <a
+          href="#podbor"
+          className="shrink-0 text-[16px] leading-[1.1] font-medium text-[#059000] min-[1440px]:text-[18px]"
         >
           Выбрать центр
-        </Button>
+        </a>
       </div>
     </header>
   );

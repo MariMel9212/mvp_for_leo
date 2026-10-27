@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Google_Sans } from "next/font/google";
+import { Google_Sans, Inter } from "next/font/google";
 import "./globals.css";
 
 const googleSans = Google_Sans({
@@ -7,6 +7,13 @@ const googleSans = Google_Sans({
   weight: ["400", "500", "700"],
   display: "swap",
   variable: "--font-google-sans",
+});
+
+const inter = Inter({
+  subsets: ["cyrillic", "latin"],
+  weight: ["400", "500"],
+  display: "swap",
+  variable: "--font-inter",
 });
 
 export const metadata: Metadata = {
@@ -17,7 +24,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="ru" className={`${googleSans.variable} h-full antialiased`}>
+    <html
+      lang="ru"
+      className={`${googleSans.variable} ${inter.variable} h-full antialiased`}
+    >
       <body className="min-h-full bg-white text-[#111]">{children}</body>
     </html>
   );

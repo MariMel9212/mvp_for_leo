@@ -16,9 +16,9 @@ export function Hero() {
   const [audience, setAudience] = useState<AudienceId>("relative");
 
   return (
-    <section id="podbor" className="bg-[#f8f8f8]">
+    <section id="podbor" className="bg-[#eee]">
       <div className="mx-auto w-full max-w-[940px] px-4 py-12 min-[768px]:pt-[77px] min-[768px]:pb-[146px] min-[1440px]:max-w-[1180px] min-[1440px]:pt-[120px] min-[1440px]:pb-[210px]">
-        <div className="flex flex-col items-start gap-8 min-[768px]:gap-[34px] min-[1440px]:gap-12">
+        <div className="flex flex-col items-center gap-8 text-center min-[768px]:gap-[34px] min-[1440px]:gap-12">
           <h1 className="max-w-[592px] text-[28px] leading-[1.1] font-medium text-black min-[768px]:text-[40px] min-[1440px]:max-w-[1040px] min-[1440px]:text-[64px]">
             Проверенные ребцентра для&nbsp;лечения и&nbsp;восстановления
             при&nbsp;зависимостях
