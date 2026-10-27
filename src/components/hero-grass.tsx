@@ -19,11 +19,12 @@ type Particle = {
   phase: number;
   appear: number;
   moveAt: number;
+  travel: number;
   bow: number;
 };
 
 function ease(t: number) {
-  return t < 0.5 ? 4 * t * t * t : 1 - (-2 * t + 2) ** 3 / 2;
+  return 1 - (1 - t) ** 2;
 }
 
 function unit(seed: number) {
@@ -80,7 +81,8 @@ export function HeroGrass() {
             phase: phase + origin * 0.001,
             appear: 0.12 + c * 0.7,
             moveAt: 0.72 + a * 0.45,
-            bow: (b - 0.5) * 36,
+            travel: 1.55 + b * 0.95,
+            bow: (c - 0.5) * 36,
           });
         }
       }
@@ -122,15 +124,18 @@ export function HeroGrass() {
         if (appeared <= 0) continue;
         const t = reduce
           ? 1
-          : Math.min(1, Math.max(0, (elapsed - particle.moveAt) / 1.45));
+          : Math.min(1, Math.max(0, (elapsed - particle.moveAt) / particle.travel));
         const eased = ease(t);
+        const settled = reduce
+          ? 1
+          : Math.min(1, Math.max(0, (t - 0.62) / 0.7));
         const sway = reduce
           ? 0
           : Math.sin(elapsed * 1.1 + particle.phase) *
             particle.height *
             particle.height *
             swayScale *
-            eased;
+            settled * settled;
         const endX = (STRIP_LEFT + particle.stripX * STRIP_WIDTH) * width;
         const endY = height - grassPx + particle.stripY * grassPx;
         const startX = particle.fromX * width;
