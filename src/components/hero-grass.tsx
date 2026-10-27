@@ -18,8 +18,8 @@ type Particle = {
   delay: number;
 };
 
-function easeOut(t: number) {
-  return 1 - (1 - t) ** 3;
+function ease(t: number) {
+  return t * t * t * (t * (t * 6 - 15) + 10);
 }
 
 export function HeroGrass() {
@@ -62,11 +62,11 @@ export function HeroGrass() {
           particles.push({
             homeX,
             homeY,
-            fromX: homeX + (drift - 0.5) * 0.09,
-            fromY: homeY + 0.32 + lift * 0.4,
+            fromX: homeX + (drift - 0.5) * 0.045,
+            fromY: homeY + 0.1 + lift * 0.14,
             height,
             phase: phase + origin * 0.001,
-            delay: height * 0.45 + stagger * 0.2,
+            delay: height * 0.08 + stagger * 0.05,
           });
         }
       }
@@ -102,8 +102,8 @@ export function HeroGrass() {
       for (const particle of particles) {
         const t = reduce
           ? 1
-          : Math.min(1, Math.max(0, (elapsed - particle.delay) / 1.15));
-        const eased = easeOut(t);
+          : Math.min(1, Math.max(0, (elapsed - particle.delay) / 0.62));
+        const eased = ease(t);
         const sway = reduce
           ? 0
           : Math.sin(elapsed * 1.1 + particle.phase) *
@@ -115,7 +115,7 @@ export function HeroGrass() {
         const y = (particle.fromY + (particle.homeY - particle.fromY) * eased) * height;
         const cx = x | 0;
         const cy = y | 0;
-        const alpha = Math.min(1, 0.4 + t * 1.15) * 132;
+        const alpha = Math.min(1, 0.82 + t * 0.3) * 132;
         for (let dy = -reach; dy <= reach; dy++) {
           const py = cy + dy;
           if (py < 0 || py >= height) continue;

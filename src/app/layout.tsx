@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Google_Sans, Inter } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 
 const googleSans = Google_Sans({
@@ -28,7 +29,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="ru"
       className={`${googleSans.variable} ${inter.variable} h-full antialiased`}
     >
-      <body className="min-h-full bg-white text-[#111]">{children}</body>
+      <body className="min-h-full bg-white text-[#111]">
+        <Script id="keep-top-on-reload" strategy="beforeInteractive">
+          {`try{history.scrollRestoration="manual"}catch(e){}if(location.hash)history.replaceState(null,"",location.pathname+location.search);scrollTo(0,0)`}
+        </Script>
+        {children}
+      </body>
     </html>
   );
 }
