@@ -2,11 +2,11 @@ const links = ["Про подбор", "Про подбор", "Про подбо�
 
 export function SiteHeader() {
   return (
-    <header className="bg-white">
+    <header className="absolute inset-x-0 top-0 z-20 bg-transparent">
       <div className="mx-auto flex h-[64px] w-full max-w-[940px] items-center justify-between gap-6 px-4 min-[1440px]:h-[80px] min-[1440px]:max-w-[1180px]">
         <a
           href="#podbor"
-          className="shrink-0 text-[18px] leading-[1.1] font-bold tracking-[-0.5px] text-[#111] opacity-80"
+          className="shrink-0 text-[24px] leading-[1.1] font-bold tracking-[-0.5px] text-[#111] opacity-80"
           style={{
             fontFamily:
               '"SF Pro Display", "SF Pro Text", var(--font-google-sans), sans-serif',
