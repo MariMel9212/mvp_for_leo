@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { HeroGrass } from "@/components/hero-grass";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -16,8 +17,11 @@ export function Hero() {
   const [audience, setAudience] = useState<AudienceId>("relative");
 
   return (
-    <section id="podbor" className="bg-[#eee]">
-      <div className="mx-auto w-full max-w-[940px] px-4 py-12 min-[768px]:pt-[77px] min-[768px]:pb-[146px] min-[1440px]:max-w-[1180px] min-[1440px]:pt-[120px] min-[1440px]:pb-[210px]">
+    <section id="podbor" className="relative overflow-hidden bg-[#eee]">
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[150px] min-[768px]:h-[180px] min-[1440px]:h-[210px]">
+        <HeroGrass />
+      </div>
+      <div className="relative z-10 mx-auto w-full max-w-[940px] px-4 pt-12 pb-44 min-[768px]:pt-[77px] min-[768px]:pb-[200px] min-[1440px]:max-w-[1180px] min-[1440px]:pt-[120px] min-[1440px]:pb-[250px]">
         <div className="flex flex-col items-center gap-8 text-center min-[768px]:gap-[34px] min-[1440px]:gap-12">
           <h1 className="max-w-[592px] text-[26px] leading-[1.1] font-medium text-black min-[768px]:text-[38px] min-[1440px]:max-w-[960px] min-[1440px]:text-[61px]">
             Проверенные ребцентра для&nbsp;лечения и&nbsp;восстановления
