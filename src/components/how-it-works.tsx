@@ -3,13 +3,6 @@
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 
-const steps = [
-  "Заполните заявку, указав удобный метод связи",
-  "Расскажите о\u00a0ситуации",
-  "Мы подберем несколько вариантов под\u00a0ваши критерии",
-  "Свяжем вас с\u00a0центром и\u00a0сопроводим на\u00a0моменте подписания договора",
-];
-
 const NAME = "Мария";
 const PHONE = "916 000-00-00";
 
@@ -66,8 +59,20 @@ export function HowItWorks() {
       const bounds = stage.getBoundingClientRect();
       const spot = target.getBoundingClientRect();
       setCursor({
-        x: spot.left - bounds.left + Math.min(spot.width * 0.62, spot.width - 16),
-        y: spot.top - bounds.top + spot.height * 0.7,
+        x: spot.left - bounds.left + spot.width * 0.5 - 6,
+        y: spot.top - bounds.top + spot.height * 0.45,
+      });
+    };
+
+    const placeCaret = () => {
+      const stage = stageRef.current;
+      const caret = stage?.querySelector("[data-caret]");
+      if (!stage || !caret) return;
+      const bounds = stage.getBoundingClientRect();
+      const spot = caret.getBoundingClientRect();
+      setCursor({
+        x: spot.left - bounds.left - 1,
+        y: spot.top - bounds.top + 1,
       });
     };
 
@@ -84,23 +89,29 @@ export function HowItWorks() {
         if (cancelled) return;
 
         setPhase("name");
-        place(nameRef.current);
-        await wait(520, timers);
+        await wait(40, timers);
+        placeCaret();
+        await wait(480, timers);
         for (const letter of NAME) {
           if (cancelled) return;
           setName((value) => value + letter);
-          await wait(110, timers);
+          await wait(40, timers);
+          placeCaret();
+          await wait(70, timers);
         }
-        await wait(320, timers);
+        await wait(280, timers);
         if (cancelled) return;
 
         setPhase("phone");
-        place(phoneRef.current);
-        await wait(520, timers);
+        await wait(40, timers);
+        placeCaret();
+        await wait(480, timers);
         for (const letter of PHONE) {
           if (cancelled) return;
           setPhone((value) => value + letter);
-          await wait(70, timers);
+          await wait(30, timers);
+          placeCaret();
+          await wait(50, timers);
         }
         await wait(360, timers);
         if (cancelled) return;
@@ -133,8 +144,17 @@ export function HowItWorks() {
     <section
       id="kak-rabotaet"
       ref={sectionRef}
-      className="mx-auto w-full max-w-[940px] px-4 pt-16 pb-8 min-[768px]:pt-24 min-[1440px]:max-w-[1180px] min-[1440px]:pt-28"
+      className="relative mx-auto w-full max-w-[940px] overflow-x-clip px-4 pt-16 pb-8 min-[768px]:pt-24 min-[1440px]:max-w-[1180px] min-[1440px]:pt-28"
     >
+      <div
+        aria-hidden
+        className="pointer-events-none absolute top-8 size-[445px] rounded-full blur-[48px]"
+        style={{
+          right: "calc(100% + 90px)",
+          background:
+            "radial-gradient(circle, #fff 0%, rgba(65,255,55,0.19) 68%, transparent 78%)",
+        }}
+      />
       <h2 className="text-center text-[32px] leading-[1.1] font-medium text-black min-[768px]:text-[44px] min-[1440px]:text-[56px]">
         Как работает подбор
       </h2>
@@ -150,7 +170,7 @@ export function HowItWorks() {
           </p>
         </div>
 
-        <div className="relative mx-auto w-full max-w-[395px] overflow-hidden px-1 py-3 min-[900px]:mx-0">
+        <div className="relative mx-auto w-full max-w-[464px] overflow-hidden rounded-[14px] bg-[#f7f7f7] px-[34px] py-[50px] min-[900px]:mx-0">
           <div
             ref={stageRef}
             className={cn(
@@ -187,9 +207,16 @@ export function HowItWorks() {
                   </span>
                   <div
                     ref={nameRef}
-                    className="mt-1 flex items-center gap-2 rounded-[10px] border border-[#e2e4e9] bg-white py-2.5 pr-3 pl-[11px] shadow-[0_1px_2px_rgba(228,229,231,0.24)]"
+                    className="mt-1 flex items-center rounded-[10px] border border-[#e2e4e9] bg-white py-2.5 pr-3 pl-[11px] shadow-[0_1px_2px_rgba(228,229,231,0.24)]"
                   >
-                    <img src="/form/user-line.svg" alt="" className="size-[18px] shrink-0" />
+                    <span
+                      className={cn(
+                        "inline-flex shrink-0 overflow-hidden transition-[width,margin,opacity] duration-300 ease-out",
+                        name ? "mr-0 w-0 opacity-0" : "mr-2 w-[18px] opacity-100",
+                      )}
+                    >
+                      <img src="/form/user-line.svg" alt="" className="size-[18px] max-w-none" />
+                    </span>
                     <span className="min-w-0 flex-1 truncate font-[family-name:var(--font-inter)] text-[13px] leading-[18px] tracking-[-0.08px]">
                       {name ? (
                         <span className="text-[#0a0d14]">
@@ -230,12 +257,14 @@ export function HowItWorks() {
                     ref={phoneRef}
                     className="mt-1 rounded-[10px] border border-[#e2e4e9] bg-white px-[11px] py-2.5 shadow-[0_1px_2px_rgba(228,229,231,0.24)]"
                   >
-                    <span className="block truncate font-[family-name:var(--font-inter)] text-[13px] leading-[18px] tracking-[-0.08px]">
+                    <span className="flex items-center font-[family-name:var(--font-inter)] text-[13px] leading-[18px] tracking-[-0.08px]">
                       {phone ? (
-                        <span className="text-[#0a0d14]">
-                          {phone}
+                        <>
+                          <span className="inline-block text-[#0a0d14] blur-[3.5px]">
+                            {phone}
+                          </span>
                           {phase === "phone" && <Caret />}
-                        </span>
+                        </>
                       ) : (
                         <span className="text-[#868c98]">
                           Контактный номер для связи
@@ -249,11 +278,17 @@ export function HowItWorks() {
                 <div
                   ref={sendRef}
                   className={cn(
-                    "mt-1 flex items-center justify-center rounded-[10px] border border-white bg-[#11ab09] px-2 py-2.5 shadow-[0_1px_2px_rgba(17,171,9,0.48),0_0_0_1px_#11ab09] motion-safe:[animation:form-in_0.55s_ease_both] motion-safe:[animation-delay:320ms]",
+                    "mt-1 flex items-center justify-center rounded-[10px] border-0 px-[7px] py-[9px] transition-transform motion-safe:[animation:form-in_0.55s_ease_both] motion-safe:[animation-delay:320ms]",
                     pressed && "scale-[0.98]",
                   )}
+                  style={{
+                    backgroundImage:
+                      "linear-gradient(180deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0) 100%), linear-gradient(90deg, #11ab09 0%, #11ab09 100%)",
+                    boxShadow:
+                      "0 0.9px 1.8px 0 rgba(17,171,9,0.48), 0 0 0 0.9px #11ab09",
+                  }}
                 >
-                  <span className="font-[family-name:var(--font-inter)] text-[13px] leading-[18px] font-medium tracking-[-0.08px] text-white">
+                  <span className="px-1 font-[family-name:var(--font-inter)] text-[12.6px] leading-[18px] font-medium tracking-[-0.075px] text-white">
                     Отправить
                   </span>
                 </div>
@@ -276,23 +311,16 @@ export function HowItWorks() {
         </div>
       </div>
 
-      <ol className="mt-16 flex max-w-[640px] flex-col gap-8 min-[768px]:mt-20">
-        {steps.map((text) => (
-          <li
-            key={text}
-            className="text-[17px] leading-5 font-medium tracking-[-0.102px] text-[#0a0d14]"
-          >
-            {text}
-          </li>
-        ))}
-      </ol>
     </section>
   );
 }
 
 function Caret() {
   return (
-    <span className="ml-px inline-block h-[1em] w-px translate-y-[2px] bg-current motion-safe:animate-pulse" />
+    <span
+      data-caret
+      className="ml-px inline-block h-[1em] w-px shrink-0 translate-y-[2px] bg-current motion-safe:animate-pulse"
+    />
   );
 }
 
