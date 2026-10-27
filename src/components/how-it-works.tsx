@@ -221,34 +221,34 @@ export function HowItWorks() {
     <section
       id="kak-rabotaet"
       ref={sectionRef}
-      className="relative mx-auto w-full max-w-[940px] overflow-x-clip px-4 pt-20 pb-16 min-[768px]:pt-28 min-[768px]:pb-24 min-[1440px]:max-w-[1180px] min-[1440px]:pt-36 min-[1440px]:pb-28"
+      className="mx-auto w-full max-w-[940px] px-4 pt-16 min-[768px]:pt-[158px] min-[1440px]:max-w-[1180px] min-[1440px]:pt-[180px]"
     >
-      <div
-        aria-hidden
-        className="pointer-events-none absolute top-8 size-[445px] rounded-full blur-[48px]"
-        style={{
-          right: "calc(100% + 90px)",
-          background:
-            "radial-gradient(circle, #fff 0%, rgba(65,255,55,0.19) 68%, transparent 78%)",
-        }}
-      />
-      <h2 className="text-center text-[32px] leading-[1.1] font-medium text-black min-[768px]:text-[44px] min-[1440px]:text-[56px]">
-        Как работает подбор
-      </h2>
+      <div className="relative overflow-hidden rounded-[28px] bg-[#fbfbfb] px-5 py-10 min-[900px]:flex min-[900px]:min-h-[624px] min-[900px]:flex-col min-[900px]:rounded-[40px] min-[900px]:px-[68px] min-[900px]:pt-[54px] min-[900px]:pb-[72px] min-[1440px]:min-h-[740px] min-[1440px]:rounded-[48px] min-[1440px]:px-20 min-[1440px]:pt-16 min-[1440px]:pb-20">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute bottom-[-180px] left-1/2 h-[280px] w-[120%] -translate-x-1/2 rounded-full blur-[50px] min-[900px]:bottom-[-360px] min-[900px]:h-[402px]"
+          style={{
+            background:
+              "radial-gradient(ellipse at center, #fff 0%, rgba(188,236,184,0.61) 50%, rgba(120,216,112,0.22) 100%)",
+          }}
+        />
+        <h2 className="relative text-center text-[32px] leading-[1.1] font-medium text-black min-[900px]:text-[44px] min-[1440px]:text-[52px]">
+          Как работает подбор
+        </h2>
 
-      <div className="mt-12 flex flex-col items-start gap-10 min-[900px]:mt-16 min-[900px]:flex-row min-[900px]:items-center min-[900px]:justify-between">
-        <div className="h-[132px] max-w-[319px] overflow-hidden min-[1440px]:h-[156px]">
-          <div className={motionClass} style={motionStyle}>
-            <h3 className="text-[28px] leading-[1.1] font-medium text-black min-[1440px]:text-[34px]">
-              {copy.title}
-            </h3>
-            <p className="mt-3 text-[16px] leading-[1.35] font-normal text-black min-[1440px]:text-[18px]">
-              {copy.body}
-            </p>
+        <div className="relative mt-8 flex flex-col items-start gap-8 min-[900px]:mt-0 min-[900px]:flex-1 min-[900px]:flex-row min-[900px]:items-center min-[900px]:justify-between">
+          <div className="h-[108px] w-full max-w-[335px] overflow-hidden min-[1440px]:h-[128px] min-[1440px]:max-w-[400px]">
+            <div className={motionClass} style={motionStyle}>
+              <h3 className="text-[28px] leading-[1.1] font-medium text-[#111] min-[900px]:text-[38px] min-[1440px]:text-[44px]">
+                {copy.title}
+              </h3>
+              <p className="mt-3 text-[16px] leading-[1.1] font-normal text-[#111] opacity-80 min-[1440px]:text-[18px]">
+                {copy.body}
+              </p>
+            </div>
           </div>
-        </div>
 
-        <div className="relative mx-auto flex min-h-[620px] w-full max-w-[464px] flex-col justify-center overflow-hidden rounded-[14px] bg-[#f7f7f7] px-[34px] py-16 min-[900px]:mx-0 min-[900px]:min-h-[700px] min-[1440px]:min-h-[760px]">
+          <div className="relative mx-auto w-full max-w-[329px] min-[900px]:mx-0 min-[1440px]:max-w-[390px]">
           <div
             ref={stageRef}
             className={cn("relative w-full", motionClass)}
@@ -258,15 +258,15 @@ export function HowItWorks() {
             <article
               key={cycle}
               aria-hidden
-              className="rounded-[18px] border border-black/8 bg-white px-7 pt-7 pb-6 shadow-[0_2px_4px_rgba(27,28,29,0.04)]"
+              className="rounded-[15px] border border-black/8 bg-white px-6 pt-6 pb-5 shadow-[0_1.5px_3px_rgba(27,28,29,0.04)]"
             >
               <div className="flex flex-col items-center gap-[7px] motion-safe:[animation:form-in_0.6s_ease_both]">
-                <div className="rounded-full border border-[#e4e5e7] bg-gradient-to-b from-[#e4e5e7]/50 to-transparent p-3.5">
-                  <div className="grid size-12 place-items-center rounded-full border border-[#e2e4e9] bg-white shadow-[0_2px_4px_rgba(27,28,29,0.04)]">
-                    <img src="/form/user.svg" alt="" className="size-[23px]" />
+                <div className="rounded-full border border-[#e4e5e7] bg-gradient-to-b from-[#e4e5e7]/50 to-transparent p-3">
+                  <div className="grid size-10 place-items-center rounded-full border border-[#e2e4e9] bg-white shadow-[0_1.5px_3px_rgba(27,28,29,0.04)]">
+                    <img src="/form/user.svg" alt="" className="size-5" />
                   </div>
                 </div>
-                <p className="text-center text-[22px] leading-[1.3] font-medium text-[#0a0d14]">
+                <p className="text-center text-[18px] leading-6 font-medium text-[#0a0d14]">
                   Заявка на подбор центра
                 </p>
               </div>
@@ -274,18 +274,18 @@ export function HowItWorks() {
               <img
                 src="/form/divider.svg"
                 alt=""
-                className="mt-5 block h-px w-full motion-safe:[animation:form-in_0.6s_ease_both] motion-safe:[animation-delay:120ms]"
+                className="mt-4 block h-px w-full motion-safe:[animation:form-in_0.6s_ease_both] motion-safe:[animation-delay:120ms]"
               />
 
-              <div className="mt-4 flex flex-col gap-[11px]">
+              <div className="mt-4 flex flex-col gap-[9px]">
                 <label className="motion-safe:[animation:form-in_0.6s_ease_both] motion-safe:[animation-delay:220ms]">
-                  <span className="font-[family-name:var(--font-inter)] text-[13px] leading-[18px] font-medium tracking-[-0.08px] text-[#0a0d14]">
+                  <span className="font-[family-name:var(--font-inter)] text-[11px] leading-[15px] font-medium tracking-[-0.06px] text-[#0a0d14]">
                     Имя
                   </span>
                   <div
                     ref={nameRef}
                     className={cn(
-                      "mt-1 flex items-center rounded-[10px] border border-[#e2e4e9] bg-white py-2.5 pr-3 pl-[11px] shadow-[0_1px_2px_rgba(228,229,231,0.24)] transition-[box-shadow,transform] duration-150",
+                      "mt-[3px] flex items-center rounded-[10px] border border-[#e2e4e9] bg-white py-[7px] pr-[8px] pl-[9px] shadow-[0_1px_2px_rgba(228,229,231,0.24)] transition-[box-shadow,transform] duration-150",
                       hot === "name" &&
                         "scale-[0.985] shadow-[0_1px_2px_rgba(228,229,231,0.24),0_0_0_3px_rgba(17,171,9,0.14)]",
                     )}
@@ -293,12 +293,12 @@ export function HowItWorks() {
                     <span
                       className={cn(
                         "inline-flex shrink-0 overflow-hidden transition-[width,margin,opacity] duration-300 ease-out",
-                        name ? "mr-0 w-0 opacity-0" : "mr-2 w-[18px] opacity-100",
+                        name ? "mr-0 w-0 opacity-0" : "mr-1.5 w-[15px] opacity-100",
                       )}
                     >
-                      <img src="/form/user-line.svg" alt="" className="size-[18px] max-w-none" />
+                      <img src="/form/user-line.svg" alt="" className="size-[15px] max-w-none" />
                     </span>
-                    <span className="min-w-0 flex-1 truncate font-[family-name:var(--font-inter)] text-[13px] leading-[18px] tracking-[-0.08px]">
+                    <span className="min-w-0 flex-1 truncate font-[family-name:var(--font-inter)] text-[11px] leading-[15px] tracking-[-0.06px]">
                       {name ? (
                         <span className="text-[#0a0d14]">
                           {name}
@@ -314,34 +314,34 @@ export function HowItWorks() {
                 </label>
 
                 <div className="motion-safe:[animation:form-in_0.6s_ease_both] motion-safe:[animation-delay:340ms]">
-                  <p className="font-[family-name:var(--font-inter)] text-[13px] leading-[18px] font-medium tracking-[-0.08px] text-[#0a0d14]">
+                  <p className="font-[family-name:var(--font-inter)] text-[11px] leading-[15px] font-medium tracking-[-0.06px] text-[#0a0d14]">
                     Способ связи
                     <span className="text-[#11ab09]">*</span>
                   </p>
-                  <div className="mt-1 flex gap-1 rounded-[9px] bg-[#f6f8fa] p-[2px]">
-                    <span className="flex flex-1 items-center justify-center rounded-[7px] bg-white px-2 py-[5px] text-[13px] leading-[18px] font-medium text-[#0a0d14]">
+                  <div className="mt-[3px] flex gap-[3px] rounded-[7px] bg-[#f6f8fa] p-[1.5px]">
+                    <span className="flex flex-1 items-center justify-center rounded-[6px] bg-white px-1.5 py-1 text-[10.5px] leading-[15px] font-medium text-[#0a0d14]">
                       Звонок
                     </span>
-                    <span className="flex flex-1 items-center justify-center rounded-[5px] px-2 py-[5px] text-[13px] leading-[18px] font-medium text-[#868c98]">
+                    <span className="flex flex-1 items-center justify-center rounded-[4px] px-1.5 py-1 text-[10.5px] leading-[15px] font-medium text-[#868c98]">
                       Мессенджер
                     </span>
                   </div>
                 </div>
 
                 <label className="motion-safe:[animation:form-in_0.6s_ease_both] motion-safe:[animation-delay:460ms]">
-                  <span className="font-[family-name:var(--font-inter)] text-[13px] leading-[18px] font-medium tracking-[-0.08px] text-[#0a0d14]">
+                  <span className="font-[family-name:var(--font-inter)] text-[11px] leading-[15px] font-medium tracking-[-0.06px] text-[#0a0d14]">
                     Номер телефона
                     <span className="text-[#11ab09]">*</span>
                   </span>
                   <div
                     ref={phoneRef}
                     className={cn(
-                      "mt-1 rounded-[10px] border border-[#e2e4e9] bg-white px-[11px] py-2.5 shadow-[0_1px_2px_rgba(228,229,231,0.24)] transition-[box-shadow,transform] duration-150",
+                      "mt-[3px] rounded-[10px] border border-[#e2e4e9] bg-white px-[9px] py-[7px] shadow-[0_1px_2px_rgba(228,229,231,0.24)] transition-[box-shadow,transform] duration-150",
                       hot === "phone" &&
                         "scale-[0.985] shadow-[0_1px_2px_rgba(228,229,231,0.24),0_0_0_3px_rgba(17,171,9,0.14)]",
                     )}
                   >
-                    <span className="flex items-center font-[family-name:var(--font-inter)] text-[13px] leading-[18px] tracking-[-0.08px]">
+                    <span className="flex items-center font-[family-name:var(--font-inter)] text-[11px] leading-[15px] tracking-[-0.06px]">
                       {phone ? (
                         <>
                           <span className="inline-block text-[#0a0d14] blur-[1.5px]">
@@ -361,17 +361,17 @@ export function HowItWorks() {
                 <div
                   ref={sendRef}
                   className={cn(
-                    "mt-1 flex items-center justify-center rounded-[10px] border-0 px-[7px] py-[9px] transition-transform motion-safe:[animation:form-in_0.6s_ease_both] motion-safe:[animation-delay:580ms]",
+                    "mt-[3px] flex items-center justify-center rounded-[10px] border border-white px-[6px] py-[7.5px] transition-transform motion-safe:[animation:form-in_0.6s_ease_both] motion-safe:[animation-delay:580ms]",
                     pressed && "scale-[0.98]",
                   )}
                   style={{
                     backgroundImage:
                       "linear-gradient(180deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0) 100%), linear-gradient(90deg, #11ab09 0%, #11ab09 100%)",
                     boxShadow:
-                      "0 0.9px 1.8px 0 rgba(17,171,9,0.48), 0 0 0 0.9px #11ab09",
+                      "0 0.75px 1.5px 0 rgba(17,171,9,0.48), 0 0 0 0.75px #11ab09",
                   }}
                 >
-                  <span className="px-1 font-[family-name:var(--font-inter)] text-[12.6px] leading-[18px] font-medium tracking-[-0.075px] text-white">
+                  <span className="px-1 font-[family-name:var(--font-inter)] text-[10.5px] leading-[15px] font-medium tracking-[-0.06px] text-white">
                     Отправить
                   </span>
                 </div>
@@ -465,7 +465,7 @@ export function HowItWorks() {
           </div>
         </div>
       </div>
-
+      </div>
     </section>
   );
 }
