@@ -35,16 +35,16 @@ export function Hero() {
         }}
       >
         <div className="flex flex-col items-center gap-[34px] text-center">
-          <h1 className="max-w-[592px] text-[26px] leading-[1.1] font-medium text-black min-[768px]:text-[38px] min-[1440px]:max-w-[960px] min-[1440px]:text-[61px]">
+          <h1 className="max-w-[592px] text-[26px] leading-[1.1] font-medium text-[#111] min-[768px]:text-[38px]">
             Проверенные ребцентра для&nbsp;лечения и&nbsp;восстановления
             при&nbsp;зависимостях
           </h1>
 
-          <div className="flex w-full max-w-[320px] flex-col items-center gap-[6px] min-[1440px]:max-w-[440px] min-[1440px]:gap-2">
+          <div className="flex flex-col items-center gap-[6px]">
             <div
               role="tablist"
               aria-label="Кому нужна помощь"
-              className="flex h-[44px] w-full gap-1 rounded-[10px] bg-[#f6f8fa] p-[2px] min-[1440px]:h-[52px]"
+              className="flex h-[36px] gap-[2px] rounded-[10px] bg-[#f6f8fa] p-[2px]"
             >
               {audiences.map((item) => {
                 const selected = audience === item.id;
@@ -56,10 +56,10 @@ export function Hero() {
                     aria-selected={selected}
                     onClick={() => setAudience(item.id)}
                     className={cn(
-                      "flex h-full flex-1 items-center justify-center rounded-[8px] px-2 text-[14px] leading-5 font-medium tracking-[-0.084px] whitespace-nowrap transition-colors min-[1440px]:text-[16px]",
+                      "flex h-full items-center justify-center px-[8px] text-[14px] leading-5 font-medium tracking-[-0.084px] whitespace-nowrap transition-colors",
                       selected
-                        ? "bg-white text-[#0a0d14]"
-                        : "text-[#868c98] hover:text-[#0a0d14]",
+                        ? "rounded-[8px] bg-white text-[#0a0d14]"
+                        : "rounded-[6px] text-[#868c98] hover:text-[#0a0d14]",
                     )}
                   >
                     {item.label}
@@ -67,16 +67,14 @@ export function Hero() {
                 );
               })}
             </div>
-            <p className="text-center text-[14px] leading-normal font-normal tracking-[-0.084px] text-[#0a0d14] opacity-40 min-[1440px]:text-[16px]">
+            <p className="text-center text-[14px] leading-[normal] font-normal tracking-[-0.084px] text-[#0a0d14] opacity-40">
               Бесплатная и анонимная консультация
             </p>
           </div>
 
           <Button
-            variant="brand"
-            size="hero"
             type="button"
-            className="h-[46px] max-w-[320px] border-[#037bd7] bg-[#037bd7] text-[17px] hover:bg-[#026cb8] min-[1440px]:h-[46px] min-[1440px]:max-w-[320px] min-[1440px]:text-[17px]"
+            className="h-[46px] w-[320px] max-w-full overflow-hidden rounded-[8px] border-0 bg-[#037bd7] px-[10px] text-[17px] leading-[1.1] font-medium text-white shadow-[inset_0px_2px_3px_0px_rgba(255,255,255,0.25)] hover:bg-[#037bd7]"
           >
             Подобрать центр
           </Button>
