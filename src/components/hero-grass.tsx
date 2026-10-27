@@ -2,7 +2,8 @@
 
 import { useEffect, useRef } from "react";
 
-const PER_COPY = 7000;
+const PER_COPY = 9000;
+const BANDS = 10;
 
 type Particle = {
   homeX: number;
@@ -58,7 +59,8 @@ export function HeroGrass() {
       const pixels = sampleCtx.getImageData(0, 0, sw, sh).data;
 
       const ink = new Uint8Array(sw * sh);
-      let inkCount = 0;
+      let minX = sw;
+      let maxX = 0;
       let minY = sh;
       let maxY = 0;
       for (let y = 0; y < sh; y++) {
@@ -66,64 +68,60 @@ export function HeroGrass() {
           const i = (y * sw + x) * 4;
           if (pixels[i + 3] > 24 && pixels[i] < 150) {
             ink[y * sw + x] = 1;
-            inkCount += 1;
+            if (x < minX) minX = x;
+            if (x > maxX) maxX = x;
             if (y < minY) minY = y;
             if (y > maxY) maxY = y;
           }
         }
       }
-      if (!inkCount) return;
+      if (maxX < minX) return;
 
-      const xs = new Int16Array(inkCount);
-      const ys = new Int16Array(inkCount);
-      const cumulative = new Float32Array(inkCount);
-      let total = 0;
-      let cursor = 0;
-      const span = Math.max(1, maxY - minY);
-      const heights = new Float32Array(inkCount);
+      const spanX = Math.max(1, maxX - minX);
+      const spanY = Math.max(1, maxY - minY);
+      const bands: number[][] = Array.from({ length: BANDS }, () => []);
       for (let y = 0; y < sh; y++) {
         for (let x = 0; x < sw; x++) {
           if (!ink[y * sw + x]) continue;
-          const height = (maxY - y) / span;
-          xs[cursor] = x;
-          ys[cursor] = y;
-          heights[cursor] = height;
-          total += 0.035 + height ** 1.85;
-          cumulative[cursor] = total;
-          cursor += 1;
+          const height = (maxY - y) / spanY;
+          const band = Math.min(BANDS - 1, Math.floor((1 - height) * BANDS));
+          bands[band].push(y * sw + x);
         }
       }
 
-      const pick = () => {
-        const target = Math.random() * total;
-        let low = 0;
-        let high = cumulative.length - 1;
-        while (low < high) {
-          const mid = (low + high) >> 1;
-          if (cumulative[mid] < target) low = mid + 1;
-          else high = mid;
-        }
-        return low;
+      const bandWeight = bands.map((pixelsInBand, index) => {
+        if (!pixelsInBand.length) return 0;
+        const down = index / (BANDS - 1);
+        return 0.08 + (1 - down) ** 1.8;
+      });
+      const weightSum = bandWeight.reduce((sum, weight) => sum + weight, 0);
+      const copySpan = 0.76;
+
+      const place = (index: number, copy: number) => {
+        const x = index % sw;
+        const y = (index / sw) | 0;
+        const localX = (x - minX + Math.random()) / spanX;
+        const homeX = localX * copySpan + copy * (1 - copySpan);
+        const homeY = (y - minY + Math.random()) / spanY;
+        particles.push({
+          homeX,
+          homeY,
+          fromX: homeX + (Math.random() - 0.5) * 0.03,
+          fromY: 1.08 + Math.random() * 0.2,
+          height: (maxY - y) / spanY,
+          phase: Math.random() * Math.PI * 2,
+          delay: Math.random() * 0.28,
+        });
       };
 
-      for (let i = 0; i < PER_COPY; i++) {
-        const index = pick();
-        const homeX = xs[index] / sw;
-        const homeY = (ys[index] - minY) / span;
-        const height = heights[index];
-        const phase = Math.random() * Math.PI * 2;
-        const delay = Math.random() * 0.28;
-        for (let copy = 0; copy < 2; copy++) {
-          const x = homeX * 0.5 + copy * 0.5;
-          particles.push({
-            homeX: x,
-            homeY,
-            fromX: x + (Math.random() - 0.5) * 0.04,
-            fromY: 1.08 + Math.random() * 0.22,
-            height,
-            phase: phase + copy * 1.4,
-            delay,
-          });
+      for (let band = 0; band < BANDS; band++) {
+        const pool = bands[band];
+        if (!pool.length || weightSum === 0) continue;
+        const count = Math.round((PER_COPY * bandWeight[band]) / weightSum);
+        for (let i = 0; i < count; i++) {
+          const index = pool[(Math.random() * pool.length) | 0];
+          place(index, 0);
+          place(index, 1);
         }
       }
 
@@ -157,12 +155,12 @@ export function HeroGrass() {
             sway * eased;
           const y =
             (particle.fromY + (particle.homeY - particle.fromY) * eased) * height;
-          const radius = (0.85 + particle.height * 1.15) * scale;
+          const radius = 1.35 * scale;
           const r2 = radius * radius;
           const reach = Math.ceil(radius);
           const cx = x | 0;
           const cy = y | 0;
-          const alpha = (0.12 + 0.88 * particle.height) * eased * 255;
+          const alpha = eased * 255;
           for (let dy = -reach; dy <= reach; dy++) {
             const py = cy + dy;
             if (py < 0 || py >= height) continue;
@@ -171,10 +169,9 @@ export function HeroGrass() {
               const px = cx + dx;
               if (px < 0 || px >= width) continue;
               const index = (py * width + px) * 4;
-              if (data[index + 3] >= alpha) continue;
-              data[index] = 18;
-              data[index + 1] = 22;
-              data[index + 2] = 16;
+              data[index] = 20;
+              data[index + 1] = 24;
+              data[index + 2] = 18;
               data[index + 3] = alpha;
             }
           }
