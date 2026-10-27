@@ -4,9 +4,10 @@ import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 
 const NAME = "Мария";
-const PHONE = "916 000-00-00";
+const PHONE = "+7 916 000-00-00";
 
-type Phase = "assemble" | "type-name" | "type-phone" | "leave";
+type Phase = "assemble" | "type-name" | "type-phone";
+type Travel = "below" | "in" | "above";
 
 function wait(ms: number, timers: number[]) {
   return new Promise<void>((resolve) => {
@@ -31,6 +32,8 @@ export function HowItWorks() {
   const [cursorOn, setCursorOn] = useState(false);
   const [clicking, setClicking] = useState(false);
   const [cursor, setCursor] = useState({ x: 300, y: 420 });
+  const [travel, setTravel] = useState<Travel>("below");
+  const [travelOn, setTravelOn] = useState(false);
 
   useEffect(() => {
     const media = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -94,6 +97,8 @@ export function HowItWorks() {
     const run = async () => {
       await wait(50, timers);
       while (!cancelled) {
+        setTravelOn(false);
+        setTravel("below");
         setCycle((value) => value + 1);
         setPhase("assemble");
         setName("");
@@ -102,7 +107,12 @@ export function HowItWorks() {
         setHot(null);
         setCursorOn(false);
         setClicking(false);
-        await wait(1500, timers);
+        await wait(60, timers);
+        if (cancelled) return;
+        setTravelOn(true);
+        await wait(40, timers);
+        setTravel("in");
+        await wait(1280, timers);
         if (cancelled) return;
 
         await click(nameRef.current, "name");
@@ -130,9 +140,8 @@ export function HowItWorks() {
         await click(sendRef.current, null);
         if (cancelled) return;
 
-        setPhase("leave");
-        await wait(860, timers);
-        await wait(280, timers);
+        setTravel("above");
+        await wait(820, timers);
       }
     };
 
@@ -177,9 +186,17 @@ export function HowItWorks() {
           <div
             ref={stageRef}
             className={cn(
-              "relative w-full transition-[transform,opacity] duration-700 ease-in",
-              phase === "leave" && "-translate-y-[120%] scale-[0.97] opacity-0",
+              "relative w-full",
+              reduced || travel === "in"
+                ? "translate-y-0"
+                : travel === "above"
+                  ? "-translate-y-[180%]"
+                  : "translate-y-[180%]",
             )}
+            style={{
+              transition:
+                travelOn && !reduced ? "translate 0.75s cubic-bezier(0.4, 0, 0.2, 1)" : "none",
+            }}
           >
             <article
               key={cycle}
