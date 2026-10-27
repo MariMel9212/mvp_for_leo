@@ -49,18 +49,28 @@ export function HeroGrass() {
       const height = (maxY - y) / spanY;
       const phase = ((i * 17) % 628) / 100;
       const delay = ((i * 13) % 100) / 400;
+      const places = [{ x, y }];
+      if (y < 52) {
+        const side = i % 4 < 2 ? 1 : -1;
+        places.push({ x: x + side * 1.35, y: y + 0.45 });
+      }
+      if (y < 40) {
+        places.push({ x: x - 1.15, y: y - 0.35 });
+      }
       for (const origin of COPIES) {
-        const homeX = (origin + x) / STRIP_W;
-        const homeY = y / TILE_H;
-        particles.push({
-          homeX,
-          homeY,
-          fromX: homeX,
-          fromY: homeY + 0.18 + ((i * 7) % 50) / 400,
-          height,
-          phase: phase + origin * 0.001,
-          delay,
-        });
+        for (const place of places) {
+          const homeX = (origin + place.x) / STRIP_W;
+          const homeY = place.y / TILE_H;
+          particles.push({
+            homeX,
+            homeY,
+            fromX: homeX,
+            fromY: homeY + 0.18 + ((i * 7) % 50) / 400,
+            height,
+            phase: phase + origin * 0.001,
+            delay,
+          });
+        }
       }
     }
 
