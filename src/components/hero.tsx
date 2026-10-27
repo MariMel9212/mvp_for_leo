@@ -81,7 +81,7 @@ export function Hero() {
 
             <Button
               type="button"
-              className="h-[clamp(46px,3.59375vw,74px)] w-full overflow-hidden rounded-[8px] border-0 bg-[#037bd7] px-[10px] text-[clamp(17px,1.328125vw,28px)] leading-[1.1] font-medium text-white shadow-[inset_0px_2px_3px_0px_rgba(255,255,255,0.25)] hover:bg-[#037bd7]"
+              className="h-[clamp(46px,3.59375vw,74px)] w-full overflow-hidden rounded-[8px] border-0 bg-[#e1f300] px-[10px] text-[clamp(17px,1.328125vw,28px)] leading-[1.1] font-medium text-[#0a0d14] shadow-[inset_0px_2px_3px_0px_rgba(255,255,255,0.25)] hover:bg-[#d6e600]"
             >
               Подобрать центр
             </Button>
