@@ -60,9 +60,9 @@ export function HeroGrass() {
       const height = (maxY - y) / spanY;
       const phase = ((i * 17) % 628) / 100;
       const places = [x];
-      // The source silhouette has a bare column just right of center.
-      // Stamp the neighboring blade into that column; the dots themselves stay the same.
-      if (x >= 250 && x <= 360) places.push(x + 140);
+      // Only the tip of the neighboring blade, so it fills the bare column
+      // without landing on the grass that is already there.
+      if (x >= 263 && x <= 300) places.push(x + 140);
       for (const placeX of places) {
         for (const origin of COPIES) {
           const stripX = (origin + placeX) / STRIP_W;
