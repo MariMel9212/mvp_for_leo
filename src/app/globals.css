@@ -129,34 +129,3 @@
     font-synthesis: none;
   }
 }
-
-@keyframes form-in {
-  from {
-    opacity: 0;
-    transform: translateY(18px) scale(0.98);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-@keyframes phone-ring {
-  0%,
-  62%,
-  100% {
-    transform: rotate(0deg);
-  }
-  8% {
-    transform: rotate(-1.4deg);
-  }
-  16% {
-    transform: rotate(1.4deg);
-  }
-  24% {
-    transform: rotate(-1deg);
-  }
-  32% {
-    transform: rotate(0.8deg);
-  }
-}

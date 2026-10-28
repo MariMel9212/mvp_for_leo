@@ -7,7 +7,8 @@ const stats = [
 
 export function Stats() {
   return (
-    <section className="mx-auto mt-8 w-full max-w-[940px] px-4 min-[1440px]:mt-12 min-[1440px]:max-w-[1180px]">
+    <section className="mx-auto mt-8 w-full max-w-[1040px] px-4 min-[1440px]:mt-12">
+      <div className="mx-auto w-full max-w-[984px]">
       <div className="flex flex-wrap justify-between gap-y-6">
         {stats.map((item) => (
           <div
@@ -22,6 +23,7 @@ export function Stats() {
             </p>
           </div>
         ))}
+      </div>
       </div>
     </section>
   );

@@ -1,6 +1,6 @@
 import { Centers } from "@/components/centers";
 import { Hero } from "@/components/hero";
-import { HowItWorks } from "@/components/how-it-works";
+import { Situation } from "@/components/situation";
 import { SiteHeader } from "@/components/site-header";
 import { Stats } from "@/components/stats";
 
@@ -10,7 +10,7 @@ export default function HomePage() {
       <SiteHeader />
       <Hero />
       <Stats />
-      <HowItWorks />
+      <Situation />
       <Centers />
     </main>
   );

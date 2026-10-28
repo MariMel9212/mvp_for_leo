@@ -36,8 +36,8 @@ export function SiteHeader() {
           {links.map((label, index) => (
             <a
               key={index}
-              href="#kak-rabotaet"
-              onClick={(event) => scrollToSection(event, "kak-rabotaet")}
+              href="#situatsii"
+              onClick={(event) => scrollToSection(event, "situatsii")}
               className="whitespace-nowrap"
             >
               {label}
