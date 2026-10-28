@@ -4,7 +4,7 @@ export function Situation() {
   return (
     <section
       id="situatsii"
-      className="mx-auto mt-20 w-full max-w-[1400px] px-4 min-[1440px]:px-8"
+      className="mx-auto mt-24 w-full max-w-[1400px] px-4 min-[768px]:mt-40 min-[1440px]:px-8"
     >
       <div className="mx-auto flex w-full flex-col gap-[54px]">
         <h2 className="text-[32px] leading-[1.1] font-medium text-[#0a0d14] opacity-96 min-[768px]:text-[38px]">
