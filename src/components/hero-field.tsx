@@ -53,9 +53,9 @@ function createParticles(inner: number, outer: number, settled: boolean) {
       homeX,
       homeY,
       homeZ: depth,
-      fromX: settled ? homeX : (Math.random() - 0.5) * span,
-      fromY: settled ? homeY : (Math.random() - 0.5) * span,
-      fromZ: settled ? depth : (Math.random() - 0.5) * 1000,
+      fromX: settled ? homeX : homeX + (Math.random() - 0.5) * outer * 0.9,
+      fromY: settled ? homeY : homeY + (Math.random() - 0.5) * outer * 0.9,
+      fromZ: settled ? depth : depth + (Math.random() - 0.5) * 240,
       flyX: (Math.random() - 0.5) * span,
       flyY: (Math.random() - 0.5) * span,
       flyZ: (Math.random() - 0.5) * 1000,
@@ -99,7 +99,7 @@ export function HeroField() {
       if (next.inner !== inner || next.outer !== outer) {
         inner = next.inner;
         outer = next.outer;
-        particles = createParticles(inner, outer, reduce || performance.now() - started > 2800);
+        particles = createParticles(inner, outer, reduce || performance.now() - started > 900);
       }
     };
     const observer = new ResizeObserver(resize);
@@ -169,7 +169,6 @@ export function HeroField() {
       const height = canvas.height;
       context.clearRect(0, 0, width, height);
       context.fillStyle = "#b2c7eb";
-      canvas.style.opacity = reduce ? "1" : String(Math.min(1, (now - started) / 1000));
 
       for (const particle of particles) {
         let x: number;
@@ -196,7 +195,7 @@ export function HeroField() {
           if (particle.flyBack === 1) particle.flyProgress = 0;
         } else if (!reduce && particle.progress < 1) {
           particle.flyProgress = 0;
-          particle.progress = Math.min(1, particle.progress + 0.006 * frames);
+          particle.progress = Math.min(1, particle.progress + 0.022 * frames);
           const t = ease(particle.progress);
           x = particle.fromX + (particle.homeX - particle.fromX) * t;
           y = particle.fromY + (particle.homeY - particle.fromY) * t;
@@ -231,7 +230,7 @@ export function HeroField() {
 
       loop.frame = requestAnimationFrame(draw);
     };
-    loop.frame = requestAnimationFrame(draw);
+    draw(performance.now());
 
     return () => {
       loop.alive = false;
