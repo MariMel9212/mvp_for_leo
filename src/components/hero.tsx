@@ -19,7 +19,7 @@ export function Hero() {
   return (
     <section
       id="podbor"
-      className="relative flex min-h-[100svh] items-center overflow-hidden bg-gradient-to-b from-[#d2def3] to-white"
+      className="relative flex min-h-[100svh] items-center overflow-hidden bg-gradient-to-b from-[#d2def3] to-[#fffffc]"
     >
       <div className="pointer-events-none absolute inset-0">
         <HeroField />

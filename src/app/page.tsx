@@ -7,7 +7,7 @@ import { Stats } from "@/components/stats";
 
 export default function HomePage() {
   return (
-    <main className="relative overflow-x-clip bg-white text-black">
+    <main className="relative overflow-x-clip bg-[#fffffc] text-black">
       <SiteHeader />
       <Hero />
       <Stats />
