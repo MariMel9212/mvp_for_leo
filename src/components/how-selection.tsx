@@ -6,6 +6,12 @@ const cardStyle: CSSProperties = {
 };
 
 const radarDots: Array<[number, number]> = [
+  [67, 305],
+  [77, 282],
+  [90, 264],
+  [223, 267],
+  [236, 285],
+  [245, 309],
   [91, 301],
   [102, 282],
   [110, 274],
@@ -241,7 +247,7 @@ function CentersCard() {
           </div>
         ))}
         <div
-          className="absolute rounded-[24px] bg-[linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,0.72),rgba(255,255,255,0))]"
+          className="absolute bg-gradient-to-r from-[rgba(70,191,255,0)] to-[rgba(56,184,251,0.46)] blur-[5.94px]"
           style={{ left: 71.63, top: 71.63, width: 91.89, height: 146.75 }}
         />
         {sparks.map(([x, y, size]) => (
@@ -252,11 +258,11 @@ function CentersCard() {
           />
         ))}
         <div
-          className="absolute bg-[#8ec8ff]/70 blur-[2px]"
+          className="absolute bg-[#32b5f0] opacity-45 blur-[3.494px]"
           style={{ left: 156.88, top: 77.57, width: 6.29, height: 145.35 }}
         />
         <div
-          className="absolute bg-[#5eb6ff]"
+          className="absolute rounded-[1.048px] bg-[#afd5fa] shadow-[0_0_1.048px_rgba(34,158,209,0.2)]"
           style={{ left: 162.82, top: 43.33, width: 1.75, height: 205.45 }}
         />
         <img
