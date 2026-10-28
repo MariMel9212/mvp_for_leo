@@ -24,8 +24,8 @@ const centers = [
 
 export function Centers() {
   return (
-    <section className="mx-auto mt-[var(--space-section)] flex w-full max-w-[940px] flex-col gap-[var(--space-heading)] px-4 pb-[var(--space-section)] min-[1440px]:max-w-[1180px]">
-      <h2 className="text-center text-[32px] leading-[1.1] font-medium text-black min-[768px]:text-[44px]">
+    <section className="mx-auto mt-24 flex w-full max-w-[940px] flex-col gap-12 px-4 pb-24 min-[768px]:mt-40 min-[768px]:gap-[88px] min-[768px]:pb-40 min-[1440px]:max-w-[1180px]">
+      <h2 className="text-center text-[clamp(36px,6vw,56px)] leading-[1.1] font-medium text-[#0a0d14]">
         Проверенные учереждения
       </h2>
 

@@ -4,13 +4,13 @@ export function Situation() {
   return (
     <section
       id="situatsii"
-      className="mx-auto mt-[var(--space-band)] w-full max-w-[1400px] px-4 min-[1440px]:px-8"
+      className="mx-auto mt-24 w-full max-w-[1400px] px-4 min-[768px]:mt-40 min-[1440px]:px-8"
     >
-      <div className="mx-auto flex w-full flex-col gap-[var(--space-heading)]">
-        <h2 className="text-[32px] leading-[1.1] font-medium text-[#0a0d14] opacity-96 min-[768px]:text-[38px]">
+      <div className="mx-auto flex w-full flex-col gap-12 min-[768px]:gap-[88px]">
+        <h2 className="text-[clamp(36px,6vw,56px)] leading-[1.1] font-medium text-[#0a0d14]">
           Подбираем помощь под ситуацию
         </h2>
-        <div className="flex flex-col items-center gap-6 min-[1040px]:flex-row min-[1040px]:items-start">
+        <div className="flex flex-col items-center gap-10 min-[1040px]:flex-row min-[1040px]:items-start">
           <DetoxCard />
           <RehabCard />
         </div>
