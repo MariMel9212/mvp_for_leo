@@ -67,11 +67,11 @@ export function HeroGrass() {
       for (const placeX of places) {
         for (const origin of COPIES) {
           const stripX = (origin + placeX) / STRIP_W;
-          const depth = Math.min(1, Math.max(0, (y - 124) / (maxY - 124)));
+          const depth = Math.min(1, Math.max(0, (y - 126) / (maxY - 126)));
           const roll = unit(i * 0.37 + 2.2);
-          const stretch = depth * depth * depth * (0.18 + roll * roll) * 30;
+          const stretch = depth * depth * (0.42 + roll * 0.7) * 50;
           const stripY = (y + stretch) / TILE_H;
-          const trail = Math.min(1, stretch / 30);
+          const trail = Math.min(1, stretch / 56);
           const a = unit(seed++);
           const b = unit(seed++);
           const c = unit(seed++);
@@ -141,14 +141,14 @@ export function HeroGrass() {
             swayScale *
             settled * settled;
         const endX = (STRIP_LEFT + particle.stripX * STRIP_WIDTH) * width;
-        const tailPx = 52 * pixelRatio;
+        const tailPx = 122 * pixelRatio;
         const endY = height - tailPx - grassPx + particle.stripY * grassPx;
         const bow = Math.sin(eased * Math.PI) * particle.bow * pixelRatio;
         const x = endX + (particle.fromX * pixelRatio + bow) * (1 - eased) + sway;
         const y = endY + particle.fromY * pixelRatio * (1 - eased);
         const cx = x | 0;
         const cy = y | 0;
-        const alpha = appeared * 132 * (1 - particle.trail * 0.78);
+        const alpha = appeared * 132 * (1 - particle.trail * 0.9);
         for (let dy = -reach; dy <= reach; dy++) {
           const py = cy + dy;
           if (py < 0 || py >= height) continue;
