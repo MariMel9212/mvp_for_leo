@@ -80,9 +80,9 @@ export function HowSelection() {
   return (
     <section
       id="kak-proiskhodit"
-      className="mx-auto mt-16 w-full max-w-[1400px] px-4 min-[768px]:mt-[108px] min-[1440px]:px-8"
+      className="mx-auto mt-[var(--space-section)] w-full max-w-[1400px] px-4 min-[1440px]:px-8"
     >
-      <div className="mx-auto flex w-full flex-col gap-[54px]">
+      <div className="mx-auto flex w-full flex-col gap-[var(--space-heading)]">
         <h2 className="text-[32px] leading-[1.1] font-medium text-[#0a0d14] opacity-96 min-[768px]:text-[38px]">
           Как происходит подбор
         </h2>

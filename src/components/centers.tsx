@@ -24,12 +24,12 @@ const centers = [
 
 export function Centers() {
   return (
-    <section className="mx-auto mt-16 w-full max-w-[940px] px-4 pb-20 min-[768px]:mt-[130px] min-[768px]:pb-28 min-[1440px]:max-w-[1180px] min-[1440px]:pb-36">
+    <section className="mx-auto mt-[var(--space-section)] flex w-full max-w-[940px] flex-col gap-[var(--space-heading)] px-4 pb-[var(--space-section)] min-[1440px]:max-w-[1180px]">
       <h2 className="text-center text-[32px] leading-[1.1] font-medium text-black min-[768px]:text-[44px]">
         Проверенные учереждения
       </h2>
 
-      <div className="mt-8 grid grid-cols-1 gap-3 min-[768px]:mt-14 min-[768px]:grid-cols-2">
+      <div className="grid grid-cols-1 gap-3 min-[768px]:grid-cols-2">
         {centers.map((center) => (
           <article
             key={center.image}

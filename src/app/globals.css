@@ -49,6 +49,11 @@
 }
 
 :root {
+  /* Vertical rhythm. Heading sits above its block; a section follows a
+     content block; the band is the shorter step after the stats strip. */
+  --space-heading: 32px;
+  --space-section: 64px;
+  --space-band: 40px;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
@@ -81,6 +86,16 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+}
+
+@layer base {
+  @media (min-width: 768px) {
+    :root {
+      --space-heading: 54px;
+      --space-section: 130px;
+      --space-band: 80px;
+    }
+  }
 }
 
 .dark {
