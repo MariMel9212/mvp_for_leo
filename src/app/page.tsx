@@ -1,4 +1,3 @@
-import { Centers } from "@/components/centers";
 import { Hero } from "@/components/hero";
 import { HowSelection } from "@/components/how-selection";
 import { Situation } from "@/components/situation";
@@ -13,7 +12,6 @@ export default function HomePage() {
       <Stats />
       <Situation />
       <HowSelection />
-      <Centers />
     </main>
   );
 }
