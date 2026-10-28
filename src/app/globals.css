@@ -129,3 +129,21 @@
     font-synthesis: none;
   }
 }
+
+@keyframes wedge-impulse {
+  0% {
+    scale: 1;
+  }
+  36% {
+    scale: 1.14;
+  }
+  100% {
+    scale: 1;
+  }
+}
+
+@media (hover: hover) {
+  .group:hover .wedge-impulse {
+    animation: wedge-impulse 0.85s ease-out;
+  }
+}
