@@ -115,9 +115,6 @@ export function HeroGrass() {
       const data = buffer.data;
       data.fill(0);
       const elapsed = (now - started) / 1000;
-      const radius = 0.83 * pixelRatio;
-      const r2 = radius * radius;
-      const reach = Math.ceil(radius);
       const swayScale = 6 * pixelRatio;
       const grassPx =
         Math.min(360, Math.max(220, (width / pixelRatio) * 0.215)) * pixelRatio;
@@ -148,19 +145,30 @@ export function HeroGrass() {
         const y = endY + particle.fromY * pixelRatio * (1 - eased);
         const cx = x | 0;
         const cy = y | 0;
-        const alpha = appeared * 132 * (1 - particle.trail * 0.9);
+        const tip = particle.height * particle.height;
+        const alpha = appeared * (112 + tip * 138) * (1 - particle.trail * 0.92);
+        const cr = 118 - tip * 50;
+        const cg = 170 - tip * 16;
+        const cb = 96 - tip * 52;
+        const dot = (0.8 + tip * 0.55) * pixelRatio;
+        const dot2 = dot * dot;
+        const reach = Math.ceil(dot);
         for (let dy = -reach; dy <= reach; dy++) {
           const py = cy + dy;
           if (py < 0 || py >= height) continue;
           for (let dx = -reach; dx <= reach; dx++) {
-            if (dx * dx + dy * dy > r2) continue;
+            if (dx * dx + dy * dy > dot2) continue;
             const px = cx + dx;
             if (px < 0 || px >= width) continue;
             const index = (py * width + px) * 4;
-            data[index] = 118;
-            data[index + 1] = 170;
-            data[index + 2] = 96;
-            data[index + 3] = alpha;
+            const dstA = data[index + 3];
+            const outA = alpha + dstA * (1 - alpha / 255);
+            const keep = dstA * (1 - alpha / 255);
+            const inv = outA > 0.5 ? 1 / outA : 0;
+            data[index] = (cr * alpha + data[index] * keep) * inv;
+            data[index + 1] = (cg * alpha + data[index + 1] * keep) * inv;
+            data[index + 2] = (cb * alpha + data[index + 2] * keep) * inv;
+            data[index + 3] = outA > 255 ? 255 : outA;
           }
         }
       }
