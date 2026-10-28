@@ -31,11 +31,17 @@ function DesignFrame({ children }: { children: ReactNode }) {
   );
 }
 
-function PickLink({ children }: { children: ReactNode }) {
+function PickLink({
+  children,
+  opacity = "opacity-80",
+}: {
+  children: ReactNode;
+  opacity?: string;
+}) {
   return (
     <a
       href="#podbor"
-      className="absolute top-[347px] left-[26px] z-10 inline-flex items-center justify-center rounded-[6px] bg-[#e1f300] px-[14px] py-[10px] text-[14px] leading-[1.1] font-medium text-[#0a0d14]/80 hover:bg-[#d6e600]"
+      className={`absolute top-[347px] left-[26px] z-10 inline-flex items-center justify-center rounded-[6px] bg-[#e1f300] px-[14px] py-[10px] text-[14px] leading-[1.1] font-medium text-[#0a0d14] hover:bg-[#d6e600] ${opacity}`}
     >
       {children}
     </a>
@@ -52,22 +58,14 @@ function DetoxCard() {
             alt=""
             className="absolute top-0 left-[-0.1%] h-full w-[100.21%] max-w-none"
           />
-          <div className="absolute inset-0 bg-black/10" />
         </div>
         <div
-          className="absolute top-0 left-0 h-[233px] w-[480px] backdrop-blur-[1.05px]"
+          className="absolute top-0 left-0 h-[136px] w-[480px] backdrop-blur-[1.05px]"
           style={{
             background:
               "linear-gradient(to bottom, #f5faff 0%, rgba(245,250,255,0.93) 28.455%, rgba(245,250,255,0) 94.85%)",
           }}
         />
-        <div className="absolute top-[8px] left-[-207px] h-[513px] w-[862px]">
-          <img
-            src="/situations/doctors.png"
-            alt=""
-            className="absolute top-0 left-[-0.1%] h-full w-[100.21%] max-w-none"
-          />
-        </div>
         <div className="absolute top-[28px] left-[26px] flex w-[395px] flex-col gap-[10px] text-[#0a0d14]">
           <h3 className="text-[28px] leading-[1.1] font-medium opacity-96">
             Детокс
@@ -98,7 +96,7 @@ function RehabCard() {
             />
           </div>
         </div>
-        <div className="absolute top-0 left-0 h-[126px] w-[480px] bg-gradient-to-b from-[#f5faff] to-transparent backdrop-blur-[0.15px]" />
+        <div className="absolute top-0 left-0 h-[126px] w-[480px] backdrop-blur-[0.15px]" />
         <div className="absolute bottom-[294px] left-[26px] flex w-[357px] flex-col gap-[10px] text-[#0a0d14]">
           <h3 className="text-[28px] leading-[1.1] font-medium opacity-96">
             Реабилитация
@@ -108,7 +106,7 @@ function RehabCard() {
             зависимости и помогают вернутся к&nbsp;полноценной жизни
           </p>
         </div>
-        <PickLink>Подобрать реабилитацию</PickLink>
+        <PickLink opacity="opacity-93">Подобрать реабилитацию</PickLink>
         <CenterCard />
       </article>
     </DesignFrame>
