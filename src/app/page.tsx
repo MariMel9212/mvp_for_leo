@@ -1,5 +1,6 @@
 import { readFileSync } from "node:fs";
 import path from "node:path";
+import { Centers } from "@/components/centers";
 import { Hero } from "@/components/hero";
 import { HowSelection } from "@/components/how-selection";
 import { Situation } from "@/components/situation";
@@ -21,6 +22,7 @@ export default function HomePage() {
       <Stats />
       <Situation />
       <HowSelection />
+      <Centers />
     </main>
   );
 }
