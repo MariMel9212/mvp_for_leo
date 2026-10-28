@@ -6,24 +6,18 @@ const cardStyle: CSSProperties = {
 };
 
 const radarDots: Array<[number, number]> = [
-  [62, 297],
-  [78, 272],
-  [88, 250],
-  [228, 251],
-  [235, 278],
-  [251, 304],
-  [81, 298],
-  [100, 278],
-  [104, 261],
-  [210, 266],
-  [222, 279],
-  [226, 305],
-  [101, 308],
+  [91, 301],
+  [102, 282],
+  [110, 274],
+  [202, 275],
+  [214, 288],
+  [222, 306],
+  [108, 303],
   [117, 290],
-  [198, 292],
-  [211, 305],
-  [124, 316],
-  [186, 312],
+  [196, 291],
+  [205, 306],
+  [122, 305],
+  [189, 306],
 ];
 
 const sparks: Array<[number, number, number]> = [
@@ -132,7 +126,7 @@ function CardShell({
 }) {
   return (
     <article
-      className="relative w-[312px] overflow-clip rounded-tl-[27px] rounded-tr-[27px] border-t border-r border-l border-[rgba(58,124,238,0.07)]"
+      className="relative w-[312px] overflow-clip rounded-tl-[27px] rounded-tr-[27px] rounded-bl-[16px] rounded-br-[16px] border border-[rgba(58,124,238,0.07)]"
       style={{ ...cardStyle, height }}
     >
       {children}
