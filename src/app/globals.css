@@ -141,15 +141,3 @@
     transform: scale(1);
   }
 }
-
-@keyframes check-impulse {
-  0% {
-    transform: scale(1);
-  }
-  35% {
-    transform: scale(1.28);
-  }
-  100% {
-    transform: scale(1);
-  }
-}

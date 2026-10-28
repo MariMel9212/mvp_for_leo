@@ -47,13 +47,22 @@ const sparks: Array<[number, number, number]> = [
   [98.5, 92.9, 2.8],
 ];
 
-const obscured = [
-  { label: "Business management", x: 38.08, y: 71.63, w: 125.78 },
-  { label: "Digital platform", x: -31.45, y: 111.46, w: 105.87 },
-  { label: "Customer Portal", x: 80.71, y: 111.46, w: 133.82 },
-  { label: "Healthcare", x: -43.67, y: 151.64, w: 105.87 },
-  { label: "Travel booking", x: 67.43, y: 151.64, w: 94.34 },
-  { label: "Online education", x: 34.24, y: 191.12, w: 119.14 },
+const drift =
+  "transition-[translate] duration-[1200ms] ease-out group-hover:translate-x-[210px]";
+
+const obscured: Array<{
+  label: string;
+  x: number;
+  y: number;
+  w: number;
+  delay: string;
+}> = [
+  { label: "Business management", x: 38.08, y: 71.63, w: 125.78, delay: "group-hover:delay-[80ms]" },
+  { label: "Digital platform", x: -31.45, y: 111.46, w: 105.87, delay: "group-hover:delay-[440ms]" },
+  { label: "Customer Portal", x: 80.71, y: 111.46, w: 133.82, delay: "group-hover:delay-0" },
+  { label: "Healthcare", x: -43.67, y: 151.64, w: 105.87, delay: "group-hover:delay-[500ms]" },
+  { label: "Travel booking", x: 67.43, y: 151.64, w: 94.34, delay: "group-hover:delay-[30ms]" },
+  { label: "Online education", x: 34.24, y: 191.12, w: 119.14, delay: "group-hover:delay-[110ms]" },
 ];
 
 export function HowSelection() {
@@ -252,15 +261,7 @@ function CentersCard() {
       />
       <div className="absolute top-[165px] left-[-7.87px] h-[261px] w-[327.735px]">
         {obscured.map((item) => (
-          <div
-            key={item.label}
-            className="absolute h-[30.048px] overflow-hidden rounded-[15.373px] bg-[rgba(214,220,216,0.55)]"
-            style={{ left: item.x, top: item.y, width: item.w }}
-          >
-            <p className="absolute top-[8.04px] left-[9.43px] truncate font-[family-name:var(--font-inter)] text-[10.482px] leading-none font-normal text-[#777e78] opacity-[0.07] blur-[0.873px]">
-              {item.label}
-            </p>
-          </div>
+          <PassingPill key={item.label} {...item} />
         ))}
         {sparks.map(([x, y, size]) => (
           <span
@@ -269,43 +270,41 @@ function CentersCard() {
             style={{ left: x, top: y, width: size, height: size }}
           />
         ))}
-        <div className="absolute inset-0 transition-[translate] duration-700 ease-out group-hover:translate-x-3">
-          <div
-            className="absolute blur-[16px]"
-            style={{
-              left: 28,
-              top: 58,
-              width: 136,
-              height: 174,
-              background:
-                "linear-gradient(90deg, rgba(70,191,255,0) 0%, rgba(70,191,255,0.03) 42%, rgba(56,184,251,0.16) 100%)",
-            }}
-          />
-          <div
-            className="absolute bg-[#32b5f0] opacity-20 blur-[8px] transition-opacity duration-700 ease-out group-hover:opacity-40"
-            style={{ left: 156.88, top: 77.57, width: 6.29, height: 145.35 }}
-          />
-          <div
-            className="absolute rounded-[1.048px] bg-[#afd5fa] shadow-[0_0_1.048px_rgba(34,158,209,0.2)]"
-            style={{ left: 162.82, top: 43.33, width: 1.75, height: 205.45 }}
-          />
-        </div>
+        <div
+          className="absolute z-10 blur-[16px]"
+          style={{
+            left: 28,
+            top: 58,
+            width: 136,
+            height: 174,
+            background:
+              "linear-gradient(90deg, rgba(70,191,255,0) 0%, rgba(70,191,255,0.03) 42%, rgba(56,184,251,0.16) 100%)",
+          }}
+        />
+        <div
+          className="absolute z-10 bg-[#32b5f0] opacity-20 blur-[8px]"
+          style={{ left: 156.88, top: 77.57, width: 6.29, height: 145.35 }}
+        />
+        <div
+          className="absolute z-10 rounded-[1.048px] bg-[#afd5fa] shadow-[0_0_1.048px_rgba(34,158,209,0.2)]"
+          style={{ left: 162.82, top: 43.33, width: 1.75, height: 205.45 }}
+        />
         <img
           src="/process/callout.svg"
           alt=""
           width={135.217}
           height={41.928}
-          className="absolute block max-w-none"
+          className="absolute z-20 block max-w-none"
           style={{ left: 96.43, top: 18.87 }}
         />
         <p
-          className="absolute font-[family-name:var(--font-inter)] text-[9.83px] leading-[13.627px] font-medium whitespace-nowrap text-[#3a9ff8] opacity-80"
+          className="absolute z-20 font-[family-name:var(--font-inter)] text-[9.83px] leading-[13.627px] font-medium whitespace-nowrap text-[#3a9ff8] opacity-80"
           style={{ left: 106.87, top: 27, width: 116 }}
         >
           Скрининг учереждений
         </p>
         <p
-          className="absolute font-[family-name:var(--font-inter)] text-[10.831px] leading-none font-normal whitespace-nowrap text-[#101110] opacity-60"
+          className={`absolute font-[family-name:var(--font-inter)] text-[10.831px] leading-none font-normal whitespace-nowrap text-[#101110] opacity-60 ${drift}`}
           style={{ left: 165.61, top: 120.54 }}
         >
           возраст
@@ -317,7 +316,6 @@ function CentersCard() {
           width={140.46}
           markLeft={119.15}
           markTop={8.39}
-          pulse="group-hover:animate-[check-impulse_0.55s_ease-out]"
         />
         <CategoryPill
           label="Программа выздоровления"
@@ -332,7 +330,6 @@ function CentersCard() {
           width={168.06}
           markLeft={144.3}
           markTop={8.04}
-          pulse="group-hover:animate-[check-impulse_0.55s_ease-out_140ms]"
         />
         <CategoryPill
           label="Лицензии"
@@ -341,10 +338,59 @@ function CentersCard() {
           width={89.1}
           markLeft={65.34}
           markTop={8.04}
-          pulse="group-hover:animate-[check-impulse_0.55s_ease-out_280ms]"
         />
       </div>
     </CardShell>
+  );
+}
+
+function PassingPill({
+  label,
+  x,
+  y,
+  w,
+  delay,
+}: {
+  label: string;
+  x: number;
+  y: number;
+  w: number;
+  delay: string;
+}) {
+  return (
+    <div
+      className={`absolute h-[30.048px] overflow-hidden rounded-[15.373px] ${drift}`}
+      style={{ left: x, top: y, width: w }}
+    >
+      <div
+        className={`absolute inset-0 bg-[rgba(214,220,216,0.55)] transition-opacity duration-300 ease-out group-hover:opacity-0 ${delay}`}
+      />
+      <div
+        className={`absolute inset-0 rounded-[15.373px] border-[0.699px] border-[#c8c9c7] bg-white/40 opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100 ${delay}`}
+      />
+      <p
+        className={`absolute top-[8.04px] right-[26px] left-[9.78px] truncate font-[family-name:var(--font-inter)] text-[10.831px] leading-[13.277px] font-normal text-[#777e78] opacity-[0.07] blur-[0.873px] transition-[opacity,filter,color] duration-300 ease-out group-hover:text-[#101110] group-hover:opacity-100 group-hover:blur-none ${delay}`}
+      >
+        {label}
+      </p>
+      <span
+        className={`absolute top-[8.04px] right-[8.04px] size-[13.976px] origin-center scale-50 rounded-full opacity-0 transition-[scale,opacity] duration-300 ease-out group-hover:scale-100 group-hover:opacity-100 ${delay}`}
+        style={{
+          background:
+            "linear-gradient(180deg, #f6ffc8 0%, #e1f300 42%, #cdde00 100%)",
+          boxShadow:
+            "0 0.349px 1.048px rgba(16,142,56,0.13), inset 0 0.45px 0.7px rgba(255,255,255,0.9)",
+        }}
+      >
+        <img
+          src="/process/check.svg"
+          alt=""
+          width={8.036}
+          height={8.036}
+          className="absolute top-[2.97px] left-[2.97px] block max-w-none"
+        />
+      </span>
+    </div>
   );
 }
 
@@ -355,7 +401,6 @@ function CategoryPill({
   width,
   markLeft,
   markTop,
-  pulse,
 }: {
   label: string;
   x: number;
@@ -363,11 +408,10 @@ function CategoryPill({
   width: number;
   markLeft?: number;
   markTop?: number;
-  pulse?: string;
 }) {
   return (
     <div
-      className="absolute h-[30.048px] overflow-hidden rounded-[15.373px] border-[0.699px] border-[#c8c9c7] bg-white/40"
+      className={`absolute h-[30.048px] overflow-hidden rounded-[15.373px] border-[0.699px] border-[#c8c9c7] bg-white/40 ${drift}`}
       style={{ left: x, top: y, width }}
     >
       <p className="absolute top-[8.04px] left-[9.78px] font-[family-name:var(--font-inter)] text-[10.831px] leading-[13.277px] font-normal whitespace-nowrap text-[#101110]">
@@ -375,7 +419,7 @@ function CategoryPill({
       </p>
       {markLeft != null && markTop != null ? (
         <span
-          className={`absolute size-[13.976px] origin-center rounded-full ${pulse ?? ""}`}
+          className="absolute size-[13.976px] origin-center rounded-full"
           style={{
             left: markLeft,
             top: markTop,
