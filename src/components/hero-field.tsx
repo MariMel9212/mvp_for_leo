@@ -5,7 +5,7 @@ import { useLayoutEffect, useRef } from "react";
 const COUNT = 3500;
 const CAMERA_Z = 900;
 const TAN_HALF = Math.tan((75 * Math.PI) / 180 / 2);
-const DOT = 4.5;
+const DOT = 2.8;
 
 type Particle = {
   theta: number;
@@ -34,7 +34,7 @@ function ease(t: number) {
 
 function band() {
   const compact = window.matchMedia("(max-width: 1599px)").matches;
-  return compact ? { inner: 550, outer: 800 } : { inner: 400, outer: 700 };
+  return compact ? { inner: 480, outer: 700 } : { inner: 350, outer: 610 };
 }
 
 function createParticles(inner: number, outer: number, settled: boolean) {
@@ -225,7 +225,7 @@ export function HeroField() {
         const radius = (DOT * scale) / 2;
         if (sx < -radius || sy < -radius || sx > width + radius || sy > height + radius) continue;
         context.beginPath();
-        context.arc(sx, sy, Math.max(0.6, radius), 0, Math.PI * 2);
+        context.arc(sx, sy, Math.max(0.45, radius), 0, Math.PI * 2);
         context.fill();
       }
 
