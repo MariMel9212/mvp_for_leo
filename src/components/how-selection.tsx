@@ -47,22 +47,25 @@ const sparks: Array<[number, number, number]> = [
   [98.5, 92.9, 2.8],
 ];
 
-const drift =
-  "transition-[translate] duration-[1200ms] ease-out group-hover:translate-x-[210px]";
+const SCAN_PERIOD = 460;
 
-const obscured: Array<{
+const streamPills: Array<{
   label: string;
   x: number;
   y: number;
   w: number;
-  delay: string;
+  check?: boolean;
+  textLeft?: number;
 }> = [
-  { label: "Business management", x: 38.08, y: 71.63, w: 125.78, delay: "group-hover:delay-[80ms]" },
-  { label: "Digital platform", x: -31.45, y: 111.46, w: 105.87, delay: "group-hover:delay-[440ms]" },
-  { label: "Customer Portal", x: 80.71, y: 111.46, w: 133.82, delay: "group-hover:delay-0" },
-  { label: "Healthcare", x: -43.67, y: 151.64, w: 105.87, delay: "group-hover:delay-[500ms]" },
-  { label: "Travel booking", x: 67.43, y: 151.64, w: 94.34, delay: "group-hover:delay-[30ms]" },
-  { label: "Online education", x: 34.24, y: 191.12, w: 119.14, delay: "group-hover:delay-[110ms]" },
+  { label: "Регион проживания", x: 5.6, y: 71.63, w: 140.46, check: true },
+  { label: "Регион проживания", x: 168.06, y: 71.63, w: 140.46, check: true },
+  { label: "Программа выздоровления", x: -76.2, y: 111.81, w: 150.24 },
+  { label: "возраст", x: 136, y: 112.5, w: 80, textLeft: 29.61 },
+  { label: "Программа выздоровления", x: 218.37, y: 111.81, w: 150.24 },
+  { label: "Персонал в организайии", x: -26.4, y: 151.64, w: 168.06, check: true },
+  { label: "Персонал в организайии", x: 159.68, y: 151.64, w: 168.06, check: true },
+  { label: "Лицензии", x: 50, y: 191.12, w: 89.1, check: true },
+  { label: "Лицензии", x: 156.53, y: 191.12, w: 89.1, check: true },
 ];
 
 export function HowSelection() {
@@ -260,9 +263,24 @@ function CentersCard() {
         body="Сверяем регион, бюджет, программу, специалистов и условия пребывания"
       />
       <div className="absolute top-[165px] left-[-7.87px] h-[261px] w-[327.735px]">
-        {obscured.map((item) => (
-          <PassingPill key={item.label} {...item} />
-        ))}
+        <div
+          className="absolute inset-0 overflow-hidden"
+          style={{
+            maskImage:
+              "linear-gradient(90deg, #000 0, #000 146px, transparent 178px)",
+          }}
+        >
+          <ScanTrack tone="gray" />
+        </div>
+        <div
+          className="absolute inset-0 overflow-hidden"
+          style={{
+            maskImage:
+              "linear-gradient(90deg, transparent 146px, #000 178px, #000 100%)",
+          }}
+        >
+          <ScanTrack tone="screened" />
+        </div>
         {sparks.map(([x, y, size]) => (
           <span
             key={`${x}-${y}`}
@@ -303,126 +321,66 @@ function CentersCard() {
         >
           Скрининг учереждений
         </p>
-        <p
-          className={`absolute font-[family-name:var(--font-inter)] text-[10.831px] leading-none font-normal whitespace-nowrap text-[#101110] opacity-60 ${drift}`}
-          style={{ left: 165.61, top: 120.54 }}
-        >
-          возраст
-        </p>
-        <CategoryPill
-          label="Регион проживания"
-          x={168.06}
-          y={71.63}
-          width={140.46}
-          markLeft={119.15}
-          markTop={8.39}
-        />
-        <CategoryPill
-          label="Программа выздоровления"
-          x={218.37}
-          y={111.81}
-          width={150.24}
-        />
-        <CategoryPill
-          label="Персонал в организайии"
-          x={159.68}
-          y={151.64}
-          width={168.06}
-          markLeft={144.3}
-          markTop={8.04}
-        />
-        <CategoryPill
-          label="Лицензии"
-          x={156.53}
-          y={191.12}
-          width={89.1}
-          markLeft={65.34}
-          markTop={8.04}
-        />
       </div>
     </CardShell>
   );
 }
 
-function PassingPill({
-  label,
-  x,
-  y,
-  w,
-  delay,
-}: {
-  label: string;
-  x: number;
-  y: number;
-  w: number;
-  delay: string;
-}) {
+function ScanTrack({ tone }: { tone: "gray" | "screened" }) {
+  const pills = streamPills.flatMap((pill) => [
+    pill,
+    { ...pill, x: pill.x - SCAN_PERIOD },
+  ]);
+
   return (
-    <div
-      className={`absolute h-[30.048px] overflow-hidden rounded-[15.373px] ${drift}`}
-      style={{ left: x, top: y, width: w }}
-    >
-      <div
-        className={`absolute inset-0 bg-[rgba(214,220,216,0.55)] transition-opacity duration-300 ease-out group-hover:opacity-0 ${delay}`}
-      />
-      <div
-        className={`absolute inset-0 rounded-[15.373px] border-[0.699px] border-[#c8c9c7] bg-white/40 opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100 ${delay}`}
-      />
-      <p
-        className={`absolute top-[8.04px] right-[26px] left-[9.78px] truncate font-[family-name:var(--font-inter)] text-[10.831px] leading-[13.277px] font-normal text-[#777e78] opacity-[0.07] blur-[0.873px] transition-[opacity,filter,color] duration-300 ease-out group-hover:text-[#101110] group-hover:opacity-100 group-hover:blur-none ${delay}`}
-      >
-        {label}
-      </p>
-      <span
-        className={`absolute top-[8.04px] right-[8.04px] size-[13.976px] origin-center scale-50 rounded-full opacity-0 transition-[scale,opacity] duration-300 ease-out group-hover:scale-100 group-hover:opacity-100 ${delay}`}
-        style={{
-          background:
-            "linear-gradient(180deg, #f6ffc8 0%, #e1f300 42%, #cdde00 100%)",
-          boxShadow:
-            "0 0.349px 1.048px rgba(16,142,56,0.13), inset 0 0.45px 0.7px rgba(255,255,255,0.9)",
-        }}
-      >
-        <img
-          src="/process/check.svg"
-          alt=""
-          width={8.036}
-          height={8.036}
-          className="absolute top-[2.97px] left-[2.97px] block max-w-none"
-        />
-      </span>
+    <div className="scan-track absolute inset-0">
+      {pills.map((pill) => (
+        <StreamPill key={`${tone}-${pill.label}-${pill.x}-${pill.y}`} pill={pill} tone={tone} />
+      ))}
     </div>
   );
 }
 
-function CategoryPill({
-  label,
-  x,
-  y,
-  width,
-  markLeft,
-  markTop,
+function StreamPill({
+  pill,
+  tone,
 }: {
-  label: string;
-  x: number;
-  y: number;
-  width: number;
-  markLeft?: number;
-  markTop?: number;
+  pill: (typeof streamPills)[number];
+  tone: "gray" | "screened";
 }) {
+  const textLeft = pill.textLeft ?? 9.78;
+
+  if (tone === "gray") {
+    return (
+      <div
+        className="absolute h-[30.048px] overflow-hidden rounded-[15.373px] bg-[rgba(214,220,216,0.55)]"
+        style={{ left: pill.x, top: pill.y, width: pill.w }}
+      >
+        <p
+          className="absolute top-[8.04px] truncate font-[family-name:var(--font-inter)] text-[10.831px] leading-[13.277px] font-normal text-[#777e78] opacity-[0.07] blur-[0.873px]"
+          style={{ left: textLeft, right: 8 }}
+        >
+          {pill.label}
+        </p>
+      </div>
+    );
+  }
+
   return (
     <div
-      className={`absolute h-[30.048px] overflow-hidden rounded-[15.373px] border-[0.699px] border-[#c8c9c7] bg-white/40 ${drift}`}
-      style={{ left: x, top: y, width }}
+      className="absolute h-[30.048px] overflow-hidden rounded-[15.373px] border-[0.699px] border-[#c8c9c7] bg-white/40"
+      style={{ left: pill.x, top: pill.y, width: pill.w }}
     >
-      <p className="absolute top-[8.04px] left-[9.78px] font-[family-name:var(--font-inter)] text-[10.831px] leading-[13.277px] font-normal whitespace-nowrap text-[#101110]">
-        {label}
+      <p
+        className="absolute top-[8.04px] font-[family-name:var(--font-inter)] text-[10.831px] leading-[13.277px] font-normal whitespace-nowrap text-[#101110]"
+        style={{ left: textLeft }}
+      >
+        {pill.label}
       </p>
-      {markLeft != null && markTop != null ? (
+      {pill.check ? (
         <span
-          className="absolute size-[13.976px] origin-center rounded-full"
+          className="absolute top-[8.04px] right-[8.04px] size-[13.976px] rounded-full"
           style={{
-            left: markLeft,
-            top: markTop,
             background:
               "linear-gradient(180deg, #f6ffc8 0%, #e1f300 42%, #cdde00 100%)",
             boxShadow:
