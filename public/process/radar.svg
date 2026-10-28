@@ -1,0 +1,24 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="229.145" height="230" viewBox="0 0 229.145 230" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Frame 65">
+<circle id="&#209;&#130;&#209;&#128;&#208;&#181;&#209;&#130;&#208;&#184;&#208;&#185;" cx="113.775" cy="128.5" r="101.5" fill="#B1D6FB" fill-opacity="0.3"/>
+<circle id="&#208;&#178;&#209;&#130;&#208;&#190;&#209;&#128;&#208;&#190;&#208;&#185;" cx="113.776" cy="128.5" r="78.4933" fill="#B6D9FB" fill-opacity="0.54"/>
+<circle id="&#208;&#191;&#208;&#181;&#209;&#128;&#208;&#178;&#209;&#139;&#208;&#185;" cx="113.099" cy="127.823" r="54.81" fill="#93C7FA" fill-opacity="0.55"/>
+<g id="Mask group">
+<mask id="mask0_0_4" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="-18" y="0" width="264" height="131">
+<g id="Frame 65_2" clip-path="url(#clip0_0_4)">
+<circle id="&#209;&#130;&#209;&#128;&#208;&#181;&#209;&#130;&#208;&#184;&#208;&#185;_2" cx="113.924" cy="131.649" r="131.649" fill="#B1D6FB" fill-opacity="0.3"/>
+<circle id="&#208;&#178;&#209;&#130;&#208;&#190;&#209;&#128;&#208;&#190;&#208;&#185;_2" cx="113.924" cy="131.649" r="101.808" fill="#B6D9FB" fill-opacity="0.54"/>
+<circle id="&#208;&#191;&#208;&#181;&#209;&#128;&#208;&#178;&#209;&#139;&#208;&#185;_2" cx="113.046" cy="130.771" r="71.0902" fill="#93C7FA" fill-opacity="0.55"/>
+</g>
+</mask>
+<g mask="url(#mask0_0_4)">
+<path id="Polygon 1" d="M114.573 149.158L229.145 -49.2873H0L114.573 149.158Z" fill="#E1F300" fill-opacity="0.52"/>
+</g>
+</g>
+</g>
+<defs>
+<clipPath id="clip0_0_4">
+<rect width="263.297" height="131" fill="white" transform="translate(-17.7244)"/>
+</clipPath>
+</defs>
+</svg>

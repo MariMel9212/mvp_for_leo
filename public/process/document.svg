@@ -1,0 +1,23 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="99.9194" height="121.852" viewBox="0 0 99.9194 121.852" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="Document illustration">
+<g id="Paper outline">
+<use xlink:href="#stroke0_0_4" fill="white"/>
+<mask id="stroke1_0_4" fill="white">
+<use xlink:href="#stroke0_0_4"/>
+</mask>
+<path d="M14.1349 6.8163e-06H67.4968C70.3317 6.8163e-06 73.0711 1.02447 75.2103 2.88466L95.8773 20.856C98.4448 23.0886 99.919 26.3241 99.919 29.7265V110.097C99.919 116.589 94.656 121.852 88.1638 121.852H11.7552C5.26298 121.852 0 116.589 0 110.097V14.6223C0 4.87411 4.71163 6.8163e-06 14.1349 6.8163e-06Z" stroke-width="1.46223" stroke="#EDF0F4" mask="url(#stroke1_0_4)"/>
+</g>
+<path id="Fold" d="M71.8934 0V12.9164C71.8934 20.5524 75.5489 24.3705 82.8601 24.3705H99.9194" stroke-width="0.731115" stroke="#EDF0F4"/>
+<g id="Document rules" filter="url(#filter0_f_0_4)">
+<path d="M11.6974 35.3372H88.4644M11.6974 47.5225H88.4644M11.6974 59.7077H88.4644M11.6974 71.893H88.4644" stroke-width="3.65557" stroke-linecap="round" stroke="#F5F5F5"/>
+</g>
+</g>
+<defs>
+<filter id="filter0_f_0_4" x="9.13845" y="32.7783" width="81.8848" height="41.6735" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="0.365557" result="effect1_foregroundBlur_0_4"/>
+</filter>
+<path id="stroke0_0_4" d="M14.1349 6.8163e-06H67.4968C70.3317 6.8163e-06 73.0711 1.02447 75.2103 2.88466L95.8773 20.856C98.4448 23.0886 99.919 26.3241 99.919 29.7265V110.097C99.919 116.589 94.656 121.852 88.1638 121.852H11.7552C5.26298 121.852 0 116.589 0 110.097V14.6223C0 4.87411 4.71163 6.8163e-06 14.1349 6.8163e-06Z"/>
+</defs>
+</svg>
