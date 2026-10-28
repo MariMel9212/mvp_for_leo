@@ -203,28 +203,30 @@ function SituationCard() {
 
 function FormatCard() {
   return (
-    <CardShell height={328}>
+    <CardShell height={328} className="group">
       <CardCopy
         title="Определяем подходящий формат"
         body={"Детокс, стационарная реабилитация или\u00a0последовательное прохождение нескольких этапов"}
       />
-      <div className="absolute top-[226px] left-[54px] h-[203px] w-[203px]">
-        <img
-          src="/process/radar.svg"
-          alt=""
-          width={229.145}
-          height={230}
-          className="absolute block max-w-none"
-          style={{ left: -12.28, top: -27 }}
-        />
+      <div className="absolute inset-0 origin-[155.5px_327.5px] transition-[scale,rotate] duration-500 ease-out group-hover:scale-105 group-hover:rotate-[4deg]">
+        <div className="absolute top-[226px] left-[54px] h-[203px] w-[203px]">
+          <img
+            src="/process/radar.svg"
+            alt=""
+            width={229.145}
+            height={230}
+            className="absolute block max-w-none"
+            style={{ left: -12.28, top: -27 }}
+          />
+        </div>
+        {radarDots.map(([x, y]) => (
+          <span
+            key={`${x}-${y}`}
+            className="absolute size-[2px] rounded-full bg-[#b2c7eb]"
+            style={{ left: x, top: y }}
+          />
+        ))}
       </div>
-      {radarDots.map(([x, y]) => (
-        <span
-          key={`${x}-${y}`}
-          className="absolute size-[2px] rounded-full bg-[#b2c7eb]"
-          style={{ left: x, top: y }}
-        />
-      ))}
     </CardShell>
   );
 }
