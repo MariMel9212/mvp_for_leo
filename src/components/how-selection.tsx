@@ -47,26 +47,34 @@ const sparks: Array<[number, number, number]> = [
   [98.5, 92.9, 2.8],
 ];
 
-const SCAN_PERIOD = 460;
+const PILL_GAP = 10;
 
-const streamPills: Array<{
-  label: string;
-  x: number;
-  y: number;
-  w: number;
-  check?: boolean;
-  textLeft?: number;
-}> = [
-  { label: "Регион проживания", x: 5.6, y: 71.63, w: 140.46, check: true },
-  { label: "Регион проживания", x: 168.06, y: 71.63, w: 140.46, check: true },
-  { label: "Программа выздоровления", x: -76.2, y: 111.81, w: 150.24 },
-  { label: "возраст", x: 136, y: 112.5, w: 80, textLeft: 29.61 },
-  { label: "Программа выздоровления", x: 218.37, y: 111.81, w: 150.24 },
-  { label: "Персонал в организайии", x: -26.4, y: 151.64, w: 168.06, check: true },
-  { label: "Персонал в организайии", x: 159.68, y: 151.64, w: 168.06, check: true },
-  { label: "Лицензии", x: 50, y: 191.12, w: 89.1, check: true },
-  { label: "Лицензии", x: 156.53, y: 191.12, w: 89.1, check: true },
+const criteria = [
+  { label: "Регион", w: 90 },
+  { label: "Бюджет", w: 94 },
+  { label: "Программа", w: 114 },
+  { label: "Специалисты", w: 124 },
+  { label: "Условия", w: 102 },
+  { label: "Лицензия", w: 106 },
+  { label: "Возраст", w: 98 },
 ];
+
+const SCAN_PERIOD =
+  criteria.reduce((sum, item) => sum + item.w, 0) + PILL_GAP * criteria.length;
+
+const streamPills = [71.63, 111.81, 151.64, 191.12].flatMap((y, row) => {
+  const order = criteria.map((_, index) => criteria[(index + row * 2) % criteria.length]);
+  const pills: Array<{ label: string; x: number; y: number; w: number; check: boolean }> = [];
+  let x = -SCAN_PERIOD + row * 28;
+  let index = 0;
+  while (x < 340) {
+    const item = order[index % order.length];
+    pills.push({ label: item.label, x, y, w: item.w, check: true });
+    x += item.w + PILL_GAP;
+    index += 1;
+  }
+  return pills;
+});
 
 export function HowSelection() {
   return (
@@ -327,14 +335,12 @@ function CentersCard() {
 }
 
 function ScanTrack({ tone }: { tone: "gray" | "screened" }) {
-  const pills = streamPills.flatMap((pill) => [
-    pill,
-    { ...pill, x: pill.x - SCAN_PERIOD },
-  ]);
-
   return (
-    <div className="scan-track absolute inset-0">
-      {pills.map((pill) => (
+    <div
+      className="scan-track absolute inset-0"
+      style={{ ["--scan-period" as string]: `${SCAN_PERIOD}px` }}
+    >
+      {streamPills.map((pill) => (
         <StreamPill key={`${tone}-${pill.label}-${pill.x}-${pill.y}`} pill={pill} tone={tone} />
       ))}
     </div>
@@ -345,7 +351,14 @@ function StreamPill({
   pill,
   tone,
 }: {
-  pill: (typeof streamPills)[number];
+  pill: {
+    label: string;
+    x: number;
+    y: number;
+    w: number;
+    check?: boolean;
+    textLeft?: number;
+  };
   tone: "gray" | "screened";
 }) {
   const textLeft = pill.textLeft ?? 9.78;

@@ -147,13 +147,13 @@
     translate: 0 0;
   }
   to {
-    translate: 460px 0;
+    translate: var(--scan-period) 0;
   }
 }
 
 @media (hover: hover) {
   .scan-track {
-    animation: scan-drift 24s linear infinite;
+    animation: scan-drift 32s linear infinite;
     animation-play-state: paused;
   }
 
