@@ -125,14 +125,16 @@ function PhoneCard({
 
 function CardShell({
   height,
+  className,
   children,
 }: {
   height: number;
+  className?: string;
   children: ReactNode;
 }) {
   return (
     <article
-      className="relative w-[312px] overflow-clip rounded-tl-[27px] rounded-tr-[27px] rounded-bl-[16px] rounded-br-[16px] border border-[rgba(58,124,238,0.07)]"
+      className={`relative w-[312px] overflow-clip rounded-tl-[27px] rounded-tr-[27px] rounded-bl-[16px] rounded-br-[16px] border border-[rgba(58,124,238,0.07)] ${className ?? ""}`}
       style={{ ...cardStyle, height }}
     >
       {children}
@@ -159,14 +161,14 @@ function CardCopy({
 
 function SituationCard() {
   return (
-    <CardShell height={264}>
+    <CardShell height={264} className="group">
       <CardCopy
         title="Разбираемся в ситуации"
         body="Тип зависимости, состояние человека, прошлый опыт лечения, возраст и другие важные обстоятельства"
       />
       <div className="absolute top-[168.37px] left-[calc(50%+0.5px)] h-[132.724px] w-[195px] -translate-x-1/2">
-        <div className="absolute top-[1.8px] left-[78.84px] flex h-[130.836px] w-[116.158px] items-center justify-center">
-          <div className="rotate-[14deg]">
+        <div className="absolute top-[1.8px] left-[78.84px] flex h-[130.836px] w-[116.158px] items-center justify-center transition-[translate] duration-500 ease-out group-hover:translate-x-1.5">
+          <div className="rotate-[14deg] transition-[rotate] duration-500 ease-out group-hover:rotate-[18deg]">
             <img
               src="/process/table.svg"
               alt=""
@@ -176,8 +178,8 @@ function SituationCard() {
             />
           </div>
         </div>
-        <div className="absolute top-[1.89px] left-0 flex h-[130.836px] w-[116.158px] items-center justify-center">
-          <div className="-rotate-[14deg]">
+        <div className="absolute top-[1.89px] left-0 flex h-[130.836px] w-[116.158px] items-center justify-center transition-[translate] duration-500 ease-out group-hover:-translate-x-1.5">
+          <div className="-rotate-[14deg] transition-[rotate] duration-500 ease-out group-hover:-rotate-[18deg]">
             <img
               src="/process/checklist.svg"
               alt=""
@@ -192,7 +194,7 @@ function SituationCard() {
           alt=""
           width={399.676}
           height={487.408}
-          className="absolute top-0 left-[45.54px] block max-w-none origin-top-left scale-[0.25]"
+          className="absolute top-0 left-[45.54px] block max-w-none origin-top-left scale-[0.25] transition-[translate] duration-500 ease-out group-hover:-translate-y-2"
         />
       </div>
     </CardShell>
