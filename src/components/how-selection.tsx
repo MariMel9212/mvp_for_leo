@@ -245,7 +245,7 @@ function FormatCard() {
 
 function CentersCard() {
   return (
-    <CardShell height={413}>
+    <CardShell height={413} className="group">
       <CardCopy
         title="Отбираем подходящие учреждения"
         body="Сверяем регион, бюджет, программу, специалистов и условия пребывания"
@@ -262,17 +262,6 @@ function CentersCard() {
             </p>
           </div>
         ))}
-        <div
-          className="absolute blur-[16px]"
-          style={{
-            left: 28,
-            top: 58,
-            width: 136,
-            height: 174,
-            background:
-              "linear-gradient(90deg, rgba(70,191,255,0) 0%, rgba(70,191,255,0.03) 42%, rgba(56,184,251,0.16) 100%)",
-          }}
-        />
         {sparks.map(([x, y, size]) => (
           <span
             key={`${x}-${y}`}
@@ -280,14 +269,27 @@ function CentersCard() {
             style={{ left: x, top: y, width: size, height: size }}
           />
         ))}
-        <div
-          className="absolute bg-[#32b5f0] opacity-20 blur-[8px]"
-          style={{ left: 156.88, top: 77.57, width: 6.29, height: 145.35 }}
-        />
-        <div
-          className="absolute rounded-[1.048px] bg-[#afd5fa] shadow-[0_0_1.048px_rgba(34,158,209,0.2)]"
-          style={{ left: 162.82, top: 43.33, width: 1.75, height: 205.45 }}
-        />
+        <div className="absolute inset-0 transition-[translate] duration-700 ease-out group-hover:translate-x-3">
+          <div
+            className="absolute blur-[16px]"
+            style={{
+              left: 28,
+              top: 58,
+              width: 136,
+              height: 174,
+              background:
+                "linear-gradient(90deg, rgba(70,191,255,0) 0%, rgba(70,191,255,0.03) 42%, rgba(56,184,251,0.16) 100%)",
+            }}
+          />
+          <div
+            className="absolute bg-[#32b5f0] opacity-20 blur-[8px] transition-opacity duration-700 ease-out group-hover:opacity-40"
+            style={{ left: 156.88, top: 77.57, width: 6.29, height: 145.35 }}
+          />
+          <div
+            className="absolute rounded-[1.048px] bg-[#afd5fa] shadow-[0_0_1.048px_rgba(34,158,209,0.2)]"
+            style={{ left: 162.82, top: 43.33, width: 1.75, height: 205.45 }}
+          />
+        </div>
         <img
           src="/process/callout.svg"
           alt=""
@@ -315,6 +317,7 @@ function CentersCard() {
           width={140.46}
           markLeft={119.15}
           markTop={8.39}
+          pulse="group-hover:animate-[check-impulse_0.55s_ease-out]"
         />
         <CategoryPill
           label="Программа выздоровления"
@@ -329,6 +332,7 @@ function CentersCard() {
           width={168.06}
           markLeft={144.3}
           markTop={8.04}
+          pulse="group-hover:animate-[check-impulse_0.55s_ease-out_140ms]"
         />
         <CategoryPill
           label="Лицензии"
@@ -337,6 +341,7 @@ function CentersCard() {
           width={89.1}
           markLeft={65.34}
           markTop={8.04}
+          pulse="group-hover:animate-[check-impulse_0.55s_ease-out_280ms]"
         />
       </div>
     </CardShell>
@@ -350,6 +355,7 @@ function CategoryPill({
   width,
   markLeft,
   markTop,
+  pulse,
 }: {
   label: string;
   x: number;
@@ -357,6 +363,7 @@ function CategoryPill({
   width: number;
   markLeft?: number;
   markTop?: number;
+  pulse?: string;
 }) {
   return (
     <div
@@ -368,7 +375,7 @@ function CategoryPill({
       </p>
       {markLeft != null && markTop != null ? (
         <span
-          className="absolute size-[13.976px] rounded-full"
+          className={`absolute size-[13.976px] origin-center rounded-full ${pulse ?? ""}`}
           style={{
             left: markLeft,
             top: markTop,
