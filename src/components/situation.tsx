@@ -4,13 +4,13 @@ export function Situation() {
   return (
     <section
       id="situatsii"
-      className="mx-auto mt-20 w-full max-w-[1040px] px-4"
+      className="mx-auto mt-20 w-full max-w-[1400px] px-4 min-[1440px]:px-8"
     >
-      <div className="mx-auto flex w-full max-w-[984px] flex-col gap-[54px]">
+      <div className="mx-auto flex w-full flex-col gap-[54px]">
         <h2 className="text-[32px] leading-[1.1] font-medium text-[#0a0d14] opacity-96 min-[768px]:text-[38px]">
           Подбираем помощь под ситуацию
         </h2>
-        <div className="flex flex-col items-stretch gap-6 min-[1040px]:flex-row min-[1040px]:items-start min-[1040px]:gap-6">
+        <div className="flex flex-col items-center gap-6 min-[1040px]:flex-row min-[1040px]:items-start">
           <DetoxCard />
           <RehabCard />
         </div>
@@ -21,7 +21,7 @@ export function Situation() {
 
 function DesignFrame({ children }: { children: ReactNode }) {
   return (
-    <div className="@container w-full max-w-[480px]">
+    <div className="@container w-full max-w-[720px] min-[1040px]:max-w-none min-[1040px]:min-w-0 min-[1040px]:flex-1">
       <div className="relative h-[calc(100cqw*408/480)] overflow-hidden">
         <div className="absolute top-0 left-0 h-[408px] w-[480px] origin-top-left [transform:scale(calc(100cqw/480px))]">
           {children}
