@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { HeroGrass } from "@/components/hero-grass";
+import { HeroField } from "@/components/hero-field";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -19,18 +19,12 @@ export function Hero() {
   return (
     <section
       id="podbor"
-      className="relative overflow-hidden bg-gradient-to-b from-[#cee0f5] to-white"
+      className="relative flex min-h-[100svh] items-center overflow-hidden bg-gradient-to-b from-[#d2def3] to-white"
     >
       <div className="pointer-events-none absolute inset-0">
-        <HeroGrass />
+        <HeroField />
       </div>
-      <div
-        className="relative z-10 mx-auto w-full max-w-[940px] px-4 min-[1440px]:max-w-[1180px]"
-        style={{
-          paddingTop: "clamp(108px, calc(7.5vw + 52px), 180px)",
-          paddingBottom: "clamp(210px, calc(21.5vw - 40px), 320px)",
-        }}
-      >
+      <div className="relative z-10 mx-auto w-full max-w-[940px] px-4 pt-28 pb-16 min-[1440px]:max-w-[1180px]">
         <div
           className="flex flex-col items-center text-center"
           style={{ gap: "clamp(28px, 2.65625vw, 56px)" }}
