@@ -247,8 +247,15 @@ function CentersCard() {
           </div>
         ))}
         <div
-          className="absolute bg-gradient-to-r from-[rgba(70,191,255,0)] to-[rgba(56,184,251,0.46)] blur-[5.94px]"
-          style={{ left: 71.63, top: 71.63, width: 91.89, height: 146.75 }}
+          className="absolute blur-[16px]"
+          style={{
+            left: 28,
+            top: 58,
+            width: 136,
+            height: 174,
+            background:
+              "linear-gradient(90deg, rgba(70,191,255,0) 0%, rgba(70,191,255,0.03) 42%, rgba(56,184,251,0.16) 100%)",
+          }}
         />
         {sparks.map(([x, y, size]) => (
           <span
@@ -258,7 +265,7 @@ function CentersCard() {
           />
         ))}
         <div
-          className="absolute bg-[#32b5f0] opacity-45 blur-[3.494px]"
+          className="absolute bg-[#32b5f0] opacity-20 blur-[8px]"
           style={{ left: 156.88, top: 77.57, width: 6.29, height: 145.35 }}
         />
         <div
