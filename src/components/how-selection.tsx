@@ -219,7 +219,7 @@ function FormatCard() {
       {radarDots.map(([x, y]) => (
         <span
           key={`${x}-${y}`}
-          className="absolute size-[3px] rounded-full bg-[rgba(82,186,255,0.42)]"
+          className="absolute size-[2px] rounded-full bg-[#b2c7eb]"
           style={{ left: x, top: y }}
         />
       ))}
