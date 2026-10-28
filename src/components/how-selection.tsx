@@ -190,9 +190,9 @@ function SituationCard() {
         <img
           src="/process/document.svg"
           alt=""
-          width={99.919}
-          height={121.852}
-          className="absolute top-0 left-[45.54px] block max-w-none"
+          width={399.676}
+          height={487.408}
+          className="absolute top-0 left-[45.54px] block max-w-none origin-top-left scale-[0.25]"
         />
       </div>
     </CardShell>
