@@ -177,7 +177,7 @@ function CenterCard() {
         Психологи, психиатры, семейные терапевты
       </Feature>
       <p className="absolute top-[174.72px] left-[10.73px] w-[122.345px] font-[family-name:var(--font-inter)] text-[9.015px] leading-[1.25] font-normal text-[#080909]">
-        от 120 000 ₽ / месяц
+        от 80 000 ₽ / месяц
       </p>
       <div className="absolute top-[170.42px] left-[142.52px] grid size-[19.318px] place-items-center overflow-hidden rounded-[9.873px] bg-[#efeeec]">
         <img src="/situations/arrow.svg" alt="" />
