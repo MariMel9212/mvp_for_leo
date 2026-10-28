@@ -132,18 +132,12 @@
 
 @keyframes wedge-impulse {
   0% {
-    scale: 1;
+    transform: scale(1);
   }
-  36% {
-    scale: 1.14;
+  32% {
+    transform: scale(1.28);
   }
   100% {
-    scale: 1;
-  }
-}
-
-@media (hover: hover) {
-  .group:hover .wedge-impulse {
-    animation: wedge-impulse 0.85s ease-out;
+    transform: scale(1);
   }
 }

@@ -219,15 +219,8 @@ function FormatCard() {
             style={{ left: -12.28, top: -27 }}
           />
         </div>
-        {radarDots.map(([x, y]) => (
-          <span
-            key={`${x}-${y}`}
-            className="absolute size-[2px] rounded-full bg-[#b2c7eb]"
-            style={{ left: x, top: y }}
-          />
-        ))}
       </div>
-      <div className="wedge-impulse pointer-events-none absolute inset-0 origin-[155.5px_327.5px]">
+      <div className="pointer-events-none absolute inset-0 origin-[155.5px_327.5px] group-hover:animate-[wedge-impulse_0.7s_ease-out]">
         <div className="absolute top-[226px] left-[54px] h-[203px] w-[203px]">
           <img
             src="/process/radar-wedge.svg"
@@ -239,6 +232,13 @@ function FormatCard() {
           />
         </div>
       </div>
+      {radarDots.map(([x, y]) => (
+        <span
+          key={`${x}-${y}`}
+          className="absolute size-[2px] rounded-full bg-[#b2c7eb]"
+          style={{ left: x, top: y }}
+        />
+      ))}
     </CardShell>
   );
 }
