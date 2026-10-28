@@ -35,7 +35,7 @@ function PickLink({ children }: { children: ReactNode }) {
   return (
     <a
       href="#podbor"
-      className="absolute top-[347px] left-[26px] z-10 inline-flex items-center justify-center overflow-hidden rounded-[6px] bg-[#e1f300] px-[14px] py-[10px] text-[14px] leading-[1.1] font-medium text-[#0a0d14] shadow-[inset_0px_2px_3px_0px_rgba(255,255,255,0.25)] hover:bg-[#d6e600]"
+      className="absolute top-[347px] left-[26px] z-10 inline-flex h-11 shrink-0 items-center justify-center rounded-[8px] bg-[#e1f300] px-4 text-[16px] leading-[1.1] font-medium text-[#0a0d14]/80 hover:bg-[#d6e600]"
     >
       {children}
     </a>
