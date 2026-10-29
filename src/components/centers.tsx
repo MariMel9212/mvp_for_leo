@@ -9,7 +9,6 @@ const centers = [
     focus: "center",
     name: "Центр «Рассвет»",
     region: "Московская область",
-    price: "120 000",
     note: "Стационар на 3–6 месяцев. Небольшие группы и работа с семьёй.",
   },
   {
@@ -18,7 +17,6 @@ const centers = [
     focus: "center",
     name: "Центр «Тишина»",
     region: "Химки",
-    price: "90 000",
     note: "Детокс и программа до 12 месяцев. Медицинское наблюдение, группы до 15 человек.",
   },
   {
@@ -27,7 +25,6 @@ const centers = [
     focus: "center",
     name: "Центр «Берег»",
     region: "Зеленоград",
-    price: "80 000",
     note: "Поэтапное восстановление, 5–12 месяцев. Группы до 18 человек.",
   },
   {
@@ -36,7 +33,6 @@ const centers = [
     focus: "center",
     name: "Центр «Сосны»",
     region: "Истра",
-    price: "110 000",
     note: "Загородная программа 12 шагов, 3–12 месяцев. Группы до 12 человек.",
   },
   {
@@ -45,7 +41,6 @@ const centers = [
     focus: "18% 40%",
     name: "Центр «Поляна»",
     region: "Звенигород",
-    price: "100 000",
     note: "Стационар с трудотерапией, 6–12 месяцев. Группы до 20 человек.",
   },
   {
@@ -54,7 +49,6 @@ const centers = [
     focus: "78% center",
     name: "Центр «Орион»",
     region: "Одинцово",
-    price: "95 000",
     note: "Семейное сопровождение, программа 4–12 месяцев. Группы до 16 человек.",
   },
 ];
@@ -132,7 +126,7 @@ export function Centers() {
 function CenterCard({ center }: { center: (typeof centers)[number] }) {
   return (
     <article className="group flex w-[min(84%,380px)] shrink-0 snap-start flex-col min-[900px]:w-[380px]">
-      <div className="h-[280px] overflow-hidden rounded-[11px]">
+      <div className="h-[340px] overflow-hidden rounded-[11px]">
         <img
           src={center.image}
           alt=""
@@ -146,16 +140,13 @@ function CenterCard({ center }: { center: (typeof centers)[number] }) {
         </h3>
         <p className="mt-2 text-[14px] leading-[1.1] text-[#0a0d14]/40">{center.region}</p>
         <p className="mt-3 text-[14px] leading-[1.2] text-[#0a0d14]">{center.note}</p>
-        <div className="mt-auto flex items-end justify-between gap-3 pt-6">
-          <p className="text-[22px] leading-[1.1] font-medium text-[#0a0d14]">
-            от {center.price} ₽
-            <span className="mt-1 block text-[14px] leading-[1.1] font-normal text-[#0a0d14]/40">
-              в месяц
-            </span>
+        <div className="mt-auto pt-5">
+          <p className="text-[14px] leading-[1.1] text-[#0a0d14]/40">
+            Стоимость считают после консультации
           </p>
           <a
             href="#podbor"
-            className="inline-flex h-11 shrink-0 items-center justify-center rounded-[8px] bg-[#e1f300] px-4 text-[16px] leading-[1.1] font-medium text-[#0a0d14]/80 hover:bg-[#d6e600]"
+            className="mt-4 inline-flex h-11 w-fit items-center justify-center rounded-[8px] bg-[#e1f300] px-4 text-[16px] leading-[1.1] font-medium text-[#0a0d14]/80 hover:bg-[#d6e600]"
           >
             Выбрать
           </a>
