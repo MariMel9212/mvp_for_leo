@@ -9,7 +9,6 @@ const centers = [
     focus: "center",
     name: "Центр «Рассвет»",
     region: "Московская область",
-    match: 92,
     price: "120 000",
     note: "Стационар на 3–6 месяцев. Небольшие группы и работа с семьёй.",
   },
@@ -19,7 +18,6 @@ const centers = [
     focus: "center",
     name: "Центр «Тишина»",
     region: "Химки",
-    match: 88,
     price: "90 000",
     note: "Детокс и программа до 12 месяцев. Медицинское наблюдение, группы до 15 человек.",
   },
@@ -29,7 +27,6 @@ const centers = [
     focus: "center",
     name: "Центр «Берег»",
     region: "Зеленоград",
-    match: 85,
     price: "80 000",
     note: "Поэтапное восстановление, 5–12 месяцев. Группы до 18 человек.",
   },
@@ -39,7 +36,6 @@ const centers = [
     focus: "center",
     name: "Центр «Сосны»",
     region: "Истра",
-    match: 90,
     price: "110 000",
     note: "Загородная программа 12 шагов, 3–12 месяцев. Группы до 12 человек.",
   },
@@ -49,7 +45,6 @@ const centers = [
     focus: "18% 40%",
     name: "Центр «Поляна»",
     region: "Звенигород",
-    match: 87,
     price: "100 000",
     note: "Стационар с трудотерапией, 6–12 месяцев. Группы до 20 человек.",
   },
@@ -59,7 +54,6 @@ const centers = [
     focus: "78% center",
     name: "Центр «Орион»",
     region: "Одинцово",
-    match: 84,
     price: "95 000",
     note: "Семейное сопровождение, программа 4–12 месяцев. Группы до 16 человек.",
   },
@@ -138,7 +132,7 @@ export function Centers() {
 function CenterCard({ center }: { center: (typeof centers)[number] }) {
   return (
     <article className="group flex w-[min(84%,380px)] shrink-0 snap-start flex-col min-[900px]:w-[380px]">
-      <div className="h-[220px] overflow-hidden rounded-[11px]">
+      <div className="h-[280px] overflow-hidden rounded-[11px]">
         <img
           src={center.image}
           alt=""
@@ -146,19 +140,11 @@ function CenterCard({ center }: { center: (typeof centers)[number] }) {
           style={{ objectPosition: center.focus }}
         />
       </div>
-      <div className="flex flex-1 flex-col pt-5">
-        <div className="flex items-start justify-between gap-4">
-          <div className="min-w-0">
-            <h3 className="text-[22px] leading-[1.1] font-medium text-[#0a0d14]">
-              {center.name}
-            </h3>
-            <p className="mt-2 text-[14px] leading-[1.1] text-[#0a0d14]/40">{center.region}</p>
-          </div>
-          <p className="shrink-0 text-right text-[14px] leading-[1.1]">
-            <span className="font-medium text-[#0a0d14]">{center.match}%</span>
-            <span className="mt-2 block text-[#0a0d14]/40">совпадение</span>
-          </p>
-        </div>
+      <div className="flex flex-1 flex-col pt-4">
+        <h3 className="text-[22px] leading-[1.1] font-medium text-[#0a0d14]">
+          {center.name}
+        </h3>
+        <p className="mt-2 text-[14px] leading-[1.1] text-[#0a0d14]/40">{center.region}</p>
         <p className="mt-3 text-[14px] leading-[1.2] text-[#0a0d14]">{center.note}</p>
         <div className="mt-auto flex items-end justify-between gap-3 pt-6">
           <p className="text-[22px] leading-[1.1] font-medium text-[#0a0d14]">
