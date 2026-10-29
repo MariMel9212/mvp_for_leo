@@ -50,13 +50,13 @@ const sparks: Array<[number, number, number]> = [
 const PILL_GAP = 10;
 
 const criteria = [
-  { label: "Регион", w: 90 },
-  { label: "Бюджет", w: 94 },
-  { label: "Программа", w: 114 },
-  { label: "Специалисты", w: 124 },
-  { label: "Условия", w: 102 },
-  { label: "Лицензия", w: 106 },
-  { label: "Возраст", w: 98 },
+  { label: "Регион", w: 75 },
+  { label: "Бюджет", w: 81 },
+  { label: "Программа", w: 100 },
+  { label: "Специалисты", w: 109 },
+  { label: "Условия", w: 81 },
+  { label: "Лицензия", w: 89 },
+  { label: "Возраст", w: 81 },
 ];
 
 const SCAN_PERIOD =
