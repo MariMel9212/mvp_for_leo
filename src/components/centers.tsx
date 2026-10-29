@@ -137,37 +137,39 @@ export function Centers() {
 
 function CenterCard({ center }: { center: (typeof centers)[number] }) {
   return (
-    <article className="flex w-[min(84%,400px)] shrink-0 snap-start flex-col overflow-hidden rounded-[11px] border border-[rgba(58,124,238,0.07)] bg-[#f5faff] min-[900px]:w-[400px]">
-      <div className="h-[210px] overflow-hidden">
+    <article className="group flex w-[min(84%,380px)] shrink-0 snap-start flex-col min-[900px]:w-[380px]">
+      <div className="h-[220px] overflow-hidden rounded-[11px]">
         <img
           src={center.image}
           alt=""
-          className="size-full object-cover"
+          className="size-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
           style={{ objectPosition: center.focus }}
         />
       </div>
-      <div className="flex flex-1 flex-col px-[26px] pt-6 pb-[26px]">
-        <h3 className="text-[22px] leading-[1.1] font-medium text-[#0a0d14]">
-          {center.name}
-        </h3>
-        <p className="mt-2.5 text-[14px] leading-[1.2] text-[#0a0d14] opacity-40">
-          {center.region}
-        </p>
-        <p className="mt-1 text-[14px] leading-[1.1] text-[#0a0d14]">
-          <span className="font-medium">{center.match}%</span>
-          <span className="opacity-40"> совпадение</span>
-        </p>
-        <p className="mt-4 text-[14px] leading-[1.2] text-[#0a0d14]">{center.note}</p>
-        <div className="mt-auto flex flex-col items-start gap-5 pt-8">
+      <div className="flex flex-1 flex-col pt-5">
+        <div className="flex items-start justify-between gap-4">
+          <div className="min-w-0">
+            <h3 className="text-[22px] leading-[1.1] font-medium text-[#0a0d14]">
+              {center.name}
+            </h3>
+            <p className="mt-2 text-[14px] leading-[1.1] text-[#0a0d14]/40">{center.region}</p>
+          </div>
+          <p className="shrink-0 text-right text-[14px] leading-[1.1]">
+            <span className="font-medium text-[#0a0d14]">{center.match}%</span>
+            <span className="mt-2 block text-[#0a0d14]/40">совпадение</span>
+          </p>
+        </div>
+        <p className="mt-3 text-[14px] leading-[1.2] text-[#0a0d14]">{center.note}</p>
+        <div className="mt-auto flex items-end justify-between gap-3 pt-6">
           <p className="text-[22px] leading-[1.1] font-medium text-[#0a0d14]">
             от {center.price} ₽
-            <span className="mt-1 block text-[14px] leading-[1.1] font-normal opacity-40">
+            <span className="mt-1 block text-[14px] leading-[1.1] font-normal text-[#0a0d14]/40">
               в месяц
             </span>
           </p>
           <a
             href="#podbor"
-            className="inline-flex h-11 items-center justify-center rounded-[8px] bg-[#e1f300] px-4 text-[16px] leading-[1.1] font-medium text-[#0a0d14]/80 hover:bg-[#d6e600]"
+            className="inline-flex h-11 shrink-0 items-center justify-center rounded-[8px] bg-[#e1f300] px-4 text-[16px] leading-[1.1] font-medium text-[#0a0d14]/80 hover:bg-[#d6e600]"
           >
             Выбрать
           </a>
