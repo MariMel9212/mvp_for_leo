@@ -3,7 +3,6 @@
 import { useState, type FormEvent } from "react";
 
 type Channel = "call" | "messenger";
-type Messenger = "telegram" | "whatsapp";
 
 function formatPhone(value: string) {
   const digits = value.replace(/\D/g, "").slice(0, 10);
@@ -23,6 +22,40 @@ function telegramReady(value: string) {
   if (!trimmed) return false;
   if (/[a-zа-я@._]/i.test(trimmed)) return trimmed.replace(/^@/, "").length >= 2;
   return trimmed.replace(/\D/g, "").length >= 10;
+}
+
+function MessengerField({
+  icon,
+  value,
+  onChange,
+  placeholder,
+  label,
+  invalid,
+  phone,
+}: {
+  icon: string;
+  value: string;
+  onChange: (value: string) => void;
+  placeholder: string;
+  label: string;
+  invalid: boolean;
+  phone?: boolean;
+}) {
+  return (
+    <label className="flex h-[60px] w-full items-center gap-[16px] rounded-[16px] border border-solid border-[#dedede] bg-white pr-[14px] pl-[24px]">
+      <img alt="" src={icon} width={42} height={42} />
+      <span className="h-[24px] w-px bg-[#dedede]" />
+      <input
+        value={value}
+        onChange={(event) => onChange(phone ? formatPhone(event.target.value) : event.target.value)}
+        inputMode={phone ? "tel" : "text"}
+        placeholder={placeholder}
+        aria-label={label}
+        aria-invalid={invalid}
+        className="min-w-0 flex-1 bg-transparent text-18 text-black outline-none placeholder:text-black placeholder:opacity-40"
+      />
+    </label>
+  );
 }
 
 function PhoneField({ value, onChange, invalid }: { value: string; onChange: (value: string) => void; invalid: boolean }) {
@@ -55,12 +88,10 @@ function PhoneField({ value, onChange, invalid }: { value: string; onChange: (va
 export function ConsultForm() {
   const [name, setName] = useState("");
   const [channel, setChannel] = useState<Channel>("call");
-  const [messenger, setMessenger] = useState<Messenger>("telegram");
   const [phone, setPhone] = useState("");
   const [telegram, setTelegram] = useState("");
   const [error, setError] = useState("");
   const [sent, setSent] = useState(false);
-  const needsPhone = channel === "call" || messenger === "whatsapp";
 
   function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -68,12 +99,12 @@ export function ConsultForm() {
       setError("Укажите имя");
       return;
     }
-    if (channel === "messenger" && messenger === "telegram" && !telegramReady(telegram)) {
-      setError("Укажите ник или номер телефона");
+    if (channel === "call" && phone.replace(/\D/g, "").length < 10) {
+      setError("Укажите телефон");
       return;
     }
-    if (needsPhone && phone.replace(/\D/g, "").length < 10) {
-      setError("Укажите телефон");
+    if (channel === "messenger" && !telegramReady(telegram) && phone.replace(/\D/g, "").length < 10) {
+      setError("Укажите ник или номер");
       return;
     }
     setError("");
@@ -83,7 +114,7 @@ export function ConsultForm() {
   return (
     <section
       className="relative mt-[120px] w-[1440px] overflow-hidden rounded-[29px] bg-gradient-to-b from-[rgba(229,246,255,0.45)] to-[rgba(209,239,255,0.45)]"
-      style={{ height: channel === "messenger" ? 692 : 636 }}
+      style={{ height: channel === "messenger" ? 740 : 636 }}
     >
       <div className="absolute top-[52px] left-[120px] flex w-[604px] flex-col gap-[24px] text-black">
         <h2 className="text-40 font-medium">
@@ -102,7 +133,9 @@ export function ConsultForm() {
           <img alt="" src="/consult/sheets.svg" width={503} height={347.863} />
         </div>
       </div>
-      <div className="pointer-events-none absolute top-[515px] left-[807px] flex h-[158.12px] w-[167.658px] items-center justify-center">
+      <div
+        className={`pointer-events-none absolute left-[807px] flex h-[158.12px] w-[167.658px] items-center justify-center ${channel === "messenger" ? "top-[635px]" : "top-[515px]"}`}
+      >
         <div className="rotate-[177.41deg]">
           <img alt="" src="/consult/leaf-bottom.svg" width={161} height={151} />
         </div>
@@ -110,7 +143,7 @@ export function ConsultForm() {
 
       <form
         onSubmit={submit}
-        className="absolute top-[50px] left-[919px] flex w-[415px] flex-col items-center gap-[36px] rounded-[23px] bg-white px-[20px] py-[24px]"
+        className="absolute top-[50px] left-[905px] flex w-[415px] flex-col items-center gap-[36px] rounded-[23px] bg-white px-[20px] py-[24px]"
         noValidate
       >
         <h3 className="w-[367px] text-center text-24 font-medium">
@@ -168,50 +201,26 @@ export function ConsultForm() {
               invalid={error !== "" && phone.replace(/\D/g, "").length < 10}
             />
           ) : (
-            <>
-              <div role="tablist" aria-label="Мессенджер" className="flex h-[40px] gap-[4px] rounded-[10px] bg-[#f6f8fa] p-[4px]">
-                {(
-                  [
-                    ["telegram", "Телеграм"],
-                    ["whatsapp", "WhatsApp"],
-                  ] as const
-                ).map(([value, label]) => {
-                  const active = messenger === value;
-                  return (
-                    <button
-                      key={value}
-                      type="button"
-                      role="tab"
-                      aria-selected={active}
-                      onClick={() => {
-                        setMessenger(value);
-                        setError("");
-                      }}
-                      className={`flex h-[32px] flex-1 items-center justify-center rounded-[8px] px-[14px] text-16 text-black ${active ? "bg-white" : "opacity-50"}`}
-                    >
-                      {label}
-                    </button>
-                  );
-                })}
-              </div>
-              {messenger === "telegram" ? (
-                <input
-                  value={telegram}
-                  onChange={(event) => setTelegram(event.target.value)}
-                  placeholder="Ник или номер телефона"
-                  autoComplete="username"
-                  aria-label="Ник или номер телефона в Телеграме"
-                  aria-invalid={error !== "" && !telegramReady(telegram)}
-                  className="h-[60px] w-full rounded-[16px] border border-solid border-[#dedede] bg-white pr-[14px] pl-[24px] text-18 text-black outline-none placeholder:text-black placeholder:opacity-40"
-                />
-              ) : (
-                <PhoneField
-                  value={phone}
-                  onChange={setPhone}
-                  invalid={error !== "" && phone.replace(/\D/g, "").length < 10}
-                />
-              )}
-            </>
+            <div className="flex w-full flex-col gap-[8px]">
+              <MessengerField
+                icon="/consult/telegram.svg"
+                value={telegram}
+                onChange={setTelegram}
+                placeholder="Укажите ник или номер"
+                label="Ник или номер в Телеграме"
+                invalid={error !== "" && !telegramReady(telegram) && phone.replace(/\D/g, "").length < 10}
+              />
+              <p className="w-full text-center text-18 text-black opacity-40">Или</p>
+              <MessengerField
+                icon="/consult/whatsapp.svg"
+                value={phone}
+                onChange={setPhone}
+                placeholder="Укажите номер"
+                label="Номер WhatsApp"
+                phone
+                invalid={error !== "" && !telegramReady(telegram) && phone.replace(/\D/g, "").length < 10}
+              />
+            </div>
           )}
         </div>
 
