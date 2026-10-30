@@ -406,9 +406,11 @@ export function CoverageScan() {
       aria-hidden
       className="absolute top-[197px] left-0 h-[305px] w-[383px] overflow-hidden rounded-[45px]"
     >
-      {rows.map((row) => (
-        <CriterionRow key={row.top} top={row.top} delay={row.delay} grain={row.grain} items={row.items} clear={false} />
-      ))}
+      <div className="scan-source">
+        {rows.map((row) => (
+          <CriterionRow key={row.top} top={row.top} delay={row.delay} grain={row.grain} items={row.items} clear={false} />
+        ))}
+      </div>
       <div className="scan-reveal">
         {rows.map((row) => (
           <CriterionRow key={row.top} top={row.top} delay={row.delay} grain={row.grain} items={row.items} clear />
