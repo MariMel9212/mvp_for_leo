@@ -3,6 +3,7 @@
 import { useState, type FormEvent } from "react";
 
 type Channel = "call" | "messenger";
+type Messenger = "telegram" | "whatsapp";
 
 function formatPhone(value: string) {
   const digits = value.replace(/\D/g, "").slice(0, 10);
@@ -17,18 +18,62 @@ function formatPhone(value: string) {
   return result;
 }
 
+function telegramReady(value: string) {
+  const trimmed = value.trim();
+  if (!trimmed) return false;
+  if (/[a-zа-я@._]/i.test(trimmed)) return trimmed.replace(/^@/, "").length >= 2;
+  return trimmed.replace(/\D/g, "").length >= 10;
+}
+
+function PhoneField({ value, onChange, invalid }: { value: string; onChange: (value: string) => void; invalid: boolean }) {
+  return (
+    <label className="flex h-[60px] items-center gap-[16px] rounded-[16px] border border-solid border-[#dedede] bg-white pr-[14px] pl-[24px]">
+      <span className="flex items-center gap-[8px]">
+        <span className="flex h-[18px] w-[24px] flex-col overflow-hidden rounded-[2px] border-[0.5px] border-solid border-[#dedede]">
+          <span className="h-[6px] bg-white" />
+          <span className="h-[6px] bg-[#0039a6]" />
+          <span className="h-[6px] bg-[#d52b1e]" />
+        </span>
+        <span className="text-18">+7</span>
+        <img alt="" src="/consult/chevron-down.svg" width={24} height={24} />
+      </span>
+      <span className="h-[24px] w-px bg-[#dedede]" />
+      <input
+        value={value}
+        onChange={(event) => onChange(formatPhone(event.target.value))}
+        inputMode="tel"
+        autoComplete="tel"
+        placeholder="(999) 123-45-67"
+        aria-label="Телефон"
+        aria-invalid={invalid}
+        className="min-w-0 flex-1 bg-transparent text-18 text-black outline-none placeholder:text-black placeholder:opacity-40"
+      />
+    </label>
+  );
+}
+
 export function ConsultForm() {
   const [name, setName] = useState("");
   const [channel, setChannel] = useState<Channel>("call");
+  const [messenger, setMessenger] = useState<Messenger>("telegram");
   const [phone, setPhone] = useState("");
+  const [telegram, setTelegram] = useState("");
   const [error, setError] = useState("");
   const [sent, setSent] = useState(false);
+  const needsPhone = channel === "call" || messenger === "whatsapp";
 
   function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const digits = phone.replace(/\D/g, "");
-    if (!name.trim() || digits.length < 10) {
-      setError("Укажите имя и телефон");
+    if (!name.trim()) {
+      setError("Укажите имя");
+      return;
+    }
+    if (channel === "messenger" && messenger === "telegram" && !telegramReady(telegram)) {
+      setError("Укажите ник или номер телефона");
+      return;
+    }
+    if (needsPhone && phone.replace(/\D/g, "").length < 10) {
+      setError("Укажите телефон");
       return;
     }
     setError("");
@@ -36,7 +81,10 @@ export function ConsultForm() {
   }
 
   return (
-    <section className="relative mt-[120px] h-[636px] w-[1440px] overflow-hidden rounded-[29px] bg-gradient-to-b from-[rgba(229,246,255,0.45)] to-[rgba(209,239,255,0.45)]">
+    <section
+      className="relative mt-[120px] w-[1440px] overflow-hidden rounded-[29px] bg-gradient-to-b from-[rgba(229,246,255,0.45)] to-[rgba(209,239,255,0.45)]"
+      style={{ height: channel === "messenger" ? 692 : 636 }}
+    >
       <div className="absolute top-[52px] left-[120px] flex w-[604px] flex-col gap-[24px] text-black">
         <h2 className="text-40 font-medium">
           Расскажите о своей проблеме, и мы подберем профильное учереждение
@@ -100,7 +148,10 @@ export function ConsultForm() {
                     type="button"
                     role="tab"
                     aria-selected={active}
-                    onClick={() => setChannel(value)}
+                    onClick={() => {
+                      setChannel(value);
+                      setError("");
+                    }}
                     className={`flex h-[32px] flex-1 items-center justify-center rounded-[8px] px-[14px] text-16 text-black ${active ? "bg-white" : "opacity-50"}`}
                   >
                     {label}
@@ -110,28 +161,58 @@ export function ConsultForm() {
             </div>
           </div>
 
-          <label className="flex h-[60px] items-center gap-[16px] rounded-[16px] border border-solid border-[#dedede] bg-white pr-[14px] pl-[24px]">
-            <span className="flex items-center gap-[8px]">
-              <span className="flex h-[18px] w-[24px] flex-col overflow-hidden rounded-[2px] border-[0.5px] border-solid border-[#dedede]">
-                <span className="h-[6px] bg-white" />
-                <span className="h-[6px] bg-[#0039a6]" />
-                <span className="h-[6px] bg-[#d52b1e]" />
-              </span>
-              <span className="text-18">+7</span>
-              <img alt="" src="/consult/chevron-down.svg" width={24} height={24} />
-            </span>
-            <span className="h-[24px] w-px bg-[#dedede]" />
-            <input
+          {channel === "call" ? (
+            <PhoneField
               value={phone}
-              onChange={(event) => setPhone(formatPhone(event.target.value))}
-              inputMode="tel"
-              autoComplete="tel"
-              placeholder="(999) 123-45-67"
-              aria-label="Телефон"
-              aria-invalid={error !== "" && phone.replace(/\D/g, "").length < 10}
-              className="min-w-0 flex-1 bg-transparent text-18 text-black outline-none placeholder:text-black placeholder:opacity-40"
+              onChange={setPhone}
+              invalid={error !== "" && phone.replace(/\D/g, "").length < 10}
             />
-          </label>
+          ) : (
+            <>
+              <div role="tablist" aria-label="Мессенджер" className="flex h-[40px] gap-[4px] rounded-[10px] bg-[#f6f8fa] p-[4px]">
+                {(
+                  [
+                    ["telegram", "Телеграм"],
+                    ["whatsapp", "WhatsApp"],
+                  ] as const
+                ).map(([value, label]) => {
+                  const active = messenger === value;
+                  return (
+                    <button
+                      key={value}
+                      type="button"
+                      role="tab"
+                      aria-selected={active}
+                      onClick={() => {
+                        setMessenger(value);
+                        setError("");
+                      }}
+                      className={`flex h-[32px] flex-1 items-center justify-center rounded-[8px] px-[14px] text-16 text-black ${active ? "bg-white" : "opacity-50"}`}
+                    >
+                      {label}
+                    </button>
+                  );
+                })}
+              </div>
+              {messenger === "telegram" ? (
+                <input
+                  value={telegram}
+                  onChange={(event) => setTelegram(event.target.value)}
+                  placeholder="Ник или номер телефона"
+                  autoComplete="username"
+                  aria-label="Ник или номер телефона в Телеграме"
+                  aria-invalid={error !== "" && !telegramReady(telegram)}
+                  className="h-[60px] w-full rounded-[16px] border border-solid border-[#dedede] bg-white pr-[14px] pl-[24px] text-18 text-black outline-none placeholder:text-black placeholder:opacity-40"
+                />
+              ) : (
+                <PhoneField
+                  value={phone}
+                  onChange={setPhone}
+                  invalid={error !== "" && phone.replace(/\D/g, "").length < 10}
+                />
+              )}
+            </>
+          )}
         </div>
 
         <button
@@ -141,7 +222,7 @@ export function ConsultForm() {
         >
           {sent ? "Заявка отправлена" : "Отправить заявку"}
         </button>
-        {error ? <p className="-mt-[20px] text-16 text-black opacity-60">{error}</p> : null}
+        {error ? <p className="-mt-[28px] w-full text-center text-16 text-black opacity-60">{error}</p> : null}
       </form>
     </section>
   );
