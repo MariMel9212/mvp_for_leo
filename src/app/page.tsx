@@ -66,7 +66,7 @@ export default function HomePage() {
             <AudienceTabs />
             <a
               href="#situacii"
-              className="flex h-[46px] w-[377px] items-center justify-center rounded-[8px] bg-[#e1f300] px-[20px] text-16 font-medium text-black"
+              className="flex h-[56px] w-[377px] items-center justify-center rounded-[12px] bg-[#e1f300] px-[20px] text-16 font-medium text-black"
             >
               Выбрать центр
             </a>
