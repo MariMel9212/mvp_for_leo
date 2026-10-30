@@ -4,10 +4,12 @@ import type { ReactNode } from "react";
 import { AudienceTabs } from "@/components/audience-tabs";
 import { HeroField } from "@/components/hero-field";
 
+// Inlined so the gather animation starts before React hydrates.
 const heroFieldBoot = readFileSync(
   path.join(process.cwd(), "src/hero-field-boot.js"),
   "utf8",
 );
+
 
 const stats = [
   { value: "3 000 +", label: "семей получили профильную помощь" },

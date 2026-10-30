@@ -13,20 +13,26 @@
     return compact ? { inner: 480, outer: 700 } : { inner: 350, outer: 610 };
   }
 
-  function createParticles(inner, outer) {
+  function createParticles(inner, outer, settled) {
     var particles = [];
     var span = outer * 4;
     for (var index = 0; index < COUNT; index++) {
       var theta = Math.random() * Math.PI * 2;
       var radius = inner + Math.random() ** 2.5 * (outer - inner);
       var depth = (2 * Math.random() - 1) ** 4 * 100;
+      var homeX = Math.cos(theta) * radius;
+      var homeY = Math.sin(theta) * radius;
       particles.push({
         theta: theta,
         r: radius,
         speed: 0.0001 + Math.random() * 0.0003,
-        homeX: Math.cos(theta) * radius,
-        homeY: Math.sin(theta) * radius,
+        homeX: homeX,
+        homeY: homeY,
         homeZ: depth,
+        fromX: settled ? homeX : (Math.random() - 0.5) * span,
+        fromY: settled ? homeY : (Math.random() - 0.5) * span,
+        fromZ: settled ? depth : (Math.random() - 0.5) * 1000,
+        progress: settled ? 1 : 0,
         flyX: (Math.random() - 0.5) * span,
         flyY: (Math.random() - 0.5) * span,
         flyZ: (Math.random() - 0.5) * 1000,
@@ -50,11 +56,12 @@
     var limits = band();
     var inner = limits.inner;
     var outer = limits.outer;
-    var particles = createParticles(inner, outer);
+    var particles = createParticles(inner, outer, reduce);
     var flyOut = false;
     var pixelRatio = 1;
     var state = { alive: true, frame: 0 };
-    var last = performance.now();
+    var started = performance.now();
+    var last = started;
     var pointer = { x: 0, y: 0, time: last, speed: 0 };
     canvas.__hero = state;
 
@@ -72,7 +79,7 @@
       if (next.inner !== inner || next.outer !== outer) {
         inner = next.inner;
         outer = next.outer;
-        particles = createParticles(inner, outer);
+        particles = createParticles(inner, outer, reduce || performance.now() - started > 2800);
       }
     }
 
@@ -141,6 +148,7 @@
       var height = canvas.height;
       context.clearRect(0, 0, width, height);
       context.fillStyle = "#b2c7eb";
+      canvas.style.opacity = reduce ? "1" : String(Math.min(1, (now - started) / 1000));
       context.beginPath();
 
       for (var i = 0; i < particles.length; i++) {
@@ -167,6 +175,13 @@
           y = particle.flyY + (particle.homeY - particle.flyY) * back;
           z = particle.flyZ + (particle.homeZ - particle.flyZ) * back;
           if (particle.flyBack === 1) particle.flyProgress = 0;
+        } else if (!reduce && particle.progress < 1) {
+          particle.flyProgress = 0;
+          particle.progress = Math.min(1, particle.progress + 0.006 * frames);
+          var gather = ease(particle.progress);
+          x = particle.fromX + (particle.homeX - particle.fromX) * gather;
+          y = particle.fromY + (particle.homeY - particle.fromY) * gather;
+          z = particle.fromZ + (particle.homeZ - particle.fromZ) * gather;
         } else {
           var settle = 1 - 0.92 ** frames;
           particle.offsetX += (0 - particle.offsetX) * settle;
