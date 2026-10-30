@@ -1,5 +1,13 @@
+import { readFileSync } from "node:fs";
+import path from "node:path";
 import type { ReactNode } from "react";
 import { AudienceTabs } from "@/components/audience-tabs";
+import { HeroField } from "@/components/hero-field";
+
+const heroFieldBoot = readFileSync(
+  path.join(process.cwd(), "src/hero-field-boot.js"),
+  "utf8",
+);
 
 const stats = [
   { value: "3 000 +", label: "семей получили профильную помощь" },
@@ -13,24 +21,20 @@ const sections = ["Раздел", "Раздел", "Раздел"];
 export default function HomePage() {
   return (
     <main className="mx-auto w-[1440px] bg-[#fdfdfd] text-black">
-      <section className="relative h-[772px] overflow-hidden">
-        <div
-          aria-hidden
-          className="absolute inset-0"
-          style={{
-            backgroundImage:
-              "linear-gradient(180deg, #d2def3 0%, #d5e0f4 8%, #d9e3f5 15%, #dce5f5 23%, #dfe8f6 31%, #e2eaf7 38%, #e6ecf8 46%, #e9eff9 54%, #ecf1f9 62%, #f0f3fa 69%, #f3f6fb 77%, #f6f8fc 85%, #fafbfc 92%, #fdfdfd 100%)",
-          }}
-        />
-        <img
-          alt=""
-          src="/desktop/hero-field.png"
-          width={1118}
-          height={699}
-          className="pointer-events-none absolute top-[34px] left-[161px] h-[699px] w-[1118px] max-w-none"
-        />
+      <section className="relative h-[772px]">
+        <div className="pointer-events-none absolute top-0 left-1/2 h-full w-screen -translate-x-1/2 overflow-hidden">
+          <div
+            aria-hidden
+            className="absolute inset-0"
+            style={{
+              backgroundImage:
+                "linear-gradient(180deg, #d2def3 0%, #d5e0f4 8%, #d9e3f5 15%, #dce5f5 23%, #dfe8f6 31%, #e2eaf7 38%, #e6ecf8 46%, #e9eff9 54%, #ecf1f9 62%, #f0f3fa 69%, #f3f6fb 77%, #f6f8fc 85%, #fafbfc 92%, #fdfdfd 100%)",
+            }}
+          />
+          <HeroField />
+        </div>
 
-        <div className="relative flex flex-col items-center gap-[122px]">
+        <div className="relative z-10 flex flex-col items-center gap-[122px]">
           <header className="flex w-full justify-center pt-[32px]">
             <div className="flex h-[44px] w-[1180px] items-center justify-between px-[16px]">
               <a href="#podbor" className="text-24 font-bold text-[#111] opacity-80">
@@ -67,6 +71,7 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+      <script dangerouslySetInnerHTML={{ __html: heroFieldBoot }} />
 
       <section className="flex w-[1440px] items-start justify-between px-[120px]">
         {stats.map((item) => (

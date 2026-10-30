@@ -29,7 +29,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="ru"
       className={`${googleSans.variable} ${inter.variable} h-full antialiased`}
     >
-      <body className="min-h-full bg-[#fdfdfd] text-[#111]">
+      <body className="min-h-full overflow-x-clip bg-[#fdfdfd] text-[#111]">
         <Script id="keep-top-on-reload" strategy="beforeInteractive">
           {`try{history.scrollRestoration="manual"}catch(e){}if(location.hash)history.replaceState(null,"",location.pathname+location.search);scrollTo(0,0)`}
         </Script>
