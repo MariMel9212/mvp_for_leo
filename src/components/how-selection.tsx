@@ -83,7 +83,7 @@ export function HowSelection() {
       className="mx-auto mt-24 w-full max-w-[1400px] px-4 min-[768px]:mt-40 min-[1440px]:px-8"
     >
       <div className="mx-auto flex w-full flex-col gap-12 min-[768px]:gap-[88px]">
-        <h2 className="text-[clamp(36px,6vw,56px)] leading-[1.1] font-medium text-[#0a0d14]">
+        <h2 className="text-32 font-medium text-[#0a0d14] min-[768px]:text-40 min-[1100px]:text-48">
           Как происходит подбор
         </h2>
 
@@ -170,11 +170,11 @@ function CardCopy({
   body: string;
 }) {
   return (
-    <div className="absolute top-[52px] left-[15px] flex w-[282px] flex-col items-center gap-[10px] text-center text-[#0a0d14]">
-      <h3 className="w-full text-[22px] leading-[1.1] font-medium opacity-96">
+    <div className="absolute top-[40px] left-[15px] flex w-[282px] flex-col items-center gap-2 text-center text-[#0a0d14]">
+      <h3 className="w-full text-18 font-medium opacity-96">
         {title}
       </h3>
-      <p className="w-full text-[14px] leading-[1.2] font-normal">{body}</p>
+      <p className="w-full text-13 font-normal">{body}</p>
     </div>
   );
 }

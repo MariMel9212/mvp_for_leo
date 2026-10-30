@@ -130,7 +130,7 @@ export function Centers() {
   return (
     <section id="uchrezhdeniya" className="mx-auto mt-24 w-full max-w-[1400px] px-4 pb-24 min-[768px]:mt-40 min-[768px]:pb-40 min-[1440px]:px-8">
       <div className="flex flex-col gap-6 min-[768px]:flex-row min-[768px]:items-end min-[768px]:justify-between">
-        <h2 className="text-[clamp(32px,5vw,44px)] leading-[1.1] font-medium text-[#0a0d14] opacity-[0.96]">
+        <h2 className="text-32 font-medium text-[#0a0d14] opacity-[0.96] min-[768px]:text-40 min-[1100px]:text-48">
           Проверенные учереждения
         </h2>
         <div className="flex w-fit items-end gap-2 border-b border-black/40" role="tablist" aria-label="Тип учреждения">
@@ -145,8 +145,8 @@ export function Centers() {
                 onClick={() => setFilter(item.id)}
                 className={
                   selected
-                    ? "-mb-px border-b border-black px-0.5 pb-1.5 text-[20px] leading-[1.1] font-medium text-black"
-                    : "px-0.5 pb-1.5 text-[20px] leading-[1.1] font-medium text-black/40"
+                    ? "-mb-px border-b border-black px-0.5 pb-1.5 text-18 font-medium text-black"
+                    : "px-0.5 pb-1.5 text-18 font-medium text-black/40"
                 }
               >
                 {item.label}
@@ -164,7 +164,7 @@ export function Centers() {
 
       <a
         href="#podbor"
-        className="mx-auto mt-[72px] flex h-11 w-[min(100%,312px)] items-center justify-center rounded-[8px] bg-[#e1f300] text-[16px] leading-[1.1] font-medium text-[#0a0d14]/80 hover:bg-[#d6e600]"
+        className="mx-auto mt-[72px] flex h-11 w-[min(100%,312px)] items-center justify-center rounded-[8px] bg-[#e1f300] text-16 font-medium text-[#0a0d14]/80 hover:bg-[#d6e600]"
       >
         Подобрать центр
       </a>
@@ -183,12 +183,12 @@ function CenterCard({ center }: { center: Center }) {
           style={center.crop}
         />
         <div className="absolute inset-x-0 bottom-0 flex items-end">
-          <span className="relative z-10 rounded-tr-[14px] bg-white px-2.5 py-1.5 text-[12px] leading-[1.1] text-[#0a0d14] drop-shadow-[0px_-1px_1.4px_rgba(0,0,0,0.14)]">
+          <span className="relative z-10 rounded-tr-[14px] bg-white px-2.5 py-1.5 text-11 text-[#0a0d14] drop-shadow-[0px_-1px_1.4px_rgba(0,0,0,0.14)]">
             {center.type}
           </span>
           {center.badge ? (
             <span
-              className={`-ml-3 rounded-tr-[14px] py-1.5 pr-2.5 pl-4 text-[12px] leading-[1.1] text-[#0a0d14] drop-shadow-[0px_-1px_1.4px_rgba(0,0,0,0.14)] ${badgeTone[center.badge.tone]}`}
+              className={`-ml-3 rounded-tr-[14px] py-1.5 pr-2.5 pl-4 text-11 text-[#0a0d14] drop-shadow-[0px_-1px_1.4px_rgba(0,0,0,0.14)] ${badgeTone[center.badge.tone]}`}
             >
               {center.badge.label}
             </span>
@@ -196,10 +196,10 @@ function CenterCard({ center }: { center: Center }) {
         </div>
       </div>
       <div className="flex flex-col gap-1.5 px-3 pt-3.5 pb-3.5">
-        <h3 className="max-w-[228px] text-[18px] leading-[1.1] font-medium text-[#0a0d14]">
+        <h3 className="max-w-[228px] text-18 font-medium text-[#0a0d14]">
           {center.name}
         </h3>
-        <div className="flex flex-col gap-1 text-[14px] leading-[1.1] text-[#0a0d14]">
+        <div className="flex flex-col gap-1 text-13 text-[#0a0d14]">
           <p>{center.region}</p>
           <p className="opacity-60">{center.course}</p>
         </div>

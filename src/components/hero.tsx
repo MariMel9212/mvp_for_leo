@@ -29,7 +29,7 @@ export function Hero() {
           className="flex flex-col items-center text-center"
           style={{ gap: "clamp(28px, 2.65625vw, 56px)" }}
         >
-          <h1 className="w-full max-w-[clamp(340px,48.7vw,1010px)] text-[clamp(28px,calc(2.96875vw+2px),66px)] leading-[1.1] font-medium text-[#111]">
+          <h1 className="w-full max-w-[clamp(340px,48.7vw,1010px)] text-28 font-medium text-[#111] min-[768px]:text-40 min-[1280px]:text-48">
             Проверенные ребцентра для&nbsp;лечения и&nbsp;восстановления
             при&nbsp;зависимостях
           </h1>
@@ -54,7 +54,7 @@ export function Hero() {
                       aria-selected={selected}
                       onClick={() => setAudience(item.id)}
                       className={cn(
-                        "flex h-full items-center justify-center px-[clamp(16px,1.4vw,24px)] text-[clamp(14px,1.09375vw,22px)] leading-5 font-normal tracking-[-0.084px] whitespace-nowrap transition-colors",
+                        "flex h-full items-center justify-center px-[clamp(16px,1.4vw,24px)] text-[13px] leading-[20px] font-normal whitespace-nowrap transition-colors",
                         selected
                           ? "rounded-[8px] bg-white text-[#0a0d14]"
                           : "rounded-[6px] text-[#868c98] hover:text-[#0a0d14]",
@@ -65,14 +65,14 @@ export function Hero() {
                   );
                 })}
               </div>
-              <p className="text-center text-[clamp(14px,1.09375vw,22px)] leading-[normal] font-normal tracking-[-0.084px] text-[#0a0d14] opacity-40">
+              <p className="text-center text-13 font-normal text-[#0a0d14] opacity-40">
                 Бесплатная и анонимная консультация
               </p>
             </div>
 
             <Button
               type="button"
-              className="h-[clamp(46px,3.59375vw,74px)] w-full overflow-hidden rounded-[8px] border-0 bg-[#e1f300] px-[10px] text-[clamp(17px,1.328125vw,28px)] leading-[1.1] font-medium text-[#0a0d14] shadow-[inset_0px_2px_3px_0px_rgba(255,255,255,0.25)] hover:bg-[#d6e600]"
+              className="h-[clamp(46px,3.59375vw,74px)] w-full overflow-hidden rounded-[8px] border-0 bg-[#e1f300] px-[10px] text-[16px] leading-[24px] font-medium text-[#0a0d14] shadow-[inset_0px_2px_3px_0px_rgba(255,255,255,0.25)] hover:bg-[#d6e600]"
             >
               Подобрать центр
             </Button>

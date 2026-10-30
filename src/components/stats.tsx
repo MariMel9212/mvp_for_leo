@@ -14,10 +14,10 @@ export function Stats() {
             key={item.value}
             className="w-[calc(50%-8px)] text-center min-[768px]:w-[160px] min-[1440px]:w-[220px]"
           >
-            <p className="text-[26px] leading-[1.1] font-medium text-[#111] min-[1440px]:text-[34px]">
+            <p className="text-28 font-medium text-[#111] min-[1100px]:text-32">
               {item.value}
             </p>
-            <p className="text-[16px] leading-[1.1] font-normal text-[#111] opacity-40 min-[1440px]:text-[18px]">
+            <p className="text-13 font-normal text-[#111] opacity-40 min-[768px]:text-16">
               {item.label}
             </p>
           </div>

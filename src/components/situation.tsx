@@ -7,7 +7,7 @@ export function Situation() {
       className="mx-auto mt-24 w-full max-w-[1400px] px-4 min-[768px]:mt-40 min-[1440px]:px-8"
     >
       <div className="mx-auto flex w-full flex-col gap-12 min-[768px]:gap-[88px]">
-        <h2 className="text-[clamp(36px,6vw,56px)] leading-[1.1] font-medium text-[#0a0d14]">
+        <h2 className="text-32 font-medium text-[#0a0d14] min-[768px]:text-40 min-[1100px]:text-48">
           Подбираем помощь под ситуацию
         </h2>
         <div className="flex flex-col items-center gap-10 min-[1040px]:flex-row min-[1040px]:items-start">
@@ -35,7 +35,7 @@ function PickLink({ children }: { children: ReactNode }) {
   return (
     <a
       href="#podbor"
-      className="absolute top-[calc(382px-34px*480px/100cqw)] left-[26px] z-10 inline-flex h-11 shrink-0 origin-top-left scale-[calc(480px/100cqw)] items-center justify-center rounded-[8px] bg-[#e1f300] px-4 text-[16px] leading-[1.1] font-medium text-[#0a0d14]/80 hover:bg-[#d6e600]"
+      className="absolute top-[calc(382px-34px*480px/100cqw)] left-[26px] z-10 inline-flex h-11 shrink-0 origin-top-left scale-[calc(480px/100cqw)] items-center justify-center rounded-[8px] bg-[#e1f300] px-4 text-16 font-medium text-[#0a0d14]/80 hover:bg-[#d6e600]"
     >
       {children}
     </a>
@@ -61,10 +61,10 @@ function DetoxCard() {
           }}
         />
         <div className="absolute top-[28px] left-[26px] flex w-[395px] flex-col gap-[10px] text-[#0a0d14]">
-          <h3 className="text-[28px] leading-[1.1] font-medium opacity-96">
+          <h3 className="text-28 font-medium opacity-96">
             Детокс
           </h3>
-          <p className="w-[350px] text-[14px] leading-[1.1] font-normal">
+          <p className="w-[350px] text-13 font-normal">
             Подберем клиники и стационары с медицинским наблюдение для
             безопасного выхода из острого состояния
           </p>
@@ -92,10 +92,10 @@ function RehabCard() {
         </div>
         <div className="absolute top-0 left-0 h-[126px] w-[480px] backdrop-blur-[0.15px]" />
         <div className="absolute bottom-[294px] left-[26px] flex w-[357px] flex-col gap-[10px] text-[#0a0d14]">
-          <h3 className="text-[28px] leading-[1.1] font-medium opacity-96">
+          <h3 className="text-28 font-medium opacity-96">
             Реабилитация
           </h3>
-          <p className="w-[350px] text-[14px] leading-[1.1] font-normal">
+          <p className="w-[350px] text-13 font-normal">
             Подберем программы и центры, где работают с&nbsp;причиной
             зависимости и помогают вернутся к&nbsp;полноценной жизни
           </p>

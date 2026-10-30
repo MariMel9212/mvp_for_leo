@@ -24,8 +24,8 @@ const buttonVariants = cva(
         default:
           "h-8 gap-1.5 px-2.5 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2",
         header:
-          "h-[34px] gap-0 rounded-[8px] px-[10px] text-[16px] leading-[1.1] font-medium min-[1440px]:h-11 min-[1440px]:px-4 min-[1440px]:text-[18px]",
-        hero: "h-[41px] w-full max-w-[320px] gap-0 rounded-[8px] px-[10px] text-[17px] leading-[1.1] font-medium min-[1440px]:h-[56px] min-[1440px]:max-w-[440px] min-[1440px]:text-[20px]",
+          "h-[34px] gap-0 rounded-[8px] px-[10px] text-16! font-medium min-[1440px]:h-11 min-[1440px]:px-4",
+        hero: "h-[41px] w-full max-w-[320px] gap-0 rounded-[8px] px-[10px] text-16! font-medium min-[1440px]:h-[56px] min-[1440px]:max-w-[440px] min-[1440px]:text-18!",
         xs: "h-6 gap-1 rounded-[min(var(--radius-md),10px)] px-2 text-xs in-data-[slot=button-group]:rounded-lg has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-3",
         sm: "h-7 gap-1 rounded-[min(var(--radius-md),12px)] px-2.5 text-[0.8rem] in-data-[slot=button-group]:rounded-lg has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-3.5",
         lg: "h-9 gap-1.5 px-2.5 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2",

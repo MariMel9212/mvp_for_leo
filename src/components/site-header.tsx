@@ -21,17 +21,13 @@ export function SiteHeader() {
         <a
           href="#podbor"
           onClick={(event) => scrollToSection(event, "podbor")}
-          className="shrink-0 text-[24px] leading-[1.1] font-bold tracking-[-0.5px] text-[#111] opacity-80"
-          style={{
-            fontFamily:
-              '"SF Pro Display", "SF Pro Text", var(--font-google-sans), sans-serif',
-          }}
+          className="shrink-0 text-24 font-bold text-[#111] opacity-80"
         >
           СвойЦентр
         </a>
         <nav
           aria-label="Разделы"
-          className="hidden min-w-0 items-center gap-[42px] text-[16px] leading-[1.1] font-medium text-[#111] opacity-80 min-[1100px]:flex"
+          className="hidden min-w-0 items-center gap-[42px] text-16 font-medium text-[#111] opacity-80 min-[1100px]:flex"
         >
           {links.map((label, index) => (
             <a
@@ -47,7 +43,7 @@ export function SiteHeader() {
         <a
           href="#podbor"
           onClick={(event) => scrollToSection(event, "podbor")}
-          className="inline-flex h-11 shrink-0 items-center justify-center rounded-[8px] bg-[#e1f300] px-4 text-[16px] leading-[1.1] font-medium text-[#0a0d14]/80 hover:bg-[#d6e600]"
+          className="inline-flex h-11 shrink-0 items-center justify-center rounded-[8px] bg-[#e1f300] px-4 text-16 font-medium text-[#0a0d14]/80 hover:bg-[#d6e600]"
         >
           Выбрать центр
         </a>
