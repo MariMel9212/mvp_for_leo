@@ -172,15 +172,21 @@ function DocumentSheet() {
 
 export function SituationSheets() {
   return (
-    <div data-part="sheets" className="absolute top-[203px] left-[94px] h-[133px] w-[195px]">
+    <div data-part="sheets" className="situation-sheets absolute top-[203px] left-[94px] h-[133px] w-[195px]">
       <div data-part="table" className="situation-sheet absolute" style={{ left: 105.93, top: 1.8 }}>
-        <TableSheet />
+        <div className="situation-sheet-motion">
+          <TableSheet />
+        </div>
       </div>
       <div data-part="checklist" className="situation-sheet absolute" style={{ left: 0, top: 24.1 }}>
-        <ChecklistSheet />
+        <div className="situation-sheet-motion">
+          <ChecklistSheet />
+        </div>
       </div>
       <div data-part="document" className="situation-sheet absolute" style={{ left: 45.54, top: 0 }}>
-        <DocumentSheet />
+        <div className="situation-sheet-motion">
+          <DocumentSheet />
+        </div>
       </div>
     </div>
   );
