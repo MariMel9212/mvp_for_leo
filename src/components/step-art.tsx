@@ -274,11 +274,16 @@ const criteria = [
   "Опыт лечения",
 ];
 
+const pillGap = 12;
+const pillHeight = 35.1;
+const firstRow = 83.7;
+const rowPitch = pillHeight + pillGap;
+
 const criterionRows = [
-  { top: 83.7, shift: 0, delay: "0s", grain: 0 },
-  { top: 130.3, shift: 3, delay: "-11s", grain: 90 },
-  { top: 177.2, shift: 5, delay: "-6s", grain: 180 },
-  { top: 223.3, shift: 1, delay: "-17s", grain: 40 },
+  { top: firstRow, shift: 0, delay: "0s", grain: 0 },
+  { top: firstRow + rowPitch, shift: 3, delay: "-11s", grain: 90 },
+  { top: firstRow + rowPitch * 2, shift: 5, delay: "-6s", grain: 180 },
+  { top: firstRow + rowPitch * 3, shift: 1, delay: "-17s", grain: 40 },
 ];
 
 const grainTiles: { key: keyof typeof pillGrains; w: number }[] = [
@@ -375,10 +380,10 @@ function CriterionRow({
   clear: boolean;
 }) {
   return (
-    <div className="absolute right-0 left-0 h-[35.1px] overflow-hidden" style={{ top }}>
+    <div className="absolute right-0 left-0 overflow-hidden" style={{ top, height: pillHeight }}>
       <div className="criterion-track" style={{ animationDelay: delay }}>
         {[0, 1].map((copy) => (
-          <div key={copy} className="flex gap-[18px] pr-[18px]">
+          <div key={copy} className="flex" style={{ gap: pillGap, paddingRight: pillGap }}>
             {items.map((label) => (
               <CriterionPill key={`${copy}-${label}`} label={label} clear={clear} grain={grain} />
             ))}
