@@ -211,8 +211,12 @@ export function FormatRadar() {
           <g data-part="wedge" mask="url(#radar-wedge)">
             <path d="M145.614 189.57L291.229 -62.6416H0L145.614 189.57Z" fill="#E1F300" fillOpacity="0.52" />
           </g>
-          <g className="radar-wedge-glow" data-part="wedge-glow" mask="url(#radar-wedge-glow)" opacity="0">
-            <path d="M145.614 189.57L291.229 -62.6416H0L145.614 189.57Z" fill="#E1F300" />
+          <g mask="url(#radar-wedge-glow)">
+            <g clipPath="url(#wedge-impulse-shape)">
+              <g className="radar-wedge-glow" data-part="wedge-glow" opacity="0">
+                <rect x="-40" y="150" width="380" height="130" fill="url(#wedge-impulse-band)" />
+              </g>
+            </g>
           </g>
           <defs>
             <mask id="radar-wedge" maskUnits="userSpaceOnUse" x="-23" y="0" width="336" height="167">
@@ -229,6 +233,16 @@ export function FormatRadar() {
                 <circle cx="143.675" cy="166.201" r="90.3511" fill="white" />
               </g>
             </mask>
+            <linearGradient id="wedge-impulse-band" x1="0" y1="1" x2="0" y2="0">
+              <stop offset="0" stopColor="#E1F300" stopOpacity="0" />
+              <stop offset="0.28" stopColor="#E8FF3A" stopOpacity="0.45" />
+              <stop offset="0.58" stopColor="#F6FF70" stopOpacity="1" />
+              <stop offset="0.8" stopColor="#F6FF70" stopOpacity="0.85" />
+              <stop offset="1" stopColor="#F6FF70" stopOpacity="0" />
+            </linearGradient>
+            <clipPath id="wedge-impulse-shape">
+              <path d="M145.614 189.57L291.229 -62.6416H0L145.614 189.57Z" />
+            </clipPath>
             <clipPath id="radar-wedge-clip">
               <rect width="334.634" height="166.493" fill="white" transform="translate(-22.5266)" />
             </clipPath>

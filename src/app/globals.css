@@ -151,12 +151,17 @@
 
 @keyframes wedge-impulse {
   0% {
+    transform: translateY(0px);
     opacity: 0;
   }
-  16% {
+  14% {
     opacity: 1;
   }
+  70% {
+    opacity: 0.9;
+  }
   100% {
+    transform: translateY(-155px);
     opacity: 0;
   }
 }
@@ -220,14 +225,14 @@
   }
 }
 
-/* Second step card. A brighter copy of the lime wedge flashes once over the resting shape. */
+/* Second step card. A bright band leaves the radar center and fades at the rim. */
 .radar-wedge-glow {
   opacity: 0;
 }
 
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
   .format-card:hover .radar-wedge-glow {
-    animation: wedge-impulse 620ms cubic-bezier(0.16, 1, 0.3, 1);
+    animation: wedge-impulse 900ms linear;
   }
 }
 
