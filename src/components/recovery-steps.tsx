@@ -38,7 +38,7 @@ export function RecoverySteps() {
             <SituationSheets />
           </article>
 
-          <article className={`${cardClass} h-[402px]`} style={cardStyle}>
+          <article className={`format-card ${cardClass} h-[402px]`} style={cardStyle}>
             <StepCopy title="Определяем формат" text={format} />
             <FormatRadar />
           </article>

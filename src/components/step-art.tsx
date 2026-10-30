@@ -211,12 +211,22 @@ export function FormatRadar() {
           <g data-part="wedge" mask="url(#radar-wedge)">
             <path d="M145.614 189.57L291.229 -62.6416H0L145.614 189.57Z" fill="#E1F300" fillOpacity="0.52" />
           </g>
+          <g className="radar-wedge-glow" data-part="wedge-glow" mask="url(#radar-wedge-glow)" opacity="0">
+            <path d="M145.614 189.57L291.229 -62.6416H0L145.614 189.57Z" fill="#E1F300" />
+          </g>
           <defs>
             <mask id="radar-wedge" maskUnits="userSpaceOnUse" x="-23" y="0" width="336" height="167">
               <g clipPath="url(#radar-wedge-clip)">
                 <circle cx="144.79" cy="167.317" r="167.317" fill="#B1D6FB" fillOpacity="0.3" />
                 <circle cx="144.791" cy="167.317" r="129.392" fill="#B6D9FB" fillOpacity="0.54" />
                 <circle cx="143.675" cy="166.201" r="90.3511" fill="#93C7FA" fillOpacity="0.55" />
+              </g>
+            </mask>
+            <mask id="radar-wedge-glow" maskUnits="userSpaceOnUse" x="-23" y="0" width="336" height="167">
+              <g clipPath="url(#radar-wedge-clip)">
+                <circle cx="144.79" cy="167.317" r="167.317" fill="white" fillOpacity="0.72" />
+                <circle cx="144.791" cy="167.317" r="129.392" fill="white" fillOpacity="0.9" />
+                <circle cx="143.675" cy="166.201" r="90.3511" fill="white" />
               </g>
             </mask>
             <clipPath id="radar-wedge-clip">
