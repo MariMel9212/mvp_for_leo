@@ -43,7 +43,7 @@ export function RecoverySteps() {
             <FormatRadar />
           </article>
 
-          <article className={`${cardClass} h-[486px]`} style={cardStyle}>
+          <article className={`coverage-card ${cardClass} h-[486px]`} style={cardStyle}>
             <StepCopy title="Отбираем учреждения" text={format} />
             <CoverageScan />
           </article>

@@ -1,3 +1,5 @@
+import { pillGrains, readGrains } from "@/components/step-grains";
+
 const radarDots: { x: number; y: number; opacity: number }[] = [
   { x: 45, y: 61, opacity: 1 },
   { x: 175, y: 51, opacity: 1 },
@@ -261,23 +263,49 @@ export function FormatRadar() {
   );
 }
 
-const criteria: { label: string; check: boolean }[] = [
-  { label: "Регион проживания", check: true },
-  { label: "Программа выздоровления", check: false },
-  { label: "Персонал в организайии", check: true },
-  { label: "Лицензии", check: true },
-  { label: "Возраст", check: false },
-  { label: "Тип зависимости", check: false },
-  { label: "Медицинское наблюдение", check: true },
-  { label: "Опыт лечения", check: false },
+const criteria = [
+  "Регион проживания",
+  "Программа выздоровления",
+  "Персонал в организайии",
+  "Лицензии",
+  "Возраст",
+  "Тип зависимости",
+  "Медицинское наблюдение",
+  "Опыт лечения",
 ];
 
 const criterionRows = [
-  { top: 83.7, shift: 0, delay: "0s" },
-  { top: 130.3, shift: 3, delay: "-11s" },
-  { top: 177.2, shift: 5, delay: "-6s" },
-  { top: 223.3, shift: 1, delay: "-17s" },
+  { top: 83.7, shift: 0, delay: "0s", grain: 0 },
+  { top: 130.3, shift: 3, delay: "-11s", grain: 90 },
+  { top: 177.2, shift: 5, delay: "-6s", grain: 180 },
+  { top: 223.3, shift: 1, delay: "-17s", grain: 40 },
 ];
+
+const grainTiles: { key: keyof typeof pillGrains; w: number }[] = [
+  { key: "business", w: 147 },
+  { key: "digital", w: 123.7 },
+  { key: "portal", w: 156.4 },
+  { key: "healthcare", w: 123.7 },
+  { key: "travel", w: 110.2 },
+  { key: "education", w: 139.2 },
+];
+
+function grainTexture() {
+  let offset = 0;
+  const specks: string[] = [];
+  for (const tile of grainTiles) {
+    for (const grain of readGrains(pillGrains[tile.key])) {
+      specks.push(
+        `<rect x="${(offset + grain.x).toFixed(2)}" y="${grain.y}" width="${grain.w}" height="${grain.h}" rx="${(Math.min(grain.w, grain.h) / 2).toFixed(2)}" fill="#919b94" fill-opacity="${grain.o}"/>`,
+      );
+    }
+    offset += tile.w;
+  }
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${offset}" height="35.1" viewBox="0 0 ${offset} 35.1">${specks.join("")}</svg>`;
+  return { image: `url("data:image/svg+xml,${encodeURIComponent(svg)}")`, width: offset };
+}
+
+const hiddenGrain = grainTexture();
 
 function StatusMark() {
   return (
@@ -293,39 +321,42 @@ function StatusMark() {
   );
 }
 
-function CriterionPill({ label, check, clear }: { label: string; check: boolean; clear: boolean }) {
+function CriterionPill({ label, clear, grain }: { label: string; clear: boolean; grain: number }) {
   return (
     <div
       data-part={clear ? "pill" : "hidden-pill"}
-      className="flex h-[35.1px] shrink-0 items-center gap-[8px] rounded-[18px] border-[0.82px] border-solid pr-[8px] pl-[12px]"
+      className="flex h-[35.1px] shrink-0 items-center gap-[8px] overflow-hidden rounded-[18px] border-[0.82px] border-solid pr-[8px] pl-[12px]"
       style={{
         backgroundColor: clear ? "rgba(255,255,255,0.86)" : "#ecedeb",
         borderColor: clear ? "#c8c9c7" : "transparent",
-        backgroundImage: clear
-          ? "none"
-          : "radial-gradient(circle, rgba(145, 155, 148, 0.55) 0.6px, transparent 0.75px)",
-        backgroundSize: "7px 6px",
+        backgroundImage: clear ? "none" : hiddenGrain.image,
+        backgroundRepeat: "repeat-x",
+        backgroundSize: clear ? undefined : `${hiddenGrain.width}px 35.1px`,
+        backgroundPosition: clear ? undefined : `${grain}px 0`,
       }}
     >
       <span
         data-part="pill-label"
         className="whitespace-nowrap"
-        style={{ fontSize: 12.66, lineHeight: "15.52px", color: clear ? "#101110" : "transparent" }}
+        style={{
+          fontSize: 12.66,
+          lineHeight: "15.52px",
+          color: clear ? "#101110" : "#777e78",
+          opacity: clear ? 1 : 0.07,
+        }}
       >
         {label}
       </span>
-      {check ? (
-        <span
-          data-part="status"
-          className="relative size-[16.3px] shrink-0 rounded-full"
-          style={{
-            opacity: clear ? 1 : 0,
-            background: "linear-gradient(162deg, #f6ffc8 0%, #e1f300 42%, #cdde00 100%)",
-          }}
-        >
-          <StatusMark />
-        </span>
-      ) : null}
+      <span
+        data-part="status"
+        className="relative size-[16.3px] shrink-0 rounded-full"
+        style={{
+          opacity: clear ? 1 : 0,
+          background: "linear-gradient(162deg, #f6ffc8 0%, #e1f300 42%, #cdde00 100%)",
+        }}
+      >
+        <StatusMark />
+      </span>
     </div>
   );
 }
@@ -333,12 +364,14 @@ function CriterionPill({ label, check, clear }: { label: string; check: boolean;
 function CriterionRow({
   top,
   delay,
+  grain,
   items,
   clear,
 }: {
   top: number;
   delay: string;
-  items: { label: string; check: boolean }[];
+  grain: number;
+  items: string[];
   clear: boolean;
 }) {
   return (
@@ -346,8 +379,8 @@ function CriterionRow({
       <div className="criterion-track" style={{ animationDelay: delay }}>
         {[0, 1].map((copy) => (
           <div key={copy} className="flex gap-[18px] pr-[18px]">
-            {items.map((item) => (
-              <CriterionPill key={`${copy}-${item.label}`} label={item.label} check={item.check} clear={clear} />
+            {items.map((label) => (
+              <CriterionPill key={`${copy}-${label}`} label={label} clear={clear} grain={grain} />
             ))}
           </div>
         ))}
@@ -369,11 +402,11 @@ export function CoverageScan() {
       className="absolute top-[197px] left-0 h-[305px] w-[383px] overflow-hidden rounded-[45px]"
     >
       {rows.map((row) => (
-        <CriterionRow key={row.top} top={row.top} delay={row.delay} items={row.items} clear={false} />
+        <CriterionRow key={row.top} top={row.top} delay={row.delay} grain={row.grain} items={row.items} clear={false} />
       ))}
       <div className="scan-reveal">
         {rows.map((row) => (
-          <CriterionRow key={row.top} top={row.top} delay={row.delay} items={row.items} clear />
+          <CriterionRow key={row.top} top={row.top} delay={row.delay} grain={row.grain} items={row.items} clear />
         ))}
       </div>
       <div
