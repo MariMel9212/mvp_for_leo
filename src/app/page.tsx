@@ -52,7 +52,7 @@ export default function HomePage() {
               </nav>
               <a
                 href="#situacii"
-                className="flex h-[44px] items-center justify-center rounded-[8px] bg-[#e1f300] px-[20px] text-16 text-black"
+                className="flex h-[38px] w-[153px] items-center justify-center rounded-[8px] bg-[#e1f300] px-[20px] text-16 text-black"
               >
                 Выбрать центр
               </a>
