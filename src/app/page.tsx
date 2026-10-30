@@ -15,7 +15,7 @@ const heroFieldBoot = readFileSync(
 
 export default function HomePage() {
   return (
-    <main className="relative overflow-x-clip bg-[#f4f7fb] text-black">
+    <main className="relative overflow-x-clip bg-[#fdfdfd] text-black">
       <SiteHeader />
       <Hero />
       <script dangerouslySetInnerHTML={{ __html: heroFieldBoot }} />

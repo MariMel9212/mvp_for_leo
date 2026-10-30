@@ -1,195 +1,209 @@
 "use client";
 
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useState } from "react";
 
-const centers = [
+type Kind = "rehab" | "detox";
+type FilterId = "all" | Kind;
+
+type Crop = {
+  left: string;
+  top: string;
+  width: string;
+  height: string;
+};
+
+type Center = {
+  id: string;
+  kind: Kind;
+  image: string;
+  crop: Crop;
+  name: string;
+  region: string;
+  course: string;
+  type: string;
+  badge?: { label: string; tone: "lime" | "blue" };
+};
+
+const filters: { id: FilterId; label: string }[] = [
+  { id: "all", label: "Все" },
+  { id: "detox", label: "Детокс" },
+  { id: "rehab", label: "Ребцентр" },
+];
+
+const houseCrop: Crop = {
+  left: "calc(-29 / 304 * 100%)",
+  top: "0",
+  width: "calc(429 / 304 * 100%)",
+  height: "calc(280 / 274 * 100%)",
+};
+
+const manorCrop: Crop = {
+  left: "calc(-74 / 304 * 100%)",
+  top: "0",
+  width: "calc(519 / 304 * 100%)",
+  height: "calc(347 / 274 * 100%)",
+};
+
+const clinicCrop: Crop = {
+  left: "0",
+  top: "calc(-18 / 274 * 100%)",
+  width: "calc(305 / 304 * 100%)",
+  height: "calc(304 / 274 * 100%)",
+};
+
+const centers: Center[] = [
   {
-    id: "rassvet",
-    image: "/centers/himki.png",
-    focus: "center",
-    name: "Центр «Рассвет»",
+    id: "serpuhov-1",
+    kind: "rehab",
+    image: "/centers/serpuhov.jpg",
+    crop: houseCrop,
+    name: "Реабилитационный центр в Серпухово",
     region: "Московская область",
-    note: "Стационар на 3–6 месяцев. Небольшие группы и работа с семьёй.",
+    course: "Курс от 3 до 12 месяцев",
+    type: "Алко / Нарко / Игро",
   },
   {
-    id: "tishina",
-    image: "/centers/timber.png",
-    focus: "center",
-    name: "Центр «Тишина»",
-    region: "Химки",
-    note: "Детокс и программа до 12 месяцев. Медицинское наблюдение, группы до 15 человек.",
+    id: "himki-1",
+    kind: "rehab",
+    image: "/centers/himki-house.jpg",
+    crop: manorCrop,
+    name: "Реабилитационный центр в Химках",
+    region: "Московская область",
+    course: "Курс от 3 до 12 месяцев",
+    type: "Алко / Нарко",
+    badge: { label: "Подходит для подростков", tone: "lime" },
   },
   {
-    id: "bereg",
-    image: "/centers/zelenograd.png",
-    focus: "center",
-    name: "Центр «Берег»",
-    region: "Зеленоград",
-    note: "Поэтапное восстановление, 5–12 месяцев. Группы до 18 человек.",
+    id: "zelenograd-1",
+    kind: "detox",
+    image: "/centers/zelenograd-clinic.jpg",
+    crop: clinicCrop,
+    name: "Детокс клиника в Зеленограде",
+    region: "Московская область",
+    course: "Курс от 4 до 14 дней",
+    type: "Алко / Нарко",
+    badge: { label: "Медицинское наблюдение", tone: "blue" },
   },
   {
-    id: "sosny",
-    image: "/centers/log.png",
-    focus: "center",
-    name: "Центр «Сосны»",
-    region: "Истра",
-    note: "Загородная программа 12 шагов, 3–12 месяцев. Группы до 12 человек.",
+    id: "zelenograd-2",
+    kind: "detox",
+    image: "/centers/zelenograd-clinic.jpg",
+    crop: clinicCrop,
+    name: "Детокс клиника в Зеленограде",
+    region: "Московская область",
+    course: "Курс от 4 до 14 дней",
+    type: "Алко / Нарко",
+    badge: { label: "Медицинское наблюдение", tone: "blue" },
   },
   {
-    id: "polyana",
-    image: "/centers/himki.png",
-    focus: "18% 40%",
-    name: "Центр «Поляна»",
-    region: "Звенигород",
-    note: "Стационар с трудотерапией, 6–12 месяцев. Группы до 20 человек.",
+    id: "serpuhov-2",
+    kind: "rehab",
+    image: "/centers/serpuhov.jpg",
+    crop: houseCrop,
+    name: "Реабилитационный центр в Серпухово",
+    region: "Московская область",
+    course: "Курс от 3 до 12 месяцев",
+    type: "Алко / Нарко / Игро",
   },
   {
-    id: "orion",
-    image: "/centers/timber.png",
-    focus: "78% center",
-    name: "Центр «Орион»",
-    region: "Одинцово",
-    note: "Семейное сопровождение, программа 4–12 месяцев. Группы до 16 человек.",
+    id: "himki-2",
+    kind: "rehab",
+    image: "/centers/himki-house.jpg",
+    crop: manorCrop,
+    name: "Реабилитационный центр в Химках",
+    region: "Московская область",
+    course: "Курс от 3 до 12 месяцев",
+    type: "Алко / Нарко",
+    badge: { label: "Подходит для подростков", tone: "lime" },
   },
 ];
 
+const badgeTone = {
+  lime: "bg-[#e1f300]",
+  blue: "bg-[#edf3fe]",
+} as const;
+
 export function Centers() {
-  const scroller = useRef<HTMLDivElement>(null);
-  const [edges, setEdges] = useState({ start: true, end: false });
-
-  useEffect(() => {
-    const el = scroller.current;
-    if (!el) return;
-
-    const sync = () => {
-      setEdges({
-        start: el.scrollLeft <= 2,
-        end: el.scrollLeft + el.clientWidth >= el.scrollWidth - 2,
-      });
-    };
-
-    sync();
-    el.addEventListener("scroll", sync, { passive: true });
-    const observer = new ResizeObserver(sync);
-    observer.observe(el);
-    return () => {
-      el.removeEventListener("scroll", sync);
-      observer.disconnect();
-    };
-  }, []);
-
-  const move = (direction: number) => {
-    const el = scroller.current;
-    const card = el?.querySelector("article");
-    if (!el || !card) return;
-    const gap = Number.parseFloat(getComputedStyle(el).columnGap || getComputedStyle(el).gap) || 32;
-    el.scrollBy({
-      left: direction * (card.getBoundingClientRect().width + gap),
-      behavior: "smooth",
-    });
-  };
+  const [filter, setFilter] = useState<FilterId>("all");
+  const visible = centers.filter((center) => filter === "all" || center.kind === filter);
 
   return (
-    <section
-      id="uchrezhdeniya"
-      aria-roledescription="карусель"
-      className="mx-auto mt-24 w-full max-w-[1400px] px-4 pb-24 min-[768px]:mt-40 min-[768px]:pb-40 min-[1440px]:px-8"
-    >
-      <div className="flex w-full flex-col gap-12 min-[768px]:gap-[88px]">
-        <div className="flex items-center justify-between gap-4">
-          <h2 className="text-[clamp(36px,6vw,56px)] leading-[1.1] font-medium text-[#0a0d14]">
-            Проверенные учереждения
-          </h2>
-          <div className="flex shrink-0 gap-2">
-            <CarouselButton label="Предыдущие центры" disabled={edges.start} onClick={() => move(-1)}>
-              <Chevron direction="left" />
-            </CarouselButton>
-            <CarouselButton label="Следующие центры" disabled={edges.end} onClick={() => move(1)}>
-              <Chevron direction="right" />
-            </CarouselButton>
-          </div>
-        </div>
-
-        <div
-          ref={scroller}
-          className="flex snap-x snap-mandatory items-stretch gap-8 overflow-x-auto scroll-smooth [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-        >
-          {centers.map((center) => (
-            <CenterCard key={center.id} center={center} />
-          ))}
+    <section id="uchrezhdeniya" className="mx-auto mt-24 w-full max-w-[1400px] px-4 pb-24 min-[768px]:mt-40 min-[768px]:pb-40 min-[1440px]:px-8">
+      <div className="flex flex-col gap-6 min-[768px]:flex-row min-[768px]:items-end min-[768px]:justify-between">
+        <h2 className="text-[clamp(32px,5vw,44px)] leading-[1.1] font-medium text-[#0a0d14] opacity-[0.96]">
+          Проверенные учереждения
+        </h2>
+        <div className="flex w-fit items-end gap-2 border-b border-black/40" role="tablist" aria-label="Тип учреждения">
+          {filters.map((item) => {
+            const selected = filter === item.id;
+            return (
+              <button
+                key={item.id}
+                type="button"
+                role="tab"
+                aria-selected={selected}
+                onClick={() => setFilter(item.id)}
+                className={
+                  selected
+                    ? "-mb-px border-b border-black px-0.5 pb-1.5 text-[20px] leading-[1.1] font-medium text-black"
+                    : "px-0.5 pb-1.5 text-[20px] leading-[1.1] font-medium text-black/40"
+                }
+              >
+                {item.label}
+              </button>
+            );
+          })}
         </div>
       </div>
+
+      <div className="mt-12 grid grid-cols-1 gap-6 min-[720px]:grid-cols-2 min-[960px]:grid-cols-3">
+        {visible.map((center) => (
+          <CenterCard key={center.id} center={center} />
+        ))}
+      </div>
+
+      <a
+        href="#podbor"
+        className="mx-auto mt-[72px] flex h-11 w-[min(100%,312px)] items-center justify-center rounded-[8px] bg-[#e1f300] text-[16px] leading-[1.1] font-medium text-[#0a0d14]/80 hover:bg-[#d6e600]"
+      >
+        Подобрать центр
+      </a>
     </section>
   );
 }
 
-function CenterCard({ center }: { center: (typeof centers)[number] }) {
+function CenterCard({ center }: { center: Center }) {
   return (
-    <article className="group flex w-[min(84%,380px)] shrink-0 snap-start flex-col min-[900px]:w-[380px]">
-      <div className="h-[340px] overflow-hidden rounded-[11px]">
+    <article className="flex flex-col overflow-hidden rounded-[12px] bg-white shadow-[0px_0px_10px_0px_rgba(91,90,90,0.08)]">
+      <div className="relative m-1 aspect-[304/274] overflow-hidden rounded-[10px]">
         <img
           src={center.image}
           alt=""
-          className="size-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
-          style={{ objectPosition: center.focus }}
+          className="absolute max-w-none object-cover"
+          style={center.crop}
         />
+        <div className="absolute inset-x-0 bottom-0 flex items-end">
+          <span className="relative z-10 rounded-tr-[14px] bg-white px-2.5 py-1.5 text-[12px] leading-[1.1] text-[#0a0d14] drop-shadow-[0px_-1px_1.4px_rgba(0,0,0,0.14)]">
+            {center.type}
+          </span>
+          {center.badge ? (
+            <span
+              className={`-ml-3 rounded-tr-[14px] py-1.5 pr-2.5 pl-4 text-[12px] leading-[1.1] text-[#0a0d14] drop-shadow-[0px_-1px_1.4px_rgba(0,0,0,0.14)] ${badgeTone[center.badge.tone]}`}
+            >
+              {center.badge.label}
+            </span>
+          ) : null}
+        </div>
       </div>
-      <div className="flex flex-1 flex-col pt-4">
-        <h3 className="text-[22px] leading-[1.1] font-medium text-[#0a0d14]">
+      <div className="flex flex-col gap-1.5 px-3 pt-3.5 pb-3.5">
+        <h3 className="max-w-[228px] text-[18px] leading-[1.1] font-medium text-[#0a0d14]">
           {center.name}
         </h3>
-        <p className="mt-2 text-[14px] leading-[1.1] text-[#0a0d14]/40">{center.region}</p>
-        <p className="mt-3 text-[14px] leading-[1.2] text-[#0a0d14]">{center.note}</p>
-        <div className="mt-auto pt-5">
-          <p className="text-[14px] leading-[1.1] text-[#0a0d14]/40">
-            Стоимость считают после консультации
-          </p>
-          <a
-            href="#podbor"
-            className="mt-4 inline-flex h-11 w-fit items-center justify-center rounded-[8px] bg-[#e1f300] px-4 text-[16px] leading-[1.1] font-medium text-[#0a0d14]/80 hover:bg-[#d6e600]"
-          >
-            Выбрать
-          </a>
+        <div className="flex flex-col gap-1 text-[14px] leading-[1.1] text-[#0a0d14]">
+          <p>{center.region}</p>
+          <p className="opacity-60">{center.course}</p>
         </div>
       </div>
     </article>
-  );
-}
-
-function CarouselButton({
-  label,
-  disabled,
-  onClick,
-  children,
-}: {
-  label: string;
-  disabled: boolean;
-  onClick: () => void;
-  children: ReactNode;
-}) {
-  return (
-    <button
-      type="button"
-      aria-label={label}
-      disabled={disabled}
-      onClick={onClick}
-      className="inline-flex size-11 items-center justify-center rounded-[8px] bg-[#f6f8fa] text-[#0a0d14] transition-opacity disabled:opacity-40"
-    >
-      {children}
-    </button>
-  );
-}
-
-function Chevron({ direction }: { direction: "left" | "right" }) {
-  return (
-    <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden>
-      <path
-        d={direction === "left" ? "M12.5 4.2L6.7 10l5.8 5.8" : "M7.5 4.2L13.3 10 7.5 15.8"}
-        stroke="currentColor"
-        strokeWidth="1.75"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
   );
 }
