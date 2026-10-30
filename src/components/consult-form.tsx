@@ -112,10 +112,7 @@ export function ConsultForm() {
   }
 
   return (
-    <section
-      className="relative mt-[120px] w-[1440px] overflow-hidden rounded-[29px] bg-gradient-to-b from-[rgba(229,246,255,0.45)] to-[rgba(209,239,255,0.45)]"
-      style={{ height: channel === "messenger" ? 740 : 636 }}
-    >
+    <section className="relative mt-[120px] h-[740px] w-[1440px] overflow-hidden rounded-[29px] bg-gradient-to-b from-[rgba(229,246,255,0.45)] to-[rgba(209,239,255,0.45)]">
       <div className="absolute top-[52px] left-[120px] flex w-[604px] flex-col gap-[24px] text-black">
         <h2 className="text-40 font-medium">
           Расскажите о своей проблеме, и мы подберем профильное учереждение
@@ -128,22 +125,20 @@ export function ConsultForm() {
           <img alt="" src="/consult/leaf-top.svg" width={223.858} height={173.671} />
         </div>
       </div>
-      <div className="pointer-events-none absolute top-[356px] left-[-81px] flex h-[367.399px] w-[516.307px] items-center justify-center">
+      <div className="pointer-events-none absolute top-[466px] left-[-121px] flex h-[367.399px] w-[516.307px] items-center justify-center">
         <div className="rotate-[2.26deg]">
           <img alt="" src="/consult/sheets.svg" width={503} height={347.863} />
         </div>
       </div>
-      <div
-        className={`pointer-events-none absolute left-[807px] flex h-[158.12px] w-[167.658px] items-center justify-center ${channel === "messenger" ? "top-[635px]" : "top-[515px]"}`}
-      >
-        <div className="rotate-[177.41deg]">
-          <img alt="" src="/consult/leaf-bottom.svg" width={161} height={151} />
+      <div className="pointer-events-none absolute top-[591.53px] left-[778.24px] flex h-[214.097px] w-[223.769px] items-center justify-center">
+        <div className="rotate-[169.57deg]">
+          <img alt="" src="/consult/leaf-bottom.svg" width={194.039} height={181.987} />
         </div>
       </div>
 
       <form
         onSubmit={submit}
-        className="absolute top-[50px] left-[905px] flex w-[415px] flex-col items-center gap-[36px] rounded-[23px] bg-white px-[20px] py-[24px]"
+        className="absolute top-[52px] left-[905px] flex w-[415px] flex-col items-center gap-[36px] rounded-[23px] bg-white px-[20px] py-[24px]"
         noValidate
       >
         <h3 className="w-[367px] text-center text-24 font-medium">
