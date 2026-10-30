@@ -27,11 +27,26 @@ function isNickname(value: string) {
   return /[a-zа-яё@._]/i.test(value);
 }
 
+function formatCode(value: string) {
+  return value.replace(/\D/g, "").slice(0, 3);
+}
+
+function formatNational(value: string, code: string) {
+  if (code === "" || code === "7") return formatPhone(value);
+  return value.replace(/\D/g, "").slice(0, 15);
+}
+
+function phoneReady(code: string, value: string) {
+  if (!/^\d{1,3}$/.test(code)) return false;
+  const count = value.replace(/\D/g, "").length;
+  if (code === "7") return count >= 10;
+  return count >= 6;
+}
+
 function telegramReady(value: string) {
   const trimmed = value.trim();
-  if (!trimmed) return false;
-  if (isNickname(trimmed)) return trimmed.replace(/^@/, "").length >= 2;
-  return nationalDigits(trimmed).length >= 10;
+  if (!trimmed || !isNickname(trimmed)) return false;
+  return trimmed.replace(/^@/, "").length >= 2;
 }
 
 function MessengerField({
@@ -42,7 +57,10 @@ function MessengerField({
   label,
   invalid,
   phone,
-  code,
+  showCode,
+  dialCode,
+  onCodeChange,
+  codeLabel,
 }: {
   icon: string;
   value: string;
@@ -51,24 +69,41 @@ function MessengerField({
   label: string;
   invalid: boolean;
   phone?: boolean;
-  code?: boolean;
+  showCode?: boolean;
+  dialCode?: string;
+  onCodeChange?: (value: string) => void;
+  codeLabel?: string;
 }) {
   return (
     <label className="flex h-[60px] w-full items-center gap-[16px] rounded-[16px] border border-solid border-[#dedede] bg-white pr-[14px] pl-[24px]">
-      <span className="flex shrink-0 items-center gap-[8px]">
-        <img alt="" src={icon} width={42} height={42} />
-        {code ? <span className="text-18">+7</span> : null}
-      </span>
+      <img alt="" className="shrink-0" src={icon} width={42} height={42} />
       <span className="h-[24px] w-px shrink-0 bg-[#dedede]" />
-      <input
-        value={value}
-        onChange={(event) => onChange(event.target.value)}
-        inputMode={phone ? "tel" : "text"}
-        placeholder={code ? "(999) 123-45-67" : placeholder}
-        aria-label={label}
-        aria-invalid={invalid}
-        className="min-w-0 flex-1 bg-transparent text-18 text-black outline-none placeholder:text-black placeholder:opacity-40"
-      />
+      <span className="flex min-w-0 flex-1 items-center gap-[8px]">
+        {showCode ? (
+          <span className="flex shrink-0 items-center gap-[4px]">
+            <span className="text-18">+</span>
+            <input
+              value={dialCode}
+              onChange={(event) => onCodeChange?.(formatCode(event.target.value))}
+              inputMode="numeric"
+              autoComplete="tel-country-code"
+              placeholder="7"
+              aria-label={codeLabel ?? "Код страны"}
+              maxLength={3}
+              className="h-[32px] w-[40px] rounded-[8px] bg-[#f6f8fa] text-center text-18 text-black outline-none placeholder:text-black placeholder:opacity-40"
+            />
+          </span>
+        ) : null}
+        <input
+          value={value}
+          onChange={(event) => onChange(event.target.value)}
+          inputMode={phone ? "tel" : "text"}
+          placeholder={placeholder}
+          aria-label={label}
+          aria-invalid={invalid}
+          className="min-w-0 flex-1 bg-transparent text-18 text-black outline-none placeholder:text-black placeholder:opacity-40"
+        />
+      </span>
     </label>
   );
 }
@@ -104,7 +139,9 @@ export function ConsultForm() {
   const [name, setName] = useState("");
   const [channel, setChannel] = useState<Channel>("call");
   const [phone, setPhone] = useState("");
+  const [phoneCode, setPhoneCode] = useState("");
   const [telegram, setTelegram] = useState("");
+  const [telegramCode, setTelegramCode] = useState("");
   const [error, setError] = useState("");
   const [sent, setSent] = useState(false);
 
@@ -118,8 +155,15 @@ export function ConsultForm() {
       setError("Укажите телефон");
       return;
     }
-    if (channel === "messenger" && !telegramReady(telegram) && phone.replace(/\D/g, "").length < 10) {
-      setError("Укажите ник или номер");
+    const telegramOk = isNickname(telegram) ? telegramReady(telegram) : phoneReady(telegramCode, telegram);
+    const whatsappOk = phoneReady(phoneCode, phone);
+    if (channel === "messenger" && !telegramOk && !whatsappOk) {
+      const telegramPhone = !isNickname(telegram) && telegram.replace(/\D/g, "").length > 0;
+      const whatsappPhone = phone.replace(/\D/g, "").length > 0;
+      const missingCode = (telegramPhone && telegramCode === "") || (whatsappPhone && phoneCode === "");
+      if (missingCode) setError("Укажите код");
+      else if (telegramPhone || whatsappPhone || telegramCode !== "" || phoneCode !== "") setError("Укажите номер");
+      else setError("Укажите ник или номер");
       return;
     }
     setError("");
@@ -215,22 +259,34 @@ export function ConsultForm() {
               <MessengerField
                 icon="/consult/telegram.svg"
                 value={telegram}
-                onChange={(value) => setTelegram(isNickname(value) ? value : formatPhone(value))}
+                onChange={(value) => setTelegram(isNickname(value) ? value : formatNational(value, telegramCode))}
                 placeholder="Укажите ник или номер"
                 label="Ник или номер в Телеграме"
-                code={!isNickname(telegram) && nationalDigits(telegram).length > 0}
-                invalid={error !== "" && !telegramReady(telegram) && nationalDigits(phone).length < 10}
+                showCode={!isNickname(telegram)}
+                codeLabel="Код страны в Телеграме"
+                dialCode={telegramCode}
+                onCodeChange={(value) => {
+                  setTelegramCode(value);
+                  setTelegram((current) => (isNickname(current) ? current : formatNational(current, value)));
+                }}
+                invalid={error !== "" && !telegramReady(telegram) && !phoneReady(phoneCode, phone)}
               />
               <p className="w-full text-center text-18 text-black opacity-40">Или</p>
               <MessengerField
                 icon="/consult/whatsapp.svg"
                 value={phone}
-                onChange={(value) => setPhone(formatPhone(value))}
+                onChange={(value) => setPhone(formatNational(value, phoneCode))}
                 placeholder="Укажите номер"
                 label="Номер WhatsApp"
                 phone
-                code
-                invalid={error !== "" && !telegramReady(telegram) && nationalDigits(phone).length < 10}
+                showCode
+                codeLabel="Код страны WhatsApp"
+                dialCode={phoneCode}
+                onCodeChange={(value) => {
+                  setPhoneCode(value);
+                  setPhone((current) => formatNational(current, value));
+                }}
+                invalid={error !== "" && !telegramReady(telegram) && !phoneReady(phoneCode, phone)}
               />
             </div>
           )}
