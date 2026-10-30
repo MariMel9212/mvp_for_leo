@@ -173,21 +173,13 @@ function DocumentSheet() {
 export function SituationSheets() {
   return (
     <div data-part="sheets" className="absolute top-[203px] left-[94px] h-[133px] w-[195px]">
-      <div
-        data-part="table"
-        className="absolute origin-top-left"
-        style={{ left: 105.93, top: 1.8, transform: "rotate(14deg)" }}
-      >
+      <div data-part="table" className="situation-sheet absolute" style={{ left: 105.93, top: 1.8 }}>
         <TableSheet />
       </div>
-      <div
-        data-part="checklist"
-        className="absolute origin-top-left"
-        style={{ left: 0, top: 24.1, transform: "rotate(-14deg)" }}
-      >
+      <div data-part="checklist" className="situation-sheet absolute" style={{ left: 0, top: 24.1 }}>
         <ChecklistSheet />
       </div>
-      <div data-part="document" className="absolute" style={{ left: 45.54, top: 0 }}>
+      <div data-part="document" className="situation-sheet absolute" style={{ left: 45.54, top: 0 }}>
         <DocumentSheet />
       </div>
     </div>

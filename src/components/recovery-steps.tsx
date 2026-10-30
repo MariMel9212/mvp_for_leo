@@ -30,7 +30,7 @@ export function RecoverySteps() {
       <div className="relative flex flex-col gap-[52px] px-[120px] pt-[34px] pb-[34px]">
         <h2 className="w-[1200px] text-40 font-medium">3 шага до выздоровления</h2>
         <div className="flex h-[486px] w-[1200px] items-end gap-[24px]">
-          <article className={`${cardClass} h-[318px]`} style={cardStyle}>
+          <article className={`situation-card ${cardClass} h-[318px]`} style={cardStyle}>
             <StepCopy
               title="Разбираемся в ситуации"
               text="Тип зависимости, состояние человека, прошлый опыт лечения, возраст и другие важные обстоятельства"
