@@ -3,6 +3,8 @@ import path from "node:path";
 import type { ReactNode } from "react";
 import { AudienceTabs } from "@/components/audience-tabs";
 import { HeroField } from "@/components/hero-field";
+import { LicensedCenters } from "@/components/licensed-centers";
+import { RecoverySteps } from "@/components/recovery-steps";
 
 // Inlined so the gather animation starts before React hydrates.
 const heroFieldBoot = readFileSync(
@@ -22,7 +24,7 @@ const sections = ["Раздел", "Раздел", "Раздел"];
 
 export default function HomePage() {
   return (
-    <main className="mx-auto w-[1440px] bg-[#fdfdfd] text-black">
+    <main className="mx-auto w-[1440px] bg-[#fdfdfd] pb-[100px] text-black">
       <section className="relative h-[772px]">
         <div className="pointer-events-none absolute top-0 left-1/2 h-full w-screen -translate-x-1/2 overflow-hidden">
           <div
@@ -84,8 +86,8 @@ export default function HomePage() {
         ))}
       </section>
 
-      <section id="situacii" className="mt-[120px] px-[120px] pb-[406px]">
-        <div className="flex w-[1200px] flex-col gap-[51px]">
+      <section id="situacii" className="mt-[120px] px-[120px]">
+        <div className="flex w-[1200px] flex-col gap-[52px]">
           <h2 className="text-40 font-medium">Подбираем помощь под ситуацию</h2>
           <div className="flex gap-[24px]">
             <SituationCard
@@ -114,6 +116,9 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      <RecoverySteps />
+      <LicensedCenters />
     </main>
   );
 }
