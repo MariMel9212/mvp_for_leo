@@ -243,3 +243,34 @@
   }
 }
 
+/* Third step card. Criteria drift left to right through the scan line.
+   Two copies make the ribbon seamless; the mask reveals type only past the line. */
+@keyframes criterion-pass {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.criterion-track {
+  display: flex;
+  width: max-content;
+  animation: criterion-pass 42s linear infinite;
+}
+
+.scan-reveal {
+  position: absolute;
+  inset: 0;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, transparent 186px, #000 198px);
+  mask-image: linear-gradient(90deg, transparent 0, transparent 186px, #000 198px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .criterion-track {
+    animation: none;
+    transform: translateX(-22%);
+  }
+}
+

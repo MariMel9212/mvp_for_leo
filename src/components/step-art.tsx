@@ -1,5 +1,3 @@
-import { pillGrains, readGrains } from "@/components/step-grains";
-
 const radarDots: { x: number; y: number; opacity: number }[] = [
   { x: 45, y: 61, opacity: 1 },
   { x: 175, y: 51, opacity: 1 },
@@ -263,20 +261,22 @@ export function FormatRadar() {
   );
 }
 
-const hiddenPills: { key: keyof typeof pillGrains; x: number; y: number; w: number; label: string }[] = [
-  { key: "business", x: 44.5, y: 83.7, w: 147, label: "Business management" },
-  { key: "digital", x: -36.7, y: 130.3, w: 123.7, label: "Digital platform" },
-  { key: "portal", x: 94.3, y: 130.3, w: 156.4, label: "Customer Portal" },
-  { key: "healthcare", x: -51, y: 177.2, w: 123.7, label: "Healthcare" },
-  { key: "travel", x: 78.8, y: 177.2, w: 110.2, label: "Travel booking" },
-  { key: "education", x: 40, y: 223.3, w: 139.2, label: "Online education" },
+const criteria: { label: string; check: boolean }[] = [
+  { label: "Регион проживания", check: true },
+  { label: "Программа выздоровления", check: false },
+  { label: "Персонал в организайии", check: true },
+  { label: "Лицензии", check: true },
+  { label: "Возраст", check: false },
+  { label: "Тип зависимости", check: false },
+  { label: "Медицинское наблюдение", check: true },
+  { label: "Опыт лечения", check: false },
 ];
 
-const clearPills: { x: number; y: number; w: number; label: string; check?: { x: number; y: number } }[] = [
-  { x: 196.4, y: 83.7, w: 164.1, label: "Регион проживания", check: { x: 139.2, y: 9.8 } },
-  { x: 255.2, y: 130.7, w: 175.6, label: "Программа выздоровления" },
-  { x: 186.6, y: 177.2, w: 196.4, label: "Персонал в организайии", check: { x: 168.6, y: 9.4 } },
-  { x: 182.9, y: 223.3, w: 104.1, label: "Лицензии", check: { x: 76.4, y: 9.4 } },
+const criterionRows = [
+  { top: 83.7, shift: 0, delay: "0s" },
+  { top: 130.3, shift: 3, delay: "-11s" },
+  { top: 177.2, shift: 5, delay: "-6s" },
+  { top: 223.3, shift: 1, delay: "-17s" },
 ];
 
 function StatusMark() {
@@ -293,84 +293,89 @@ function StatusMark() {
   );
 }
 
-function HiddenPill({ pillKey, x, y, w, label }: { pillKey: keyof typeof pillGrains; x: number; y: number; w: number; label: string }) {
-  const grains = readGrains(pillGrains[pillKey]);
+function CriterionPill({ label, check, clear }: { label: string; check: boolean; clear: boolean }) {
   return (
     <div
-      data-part="hidden-pill"
-      className="absolute overflow-hidden bg-[#ecedeb]"
-      style={{ left: x, top: y, width: w, height: 35.1, borderRadius: 18 }}
+      data-part={clear ? "pill" : "hidden-pill"}
+      className="flex h-[35.1px] shrink-0 items-center gap-[8px] rounded-[18px] border-[0.82px] border-solid pr-[8px] pl-[12px]"
+      style={{
+        backgroundColor: clear ? "rgba(255,255,255,0.86)" : "#ecedeb",
+        borderColor: clear ? "#c8c9c7" : "transparent",
+        backgroundImage: clear
+          ? "none"
+          : "radial-gradient(circle, rgba(145, 155, 148, 0.55) 0.6px, transparent 0.75px)",
+        backgroundSize: "7px 6px",
+      }}
     >
       <span
-        data-part="hidden-label"
-        className="absolute text-[#777e78]"
-        style={{ left: 11, top: 9.4, fontSize: 12.25, lineHeight: "16.3px", opacity: 0.07 }}
+        data-part="pill-label"
+        className="whitespace-nowrap"
+        style={{ fontSize: 12.66, lineHeight: "15.52px", color: clear ? "#101110" : "transparent" }}
       >
         {label}
       </span>
-      {grains.map((grain, index) => (
+      {check ? (
         <span
-          key={index}
-          data-part="grain"
-          className="absolute rounded-full bg-[#919b94]"
-          style={{ left: grain.x, top: grain.y, width: grain.w, height: grain.h, opacity: grain.o }}
-        />
-      ))}
+          data-part="status"
+          className="relative size-[16.3px] shrink-0 rounded-full"
+          style={{
+            opacity: clear ? 1 : 0,
+            background: "linear-gradient(162deg, #f6ffc8 0%, #e1f300 42%, #cdde00 100%)",
+          }}
+        >
+          <StatusMark />
+        </span>
+      ) : null}
+    </div>
+  );
+}
+
+function CriterionRow({
+  top,
+  delay,
+  items,
+  clear,
+}: {
+  top: number;
+  delay: string;
+  items: { label: string; check: boolean }[];
+  clear: boolean;
+}) {
+  return (
+    <div className="absolute right-0 left-0 h-[35.1px] overflow-hidden" style={{ top }}>
+      <div className="criterion-track" style={{ animationDelay: delay }}>
+        {[0, 1].map((copy) => (
+          <div key={copy} className="flex gap-[18px] pr-[18px]">
+            {items.map((item) => (
+              <CriterionPill key={`${copy}-${item.label}`} label={item.label} check={item.check} clear={clear} />
+            ))}
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
 
 export function CoverageScan() {
+  const rows = criterionRows.map((row) => ({
+    ...row,
+    items: criteria.map((_, index) => criteria[(index + row.shift) % criteria.length]),
+  }));
+
   return (
-    <div data-part="coverage" className="absolute top-[197px] left-0 h-[305px] w-[383px] overflow-hidden rounded-[45px]">
-      {hiddenPills.map((pill) => (
-        <HiddenPill key={pill.key} pillKey={pill.key} x={pill.x} y={pill.y} w={pill.w} label={pill.label} />
+    <div
+      data-part="coverage"
+      aria-hidden
+      className="absolute top-[197px] left-0 h-[305px] w-[383px] overflow-hidden rounded-[45px]"
+    >
+      {rows.map((row) => (
+        <CriterionRow key={row.top} top={row.top} delay={row.delay} items={row.items} clear={false} />
       ))}
-      <span
-        data-part="partial-label"
-        className="absolute text-[#101110]"
-        style={{ left: 193.5, top: 140.9, width: 50, fontSize: 12.66, lineHeight: "15px", opacity: 0.6 }}
-      >
-        возраст
-      </span>
-      {clearPills.map((pill) => (
-        <div
-          key={pill.label}
-          data-part="pill"
-          className="absolute border-solid border-[#c8c9c7] bg-white/40"
-          style={{
-            left: pill.x,
-            top: pill.y,
-            width: pill.w,
-            height: 35.1,
-            borderRadius: 18,
-            borderWidth: 0.82,
-          }}
-        >
-          <span
-            data-part="pill-label"
-            className="absolute whitespace-nowrap text-[#101110]"
-            style={{ left: 11.4, top: 10.2, fontSize: 12.66, lineHeight: "15.52px" }}
-          >
-            {pill.label}
-          </span>
-          {pill.check ? (
-            <span
-              data-part="status"
-              className="absolute rounded-full"
-              style={{
-                left: pill.check.x,
-                top: pill.check.y,
-                width: 16.3,
-                height: 16.3,
-                background: "linear-gradient(162deg, #f6ffc8 0%, #e1f300 42%, #cdde00 100%)",
-              }}
-            >
-              <StatusMark />
-            </span>
-          ) : null}
-        </div>
-      ))}
+      <div className="scan-reveal">
+        {rows.map((row) => (
+          <CriterionRow key={row.top} top={row.top} delay={row.delay} items={row.items} clear />
+        ))}
+      </div>
       <div
         data-part="scan-light"
         className="absolute"
