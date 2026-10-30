@@ -53,7 +53,7 @@ const centers: Center[] = [
 
 function CenterCard({ title, course, photo, photoClassName, badge }: Center) {
   return (
-    <article className="relative h-[559px] w-[429px] shadow-[0_0_10px_rgba(91,90,90,0.08)]">
+    <article className="relative h-[559px] w-[429px] overflow-hidden rounded-[14px] drop-shadow-[0_0_5px_rgba(91,90,90,0.08)]">
       <div className="h-[425px] overflow-hidden rounded-t-[14px] bg-white">
         <div className="absolute top-[4px] left-[4px] h-[421px] w-[421px] overflow-hidden rounded-[10px]">
           <img alt="" src={photo} className={`absolute max-w-none ${photoClassName}`} />
@@ -100,6 +100,13 @@ export function LicensedCenters() {
           ))}
         </div>
       </div>
+      <a
+        href="#uchrezhdeniya"
+        className="mx-auto flex h-[56px] w-[377px] items-center justify-center gap-[4px] rounded-[12px] bg-[#e1f300] px-[20px] text-18 leading-[24px] font-medium text-black"
+      >
+        Смотреть все
+        <img alt="" src="/icons/arrow-right.svg" width={24} height={24} />
+      </a>
     </section>
   );
 }
