@@ -3,6 +3,7 @@ import path from "node:path";
 import type { ReactNode } from "react";
 import { AudienceTabs } from "@/components/audience-tabs";
 import { HeroField } from "@/components/hero-field";
+import { ConsultForm } from "@/components/consult-form";
 import { LicensedCenters } from "@/components/licensed-centers";
 import { RecoverySteps } from "@/components/recovery-steps";
 
@@ -119,6 +120,7 @@ export default function HomePage() {
 
       <RecoverySteps />
       <LicensedCenters />
+      <ConsultForm />
     </main>
   );
 }
