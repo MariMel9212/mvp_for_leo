@@ -11,55 +11,55 @@ const centers: Center[] = [
     title: "Реабилитационный центр в Серпухово",
     course: "Курс от 3 до 12 месяцев",
     photo: "/centers/serpuhov.png",
-    photoClassName: "top-[-40px] left-[-86px] h-[507px] w-[594px]",
+    photoClassName: "top-[-36px] left-[-77px] h-[453px] w-[530px]",
     badge: { label: "Медицинское наблюдение", className: "w-[192px] bg-[#deeaff]" },
   },
   {
     title: "Реабилитационный центр в Химках",
     course: "Курс от 3 до 12 месяцев",
     photo: "/centers/himki.png",
-    photoClassName: "top-[-8px] left-[-126px] h-[507px] w-[719px]",
+    photoClassName: "top-[-7px] left-[-112px] h-[453px] w-[642px]",
     badge: { label: "Подходит для подростков", className: "w-[188px] bg-[#e1f300]" },
   },
   {
     title: "Детокс клиника в\u00a0Зеленограде",
     course: "Курс от 4 до 14 дней",
     photo: "/centers/zelenograd.png",
-    photoClassName: "top-[-40px] left-[-46px] h-[514px] w-[514px]",
+    photoClassName: "top-[-36px] left-[-41px] h-[459px] w-[459px]",
     badge: { label: "Медицинское наблюдение", className: "w-[192px] bg-[#deeaff]" },
   },
   {
     title: "Детокс клиника в\u00a0Зеленограде",
     course: "Курс от 4 до 14 дней",
     photo: "/centers/zelenograd.png",
-    photoClassName: "top-[-40px] left-[-46px] h-[514px] w-[514px]",
+    photoClassName: "top-[-36px] left-[-41px] h-[459px] w-[459px]",
     badge: { label: "Медицинское наблюдение", className: "w-[192px] bg-[#deeaff]" },
   },
   {
     title: "Реабилитационный центр в Серпухово",
     course: "Курс от 3 до 12 месяцев",
     photo: "/centers/serpuhov.png",
-    photoClassName: "top-[-40px] left-[-86px] h-[507px] w-[594px]",
+    photoClassName: "top-[-36px] left-[-77px] h-[453px] w-[530px]",
     badge: { label: "Медицинское наблюдение", className: "w-[192px] bg-[#deeaff]" },
   },
   {
     title: "Реабилитационный центр в Химках",
     course: "Курс от 3 до 12 месяцев",
     photo: "/centers/himki.png",
-    photoClassName: "top-[-8px] left-[-126px] h-[507px] w-[719px]",
+    photoClassName: "top-[-7px] left-[-112px] h-[453px] w-[642px]",
     badge: { label: "Подходит для подростков", className: "w-[188px] bg-[#e1f300]" },
   },
 ];
 
 function CenterCard({ title, course, photo, photoClassName, badge }: Center) {
   return (
-    <article className="relative h-[559px] w-[429px] overflow-hidden rounded-[14px] drop-shadow-[0_0_5px_rgba(91,90,90,0.08)]">
-      <div className="h-[425px] overflow-hidden rounded-t-[14px] bg-white">
-        <div className="absolute top-[4px] left-[4px] h-[421px] w-[421px] overflow-hidden rounded-[10px]">
+    <article className="relative h-[514px] w-[384px] overflow-hidden rounded-[14px] drop-shadow-[0_0_5px_rgba(91,90,90,0.08)]">
+      <div className="h-[380px] overflow-hidden rounded-t-[14px] bg-white">
+        <div className="absolute top-[4px] left-[4px] h-[376px] w-[376px] overflow-hidden rounded-[10px]">
           <img alt="" src={photo} className={`absolute max-w-none ${photoClassName}`} />
         </div>
       </div>
-      <div className="absolute top-[397px] left-0 w-[429px]">
+      <div className="absolute top-[352px] left-0 w-[384px]">
         <div className="relative h-[28px] w-[320px]">
           {badge ? (
             <span
@@ -86,27 +86,29 @@ function CenterCard({ title, course, photo, photoClassName, badge }: Center) {
 
 export function LicensedCenters() {
   return (
-    <section id="uchrezhdeniya" className="mt-[120px] ml-[53px] flex w-[1335px] flex-col gap-[52px]">
-      <h2 className="w-[1335px] text-40 font-medium">Лицензированные учереждения</h2>
-      <div className="flex w-[1335px] flex-col gap-[24px]">
-        <div className="flex gap-[24px]">
-          {centers.slice(0, 3).map((center, index) => (
-            <CenterCard key={index} {...center} />
-          ))}
+    <section id="uchrezhdeniya" className="mt-[120px] px-[120px]">
+      <div className="flex w-[1200px] flex-col gap-[52px]">
+        <h2 className="w-[1200px] text-40 font-medium">Лицензированные учереждения</h2>
+        <div className="flex w-[1200px] flex-col gap-[24px]">
+          <div className="flex gap-[24px]">
+            {centers.slice(0, 3).map((center, index) => (
+              <CenterCard key={index} {...center} />
+            ))}
+          </div>
+          <div className="flex gap-[24px]">
+            {centers.slice(3).map((center, index) => (
+              <CenterCard key={index} {...center} />
+            ))}
+          </div>
         </div>
-        <div className="flex gap-[24px]">
-          {centers.slice(3).map((center, index) => (
-            <CenterCard key={index} {...center} />
-          ))}
-        </div>
+        <a
+          href="#uchrezhdeniya"
+          className="mx-auto flex h-[56px] w-[377px] items-center justify-center gap-[4px] rounded-[12px] bg-[#e1f300] px-[20px] text-18 leading-[24px] font-medium text-black"
+        >
+          Смотреть все
+          <img alt="" src="/icons/arrow-right.svg" width={24} height={24} />
+        </a>
       </div>
-      <a
-        href="#uchrezhdeniya"
-        className="mx-auto flex h-[56px] w-[377px] items-center justify-center gap-[4px] rounded-[12px] bg-[#e1f300] px-[20px] text-18 leading-[24px] font-medium text-black"
-      >
-        Смотреть все
-        <img alt="" src="/icons/arrow-right.svg" width={24} height={24} />
-      </a>
     </section>
   );
 }
