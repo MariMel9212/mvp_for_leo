@@ -38,8 +38,18 @@ const criteria: { n: string; title: string; text: ReactNode }[] = [
 
 export function SelectionCriteria() {
   return (
-    <section className="mt-[120px] px-[120px]">
-      <div className="flex w-[1200px] items-start">
+    <section className="relative w-[1440px] pt-[120px] pb-[92px]">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0"
+        style={{
+          backgroundImage:
+            "linear-gradient(to right, rgba(136,136,136,0.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(136,136,136,0.06) 1px, transparent 1px)",
+          backgroundSize: "56px 56px",
+          backgroundPosition: "0 2px",
+        }}
+      />
+      <div className="relative mx-auto flex w-[1200px] items-start">
         <div className="flex w-[483px] shrink-0 flex-col gap-[24px]">
           <h2 className="text-40 font-medium">
             Отбираем учреждения
