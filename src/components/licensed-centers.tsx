@@ -1,10 +1,10 @@
 import Link from "next/link";
+import { CenterPhoto, type CenterSlide } from "@/components/center-photo";
 
 type Center = {
   title: string;
   course: string;
-  photo: string;
-  photoClassName: string;
+  slides: CenterSlide[];
   badge?: { label: string; className: string };
 };
 
@@ -12,54 +12,76 @@ const centers: Center[] = [
   {
     title: "Реабилитационный центр в Серпухово",
     course: "Курс от 3 до 12 месяцев",
-    photo: "/centers/serpuhov.png",
-    photoClassName: "top-[-36px] left-[-77px] h-[453px] w-[530px]",
+    slides: [
+      { src: "/centers/serpuhov.png", className: "top-[-36px] left-[-77px] h-[453px] w-[530px]" },
+      { src: "/centers/serpuhov.png", className: "top-[-8px] left-0 h-[453px] w-[530px]" },
+      { src: "/centers/serpuhov.png", className: "top-[-36px] left-[-150px] h-[453px] w-[530px]" },
+      { src: "/centers/serpuhov.png", className: "top-[-70px] left-[-40px] h-[453px] w-[530px]" },
+    ],
     badge: { label: "Медицинское наблюдение", className: "w-[192px] bg-[#deeaff]" },
   },
   {
     title: "Реабилитационный центр в Химках",
     course: "Курс от 3 до 12 месяцев",
-    photo: "/centers/himki.png",
-    photoClassName: "top-[-7px] left-[-112px] h-[453px] w-[642px]",
+    slides: [
+      { src: "/centers/himki.png", className: "top-[-7px] left-[-112px] h-[453px] w-[642px]" },
+      { src: "/centers/himki.png", className: "top-[-7px] left-[-8px] h-[453px] w-[642px]" },
+      { src: "/centers/himki.png", className: "top-[-7px] left-[-250px] h-[453px] w-[642px]" },
+      { src: "/centers/himki.png", className: "top-[-70px] left-[-140px] h-[453px] w-[642px]" },
+    ],
     badge: { label: "Подходит для подростков", className: "w-[188px] bg-[#e1f300]" },
   },
   {
     title: "Детокс клиника в\u00a0Зеленограде",
     course: "Курс от 4 до 14 дней",
-    photo: "/centers/zelenograd.png",
-    photoClassName: "top-[-36px] left-[-41px] h-[459px] w-[459px]",
+    slides: [
+      { src: "/centers/zelenograd.png", className: "top-[-36px] left-[-41px] h-[459px] w-[459px]" },
+      { src: "/centers/zelenograd.png", className: "top-0 left-0 h-[459px] w-[459px]" },
+      { src: "/centers/zelenograd.png", className: "top-[-36px] left-[-80px] h-[459px] w-[459px]" },
+      { src: "/centers/zelenograd.png", className: "top-[-80px] left-[-20px] h-[459px] w-[459px]" },
+    ],
     badge: { label: "Медицинское наблюдение", className: "w-[192px] bg-[#deeaff]" },
   },
   {
     title: "Детокс клиника в\u00a0Зеленограде",
     course: "Курс от 4 до 14 дней",
-    photo: "/centers/zelenograd.png",
-    photoClassName: "top-[-36px] left-[-41px] h-[459px] w-[459px]",
+    slides: [
+      { src: "/centers/zelenograd.png", className: "top-[-36px] left-[-41px] h-[459px] w-[459px]" },
+      { src: "/centers/zelenograd.png", className: "top-0 left-0 h-[459px] w-[459px]" },
+      { src: "/centers/zelenograd.png", className: "top-[-36px] left-[-80px] h-[459px] w-[459px]" },
+      { src: "/centers/zelenograd.png", className: "top-[-80px] left-[-20px] h-[459px] w-[459px]" },
+    ],
     badge: { label: "Медицинское наблюдение", className: "w-[192px] bg-[#deeaff]" },
   },
   {
     title: "Реабилитационный центр в Серпухово",
     course: "Курс от 3 до 12 месяцев",
-    photo: "/centers/serpuhov.png",
-    photoClassName: "top-[-36px] left-[-77px] h-[453px] w-[530px]",
+    slides: [
+      { src: "/centers/serpuhov.png", className: "top-[-36px] left-[-77px] h-[453px] w-[530px]" },
+      { src: "/centers/serpuhov.png", className: "top-[-8px] left-0 h-[453px] w-[530px]" },
+      { src: "/centers/serpuhov.png", className: "top-[-36px] left-[-150px] h-[453px] w-[530px]" },
+      { src: "/centers/serpuhov.png", className: "top-[-70px] left-[-40px] h-[453px] w-[530px]" },
+    ],
     badge: { label: "Медицинское наблюдение", className: "w-[192px] bg-[#deeaff]" },
   },
   {
     title: "Реабилитационный центр в Химках",
     course: "Курс от 3 до 12 месяцев",
-    photo: "/centers/himki.png",
-    photoClassName: "top-[-7px] left-[-112px] h-[453px] w-[642px]",
+    slides: [
+      { src: "/centers/himki.png", className: "top-[-7px] left-[-112px] h-[453px] w-[642px]" },
+      { src: "/centers/himki.png", className: "top-[-7px] left-[-8px] h-[453px] w-[642px]" },
+      { src: "/centers/himki.png", className: "top-[-7px] left-[-250px] h-[453px] w-[642px]" },
+      { src: "/centers/himki.png", className: "top-[-70px] left-[-140px] h-[453px] w-[642px]" },
+    ],
     badge: { label: "Подходит для подростков", className: "w-[188px] bg-[#e1f300]" },
   },
 ];
 
-function CenterCard({ title, course, photo, photoClassName, badge }: Center) {
+function CenterCard({ title, course, slides, badge }: Center) {
   return (
     <article className="relative h-[514px] w-[384px] overflow-hidden rounded-[14px] drop-shadow-[0_0_5px_rgba(91,90,90,0.08)]">
       <div className="h-[380px] overflow-hidden rounded-t-[14px] bg-white">
-        <div className="absolute top-[4px] left-[4px] h-[376px] w-[376px] overflow-hidden rounded-[10px]">
-          <img alt="" src={photo} className={`absolute max-w-none ${photoClassName}`} />
-        </div>
+        <CenterPhoto slides={slides} frameClassName="h-[376px]" />
       </div>
       <div className="absolute top-[352px] left-0 w-[384px]">
         <div className="relative h-[28px] w-[320px]">

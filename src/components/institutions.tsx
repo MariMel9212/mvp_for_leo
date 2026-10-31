@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useId, useState } from "react";
 import { ChartArt, MagnifierArt } from "@/components/catalog-art";
+import { CenterPhoto, type CenterSlide } from "@/components/center-photo";
 
 type Kind = "rehab" | "detox";
 type Dependency = "alco" | "narco" | "game";
@@ -11,8 +12,7 @@ type Center = {
   title: string;
   course: string;
   price: string;
-  photo: string;
-  photoClassName: string;
+  slides: CenterSlide[];
   kind: Kind;
   dependencies: Dependency[];
   teen: boolean;
@@ -38,8 +38,12 @@ const centers: Center[] = [
     title: "Реабилитационный центр в Химках",
     course: "Курс от 3 до 12 месяцев • группа до 20 человек",
     price: "от 80 000 ₽ / месяц",
-    photo: "/centers/himki.png",
-    photoClassName: "top-[-8px] left-[-149px] h-[507px] w-[719px]",
+    slides: [
+      { src: "/centers/himki.png", className: "top-[-8px] left-[-149px] h-[507px] w-[719px]" },
+      { src: "/centers/himki.png", className: "top-[-8px] left-[-16px] h-[507px] w-[719px]" },
+      { src: "/centers/himki.png", className: "top-[-8px] left-[-300px] h-[507px] w-[719px]" },
+      { src: "/centers/himki.png", className: "top-[-90px] left-[-160px] h-[507px] w-[719px]" },
+    ],
     kind: "rehab",
     dependencies: ["alco", "narco", "game"],
     teen: true,
@@ -52,8 +56,12 @@ const centers: Center[] = [
     title: "Реабилитационный центр в Серпухово",
     course: "Курс от 3 до 12 месяцев • группа до 20 человек",
     price: "от 70 000 ₽ / месяц",
-    photo: "/centers/serpuhov.png",
-    photoClassName: "top-[-40px] left-[-109px] h-[507px] w-[594px]",
+    slides: [
+      { src: "/centers/serpuhov.png", className: "top-[-40px] left-[-109px] h-[507px] w-[594px]" },
+      { src: "/centers/serpuhov.png", className: "top-[-8px] left-[-8px] h-[507px] w-[594px]" },
+      { src: "/centers/serpuhov.png", className: "top-[-40px] left-[-210px] h-[507px] w-[594px]" },
+      { src: "/centers/serpuhov.png", className: "top-[-100px] left-[-80px] h-[507px] w-[594px]" },
+    ],
     kind: "rehab",
     dependencies: ["alco", "narco"],
     teen: false,
@@ -65,8 +73,12 @@ const centers: Center[] = [
     title: "Детокс клиника в\u00a0Зеленограде",
     course: "Курс от 4 до 14 дней • 3 типа палат",
     price: "от 8 000 ₽ / день",
-    photo: "/centers/zelenograd.png",
-    photoClassName: "top-[-40px] left-[-69px] h-[514px] w-[514px]",
+    slides: [
+      { src: "/centers/zelenograd.png", className: "top-[-40px] left-[-69px] h-[514px] w-[514px]" },
+      { src: "/centers/zelenograd.png", className: "top-[-8px] left-0 h-[514px] w-[514px]" },
+      { src: "/centers/zelenograd.png", className: "top-[-40px] left-[-130px] h-[514px] w-[514px]" },
+      { src: "/centers/zelenograd.png", className: "top-[-110px] left-[-40px] h-[514px] w-[514px]" },
+    ],
     kind: "detox",
     dependencies: ["alco", "narco"],
     teen: false,
@@ -79,8 +91,12 @@ const centers: Center[] = [
     title: "Детокс клиника в\u00a0Зеленограде",
     course: "Курс от 4 до 14 дней • 3 типа палат",
     price: "от 8 000 ₽ / день",
-    photo: "/centers/zelenograd.png",
-    photoClassName: "top-[-40px] left-[-69px] h-[514px] w-[514px]",
+    slides: [
+      { src: "/centers/zelenograd.png", className: "top-[-40px] left-[-69px] h-[514px] w-[514px]" },
+      { src: "/centers/zelenograd.png", className: "top-[-8px] left-0 h-[514px] w-[514px]" },
+      { src: "/centers/zelenograd.png", className: "top-[-40px] left-[-130px] h-[514px] w-[514px]" },
+      { src: "/centers/zelenograd.png", className: "top-[-110px] left-[-40px] h-[514px] w-[514px]" },
+    ],
     kind: "detox",
     dependencies: ["alco", "narco"],
     teen: false,
@@ -93,8 +109,12 @@ const centers: Center[] = [
     title: "Реабилитационный центр в Химках",
     course: "Курс от 3 до 12 месяцев • группа до 20 человек",
     price: "от 80 000 ₽ / месяц",
-    photo: "/centers/himki.png",
-    photoClassName: "top-[-8px] left-[-149px] h-[507px] w-[719px]",
+    slides: [
+      { src: "/centers/himki.png", className: "top-[-8px] left-[-149px] h-[507px] w-[719px]" },
+      { src: "/centers/himki.png", className: "top-[-8px] left-[-16px] h-[507px] w-[719px]" },
+      { src: "/centers/himki.png", className: "top-[-8px] left-[-300px] h-[507px] w-[719px]" },
+      { src: "/centers/himki.png", className: "top-[-90px] left-[-160px] h-[507px] w-[719px]" },
+    ],
     kind: "rehab",
     dependencies: ["alco", "narco", "game"],
     teen: true,
@@ -107,8 +127,12 @@ const centers: Center[] = [
     title: "Реабилитационный центр в Серпухово",
     course: "Курс от 3 до 12 месяцев • группа до 20 человек",
     price: "от 70 000 ₽ / месяц",
-    photo: "/centers/serpuhov.png",
-    photoClassName: "top-[-40px] left-[-109px] h-[507px] w-[594px]",
+    slides: [
+      { src: "/centers/serpuhov.png", className: "top-[-40px] left-[-109px] h-[507px] w-[594px]" },
+      { src: "/centers/serpuhov.png", className: "top-[-8px] left-[-8px] h-[507px] w-[594px]" },
+      { src: "/centers/serpuhov.png", className: "top-[-40px] left-[-210px] h-[507px] w-[594px]" },
+      { src: "/centers/serpuhov.png", className: "top-[-100px] left-[-80px] h-[507px] w-[594px]" },
+    ],
     kind: "rehab",
     dependencies: ["alco", "narco"],
     teen: false,
@@ -120,8 +144,12 @@ const centers: Center[] = [
     title: "Детокс клиника в\u00a0Зеленограде",
     course: "Курс от 4 до 14 дней • 3 типа палат",
     price: "от 8 000 ₽ / день",
-    photo: "/centers/zelenograd.png",
-    photoClassName: "top-[-40px] left-[-69px] h-[514px] w-[514px]",
+    slides: [
+      { src: "/centers/zelenograd.png", className: "top-[-40px] left-[-69px] h-[514px] w-[514px]" },
+      { src: "/centers/zelenograd.png", className: "top-[-8px] left-0 h-[514px] w-[514px]" },
+      { src: "/centers/zelenograd.png", className: "top-[-40px] left-[-130px] h-[514px] w-[514px]" },
+      { src: "/centers/zelenograd.png", className: "top-[-110px] left-[-40px] h-[514px] w-[514px]" },
+    ],
     kind: "detox",
     dependencies: ["alco", "narco"],
     teen: false,
@@ -153,15 +181,7 @@ function CenterCard({ center }: { center: Center }) {
   return (
     <article className="relative h-[566px] w-[384px] overflow-hidden rounded-[14px] drop-shadow-[0_0_5px_rgba(91,90,90,0.08)]">
       <div className="h-[400px] overflow-hidden rounded-t-[14px] bg-white">
-        <div className="absolute top-[4px] left-[4px] h-[396px] w-[376px] overflow-hidden rounded-[10px]">
-          <img alt="" src={center.photo} className={`absolute max-w-none ${center.photoClassName}`} />
-        </div>
-        <div className="absolute top-[12px] left-[189px] flex items-center gap-[4px]">
-          <span className="h-[8px] w-[16px] rounded-full bg-[#8aa7d9]" />
-          <span className="size-[8px] rounded-full bg-[#9bb6e5] opacity-50" />
-          <span className="size-[8px] rounded-full bg-[#9bb6e5] opacity-50" />
-          <span className="size-[8px] rounded-full bg-[#9bb6e5] opacity-50" />
-        </div>
+        <CenterPhoto slides={center.slides} frameClassName="h-[396px]" />
       </div>
       <div className="absolute top-[372px] left-0 w-[384px]">
         <div className="relative h-[28px] w-[320px]">
