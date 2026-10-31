@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const items: { q: string; a?: string }[] = [
   {
@@ -29,11 +29,52 @@ function Chevron({ open }: { open: boolean }) {
   );
 }
 
+function trimSpacer(spacer: HTMLDivElement | null) {
+  if (!spacer || spacer.offsetHeight === 0) return;
+  const slack = document.documentElement.scrollHeight - (window.scrollY + window.innerHeight);
+  const spare = Math.min(spacer.offsetHeight, Math.max(0, slack));
+  if (spare > 0) spacer.style.height = `${spacer.offsetHeight - spare}px`;
+}
+
+function holdQuestion(button: HTMLButtonElement, spacer: HTMLDivElement | null, locking: { current: boolean }) {
+  const top = button.getBoundingClientRect().top;
+  const scroller = document.documentElement;
+  let lastHeight = scroller.scrollHeight;
+  const started = performance.now();
+  locking.current = true;
+  const lock = () => {
+    const delta = lastHeight - scroller.scrollHeight;
+    if (spacer && Math.abs(delta) > 0.5) {
+      spacer.style.height = `${Math.max(0, spacer.offsetHeight + delta)}px`;
+    }
+    lastHeight = scroller.scrollHeight;
+    const shift = button.getBoundingClientRect().top - top;
+    if (Math.abs(shift) > 0.5) window.scrollBy(0, shift);
+    if (performance.now() - started < 360) {
+      requestAnimationFrame(lock);
+      return;
+    }
+    trimSpacer(spacer);
+    locking.current = false;
+  };
+  requestAnimationFrame(lock);
+}
+
 export function FaqSection() {
   const [open, setOpen] = useState(0);
+  const spacer = useRef<HTMLDivElement>(null);
+  const locking = useRef(false);
+
+  useEffect(() => {
+    const onScroll = () => {
+      if (!locking.current) trimSpacer(spacer.current);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
-    <section className="px-[120px] pt-[120px] pb-[80px]">
+    <section className="px-[120px] pt-[120px] pb-[80px] [overflow-anchor:none]">
       <div className="mx-auto flex w-[1200px] flex-col items-center gap-[48px]">
         <div className="flex w-full flex-col items-center gap-[10px] text-center">
           <h2 className="text-40 font-medium">Частые вопросы</h2>
@@ -47,16 +88,25 @@ export function FaqSection() {
                 <button
                   type="button"
                   aria-expanded={expanded}
-                  onClick={() => setOpen(expanded ? -1 : index)}
+                  onClick={(event) => {
+                    holdQuestion(event.currentTarget, spacer.current, locking);
+                    setOpen(expanded ? -1 : index);
+                  }}
                   className="flex h-[76px] w-full items-center justify-between py-[24px] pr-[24px] pl-[28px] text-left"
                 >
                   <span className="text-18 leading-[28px] font-medium">{item.q}</span>
                   <Chevron open={expanded} />
                 </button>
-                {expanded && item.a ? (
-                  <div className="px-[28px] pb-[24px]">
-                    <div className="h-px bg-[#dedede] opacity-60" />
-                    <p className="pt-[20px] text-16 text-black">{item.a}</p>
+                {item.a ? (
+                  <div
+                    className={`grid transition-[grid-template-rows] duration-300 ease-out motion-reduce:transition-none ${expanded ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}
+                  >
+                    <div className="overflow-hidden">
+                      <div className="px-[28px] pb-[24px]">
+                        <div className="h-px bg-[#dedede] opacity-60" />
+                        <p className="pt-[20px] text-16 text-black">{item.a}</p>
+                      </div>
+                    </div>
                   </div>
                 ) : null}
               </div>
@@ -64,6 +114,7 @@ export function FaqSection() {
           })}
         </div>
       </div>
+      <div ref={spacer} aria-hidden />
     </section>
   );
 }
