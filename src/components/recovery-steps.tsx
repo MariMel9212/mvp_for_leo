@@ -25,7 +25,12 @@ export function RecoverySteps() {
     <section id="shagi" className="relative mt-[120px] w-[1440px]">
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-y-0 left-1/2 w-screen -translate-x-1/2 bg-[linear-gradient(180deg,rgba(236,236,236,0.2)_0%,rgba(189,226,255,0.2)_100%)]"
+        className="pointer-events-none absolute inset-y-0 left-1/2 w-screen -translate-x-1/2"
+        style={{
+          backgroundColor: "#d9ecfd",
+          backgroundImage:
+            "radial-gradient(ellipse at 50% 0%, #e4f0fb 0%, #d9ecfd 70%), radial-gradient(ellipse at 50% 100%, rgba(209,189,255,0.2) 0%, rgba(255,255,255,0) 70%), linear-gradient(180deg, rgba(210,222,243,0.25) 0%, rgba(222,234,255,0.25) 100%)",
+        }}
       />
       <div className="relative flex flex-col gap-[52px] px-[120px] pt-[34px] pb-[34px]">
         <h2 className="w-[1200px] text-40 font-medium">3 шага до выздоровления</h2>

@@ -232,10 +232,10 @@ function MessengerField({
           placeholder={showPlus ? "" : placeholder}
           aria-label={label}
           aria-invalid={invalid}
-          className="order-2 min-w-0 flex-1 bg-transparent text-18 text-black outline-none placeholder:text-black placeholder:opacity-40"
+          className="order-2 min-w-0 flex-1 bg-transparent text-18 text-[#27292d] outline-none placeholder:text-[#27292d] placeholder:opacity-40"
         />
         {showPlus ? (
-          <span className="order-1 flex shrink-0 items-center text-18 text-black">
+          <span className="order-1 flex shrink-0 items-center text-18 text-[#27292d]">
             <span>+</span>
             <input
               value={code}
@@ -246,7 +246,7 @@ function MessengerField({
               maxLength={3}
               size={Math.max(code.length, 1)}
               style={{ width: code.length > 0 ? `${code.length}ch` : 0 }}
-              className="m-0 min-w-0 border-0 bg-transparent p-0 text-18 text-black outline-none"
+              className="m-0 min-w-0 border-0 bg-transparent p-0 text-18 text-[#27292d] outline-none"
             />
           </span>
         ) : null}
@@ -299,7 +299,7 @@ function PhoneField({
         aria-haspopup="listbox"
         aria-expanded={open}
         onClick={() => setOpen((current) => !current)}
-        className="flex shrink-0 items-center gap-[8px] bg-transparent p-0 text-black"
+        className="flex shrink-0 items-center gap-[8px] bg-transparent p-0 text-[#27292d]"
       >
         <Flag id={country.id} />
         <span className="text-18">+{country.dial}</span>
@@ -320,7 +320,7 @@ function PhoneField({
         placeholder={country.dial === "7" ? "(999) 123-45-67" : "Номер телефона"}
         aria-label="Телефон"
         aria-invalid={invalid}
-        className="min-w-0 flex-1 bg-transparent text-18 text-black outline-none placeholder:text-black placeholder:opacity-40"
+        className="min-w-0 flex-1 bg-transparent text-18 text-[#27292d] outline-none placeholder:text-[#27292d] placeholder:opacity-40"
       />
       {open ? (
         <ul
@@ -340,7 +340,7 @@ function PhoneField({
                     onCountry(item.id);
                     setOpen(false);
                   }}
-                  className={`flex h-[40px] w-full items-center gap-[12px] px-[16px] text-left text-16 text-black ${selected ? "bg-[#f6f8fa]" : "hover:bg-[#f6f8fa]"}`}
+                  className={`flex h-[40px] w-full items-center gap-[12px] px-[16px] text-left text-16 text-[#27292d] ${selected ? "bg-[#f6f8fa]" : "hover:bg-[#f6f8fa]"}`}
                 >
                   <Flag id={item.id} />
                   <span className="min-w-0 flex-1">{item.name}</span>
@@ -394,7 +394,7 @@ export function ConsultForm() {
 
   return (
     <section id="zayavka" className="relative mt-[120px] h-[740px] w-[1440px] overflow-hidden rounded-[29px] bg-gradient-to-b from-[rgba(229,246,255,0.45)] to-[rgba(209,239,255,0.45)]">
-      <div className="absolute top-[52px] left-[120px] flex w-[604px] flex-col gap-[24px] text-black">
+      <div className="absolute top-[52px] left-[120px] flex w-[604px] flex-col gap-[24px] text-[#27292d]">
         <h2 className="text-40 font-medium">
           Расскажите о своей проблеме, и мы подберем профильное учереждение
         </h2>
@@ -435,7 +435,7 @@ export function ConsultForm() {
               placeholder="Укажите как к вам можно обращаться"
               autoComplete="name"
               aria-invalid={error !== "" && !name.trim()}
-              className="h-[48px] rounded-[16px] border border-solid border-[#dedede] bg-white pr-[14px] pl-[24px] text-18 text-black outline-none placeholder:text-black placeholder:opacity-40"
+              className="h-[48px] rounded-[16px] border border-solid border-[#dedede] bg-white pr-[14px] pl-[24px] text-18 text-[#27292d] outline-none placeholder:text-[#27292d] placeholder:opacity-40"
             />
           </label>
         </div>
@@ -463,7 +463,7 @@ export function ConsultForm() {
                       setChannel(value);
                       setError("");
                     }}
-                    className={`flex h-[32px] flex-1 items-center justify-center rounded-[8px] px-[14px] text-16 text-black ${active ? "bg-white" : "opacity-50"}`}
+                    className={`flex h-[32px] flex-1 items-center justify-center rounded-[8px] px-[14px] text-16 text-[#27292d] ${active ? "bg-white" : "opacity-50"}`}
                   >
                     {label}
                   </button>
@@ -503,7 +503,7 @@ export function ConsultForm() {
               />
               <div className="flex h-[28px] w-full items-center gap-[8px]">
                 <span aria-hidden className="h-px min-w-0 flex-1 bg-black/10" />
-                <span className="text-18 text-black opacity-40">Или</span>
+                <span className="text-18 text-[#27292d] opacity-40">Или</span>
                 <span aria-hidden className="h-px min-w-0 flex-1 bg-black/10" />
               </div>
               <MessengerField
@@ -533,7 +533,7 @@ export function ConsultForm() {
         >
           {sent ? "Заявка отправлена" : "Отправить заявку"}
         </button>
-        {error ? <p className="-mt-[28px] w-full text-center text-16 text-black opacity-60">{error}</p> : null}
+        {error ? <p className="-mt-[28px] w-full text-center text-16 text-[#27292d] opacity-60">{error}</p> : null}
       </form>
     </section>
   );

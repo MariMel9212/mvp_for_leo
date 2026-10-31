@@ -6,8 +6,10 @@ import { HeroField } from "@/components/hero-field";
 import { ConsultForm } from "@/components/consult-form";
 import { LicensedCenters } from "@/components/licensed-centers";
 import { RecoverySteps } from "@/components/recovery-steps";
+import { FaqSection } from "@/components/faq-section";
 import { SelectionCriteria } from "@/components/selection-criteria";
 import { SiteHeader } from "@/components/site-header";
+import { SupportStages } from "@/components/support-stages";
 
 // Inlined so the gather animation starts before React hydrates.
 const heroFieldBoot = readFileSync(
@@ -25,7 +27,7 @@ const stats = [
 
 export default function HomePage() {
   return (
-    <main className="mx-auto w-[1440px] bg-[#fdfdfd] pb-[100px] text-black">
+    <main className="mx-auto w-[1440px] bg-[#fdfdfd] text-[#27292d]">
       <section className="relative h-[772px]">
         <div className="pointer-events-none absolute top-0 left-1/2 h-full w-screen -translate-x-1/2 overflow-hidden">
           <div
@@ -33,7 +35,7 @@ export default function HomePage() {
             className="absolute inset-0"
             style={{
               backgroundImage:
-                "linear-gradient(180deg, #d2def3 0%, #d5e0f4 8%, #d9e3f5 15%, #dce5f5 23%, #dfe8f6 31%, #e2eaf7 38%, #e6ecf8 46%, #e9eff9 54%, #ecf1f9 62%, #f0f3fa 69%, #f3f6fb 77%, #f6f8fc 85%, #fafbfc 92%, #fdfdfd 100%)",
+                "linear-gradient(180deg, #d2def3 0%, #d5e0f4 7.7%, #d9e3f5 15.4%, #dce5f5 23.1%, #dfe8f6 30.8%, #e2eaf7 38.5%, #e6ecf8 46.1%, #e9eff9 53.9%, #ecf1f9 61.5%, #f0f3fa 69.2%, #f3f6fb 76.9%, #f6f8fa 84.6%, #fdfdfd 92.3%, #fdfdfd 100%)",
             }}
           />
           <HeroField />
@@ -102,6 +104,8 @@ export default function HomePage() {
       <LicensedCenters />
       <ConsultForm />
       <SelectionCriteria />
+      <SupportStages />
+      <FaqSection />
     </main>
   );
 }
@@ -126,7 +130,7 @@ function SituationCard({
   return (
     <article className="w-[588px] overflow-hidden rounded-[20px]">
       <div className="flex flex-col gap-[6px] bg-[#eef2f9] px-[32px] pt-[32px] pb-[10px]">
-        <h3 className="text-32 font-medium text-[#0a0d14] opacity-[96%]">{title}</h3>
+        <h3 className="text-32 font-medium">{title}</h3>
         <p className="w-[457px] text-16">{text}</p>
       </div>
       <div className="relative h-[443px] overflow-hidden">

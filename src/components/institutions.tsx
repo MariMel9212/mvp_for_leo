@@ -236,7 +236,7 @@ function FilterMenu({
         onClick={onToggle}
         className="flex h-[48px] w-full items-center justify-between rounded-[10px] bg-[rgba(36,74,127,0.04)] px-[12px] text-left"
       >
-        <span className={`min-w-0 truncate text-13 text-black ${value ? "" : "opacity-60"}`}>{value || label}</span>
+        <span className={`min-w-0 truncate text-13 text-[#27292d] ${value ? "" : "opacity-60"}`}>{value || label}</span>
         <img
           alt=""
           src="/icons/chevron-filter.svg"
@@ -254,7 +254,7 @@ function FilterMenu({
                 role="option"
                 aria-selected={value === option.label}
                 onClick={() => onSelect(option.value)}
-                className="flex w-full px-[12px] py-[8px] text-left text-13 text-black hover:bg-[rgba(36,74,127,0.04)]"
+                className="flex w-full px-[12px] py-[8px] text-left text-13 text-[#27292d] hover:bg-[rgba(36,74,127,0.04)]"
               >
                 {option.label}
               </button>
@@ -317,7 +317,7 @@ function CheckFilter({
       onClick={onChange}
       className="group flex h-[44px] min-w-0 flex-1 items-center justify-between rounded-[10px] bg-[rgba(36,74,127,0.04)] px-[12px] text-left"
     >
-      <span className="text-13 whitespace-nowrap text-black opacity-60">{label}</span>
+      <span className="text-13 whitespace-nowrap text-[#27292d] opacity-60">{label}</span>
       <FilterCheckbox checked={checked} />
     </button>
   );
@@ -326,7 +326,7 @@ function CheckFilter({
 function CallBanner() {
   return (
     <section className="relative -mx-[22px] mt-[50px] w-[1244px] overflow-hidden rounded-[24px] bg-[linear-gradient(180deg,rgba(238,242,249,0.87)_0%,rgba(158,187,230,0.87)_100%)] px-[22px] pt-[32px] pb-[26px]">
-      <div className="mx-auto flex w-[611px] flex-col items-center gap-[15px] text-center text-black">
+      <div className="mx-auto flex w-[611px] flex-col items-center gap-[15px] text-center text-[#27292d]">
         <h2 className="text-40 font-medium">Запланируйте звонок, чтобы&nbsp;не&nbsp;ошибиться с&nbsp;выбором</h2>
         <p className="text-16 opacity-60">
           На бесплатной и анонимной консультации погрузимся в&nbsp;Вашу проблему и&nbsp;подберем подходящее учереждение
@@ -432,7 +432,7 @@ export function Institutions() {
               setApplied(emptyFilters);
               setOpenMenu(null);
             }}
-            className="flex items-center gap-[4px] rounded-[12px] bg-[#f6ffc8] px-[12px] py-[9px] text-16 text-black opacity-40"
+            className="flex items-center gap-[4px] rounded-[12px] bg-[#f6ffc8] px-[12px] py-[9px] text-16 text-[#27292d] opacity-40"
           >
             <img alt="" src="/icons/filter.svg" width={20} height={20} />
             Очистить фильтр
@@ -447,7 +447,7 @@ export function Institutions() {
       </form>
 
       {firstRows.length === 0 ? (
-        <p className="mt-[46px] text-16 text-black opacity-60">Нет учереждений по этим условиям</p>
+        <p className="mt-[46px] text-16 text-[#27292d] opacity-60">Нет учереждений по этим условиям</p>
       ) : (
         <div className="mt-[46px] flex w-[1200px] flex-wrap gap-x-[24px] gap-y-[24px]">
           {firstRows.map((center, index) => (

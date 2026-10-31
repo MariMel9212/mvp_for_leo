@@ -32,7 +32,7 @@ export function AudienceTabs() {
           ))}
         </div>
       </div>
-      <p className="w-full text-center text-13 text-black opacity-50">
+      <p className="w-full text-center text-13 text-[#27292d] opacity-50">
         Бесплатная и анонимная консультация
       </p>
     </div>
@@ -56,8 +56,8 @@ function Tab({
       onClick={onSelect}
       className={
         selected
-          ? "flex h-[32px] items-center justify-center rounded-[8px] bg-white px-[14px] text-16 text-black"
-          : "flex h-[32px] items-center justify-center rounded-[6px] px-[14px] text-16 text-black opacity-50"
+          ? "flex h-[32px] items-center justify-center rounded-[8px] bg-white px-[14px] text-16 text-[#27292d]"
+          : "flex h-[32px] items-center justify-center rounded-[6px] px-[14px] text-16 text-[#27292d] opacity-50"
       }
     >
       {label}

@@ -62,7 +62,7 @@ export function SelectionCriteria() {
           {criteria.map((item, index) => (
             <li key={item.n} className={index < criteria.length - 1 ? "flex flex-col gap-[12px]" : undefined}>
               <div className="flex items-start gap-[16px]">
-                <span className="text-24 font-medium opacity-80">{item.n}</span>
+                <span className="text-24 font-medium text-[#5a98ff] opacity-80">{item.n}</span>
                 <div className="flex min-w-0 flex-1 flex-col gap-[4px]">
                   <h3 className="text-24 font-medium">{item.title}</h3>
                   <p className="text-16 opacity-60">{item.text}</p>
