@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, type FocusEvent, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FocusEvent, type FormEvent, type KeyboardEvent as ReactKeyboardEvent } from "react";
 
 type Channel = "call" | "messenger";
 
@@ -193,6 +193,26 @@ function MessengerField({
     setFocused(false);
   }
 
+  function onPhoneChange(raw: string) {
+    if (isNickname(raw)) {
+      onChange(raw);
+      return;
+    }
+    const digits = raw.replace(/\D/g, "");
+    if (code.length === 0 && digits.length > 0) {
+      onCodeChange?.(digits.slice(0, 1));
+      onChange(digits.slice(1));
+      return;
+    }
+    onChange(raw);
+  }
+
+  function onPhoneKeyDown(event: ReactKeyboardEvent<HTMLInputElement>) {
+    if (event.key !== "Backspace" || value !== "" || code.length === 0) return;
+    event.preventDefault();
+    onCodeChange?.(code.slice(0, -1));
+  }
+
   return (
     <label
       ref={rootRef}
@@ -205,7 +225,8 @@ function MessengerField({
       <span className="flex min-w-0 flex-1 items-center gap-[4px]">
         <input
           value={value}
-          onChange={(event) => onChange(event.target.value)}
+          onChange={(event) => onPhoneChange(event.target.value)}
+          onKeyDown={onPhoneKeyDown}
           inputMode={phone ? "tel" : "text"}
           placeholder={showPlus ? "" : placeholder}
           aria-label={label}
@@ -222,8 +243,9 @@ function MessengerField({
               autoComplete="tel-country-code"
               aria-label={codeLabel ?? "Код страны"}
               maxLength={3}
+              size={Math.max(code.length, 1)}
               style={{ width: code.length > 0 ? `${code.length}ch` : 0 }}
-              className="bg-transparent p-0 text-18 text-black outline-none"
+              className="m-0 min-w-0 border-0 bg-transparent p-0 text-18 text-black outline-none"
             />
           </span>
         ) : null}
