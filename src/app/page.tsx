@@ -6,6 +6,7 @@ import { HeroField } from "@/components/hero-field";
 import { ConsultForm } from "@/components/consult-form";
 import { LicensedCenters } from "@/components/licensed-centers";
 import { RecoverySteps } from "@/components/recovery-steps";
+import { SelectionCriteria } from "@/components/selection-criteria";
 import { SiteHeader } from "@/components/site-header";
 
 // Inlined so the gather animation starts before React hydrates.
@@ -100,6 +101,7 @@ export default function HomePage() {
       <RecoverySteps />
       <LicensedCenters />
       <ConsultForm />
+      <SelectionCriteria />
     </main>
   );
 }
