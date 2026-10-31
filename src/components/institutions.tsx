@@ -266,6 +266,41 @@ function FilterMenu({
   );
 }
 
+function FilterCheckbox({ checked }: { checked: boolean }) {
+  if (checked) {
+    return (
+      <span className="relative size-[18.406px] shrink-0">
+        <span className="absolute top-[1.534px] left-[1.534px] size-[15.338px] rounded-[3.068px] bg-[#e1f300]" />
+        <svg
+          viewBox="0 0 6.902085304260254 5.368288993835449"
+          fill="none"
+          aria-hidden
+          className="absolute top-[4.985px] left-[4.218px] h-[5.368px] w-[6.902px] overflow-visible"
+        >
+          <path
+            d="M0 3.2209732500270025 L2.1911382440694576 5.368288993835449 L6.902085304260254 0"
+            stroke="#626262"
+            strokeWidth="1.534"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </span>
+    );
+  }
+
+  return (
+    <svg viewBox="0 0 18.4056 18.4056" fill="none" aria-hidden className="size-[18.406px] shrink-0">
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M14.571 3.8345V14.5711H3.83447V3.8345H14.571V3.8345ZM14.5711 2.3007H3.83449C2.9909 2.3007 2.3007 2.9909 2.3007 3.83449V14.5711C2.3007 15.4147 2.9909 16.1049 3.83449 16.1049H14.5711C15.4147 16.1049 16.1049 15.4147 16.1049 14.5711V3.83449C16.1049 2.9909 15.4147 2.3007 14.5711 2.3007Z"
+        className="filter-check"
+      />
+    </svg>
+  );
+}
+
 function CheckFilter({
   label,
   checked,
@@ -280,25 +315,10 @@ function CheckFilter({
       type="button"
       aria-pressed={checked}
       onClick={onChange}
-      className="flex h-[44px] min-w-0 flex-1 items-center justify-between rounded-[10px] bg-[rgba(36,74,127,0.04)] px-[12px] text-left"
+      className="group flex h-[44px] min-w-0 flex-1 items-center justify-between rounded-[10px] bg-[rgba(36,74,127,0.04)] px-[12px] text-left"
     >
       <span className="text-13 whitespace-nowrap text-black opacity-60">{label}</span>
-      <span className="relative size-[18.406px] shrink-0">
-        <img alt="" src="/icons/checkbox.svg" width={18.406} height={18.406} />
-        {checked ? (
-          <svg viewBox="0 0 18.4 18.4" className="absolute inset-0 size-[18.406px]" aria-hidden>
-            <path
-              d="M5.1 9.3 7.7 11.9 13.4 6.2"
-              fill="none"
-              stroke="#001024"
-              strokeOpacity="0.72"
-              strokeWidth="1.8"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        ) : null}
-      </span>
+      <FilterCheckbox checked={checked} />
     </button>
   );
 }
@@ -419,7 +439,7 @@ export function Institutions() {
           </button>
           <button
             type="submit"
-            className="flex h-[42px] w-[142px] items-center justify-center rounded-[8px] bg-[#e1f300] px-[20px] text-16 text-black"
+            className="lime-control flex h-[42px] w-[142px] items-center justify-center rounded-[8px] px-[20px] text-16"
           >
             Применить
           </button>

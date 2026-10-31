@@ -23,7 +23,7 @@ export function SiteHeader({ ctaHref = "/#situacii" }: { ctaHref?: string }) {
         </nav>
         <Link
           href={ctaHref}
-          className="flex h-[38px] w-[153px] shrink-0 items-center justify-center rounded-[8px] bg-[#e1f300] px-[20px] text-16 text-black"
+          className="lime-control flex h-[38px] w-[153px] shrink-0 items-center justify-center rounded-[8px] px-[20px] text-16"
         >
           Выбрать центр
         </Link>

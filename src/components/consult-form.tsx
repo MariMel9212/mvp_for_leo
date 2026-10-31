@@ -529,7 +529,7 @@ export function ConsultForm() {
         <button
           type="submit"
           disabled={sent}
-          className="flex h-[52px] w-full items-center justify-center rounded-[12px] bg-[#e1f300] px-[20px] text-18 leading-[24px] font-medium text-black disabled:opacity-80"
+          className="lime-control flex h-[52px] w-full items-center justify-center rounded-[12px] px-[20px] text-18 leading-[24px] font-medium"
         >
           {sent ? "Заявка отправлена" : "Отправить заявку"}
         </button>

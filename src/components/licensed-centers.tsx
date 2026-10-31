@@ -119,7 +119,7 @@ export function LicensedCenters() {
         </div>
         <Link
           href="/uchrezhdeniya"
-          className="mx-auto flex h-[56px] w-[377px] items-center justify-center gap-[4px] rounded-[12px] bg-[#e1f300] px-[20px] text-18 leading-[24px] font-medium text-black"
+          className="lime-control mx-auto flex h-[56px] w-[377px] items-center justify-center gap-[4px] rounded-[12px] px-[20px] text-18 leading-[24px] font-medium"
         >
           Смотреть все
           <img alt="" src="/icons/arrow-right.svg" width={24} height={24} />

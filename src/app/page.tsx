@@ -49,7 +49,7 @@ export default function HomePage() {
             <AudienceTabs />
             <a
               href="#situacii"
-              className="flex h-[56px] w-[377px] items-center justify-center rounded-[12px] bg-[#e1f300] px-[20px] text-18 leading-[24px] font-medium text-black"
+              className="lime-control flex h-[56px] w-[377px] items-center justify-center rounded-[12px] px-[20px] text-18 leading-[24px] font-medium"
             >
               Выбрать центр
             </a>
@@ -148,7 +148,7 @@ function SituationCard({
         <div className="absolute bottom-0 left-0 flex w-[588px] px-[32px] pb-[24px]">
           <a
             href="#situacii"
-            className="flex h-[44px] items-center justify-center rounded-[8px] bg-[#e1f300] px-[20px] text-16 text-black shadow-[0_4px_4px_rgba(173,173,173,20%)]"
+            className="lime-control flex h-[44px] items-center justify-center rounded-[8px] px-[20px] text-16 shadow-[0_4px_4px_rgba(173,173,173,20%)]"
           >
             {action}
           </a>

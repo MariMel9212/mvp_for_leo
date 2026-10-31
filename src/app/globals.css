@@ -277,6 +277,37 @@
   mask-image: linear-gradient(90deg, transparent 0, transparent 186px, #000 198px);
 }
 
+.lime-control {
+  background-color: #e1f300;
+  color: #000;
+}
+
+.lime-control:hover {
+  background-color: #d6e701;
+}
+
+.lime-control:active {
+  background-color: #cedf01;
+}
+
+.lime-control:disabled {
+  background-color: #ebf967;
+  color: rgb(0 0 0 / 40%);
+}
+
+.filter-check {
+  fill: #001024;
+  opacity: 0.36;
+}
+
+.group:hover .filter-check {
+  opacity: 0.46;
+}
+
+.group:active .filter-check {
+  opacity: 0.56;
+}
+
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
   .coverage-card:hover .criterion-track {
     animation-play-state: running;
