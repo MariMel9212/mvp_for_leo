@@ -501,7 +501,11 @@ export function ConsultForm() {
                 }}
                 invalid={error !== "" && !telegramReady(telegram) && !phoneReady(phoneCode, phone)}
               />
-              <p className="w-full text-center text-18 text-black opacity-40">Или</p>
+              <div className="flex h-[28px] w-full items-center gap-[8px]">
+                <span aria-hidden className="h-px min-w-0 flex-1 bg-black/10" />
+                <span className="text-18 text-black opacity-40">Или</span>
+                <span aria-hidden className="h-px min-w-0 flex-1 bg-black/10" />
+              </div>
               <MessengerField
                 icon="/consult/whatsapp.svg"
                 value={phone}
