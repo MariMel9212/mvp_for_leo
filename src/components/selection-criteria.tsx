@@ -49,6 +49,16 @@ export function SelectionCriteria() {
           backgroundPosition: "0 2px",
         }}
       />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 h-[73px]"
+        style={{ backgroundImage: "linear-gradient(to bottom, #fdfdfd 0%, rgba(253,253,253,0) 100%)" }}
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-[73px]"
+        style={{ backgroundImage: "linear-gradient(to top, #fdfdfd 0%, rgba(253,253,253,0) 100%)" }}
+      />
       <div className="relative mx-auto flex w-[1200px] items-start">
         <div className="flex w-[483px] shrink-0 flex-col gap-[24px]">
           <h2 className="text-40 font-medium">
@@ -80,7 +90,13 @@ export function SelectionCriteria() {
               </div>
               {index < criteria.length - 1 ? (
                 <div className="relative h-0">
-                  <div className="absolute inset-x-0 h-px bg-black/10" />
+                  <div
+                    className="absolute inset-x-0 top-0 h-px"
+                    style={{
+                      backgroundImage:
+                        "repeating-linear-gradient(to right, rgba(39,41,45,0.1) 0 9px, transparent 9px 18px)",
+                    }}
+                  />
                 </div>
               ) : null}
             </li>
