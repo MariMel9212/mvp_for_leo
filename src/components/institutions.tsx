@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useId, useState } from "react";
+import { ChartArt, MagnifierArt } from "@/components/catalog-art";
 
 type Kind = "rehab" | "detox";
 type Dependency = "alco" | "narco" | "game";
@@ -282,8 +283,6 @@ function CheckFilter({
   );
 }
 
-const chartLabels = ["100", "90", "80", "70", "60", "50", "40", "30", "20", "10", "00"];
-
 function CallBanner() {
   return (
     <section className="relative -mx-[22px] mt-[50px] w-[1244px] overflow-hidden rounded-[24px] bg-[linear-gradient(180deg,rgba(238,242,249,0.87)_0%,rgba(158,187,230,0.87)_100%)] px-[22px] pt-[32px] pb-[26px]">
@@ -301,13 +300,7 @@ function CallBanner() {
               <img alt="" src="/icons/angle-right.svg" width={7.286} height={13.414} />
             </span>
           </span>
-          <img
-            alt=""
-            src="/catalog/no-search.svg"
-            width={327.636}
-            height={263.376}
-            className="absolute top-px left-[250.18px] max-w-none"
-          />
+          <MagnifierArt className="pointer-events-none absolute top-px left-[250.18px]" />
         </Link>
         <Link href="/#zayavka" className="relative h-[213px] w-[588px] overflow-hidden rounded-[20px] bg-[rgba(255,255,255,0.7)]">
           <span className="flex items-center justify-between px-[20px] py-[19px]">
@@ -316,26 +309,7 @@ function CallBanner() {
               <img alt="" src="/icons/angle-right.svg" width={7.286} height={13.414} />
             </span>
           </span>
-          <div className="pointer-events-none absolute top-[48px] left-[201px] h-[216.993px] w-[389px]">
-            <span className="absolute top-[43.66px] left-0 h-px w-[389px] bg-[#f3f1f7] opacity-65" />
-            <span className="absolute top-[100.56px] left-0 h-px w-[389px] bg-[#f3f1f7] opacity-65" />
-            <span className="absolute top-[157.45px] left-0 h-px w-[389px] bg-[#f3f1f7] opacity-65" />
-            <span className="absolute top-0 left-[80.71px] h-[216.993px] w-px bg-[#f3f1f7]" />
-            <span className="absolute top-0 left-[308.29px] h-[216.993px] w-px bg-[#f3f1f7]" />
-            <img alt="" src="/catalog/chart-area.svg" width={387.677} height={148.19} className="absolute top-[33.08px] left-0 max-w-none" />
-            <img alt="" src="/catalog/trend-glow.svg" width={395.611} height={159.963} className="absolute top-[25.82px] left-[-4.26px] max-w-none" />
-            <img alt="" src="/catalog/area-edge.svg" width={391.783} height={152.615} className="absolute top-[30.52px] left-[-2.52px] max-w-none" />
-            <img alt="" src="/catalog/trend.svg" width={390.059} height={147.926} className="absolute top-[31.89px] left-[-1.19px] max-w-none" />
-            {chartLabels.map((label, index) => (
-              <span
-                key={label}
-                className={`absolute top-[189.21px] w-[23.816px] -translate-x-1/2 text-center text-[11.908px] leading-none ${label === "30" ? "text-[#2e7dff]" : "text-[#e5e4e9]"}`}
-                style={{ left: `${391.65 - index * 38.768}px`, fontFamily: "var(--font-inter), sans-serif" }}
-              >
-                {label}
-              </span>
-            ))}
-          </div>
+          <ChartArt className="pointer-events-none absolute top-[48px] left-[201px] h-[216.993px] w-[389px]" />
         </Link>
       </div>
     </section>
