@@ -7,6 +7,14 @@ export type CenterSlide = {
   className: string;
 };
 
+function phaseOf(className: string) {
+  const num = (name: string) => {
+    const hit = className.match(new RegExp(`(?:^|\\s)${name}-\\[(-?\\d+(?:\\.\\d+)?)px\\]`));
+    return hit ? Number(hit[1]) : 0;
+  };
+  return { x: num("left"), y: num("top"), w: num("w"), h: num("h") };
+}
+
 export function CenterPhoto({
   slides,
   frameClassName,
@@ -16,6 +24,7 @@ export function CenterPhoto({
 }) {
   const [index, setIndex] = useState(0);
   const count = slides.length;
+  const phase = phaseOf(slides[index].className);
 
   function scrub(event: React.PointerEvent<HTMLDivElement>) {
     const rect = event.currentTarget.getBoundingClientRect();
@@ -30,21 +39,17 @@ export function CenterPhoto({
       onPointerMove={scrub}
       onPointerLeave={() => setIndex(0)}
     >
-      <div
-        className="flex h-full transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]"
-        style={{ width: `${count * 100}%`, transform: `translateX(-${(index * 100) / count}%)` }}
-      >
-        {slides.map((slide, slideIndex) => (
-          <div key={slideIndex} className="relative h-full overflow-hidden" style={{ width: `${100 / count}%` }}>
-            <img alt="" src={slide.src} className={`absolute max-w-none ${slide.className}`} />
-          </div>
-        ))}
-      </div>
-      <div className="pointer-events-none absolute top-[8px] left-[185px] flex items-center gap-[4px]">
+      <img
+        alt=""
+        src={slides[index].src}
+        className="absolute top-0 left-0 max-w-none transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
+        style={{ width: phase.w, height: phase.h, transform: `translate3d(${phase.x}px, ${phase.y}px, 0)` }}
+      />
+      <div className="pointer-events-none absolute top-[8px] left-[185px] z-20 flex items-center gap-[4px]">
         {slides.map((_, slideIndex) => (
           <span
             key={slideIndex}
-            className={`rounded-full transition-all duration-300 ease-out ${
+            className={`rounded-full ${
               slideIndex === index ? "h-[8px] w-[16px] bg-[#8aa7d9]" : "size-[8px] bg-[#9bb6e5] opacity-50"
             }`}
           />
