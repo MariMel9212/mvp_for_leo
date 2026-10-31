@@ -4,14 +4,16 @@ import { useEffect, useRef, useState, type FocusEvent, type FormEvent, type Keyb
 
 type Channel = "call" | "messenger";
 
-function nationalDigits(value: string) {
+function nationalDigits(value: string, code = "7") {
   let digits = value.replace(/\D/g, "");
-  if (digits.length > 10 && (digits.startsWith("7") || digits.startsWith("8"))) digits = digits.slice(1);
+  if ((code === "" || code === "7") && digits.length > 10 && (digits.startsWith("7") || digits.startsWith("8"))) {
+    digits = digits.slice(1);
+  }
   return digits.slice(0, 10);
 }
 
-function formatPhone(value: string) {
-  const digits = nationalDigits(value);
+function formatPhone(value: string, code = "7") {
+  const digits = nationalDigits(value, code);
   const parts = [digits.slice(0, 3), digits.slice(3, 6), digits.slice(6, 8), digits.slice(8, 10)];
   if (digits.length === 0) return "";
   let result = `(${parts[0]}`;
@@ -32,8 +34,7 @@ function formatCode(value: string) {
 }
 
 function formatNational(value: string, code: string) {
-  if (code === "" || code === "7") return formatPhone(value);
-  return value.replace(/\D/g, "").slice(0, 15);
+  return formatPhone(value, code);
 }
 
 function phoneReady(code: string, value: string) {
