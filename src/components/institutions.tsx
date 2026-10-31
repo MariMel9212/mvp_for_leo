@@ -28,9 +28,9 @@ const kindOptions: { value: Kind; label: string }[] = [
 ];
 
 const dependencyOptions: { value: Dependency; label: string }[] = [
-  { value: "alco", label: "Алко" },
-  { value: "narco", label: "Нарко" },
-  { value: "game", label: "Игро" },
+  { value: "alco", label: "Алкоголизм" },
+  { value: "narco", label: "Наркомания" },
+  { value: "game", label: "Игромания" },
 ];
 
 const centers: Center[] = [
