@@ -181,10 +181,10 @@ function MessengerField({
     <label className="flex h-[48px] w-full items-center gap-[16px] rounded-[16px] border border-solid border-[#dedede] bg-white pr-[14px] pl-[24px]">
       <img alt="" className="shrink-0" src={icon} width={42} height={42} />
       <span className="h-[24px] w-px shrink-0 bg-[#dedede]" />
-      <span className="flex min-w-0 flex-1 items-center gap-[8px]">
+      <span className="flex min-w-0 flex-1 items-center gap-[4px]">
         {showCode ? (
-          <span className="flex shrink-0 items-center gap-[4px]">
-            <span className="text-18">+</span>
+          <span className="flex shrink-0 items-center text-18">
+            <span>+</span>
             <input
               value={dialCode}
               onChange={(event) => onCodeChange?.(formatCode(event.target.value))}
@@ -193,7 +193,8 @@ function MessengerField({
               placeholder="7"
               aria-label={codeLabel ?? "Код страны"}
               maxLength={3}
-              className="h-[32px] w-[40px] rounded-[8px] bg-[#f6f8fa] text-center text-18 text-black outline-none placeholder:text-black placeholder:opacity-40"
+              style={{ width: `${Math.max(dialCode?.length ?? 0, 1)}ch` }}
+              className="bg-transparent text-18 text-black outline-none placeholder:text-black placeholder:opacity-40"
             />
           </span>
         ) : null}
@@ -462,7 +463,7 @@ export function ConsultForm() {
                 icon="/consult/whatsapp.svg"
                 value={phone}
                 onChange={(value) => setPhone(formatNational(value, phoneCode))}
-                placeholder="Укажите номер"
+                placeholder="(999) 123-45-67"
                 label="Номер WhatsApp"
                 phone
                 showCode

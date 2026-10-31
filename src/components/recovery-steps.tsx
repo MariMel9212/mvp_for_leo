@@ -25,7 +25,7 @@ export function RecoverySteps() {
     <section id="shagi" className="relative mt-[120px] w-[1440px]">
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-y-0 left-1/2 w-screen -translate-x-1/2 bg-[#eef2f9]/28"
+        className="pointer-events-none absolute inset-y-0 left-1/2 w-screen -translate-x-1/2 bg-[linear-gradient(180deg,rgba(236,236,236,0.2)_0%,rgba(189,226,255,0.2)_100%)]"
       />
       <div className="relative flex flex-col gap-[52px] px-[120px] pt-[34px] pb-[34px]">
         <h2 className="w-[1200px] text-40 font-medium">3 шага до выздоровления</h2>
