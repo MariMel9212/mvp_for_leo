@@ -24,6 +24,7 @@ export function CenterPhoto({
 }) {
   const [index, setIndex] = useState(0);
   const count = slides.length;
+  const cover = slides.every((slide) => slide.className === "cover");
   const phase = phaseOf(slides[index].className);
 
   function scrub(event: React.PointerEvent<HTMLDivElement>) {
@@ -39,12 +40,25 @@ export function CenterPhoto({
       onPointerMove={scrub}
       onPointerLeave={() => setIndex(0)}
     >
-      <img
-        alt=""
-        src={slides[index].src}
-        className="absolute top-0 left-0 max-w-none transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
-        style={{ width: phase.w, height: phase.h, transform: `translate3d(${phase.x}px, ${phase.y}px, 0)` }}
-      />
+      {cover ? (
+        slides.map((slide, slideIndex) => (
+          <img
+            key={slide.src}
+            alt=""
+            src={slide.src}
+            className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ease-out ${
+              slideIndex === index ? "z-10 opacity-100" : "opacity-0"
+            }`}
+          />
+        ))
+      ) : (
+        <img
+          alt=""
+          src={slides[index].src}
+          className="absolute top-0 left-0 max-w-none transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
+          style={{ width: phase.w, height: phase.h, transform: `translate3d(${phase.x}px, ${phase.y}px, 0)` }}
+        />
+      )}
       <div className="pointer-events-none absolute top-[8px] left-[185px] z-20 flex items-center gap-[4px]">
         {slides.map((_, slideIndex) => (
           <span
