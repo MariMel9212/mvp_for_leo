@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FocusEvent, type FormEvent } from "react";
 
 type Channel = "call" | "messenger";
 
@@ -160,7 +160,7 @@ function MessengerField({
   label,
   invalid,
   phone,
-  showCode,
+  plusMode,
   dialCode,
   onCodeChange,
   codeLabel,
@@ -172,41 +172,61 @@ function MessengerField({
   label: string;
   invalid: boolean;
   phone?: boolean;
-  showCode?: boolean;
+  plusMode: "focus" | "digit";
   dialCode?: string;
   onCodeChange?: (value: string) => void;
   codeLabel?: string;
 }) {
+  const [focused, setFocused] = useState(false);
+  const rootRef = useRef<HTMLLabelElement>(null);
+  const code = dialCode ?? "";
+  const typedPhone = value.length > 0 && !isNickname(value);
+  const showPlus = plusMode === "focus" ? focused || typedPhone || code.length > 0 : typedPhone || code.length > 0;
+
+  function trackFocus(event: FocusEvent<HTMLLabelElement>) {
+    if (!rootRef.current?.contains(event.target)) return;
+    setFocused(true);
+  }
+
+  function trackBlur(event: FocusEvent<HTMLLabelElement>) {
+    if (rootRef.current?.contains(event.relatedTarget as Node)) return;
+    setFocused(false);
+  }
+
   return (
-    <label className="flex h-[48px] w-full items-center gap-[16px] rounded-[16px] border border-solid border-[#dedede] bg-white pr-[14px] pl-[24px]">
+    <label
+      ref={rootRef}
+      onFocus={trackFocus}
+      onBlur={trackBlur}
+      className="flex h-[48px] w-full items-center gap-[16px] rounded-[16px] border border-solid border-[#dedede] bg-white pr-[14px] pl-[24px]"
+    >
       <img alt="" className="shrink-0" src={icon} width={42} height={42} />
       <span className="h-[24px] w-px shrink-0 bg-[#dedede]" />
       <span className="flex min-w-0 flex-1 items-center gap-[4px]">
-        {showCode ? (
-          <span className="flex shrink-0 items-center text-18">
-            <span>+</span>
-            <input
-              value={dialCode}
-              onChange={(event) => onCodeChange?.(formatCode(event.target.value))}
-              inputMode="numeric"
-              autoComplete="tel-country-code"
-              placeholder="7"
-              aria-label={codeLabel ?? "Код страны"}
-              maxLength={3}
-              style={{ width: `${Math.max(dialCode?.length ?? 0, 1)}ch` }}
-              className="bg-transparent text-18 text-black outline-none placeholder:text-black placeholder:opacity-40"
-            />
-          </span>
-        ) : null}
         <input
           value={value}
           onChange={(event) => onChange(event.target.value)}
           inputMode={phone ? "tel" : "text"}
-          placeholder={placeholder}
+          placeholder={showPlus ? "" : placeholder}
           aria-label={label}
           aria-invalid={invalid}
-          className="min-w-0 flex-1 bg-transparent text-18 text-black outline-none placeholder:text-black placeholder:opacity-40"
+          className="order-2 min-w-0 flex-1 bg-transparent text-18 text-black outline-none placeholder:text-black placeholder:opacity-40"
         />
+        {showPlus ? (
+          <span className="order-1 flex shrink-0 items-center text-18 text-black">
+            <span>+</span>
+            <input
+              value={code}
+              onChange={(event) => onCodeChange?.(formatCode(event.target.value))}
+              inputMode="numeric"
+              autoComplete="tel-country-code"
+              aria-label={codeLabel ?? "Код страны"}
+              maxLength={3}
+              style={{ width: code.length > 0 ? `${code.length}ch` : 0 }}
+              className="bg-transparent p-0 text-18 text-black outline-none"
+            />
+          </span>
+        ) : null}
       </span>
     </label>
   );
@@ -449,7 +469,7 @@ export function ConsultForm() {
                 onChange={(value) => setTelegram(isNickname(value) ? value : formatNational(value, telegramCode))}
                 placeholder="Укажите ник или номер"
                 label="Ник или номер в Телеграме"
-                showCode={!isNickname(telegram)}
+                plusMode="digit"
                 codeLabel="Код страны в Телеграме"
                 dialCode={telegramCode}
                 onCodeChange={(value) => {
@@ -463,10 +483,10 @@ export function ConsultForm() {
                 icon="/consult/whatsapp.svg"
                 value={phone}
                 onChange={(value) => setPhone(formatNational(value, phoneCode))}
-                placeholder="(999) 123-45-67"
+                placeholder="Укажите номер"
                 label="Номер WhatsApp"
                 phone
-                showCode
+                plusMode="focus"
                 codeLabel="Код страны WhatsApp"
                 dialCode={phoneCode}
                 onCodeChange={(value) => {
