@@ -171,7 +171,7 @@ export function ConsultForm() {
   }
 
   return (
-    <section className="relative mt-[120px] h-[740px] w-[1440px] overflow-hidden rounded-[29px] bg-gradient-to-b from-[rgba(229,246,255,0.45)] to-[rgba(209,239,255,0.45)]">
+    <section id="zayavka" className="relative mt-[120px] h-[740px] w-[1440px] overflow-hidden rounded-[29px] bg-gradient-to-b from-[rgba(229,246,255,0.45)] to-[rgba(209,239,255,0.45)]">
       <div className="absolute top-[52px] left-[120px] flex w-[604px] flex-col gap-[24px] text-black">
         <h2 className="text-40 font-medium">
           Расскажите о своей проблеме, и мы подберем профильное учереждение

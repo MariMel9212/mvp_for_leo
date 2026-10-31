@@ -6,6 +6,7 @@ import { HeroField } from "@/components/hero-field";
 import { ConsultForm } from "@/components/consult-form";
 import { LicensedCenters } from "@/components/licensed-centers";
 import { RecoverySteps } from "@/components/recovery-steps";
+import { SiteHeader } from "@/components/site-header";
 
 // Inlined so the gather animation starts before React hydrates.
 const heroFieldBoot = readFileSync(
@@ -20,8 +21,6 @@ const stats = [
   { value: "30 +", label: "лицензированных организаций" },
   { value: "86%", label: "удачно подобранных учереждений" },
 ];
-
-const sections = ["Раздел", "Раздел", "Раздел"];
 
 export default function HomePage() {
   return (
@@ -40,27 +39,7 @@ export default function HomePage() {
         </div>
 
         <div className="relative z-10 flex flex-col items-center gap-[122px]">
-          <header className="flex w-full justify-center pt-[32px]">
-            <div className="flex h-[44px] w-[1180px] items-center justify-between px-[16px]">
-              <a href="#podbor" className="text-24 font-bold text-[#111] opacity-80">
-                СвойЦентр
-              </a>
-              <nav aria-label="Разделы" className="flex items-center gap-[42px] opacity-80">
-                <span aria-hidden className="block h-[24px] w-[55px]" />
-                {sections.map((label, index) => (
-                  <a key={index} href="#podbor" className="text-16 text-black">
-                    {label}
-                  </a>
-                ))}
-              </nav>
-              <a
-                href="#situacii"
-                className="flex h-[38px] w-[153px] items-center justify-center rounded-[8px] bg-[#e1f300] px-[20px] text-16 text-black"
-              >
-                Выбрать центр
-              </a>
-            </div>
-          </header>
+          <SiteHeader ctaHref="#situacii" />
 
           <div id="podbor" className="flex w-[754px] flex-col items-center gap-[42px]">
             <h1 className="w-full text-center text-48 font-medium">
