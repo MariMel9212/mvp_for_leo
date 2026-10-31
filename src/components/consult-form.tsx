@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 
 type Channel = "call" | "messenger";
 
@@ -49,6 +49,109 @@ function telegramReady(value: string) {
   return trimmed.replace(/^@/, "").length >= 2;
 }
 
+const countries: { id: string; name: string; dial: string; stripes: { color: string; className: string }[] }[] = [
+  {
+    id: "ru",
+    name: "Россия",
+    dial: "7",
+    stripes: [
+      { color: "#ffffff", className: "h-[6px]" },
+      { color: "#0039a6", className: "h-[6px]" },
+      { color: "#d52b1e", className: "h-[6px]" },
+    ],
+  },
+  {
+    id: "az",
+    name: "Азербайджан",
+    dial: "994",
+    stripes: [
+      { color: "#00b5e2", className: "h-[6px]" },
+      { color: "#ef3340", className: "h-[6px]" },
+      { color: "#509e2f", className: "h-[6px]" },
+    ],
+  },
+  {
+    id: "am",
+    name: "Армения",
+    dial: "374",
+    stripes: [
+      { color: "#d90012", className: "h-[6px]" },
+      { color: "#0033a0", className: "h-[6px]" },
+      { color: "#f2a800", className: "h-[6px]" },
+    ],
+  },
+  {
+    id: "by",
+    name: "Беларусь",
+    dial: "375",
+    stripes: [
+      { color: "#c8313e", className: "h-[12px]" },
+      { color: "#4aa657", className: "h-[6px]" },
+    ],
+  },
+  { id: "ge", name: "Грузия", dial: "995", stripes: [] },
+  { id: "kz", name: "Казахстан", dial: "7", stripes: [{ color: "#00afca", className: "h-[18px]" }] },
+  { id: "kg", name: "Кыргызстан", dial: "996", stripes: [{ color: "#e8112d", className: "h-[18px]" }] },
+  {
+    id: "md",
+    name: "Молдова",
+    dial: "373",
+    stripes: [
+      { color: "#003da5", className: "h-[6px]" },
+      { color: "#ffd100", className: "h-[6px]" },
+      { color: "#c8102e", className: "h-[6px]" },
+    ],
+  },
+  {
+    id: "tj",
+    name: "Таджикистан",
+    dial: "992",
+    stripes: [
+      { color: "#cc0000", className: "h-[6px]" },
+      { color: "#ffffff", className: "h-[6px]" },
+      { color: "#006600", className: "h-[6px]" },
+    ],
+  },
+  {
+    id: "uz",
+    name: "Узбекистан",
+    dial: "998",
+    stripes: [
+      { color: "#0099b5", className: "h-[6px]" },
+      { color: "#ffffff", className: "h-[6px]" },
+      { color: "#1eb53a", className: "h-[6px]" },
+    ],
+  },
+  {
+    id: "ua",
+    name: "Украина",
+    dial: "380",
+    stripes: [
+      { color: "#005bbb", className: "h-[9px]" },
+      { color: "#ffd500", className: "h-[9px]" },
+    ],
+  },
+];
+
+function Flag({ id }: { id: string }) {
+  if (id === "ge") {
+    return (
+      <span className="relative h-[18px] w-[24px] shrink-0 overflow-hidden rounded-[2px] border-[0.5px] border-solid border-[#dedede] bg-white">
+        <span className="absolute top-0 left-[10px] h-full w-[4px] bg-[#ff0000]" />
+        <span className="absolute top-[7px] left-0 h-[4px] w-full bg-[#ff0000]" />
+      </span>
+    );
+  }
+  const country = countries.find((item) => item.id === id) ?? countries[0];
+  return (
+    <span className="flex h-[18px] w-[24px] shrink-0 flex-col overflow-hidden rounded-[2px] border-[0.5px] border-solid border-[#dedede]">
+      {country.stripes.map((stripe) => (
+        <span key={`${id}-${stripe.color}-${stripe.className}`} className={stripe.className} style={{ backgroundColor: stripe.color }} />
+      ))}
+    </span>
+  );
+}
+
 function MessengerField({
   icon,
   value,
@@ -75,7 +178,7 @@ function MessengerField({
   codeLabel?: string;
 }) {
   return (
-    <label className="flex h-[60px] w-full items-center gap-[16px] rounded-[16px] border border-solid border-[#dedede] bg-white pr-[14px] pl-[24px]">
+    <label className="flex h-[48px] w-full items-center gap-[16px] rounded-[16px] border border-solid border-[#dedede] bg-white pr-[14px] pl-[24px]">
       <img alt="" className="shrink-0" src={icon} width={42} height={42} />
       <span className="h-[24px] w-px shrink-0 bg-[#dedede]" />
       <span className="flex min-w-0 flex-1 items-center gap-[8px]">
@@ -108,29 +211,102 @@ function MessengerField({
   );
 }
 
-function PhoneField({ value, onChange, invalid }: { value: string; onChange: (value: string) => void; invalid: boolean }) {
+function PhoneField({
+  value,
+  onChange,
+  invalid,
+  countryId,
+  onCountry,
+}: {
+  value: string;
+  onChange: (value: string) => void;
+  invalid: boolean;
+  countryId: string;
+  onCountry: (id: string) => void;
+}) {
+  const [open, setOpen] = useState(false);
+  const rootRef = useRef<HTMLLabelElement>(null);
+  const country = countries.find((item) => item.id === countryId) ?? countries[0];
+
+  useEffect(() => {
+    if (!open) return;
+    function onPointer(event: PointerEvent) {
+      if (!rootRef.current?.contains(event.target as Node)) setOpen(false);
+    }
+    function onKey(event: KeyboardEvent) {
+      if (event.key === "Escape") setOpen(false);
+    }
+    document.addEventListener("pointerdown", onPointer);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("pointerdown", onPointer);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [open]);
+
   return (
-    <label className="flex h-[60px] items-center gap-[16px] rounded-[16px] border border-solid border-[#dedede] bg-white pr-[14px] pl-[24px]">
-      <span className="flex items-center gap-[8px]">
-        <span className="flex h-[18px] w-[24px] flex-col overflow-hidden rounded-[2px] border-[0.5px] border-solid border-[#dedede]">
-          <span className="h-[6px] bg-white" />
-          <span className="h-[6px] bg-[#0039a6]" />
-          <span className="h-[6px] bg-[#d52b1e]" />
-        </span>
-        <span className="text-18">+7</span>
-        <img alt="" src="/consult/chevron-down.svg" width={24} height={24} />
-      </span>
+    <label
+      ref={rootRef}
+      className="relative flex h-[48px] items-center gap-[16px] rounded-[16px] border border-solid border-[#dedede] bg-white pr-[14px] pl-[24px]"
+    >
+      <button
+        type="button"
+        aria-label="Код страны"
+        aria-haspopup="listbox"
+        aria-expanded={open}
+        onClick={() => setOpen((current) => !current)}
+        className="flex shrink-0 items-center gap-[8px] bg-transparent p-0 text-black"
+      >
+        <Flag id={country.id} />
+        <span className="text-18">+{country.dial}</span>
+        <img
+          alt=""
+          src="/consult/chevron-down.svg"
+          width={24}
+          height={24}
+          className={`transition-transform duration-150 ${open ? "rotate-180" : ""}`}
+        />
+      </button>
       <span className="h-[24px] w-px bg-[#dedede]" />
       <input
         value={value}
-        onChange={(event) => onChange(formatPhone(event.target.value))}
+        onChange={(event) => onChange(formatNational(event.target.value, country.dial))}
         inputMode="tel"
         autoComplete="tel"
-        placeholder="(999) 123-45-67"
+        placeholder={country.dial === "7" ? "(999) 123-45-67" : "Номер телефона"}
         aria-label="Телефон"
         aria-invalid={invalid}
         className="min-w-0 flex-1 bg-transparent text-18 text-black outline-none placeholder:text-black placeholder:opacity-40"
       />
+      {open ? (
+        <ul
+          role="listbox"
+          aria-label="Код страны"
+          className="absolute top-[56px] left-[-1px] z-30 max-h-[240px] w-[375px] overflow-auto rounded-[16px] border border-solid border-[#dedede] bg-white py-[8px] shadow-[0_8px_24px_rgba(91,90,90,0.12)]"
+        >
+          {countries.map((item) => {
+            const selected = item.id === country.id;
+            return (
+              <li key={item.id}>
+                <button
+                  type="button"
+                  role="option"
+                  aria-selected={selected}
+                  onClick={() => {
+                    onCountry(item.id);
+                    setOpen(false);
+                  }}
+                  className={`flex h-[40px] w-full items-center gap-[12px] px-[16px] text-left text-16 text-black ${selected ? "bg-[#f6f8fa]" : "hover:bg-[#f6f8fa]"}`}
+                >
+                  <Flag id={item.id} />
+                  <span className="min-w-0 flex-1">{item.name}</span>
+                  <span className="opacity-50">+{item.dial}</span>
+                </button>
+              </li>
+            );
+          })}
+        </ul>
+      ) : null}
     </label>
   );
 }
@@ -138,6 +314,7 @@ function PhoneField({ value, onChange, invalid }: { value: string; onChange: (va
 export function ConsultForm() {
   const [name, setName] = useState("");
   const [channel, setChannel] = useState<Channel>("call");
+  const [countryId, setCountryId] = useState("ru");
   const [phone, setPhone] = useState("");
   const [phoneCode, setPhoneCode] = useState("");
   const [telegram, setTelegram] = useState("");
@@ -151,7 +328,8 @@ export function ConsultForm() {
       setError("Укажите имя");
       return;
     }
-    if (channel === "call" && phone.replace(/\D/g, "").length < 10) {
+    const country = countries.find((item) => item.id === countryId) ?? countries[0];
+    if (channel === "call" && !phoneReady(country.dial, phone)) {
       setError("Укажите телефон");
       return;
     }
@@ -197,24 +375,26 @@ export function ConsultForm() {
 
       <form
         onSubmit={submit}
-        className="absolute top-[52px] left-[905px] flex w-[415px] flex-col items-center gap-[36px] rounded-[23px] bg-white px-[20px] py-[24px]"
+        className="absolute top-[52px] left-[905px] flex w-[415px] flex-col gap-[30px] rounded-[23px] bg-white px-[20px] py-[24px]"
         noValidate
       >
-        <h3 className="w-[367px] text-center text-24 font-medium">
-          Бесплатная консультация по&nbsp;подбору учереждения
-        </h3>
+        <div className="flex w-full flex-col gap-[22px]">
+          <h3 className="mx-auto w-[367px] text-center text-24 font-medium">
+            Бесплатная консультация по&nbsp;подбору учереждения
+          </h3>
 
-        <label className="flex w-full flex-col gap-[10px]">
-          <span className="text-18">Имя</span>
-          <input
-            value={name}
-            onChange={(event) => setName(event.target.value)}
-            placeholder="Укажите как к вам можно обращаться"
-            autoComplete="name"
-            aria-invalid={error !== "" && !name.trim()}
-            className="h-[60px] rounded-[16px] border border-solid border-[#dedede] bg-white pr-[14px] pl-[24px] text-18 text-black outline-none placeholder:text-black placeholder:opacity-40"
-          />
-        </label>
+          <label className="flex w-full flex-col gap-[10px]">
+            <span className="text-18">Имя</span>
+            <input
+              value={name}
+              onChange={(event) => setName(event.target.value)}
+              placeholder="Укажите как к вам можно обращаться"
+              autoComplete="name"
+              aria-invalid={error !== "" && !name.trim()}
+              className="h-[48px] rounded-[16px] border border-solid border-[#dedede] bg-white pr-[14px] pl-[24px] text-18 text-black outline-none placeholder:text-black placeholder:opacity-40"
+            />
+          </label>
+        </div>
 
         <div className="flex w-full flex-col gap-[16px]">
           <div className="flex w-full flex-col gap-[10px]">
@@ -252,7 +432,13 @@ export function ConsultForm() {
             <PhoneField
               value={phone}
               onChange={setPhone}
-              invalid={error !== "" && phone.replace(/\D/g, "").length < 10}
+              countryId={countryId}
+              onCountry={(id) => {
+                const next = countries.find((item) => item.id === id) ?? countries[0];
+                setCountryId(id);
+                setPhone((current) => formatNational(current, next.dial));
+              }}
+              invalid={error !== "" && !phoneReady((countries.find((item) => item.id === countryId) ?? countries[0]).dial, phone)}
             />
           ) : (
             <div className="flex w-full flex-col gap-[8px]">
@@ -295,7 +481,7 @@ export function ConsultForm() {
         <button
           type="submit"
           disabled={sent}
-          className="flex h-[56px] w-full items-center justify-center rounded-[12px] bg-[#e1f300] px-[20px] text-18 leading-[24px] font-medium text-black disabled:opacity-80"
+          className="flex h-[52px] w-full items-center justify-center rounded-[12px] bg-[#e1f300] px-[20px] text-18 leading-[24px] font-medium text-black disabled:opacity-80"
         >
           {sent ? "Заявка отправлена" : "Отправить заявку"}
         </button>
