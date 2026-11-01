@@ -206,7 +206,7 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
         aria-modal="true"
         aria-labelledby={titleId}
         tabIndex={-1}
-        className={`relative flex w-[1100px] flex-col rounded-[21px] bg-[#fdfdfd] outline-none ${step === "format" ? "h-[545px]" : "min-h-[612px]"}`}
+        className="relative flex h-[612px] w-[1100px] flex-col overflow-hidden rounded-[21px] bg-[#fdfdfd] outline-none"
       >
         <div className="flex h-[44px] items-center justify-between px-[26px] pt-[20px]">
           {step === "format" ? (
@@ -243,7 +243,7 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
         ) : null}
 
         {step === "schedule" ? (
-          <div className="flex gap-[61px] px-[34px] pt-[24px] pb-[46px]">
+          <div className="flex min-h-0 flex-1 gap-[61px] overflow-hidden px-[34px] pt-[24px] pb-[46px]">
             <div className="flex w-[366px] flex-col gap-[10px] pt-[0px]">
               <h2 id={titleId} className="w-[232px] text-24 font-medium">
                 Выберите удобную дату и время
@@ -373,7 +373,7 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
                           <Chevron direction={open ? "up" : "down"} />
                         </button>
                         {open ? (
-                          <div className="grid grid-cols-3 gap-x-[6px] gap-y-[6px]">
+                          <div className="grid grid-cols-2 gap-[6px]">
                             {group.slots.map((slot) => {
                               const selected = time === slot;
                               return (
@@ -381,8 +381,8 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
                                   key={slot}
                                   type="button"
                                   onClick={() => setTime(slot)}
-                                  className={`flex h-[24px] items-center justify-center rounded-[4px] text-13 ${
-                                    selected ? "bg-[#e1f300]" : "bg-[rgba(231,231,231,0.4)]"
+                                  className={`flex h-[32px] items-center justify-center rounded-[4px] text-13 ${
+                                    selected ? "bg-[#e1f300]" : "bg-[#e7e7e7]"
                                   }`}
                                 >
                                   {slot}
@@ -409,11 +409,11 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
         ) : null}
 
         {step === "contact" ? (
-          <form onSubmit={submit} noValidate className="mx-auto flex w-[415px] flex-col items-center gap-[21px] pt-[38px] pb-[46px]">
-            <h2 id={titleId} className="w-[378px] text-center text-24 font-medium">
+          <form onSubmit={submit} noValidate className="mx-auto flex min-h-0 w-[415px] flex-1 flex-col items-center gap-[21px] pt-[38px] pb-[24px]">
+            <h2 id={titleId} className="w-[378px] shrink-0 text-center text-24 font-medium">
               Заполните контактную информацию
             </h2>
-            <div className="flex w-full flex-col gap-[18px] rounded-[20px] bg-white px-[18px] py-[18px]">
+            <div className="flex min-h-0 w-full flex-1 flex-col gap-[18px] rounded-[20px] bg-white px-[18px] py-[18px]">
               <label className="flex flex-col gap-[8px]">
                 <span className="text-18">Имя</span>
                 <input
@@ -425,7 +425,7 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
                   className="h-[44px] rounded-[12px] border border-solid border-[#dedede] bg-white px-[24px] text-16 text-[#27292d] outline-none placeholder:text-[#27292d] placeholder:opacity-40"
                 />
               </label>
-              <div className="flex flex-col gap-[12px]">
+              <div className="flex min-h-0 flex-1 flex-col gap-[12px]">
                 <span className="text-18" id={`${titleId}-channel`}>
                   Способ связи
                 </span>
@@ -454,6 +454,7 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
                     );
                   })}
                 </div>
+                <div className="min-h-0 flex-1 overflow-y-auto">
                 {channel === "call" ? (
                   <PhoneField
                     value={phone}
@@ -506,8 +507,9 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
                     />
                   </div>
                 )}
+                </div>
               </div>
-              <button type="submit" disabled={!canSend} className="lime-control h-[46px] rounded-[12px] text-16">
+              <button type="submit" disabled={!canSend} className="lime-control h-[46px] shrink-0 rounded-[12px] text-16">
                 {sent ? "Заявка отправлена" : "Отправить заявку"}
               </button>
               {error ? <p className="text-center text-16 opacity-60">{error}</p> : null}
@@ -537,7 +539,7 @@ function FormatCard({ title, text, onClick }: { title: string; text: string; onC
     <button
       type="button"
       onClick={onClick}
-      className="flex w-[300px] flex-col gap-[20px] rounded-[30px] border border-solid border-[rgba(0,0,0,0.04)] bg-white px-[20px] py-[22px] text-left hover:bg-[#f6f8fa]"
+      className="flex w-[300px] flex-col gap-[20px] rounded-[12px] border border-solid border-[rgba(0,0,0,0.04)] bg-white px-[20px] py-[22px] text-left hover:bg-[#f6f8fa]"
     >
       <span className="border-b border-solid border-[rgba(0,0,0,0.04)] pb-[4px] text-18 leading-[28px] font-medium">{title}</span>
       <span className="flex items-center justify-between gap-[8px]">
