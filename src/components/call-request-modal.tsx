@@ -93,7 +93,10 @@ function Steps({ count, current }: { count: number; current: number }) {
   return (
     <div className="flex items-center gap-[6px]" aria-hidden>
       {Array.from({ length: count }, (_, index) => (
-        <span key={index} className={`h-[10px] rounded-full bg-[#e1f300] ${index === current ? "w-[26px]" : "w-[10px]"}`} />
+        <span
+          key={index}
+          className={`h-[10px] rounded-full bg-[#e1f300] ${index === current ? "w-[26px]" : "w-[10px] opacity-40"}`}
+        />
       ))}
     </div>
   );
@@ -191,7 +194,7 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
         aria-modal="true"
         aria-labelledby={titleId}
         tabIndex={-1}
-        className={`relative flex w-[1100px] flex-col rounded-[21px] bg-[#fdfdfd] outline-none ${step === "contact" ? "" : "h-[612px] overflow-hidden"}`}
+        className="relative flex h-[650px] w-[1100px] flex-col overflow-hidden rounded-[21px] bg-white outline-none"
       >
         <div className="flex h-[44px] items-center justify-between px-[26px] pt-[20px]">
           {step === "format" ? (
@@ -208,19 +211,19 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
         </div>
 
         {step === "format" ? (
-          <div className="flex flex-col items-center gap-[56px] pt-[52.5px]">
-            <h2 id={titleId} className="w-[326px] text-center text-24 font-medium">
+          <div className="flex flex-col items-center gap-[56px] pt-[36px]">
+            <h2 id={titleId} className="w-[406px] text-center text-28 font-medium">
               Выберите удобный формат для консультации
             </h2>
-            <div className="flex items-start gap-[46px]">
+            <div className="flex items-start gap-[24px]">
               <FormatCard
-                gap={23}
+                icon="/modal/format-call.svg"
                 title="Связаться как можно скорее"
                 text="Свяжемся с Вами как можно скорее, чтоб обсудить вашу ситуацию"
                 onClick={() => choose("soon")}
               />
               <FormatCard
-                gap={20}
+                icon="/modal/format-calendar.svg"
                 title="Запланировать консультацию"
                 text="Выберите удобное для Вас время, чтобы обсудить Вашу ситуацию"
                 onClick={() => choose("plan")}
@@ -230,12 +233,12 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
         ) : null}
 
         {step === "schedule" ? (
-          <div className="flex min-h-0 flex-1 gap-[61px] overflow-hidden px-[34px] pt-[24px] pb-[46px]">
-            <div className="flex w-[366px] flex-col gap-[10px] pt-[0px]">
-              <h2 id={titleId} className="w-[232px] text-24 font-medium">
+          <div className="flex gap-[61px] px-[34px] pt-[24px]">
+            <div className="flex w-[366px] flex-col gap-[10px]">
+              <h2 id={titleId} className="w-[270px] text-28 font-medium">
                 Выберите удобную дату и время
               </h2>
-              <p className="text-16 opacity-60">
+              <p className="text-13 leading-[20px] opacity-50">
                 Запланируйте консультацию на удобное для вас время. Специалист свяжется с вами в выбранное время, чтобы обсудить ситуацию и возможные варианты помощи
               </p>
             </div>
@@ -337,28 +340,39 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
                   ) : null}
                 </div>
               </div>
-              <div className="flex min-h-[498px] w-[221px] flex-col">
+              <div className="flex h-[514px] w-[221px] flex-col">
                 <div className="flex w-full flex-col gap-[12px]">
                   {slotGroups.map((group) => {
                     const open = openGroups.includes(group.id);
                     return (
                       <div key={group.id} className={`flex flex-col gap-[12px] ${open ? "pb-[10px]" : ""}`}>
-                        <button
-                          type="button"
-                          aria-expanded={open}
-                          onClick={() =>
-                            setOpenGroups((current) =>
-                              current.includes(group.id) ? current.filter((id) => id !== group.id) : [...current, group.id],
-                            )
-                          }
-                          className="flex h-[27px] w-full items-center justify-between pb-[2px]"
-                        >
-                          <span className="flex items-center gap-[6px] text-[14px] leading-[24px] font-medium">
+                        <div className="flex h-[27px] w-full items-center justify-between pb-[2px]">
+                          <button
+                            type="button"
+                            aria-pressed={open}
+                            onClick={() =>
+                              setOpenGroups((current) =>
+                                current.includes(group.id) ? current.filter((id) => id !== group.id) : [...current, group.id],
+                              )
+                            }
+                            className="flex items-center gap-[6px] text-[14px] leading-[24px] font-medium"
+                          >
                             <PeriodMark />
                             {group.label}
-                          </span>
-                          <SlotChevron open={open} />
-                        </button>
+                          </button>
+                          <button
+                            type="button"
+                            aria-expanded={open}
+                            aria-label={open ? `Свернуть ${group.label}` : `Развернуть ${group.label}`}
+                            onClick={() =>
+                              setOpenGroups((current) =>
+                                current.includes(group.id) ? current.filter((id) => id !== group.id) : [...current, group.id],
+                              )
+                            }
+                          >
+                            <SlotChevron open={open} />
+                          </button>
+                        </div>
                         {open ? (
                           <div className="grid grid-cols-2 gap-[6px]">
                             {group.slots.map((slot) => {
@@ -396,13 +410,13 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
         ) : null}
 
         {step === "contact" ? (
-          <form onSubmit={submit} noValidate className="mx-auto flex w-[415px] flex-col items-center gap-[21px] pt-[38px] pb-[46px]">
-            <h2 id={titleId} className="w-[378px] text-center text-24 font-medium">
-              Заполните контактную информацию
+          <form onSubmit={submit} noValidate className="mx-auto flex w-[415px] flex-col items-center gap-[21px] pt-[38px]">
+            <h2 id={titleId} className="w-[351px] text-center text-28 font-medium">
+              Выберите удобный формат для консультации
             </h2>
-            <div className="flex w-full flex-col gap-[18px] rounded-[20px] bg-white px-[18px] py-[18px]">
+            <div className="flex w-full flex-col gap-[18px] rounded-[23px] bg-white px-[18px] py-[18px]">
               <label className="flex flex-col gap-[8px]">
-                <span className="text-18">Имя</span>
+                <span className="text-16">Имя</span>
                 <input
                   value={name}
                   onChange={(event) => setName(event.target.value)}
@@ -413,9 +427,10 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
                 />
               </label>
               <div className="flex flex-col gap-[12px]">
-                <span className="text-18" id={`${titleId}-channel`}>
+                <span className="text-16" id={`${titleId}-channel`}>
                   Способ связи
                 </span>
+                <div className="flex flex-col gap-[10px]">
                 <div role="tablist" aria-labelledby={`${titleId}-channel`} className="flex h-[36px] gap-[4px] rounded-[10px] bg-[#f6f8fa] p-[2px]">
                   {(
                     [
@@ -441,14 +456,11 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
                     );
                   })}
                 </div>
-                <div className="grid">
-                  <div
-                    className={`col-start-1 row-start-1 flex flex-col gap-[8px] ${channel === "messenger" ? "" : "invisible"}`}
-                    aria-hidden={channel !== "messenger"}
-                    inert={channel !== "messenger"}
-                  >
+                {channel === "messenger" ? (
+                  <div className="flex flex-col gap-[6px]">
                     <MessengerField
-                      icon="/consult/telegram.svg"
+                      compact
+                      icon="/modal/telegram.svg"
                       value={telegram}
                       onChange={(value) => setTelegram(isNickname(value) ? value : formatNational(value, telegramCode))}
                       placeholder="Укажите ник или номер"
@@ -462,13 +474,14 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
                       }}
                       invalid={error !== "" && !telegramReady(telegram) && !phoneReady(phoneCode, phone)}
                     />
-                    <div className="flex h-[28px] items-center gap-[8px]">
+                    <div className="flex h-[24px] items-center gap-[8px]">
                       <span aria-hidden className="h-px min-w-0 flex-1 bg-black/10" />
-                      <span className="text-18 opacity-40">Или</span>
+                      <span className="text-16 opacity-40">Или</span>
                       <span aria-hidden className="h-px min-w-0 flex-1 bg-black/10" />
                     </div>
                     <MessengerField
-                      icon="/consult/whatsapp.svg"
+                      compact
+                      icon="/modal/whatsapp.svg"
                       value={phone}
                       onChange={(value) => setPhone(formatNational(value, phoneCode))}
                       placeholder="Укажите номер"
@@ -484,24 +497,23 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
                       invalid={error !== "" && !telegramReady(telegram) && !phoneReady(phoneCode, phone)}
                     />
                   </div>
-                  {channel === "call" ? (
-                    <div className="col-start-1 row-start-1">
-                      <PhoneField
-                        value={phone}
-                        onChange={setPhone}
-                        countryId={countryId}
-                        onCountry={(id) => {
-                          const next = countries.find((item) => item.id === id) ?? countries[0];
-                          setCountryId(id);
-                          setPhone((current) => formatNational(current, next.dial));
-                        }}
-                        invalid={error !== "" && !phoneReady(country.dial, phone)}
-                      />
-                    </div>
-                  ) : null}
+                ) : (
+                  <PhoneField
+                    compact
+                    value={phone}
+                    onChange={setPhone}
+                    countryId={countryId}
+                    onCountry={(id) => {
+                      const next = countries.find((item) => item.id === id) ?? countries[0];
+                      setCountryId(id);
+                      setPhone((current) => formatNational(current, next.dial));
+                    }}
+                    invalid={error !== "" && !phoneReady(country.dial, phone)}
+                  />
+                )}
                 </div>
               </div>
-              <button type="submit" disabled={!canSend} className="lime-control h-[46px] rounded-[12px] text-16">
+              <button type="submit" disabled={!canSend} className="lime-control h-[46px] rounded-[12px] text-16 font-medium">
                 {sent ? "Заявка отправлена" : "Отправить заявку"}
               </button>
               {error ? <p className="text-center text-16 opacity-60">{error}</p> : null}
@@ -551,30 +563,30 @@ function SlotChevron({ open }: { open: boolean }) {
 }
 
 function FormatCard({
+  icon,
   title,
   text,
-  gap,
   onClick,
 }: {
+  icon: string;
   title: string;
   text: string;
-  gap: 20 | 23;
   onClick: () => void;
 }) {
   return (
     <button
       type="button"
       onClick={onClick}
-      className={`flex w-[300px] flex-col rounded-[12px] border border-solid border-[rgba(0,0,0,0.04)] bg-white px-[20px] py-[22px] text-left hover:bg-[#f6f8fa] ${gap === 23 ? "gap-[23px]" : "gap-[20px]"}`}
+      className="flex w-[300px] flex-col items-start gap-[16px] rounded-[12px] border border-solid border-[rgba(69,114,230,0.06)] px-[20px] py-[22px] text-left hover:border-[rgba(69,114,230,0.18)]"
+      style={{
+        backgroundImage:
+          "linear-gradient(122.62deg, rgba(223, 235, 255, 0.24) 3.1%, rgba(240, 245, 255, 0.24) 99.38%)",
+      }}
     >
-      <span className="w-fit border-b border-solid border-[rgba(0,0,0,0.04)] pb-[4px] text-18 leading-[28px] font-medium">
-        {title}
-      </span>
-      <span className="flex h-[40px] w-full items-center justify-between">
-        <span className="w-[226px] text-13 leading-[20px] opacity-70">{text}</span>
-        <span className="flex size-[32px] shrink-0 items-center justify-center opacity-40">
-          <Chevron direction="right" />
-        </span>
+      <img alt="" src={icon} width={38} height={38} />
+      <span className="flex flex-col items-start gap-[8px]">
+        <span className="text-18 leading-[28px] font-medium">{title}</span>
+        <span className="w-[258px] text-13 leading-[20px] opacity-70">{text}</span>
       </span>
     </button>
   );

@@ -198,6 +198,7 @@ export function MessengerField({
   dialCode,
   onCodeChange,
   codeLabel,
+  compact,
 }: {
   icon: string;
   value: string;
@@ -210,6 +211,7 @@ export function MessengerField({
   dialCode?: string;
   onCodeChange?: (value: string) => void;
   codeLabel?: string;
+  compact?: boolean;
 }) {
   const [focused, setFocused] = useState(false);
   const rootRef = useRef<HTMLLabelElement>(null);
@@ -275,9 +277,9 @@ export function MessengerField({
       ref={rootRef}
       onFocus={trackFocus}
       onBlur={trackBlur}
-      className="flex h-[48px] w-full items-center gap-[16px] rounded-[16px] border border-solid border-[#dedede] bg-white pr-[14px] pl-[24px]"
+      className={`flex w-full items-center gap-[16px] rounded-[16px] border border-solid border-[#dedede] bg-white pr-[14px] pl-[24px] ${compact ? "h-[44px]" : "h-[48px]"}`}
     >
-      <img alt="" className="shrink-0" src={icon} width={42} height={42} />
+      <img alt="" className="shrink-0" src={icon} width={compact ? 32 : 42} height={compact ? 32 : 42} />
       <span className="h-[24px] w-px shrink-0 bg-[#dedede]" />
       <span className="flex min-w-0 flex-1 items-center gap-[4px]">
         <input
@@ -289,10 +291,10 @@ export function MessengerField({
           placeholder={showPlus ? "" : placeholder}
           aria-label={label}
           aria-invalid={invalid}
-          className="order-2 min-w-0 flex-1 bg-transparent text-18 text-[#27292d] outline-none placeholder:text-[#27292d] placeholder:opacity-40"
+          className={`order-2 min-w-0 flex-1 bg-transparent text-[#27292d] outline-none placeholder:text-[#27292d] placeholder:opacity-40 ${compact ? "text-16" : "text-18"}`}
         />
         {showPlus ? (
-          <span className="order-1 flex shrink-0 items-center text-18 text-[#27292d]">
+          <span className={`order-1 flex shrink-0 items-center text-[#27292d] ${compact ? "text-16" : "text-18"}`}>
             <span>+</span>
             <input
               value={code}
@@ -303,7 +305,7 @@ export function MessengerField({
               maxLength={3}
               size={Math.max(code.length, 1)}
               style={{ width: code.length > 0 ? `${code.length}ch` : 0 }}
-              className="m-0 min-w-0 border-0 bg-transparent p-0 text-18 text-[#27292d] outline-none"
+              className={`m-0 min-w-0 border-0 bg-transparent p-0 text-[#27292d] outline-none ${compact ? "text-16" : "text-18"}`}
             />
           </span>
         ) : null}
@@ -318,12 +320,14 @@ export function PhoneField({
   invalid,
   countryId,
   onCountry,
+  compact,
 }: {
   value: string;
   onChange: (value: string) => void;
   invalid: boolean;
   countryId: string;
   onCountry: (id: string) => void;
+  compact?: boolean;
 }) {
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLLabelElement>(null);
@@ -369,7 +373,7 @@ export function PhoneField({
         className="flex shrink-0 items-center gap-[8px] bg-transparent p-0 text-[#27292d]"
       >
         <Flag id={country.id} />
-        <span className="text-18">+{country.dial}</span>
+        <span className={compact ? "text-16" : "text-18"}>+{country.dial}</span>
         <img
           alt=""
           src="/consult/chevron-down.svg"
@@ -401,7 +405,7 @@ export function PhoneField({
         placeholder={country.dial === "7" ? "(999) 123-45-67" : "Номер телефона"}
         aria-label="Телефон"
         aria-invalid={invalid}
-        className="min-w-0 flex-1 bg-transparent text-18 text-[#27292d] outline-none placeholder:text-[#27292d] placeholder:opacity-40"
+        className={`min-w-0 flex-1 bg-transparent text-[#27292d] outline-none placeholder:text-[#27292d] placeholder:opacity-40 ${compact ? "text-16" : "text-18"}`}
       />
       {open ? (
         <ul
