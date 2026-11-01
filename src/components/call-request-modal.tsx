@@ -312,13 +312,13 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
                     className="mt-[10px] flex h-[40px] w-full items-center justify-between rounded-[3px] border border-solid border-[#c7c7c7] bg-white px-[14px] text-left text-16"
                   >
                     <span className="truncate">{zoneLabel}</span>
-                    <Chevron direction="down" />
+                    <Chevron direction={zoneOpen ? "up" : "down"} />
                   </button>
                   {zoneOpen ? (
                     <ul
                       role="listbox"
                       aria-label="Часовой пояс"
-                      className="absolute top-[78px] z-10 max-h-[220px] w-full overflow-auto rounded-[8px] border border-solid border-[#dedede] bg-white py-[4px] shadow-[0_8px_24px_rgba(39,41,45,0.12)]"
+                      className="absolute bottom-[44px] z-20 w-full rounded-[8px] border border-solid border-[#dedede] bg-white py-[4px] shadow-[0_8px_24px_rgba(39,41,45,0.12)]"
                     >
                       {zones.map((item) => (
                         <li key={item.id}>
