@@ -10,7 +10,6 @@ import {
   phoneReady,
   telegramReady,
 } from "@/components/consult-form";
-import { FilterCheckbox } from "@/components/institutions";
 
 type Path = "soon" | "plan";
 type Step = "format" | "schedule" | "contact";
@@ -263,7 +262,7 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
         ) : null}
 
         {step === "schedule" ? (
-          <div className="flex gap-[61px] px-[34px] pt-[24px]">
+          <div className="flex gap-[81px] px-[34px] pt-[24px]">
             <div className="flex w-[366px] flex-col gap-[10px]">
               <h2 id={titleId} className="w-[270px] text-28 font-medium">
                 Выберите удобную дату и время
@@ -272,10 +271,10 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
                 Запланируйте консультацию на удобное для вас время. Специалист свяжется с вами в выбранное время, чтобы обсудить ситуацию и возможные варианты помощи
               </p>
             </div>
-            <div className="flex w-[605px] items-start gap-[16px]">
-              <div className="flex w-[368px] flex-col gap-[12px]">
-                <div className="rounded-[16px] bg-white px-[20px] pb-[20px]">
-                  <div className="flex h-[36px] items-center justify-between rounded-[8px] bg-[#f6f8fa] px-[6px]">
+            <div className="flex w-[585px] items-start gap-[16px]">
+              <div className="flex w-[348px] flex-col gap-[12px]">
+                <div className="flex w-[348px] flex-col gap-[8px] rounded-[16px] bg-white pb-[20px]">
+                  <div className="flex h-[36px] w-full items-center gap-[6px] rounded-[8px] bg-[#f6f8fa] p-[6px]">
                     <button
                       type="button"
                       aria-label="Предыдущий месяц"
@@ -286,11 +285,11 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
                             : { year: current.year, month: current.month - 1 },
                         )
                       }
-                      className="flex size-[24px] items-center justify-center rounded-[6px] bg-white"
+                      className="flex items-center justify-center rounded-[6px] bg-white p-[2px] shadow-[0_2px_4px_rgba(27,28,29,0.04)]"
                     >
                       <Chevron direction="left" />
                     </button>
-                    <span className="text-[14px] leading-[20px] font-medium">
+                    <span className="flex-1 text-center text-[14px] leading-[20px] font-medium tracking-[-0.084px]">
                       {months[cursor.month]}, {cursor.year}
                     </span>
                     <button
@@ -303,14 +302,14 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
                             : { year: current.year, month: current.month + 1 },
                         )
                       }
-                      className="flex size-[24px] items-center justify-center rounded-[6px] bg-white"
+                      className="flex items-center justify-center rounded-[6px] bg-white p-[2px] shadow-[0_2px_4px_rgba(27,28,29,0.04)]"
                     >
                       <Chevron direction="right" />
                     </button>
                   </div>
-                  <div className="mt-[8px] grid grid-cols-7 gap-x-[8px] gap-y-[8px]">
+                  <div className="grid grid-cols-7 gap-x-[8px] gap-y-[8px]">
                     {weekdays.map((label) => (
-                      <span key={label} className="flex h-[40px] items-center justify-center text-[14px] leading-[20px] opacity-40">
+                      <span key={label} className="flex h-[40px] items-center justify-center text-[14px] leading-[20px] font-medium tracking-[-0.084px] text-[#868c98]">
                         {label}
                       </span>
                     ))}
@@ -322,8 +321,8 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
                           type="button"
                           disabled={cell.outside}
                           onClick={() => setDate(cell.date)}
-                          className={`flex size-[40px] items-center justify-center rounded-[8px] text-[14px] leading-[20px] ${
-                            selected ? "bg-[#e1f300]" : cell.outside ? "text-[#cdd0d5]" : "hover:bg-[#f6f8fa]"
+                          className={`flex h-[40px] items-center justify-center rounded-[8px] text-[14px] leading-[20px] tracking-[-0.084px] ${
+                            selected ? "bg-[#e1f300] font-medium" : cell.outside ? "text-[#cdd0d5]" : "hover:bg-[#f6f8fa]"
                           }`}
                         >
                           {cell.date.getDate()}
@@ -388,7 +387,7 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
                             onClick={() => choosePeriod(group.id)}
                             className="group flex items-center gap-[6px] text-16 leading-[24px]"
                           >
-                            <FilterCheckbox checked={period === group.id} />
+                            <PeriodCheckbox checked={period === group.id} />
                             {group.label}
                           </button>
                           <button
@@ -561,6 +560,37 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
         ) : null}
       </div>
     </div>
+  );
+}
+
+function PeriodCheckbox({ checked }: { checked: boolean }) {
+  if (checked) {
+    return (
+      <span className="inline-flex shrink-0 items-start p-[1.534px]">
+        <svg width="15.338" height="15.338" viewBox="0 0 15.338 15.338" fill="none" aria-hidden>
+          <rect width="15.338" height="15.338" rx="3.06759" fill="#E1F300" />
+          <path
+            d="M4.21794 8.20581L6.40908 10.3531L11.12 4.98484"
+            stroke="#626262"
+            strokeWidth="1.5338"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </span>
+    );
+  }
+
+  return (
+    <svg width="18.4056" height="18.4056" viewBox="0 0 18.4056 18.4056" fill="none" aria-hidden className="shrink-0">
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M14.571 3.8345V14.5711H3.83447V3.8345H14.571V3.8345ZM14.5711 2.3007H3.83449C2.9909 2.3007 2.3007 2.9909 2.3007 3.83449V14.5711C2.3007 15.4147 2.9909 16.1049 3.83449 16.1049H14.5711C15.4147 16.1049 16.1049 15.4147 16.1049 14.5711V3.83449C16.1049 2.9909 15.4147 2.3007 14.5711 2.3007Z"
+        fill="#001024"
+        className="opacity-[0.36] group-hover:opacity-[0.46] group-active:opacity-[0.56]"
+      />
+    </svg>
   );
 }
 
