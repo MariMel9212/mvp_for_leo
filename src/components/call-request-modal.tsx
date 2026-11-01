@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useId, useRef, useState, type FormEvent } from "react";
+import { useEffect, useId, useRef, useState, type FormEvent, type ReactNode } from "react";
 import {
   MessengerField,
   PhoneField,
@@ -106,6 +106,7 @@ function Steps({ count, current }: { count: number; current: number }) {
 function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => void }) {
   const titleId = useId();
   const dialogRef = useRef<HTMLDivElement>(null);
+  const zoneButtonRef = useRef<HTMLButtonElement>(null);
   const zoneOpenRef = useRef(false);
   const [step, setStep] = useState<Step>("format");
   const [path, setPath] = useState<Path | null>(null);
@@ -119,6 +120,7 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
   const [period, setPeriod] = useState<string | null>(null);
   const [zone, setZone] = useState(zones[1].id);
   const [zoneOpen, setZoneOpen] = useState(false);
+  const [zoneMenuMax, setZoneMenuMax] = useState(160);
   zoneOpenRef.current = zoneOpen;
   const [name, setName] = useState("");
   const [channel, setChannel] = useState<Channel>("call");
@@ -170,6 +172,20 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
       const owner = slotGroups.find((item) => item.slots.includes(slot));
       if (!owner || next == null || owner.id !== next) return null;
       return slot;
+    });
+  }
+
+  function toggleZone() {
+    setZoneOpen((current) => {
+      const next = !current;
+      if (next) {
+        const field = zoneButtonRef.current?.getBoundingClientRect();
+        const dialog = dialogRef.current?.getBoundingClientRect();
+        if (field && dialog) {
+          setZoneMenuMax(Math.max(40, Math.floor(dialog.bottom - field.bottom - 12)));
+        }
+      }
+      return next;
     });
   }
 
@@ -231,13 +247,13 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
             </h2>
             <div className="flex items-start gap-[24px]">
               <FormatCard
-                icon="/modal/format-call.svg"
+                icon={<CallIcon />}
                 title="Связаться как можно скорее"
                 text="Свяжемся с Вами как можно скорее, чтоб обсудить вашу ситуацию"
                 onClick={() => choose("soon")}
               />
               <FormatCard
-                icon="/modal/format-calendar.svg"
+                icon={<CalendarIcon />}
                 title="Запланировать консультацию"
                 text="Выберите удобное для Вас время, чтобы обсудить Вашу ситуацию"
                 onClick={() => choose("plan")}
@@ -319,10 +335,11 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
                 <div className="relative">
                   <span className="text-16">Часовой пояс</span>
                   <button
+                    ref={zoneButtonRef}
                     type="button"
                     aria-haspopup="listbox"
                     aria-expanded={zoneOpen}
-                    onClick={() => setZoneOpen((current) => !current)}
+                    onClick={toggleZone}
                     className="mt-[10px] flex h-[40px] w-full items-center justify-between rounded-[3px] border border-solid border-[#c7c7c7] bg-white px-[14px] text-left text-16"
                   >
                     <span className="truncate">{zoneLabel}</span>
@@ -332,7 +349,8 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
                     <ul
                       role="listbox"
                       aria-label="Часовой пояс"
-                      className="absolute bottom-[44px] z-20 w-full rounded-[8px] border border-solid border-[#dedede] bg-white py-[4px] shadow-[0_8px_24px_rgba(39,41,45,0.12)]"
+                      style={{ maxHeight: zoneMenuMax }}
+                      className="absolute top-[calc(100%+4px)] z-20 w-full overflow-y-auto overscroll-contain rounded-[8px] border border-solid border-[#dedede] bg-white py-[4px] shadow-[0_8px_24px_rgba(39,41,45,0.12)]"
                     >
                       {zones.map((item) => (
                         <li key={item.id}>
@@ -359,19 +377,18 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
                   {slotGroups.map((group) => {
                     const open = openGroups.includes(group.id);
                     return (
-                      <div key={group.id} className={`flex flex-col gap-[12px] ${open ? "pb-[10px]" : ""}`}>
-                        <div className="flex h-[27px] w-full items-center justify-between pb-[2px]">
+                      <div
+                        key={group.id}
+                        className={`flex flex-col border-b border-solid border-[rgba(0,0,0,0.04)] ${open ? "gap-[12px] pb-[10px]" : "pb-[2px]"}`}
+                      >
+                        <div className="flex w-full items-center justify-between">
                           <button
                             type="button"
                             aria-pressed={period === group.id}
                             onClick={() => choosePeriod(group.id)}
                             className="group flex items-center gap-[6px] text-16 leading-[24px]"
                           >
-                            <span className="relative size-[16px] shrink-0">
-                              <span className="absolute top-0 left-0 origin-top-left scale-[0.86935]">
-                                <FilterCheckbox checked={period === group.id} />
-                              </span>
-                            </span>
+                            <FilterCheckbox checked={period === group.id} />
                             {group.label}
                           </button>
                           <button
@@ -415,7 +432,7 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
                 </div>
                 <button
                   type="button"
-                  disabled={!date || !time}
+                  disabled={!date || (!time && !period)}
                   onClick={() => setStep("contact")}
                   className="lime-control mt-auto h-[38px] self-end rounded-[8px] px-[20px] text-16"
                 >
@@ -566,13 +583,55 @@ function SlotChevron({ open }: { open: boolean }) {
   );
 }
 
+function CallIcon() {
+  return (
+    <svg width="38" height="38" viewBox="0 0 38 38" fill="none" aria-hidden>
+      <path
+        d="M13.1417 6.01662L10.7667 3.95829C10.1953 3.48584 9.4623 3.25465 8.72326 3.31377C7.98422 3.37289 7.29732 3.71768 6.80832 4.27495L4.59165 6.96662C3.48332 8.23329 3.32499 10.1333 3.95832 11.7166C7.91665 21.5333 13.4583 27.075 23.275 31.0333C24.8583 31.6666 26.7583 31.5083 28.025 30.4L30.7167 28.1833C31.2739 27.6943 31.6187 27.0074 31.6778 26.2683C31.737 25.5293 31.5058 24.7963 31.0333 24.225L28.975 22.1666C28.6033 21.7091 28.0837 21.3956 27.5057 21.28C26.9276 21.1644 26.3274 21.254 25.8083 21.5333L22.4833 23.275C18.527 21.1361 15.2805 17.8896 13.1417 13.9333L14.8833 10.6083C15.1627 10.0892 15.2522 9.48897 15.1366 8.91096C15.021 8.33294 14.7075 7.81333 14.25 7.44162L13.1417 6.01662Z"
+        stroke="#82ACF8"
+        strokeWidth="2.375"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M22.1667 4.75C25.1061 4.75 27.9252 5.9177 30.0038 7.99623C32.0823 10.0748 33.25 12.8939 33.25 15.8333M22.1667 10.2917C23.6364 10.2917 25.046 10.8755 26.0852 11.9148C27.1245 12.954 27.7083 14.3636 27.7083 15.8333"
+        stroke="#82ACF8"
+        strokeWidth="2.375"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function CalendarIcon() {
+  return (
+    <svg width="38" height="38" viewBox="0 0 38 38" fill="none" aria-hidden>
+      <path
+        d="M7.91667 7.91667H30.0833C31.8322 7.91667 33.25 9.33443 33.25 11.0833V30.0833C33.25 31.8322 31.8322 33.25 30.0833 33.25H7.91667C6.16776 33.25 4.75 31.8322 4.75 30.0833V11.0833C4.75 9.33443 6.16776 7.91667 7.91667 7.91667Z"
+        stroke="#82ACF8"
+        strokeWidth="2.77083"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M11.0833 4.75V11.0833M26.9167 4.75V11.0833M4.75 15.8333H33.25M11.875 22.1667H15.0417M22.9583 22.1667H26.125M11.875 27.7083H15.0417"
+        stroke="#82ACF8"
+        strokeWidth="2.77083"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 function FormatCard({
   icon,
   title,
   text,
   onClick,
 }: {
-  icon: string;
+  icon: ReactNode;
   title: string;
   text: string;
   onClick: () => void;
@@ -587,7 +646,7 @@ function FormatCard({
           "linear-gradient(122.62deg, rgba(223, 235, 255, 0.24) 3.1%, rgba(240, 245, 255, 0.24) 99.38%)",
       }}
     >
-      <img alt="" src={icon} width={38} height={38} />
+      {icon}
       <span className="flex flex-col items-start gap-[8px]">
         <span className="text-18 leading-[28px] font-medium">{title}</span>
         <span className="w-[258px] text-13 leading-[20px] opacity-70">{text}</span>
