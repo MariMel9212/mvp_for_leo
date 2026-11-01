@@ -115,6 +115,7 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
   const [date, setDate] = useState<Date | null>(null);
   const [time, setTime] = useState<string | null>(null);
   const [openGroups, setOpenGroups] = useState<string[]>(["morning"]);
+  const [period, setPeriod] = useState<string | null>(null);
   const [zone, setZone] = useState(zones[1].id);
   const [zoneOpen, setZoneOpen] = useState(false);
   zoneOpenRef.current = zoneOpen;
@@ -158,6 +159,18 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
       previous?.focus();
     };
   }, [onClose]);
+
+  function choosePeriod(id: string) {
+    const next = period === id ? null : id;
+    setPeriod(next);
+    setOpenGroups((current) => current.filter((item) => item !== id));
+    setTime((slot) => {
+      if (!slot) return slot;
+      const owner = slotGroups.find((item) => item.slots.includes(slot));
+      if (!owner || next == null || owner.id !== next) return null;
+      return slot;
+    });
+  }
 
   function choose(next: Path) {
     setPath(next);
@@ -349,15 +362,11 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
                         <div className="flex h-[27px] w-full items-center justify-between pb-[2px]">
                           <button
                             type="button"
-                            aria-pressed={open}
-                            onClick={() =>
-                              setOpenGroups((current) =>
-                                current.includes(group.id) ? current.filter((id) => id !== group.id) : [...current, group.id],
-                              )
-                            }
+                            aria-pressed={period === group.id}
+                            onClick={() => choosePeriod(group.id)}
                             className="flex items-center gap-[6px] text-[14px] leading-[24px] font-medium"
                           >
-                            <PeriodMark />
+                            <PeriodMark checked={period === group.id} />
                             {group.label}
                           </button>
                           <button
@@ -381,7 +390,10 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
                                 <button
                                   key={slot}
                                   type="button"
-                                  onClick={() => setTime(slot)}
+                                  onClick={() => {
+                                    setTime(slot);
+                                    setPeriod(group.id);
+                                  }}
                                   className={`flex h-[32px] items-center justify-center rounded-[4px] text-[14px] leading-[20px] text-[#27292d] ${
                                     selected ? "bg-[#e1f300]" : "bg-[rgba(231,231,231,0.4)]"
                                   }`}
@@ -530,7 +542,15 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
   );
 }
 
-function PeriodMark() {
+function PeriodMark({ checked }: { checked: boolean }) {
+  if (checked) {
+    return (
+      <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden className="shrink-0">
+        <rect x="2" y="2" width="12" height="12" rx="1.33" fill="#e1f300" />
+        <path d="M4.7 8.1 6.9 10.3 11.3 5.8" stroke="#626262" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    );
+  }
   return (
     <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden className="shrink-0">
       <path
