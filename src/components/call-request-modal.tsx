@@ -223,17 +223,19 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
         </div>
 
         {step === "format" ? (
-          <div className="flex flex-1 flex-col items-center justify-center gap-[56px] pb-[40px]">
+          <div className="flex flex-col items-center gap-[56px] pt-[52.5px]">
             <h2 id={titleId} className="w-[326px] text-center text-24 font-medium">
               Выберите удобный формат для консультации
             </h2>
-            <div className="flex gap-[46px]">
+            <div className="flex items-start gap-[46px]">
               <FormatCard
+                gap={23}
                 title="Связаться как можно скорее"
                 text="Свяжемся с Вами как можно скорее, чтоб обсудить вашу ситуацию"
                 onClick={() => choose("soon")}
               />
               <FormatCard
+                gap={20}
                 title="Запланировать консультацию"
                 text="Выберите удобное для Вас время, чтобы обсудить Вашу ситуацию"
                 onClick={() => choose("plan")}
@@ -534,17 +536,31 @@ function PeriodMark() {
   );
 }
 
-function FormatCard({ title, text, onClick }: { title: string; text: string; onClick: () => void }) {
+function FormatCard({
+  title,
+  text,
+  gap,
+  onClick,
+}: {
+  title: string;
+  text: string;
+  gap: 20 | 23;
+  onClick: () => void;
+}) {
   return (
     <button
       type="button"
       onClick={onClick}
-      className="flex w-[300px] flex-col gap-[20px] rounded-[12px] border border-solid border-[rgba(0,0,0,0.04)] bg-white px-[20px] py-[22px] text-left hover:bg-[#f6f8fa]"
+      className={`flex w-[300px] flex-col rounded-[12px] border border-solid border-[rgba(0,0,0,0.04)] bg-white px-[20px] py-[22px] text-left hover:bg-[#f6f8fa] ${gap === 23 ? "gap-[23px]" : "gap-[20px]"}`}
     >
-      <span className="border-b border-solid border-[rgba(0,0,0,0.04)] pb-[4px] text-18 leading-[28px] font-medium">{title}</span>
-      <span className="flex items-center justify-between gap-[8px]">
-        <span className="text-13 opacity-70">{text}</span>
-        <Chevron direction="right" />
+      <span className="w-fit border-b border-solid border-[rgba(0,0,0,0.04)] pb-[4px] text-18 leading-[28px] font-medium">
+        {title}
+      </span>
+      <span className="flex h-[40px] w-full items-center justify-between">
+        <span className="w-[226px] text-13 leading-[20px] opacity-70">{text}</span>
+        <span className="flex size-[32px] shrink-0 items-center justify-center opacity-40">
+          <Chevron direction="right" />
+        </span>
       </span>
     </button>
   );
