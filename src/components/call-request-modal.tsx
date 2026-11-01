@@ -132,7 +132,7 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
     channel === "call"
       ? phoneReady(country.dial, phone)
       : telegramReady(telegram) || phoneReady(phoneCode, phone);
-  const canSend = name.trim().length > 0 && contactReady && !sent;
+  const canSend = contactReady && !sent;
 
   useEffect(() => {
     const previous = document.activeElement as HTMLElement | null;
@@ -171,23 +171,8 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
 
   function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (!name.trim()) {
-      setError("Укажите имя");
-      return;
-    }
-    if (channel === "call" && !phoneReady(country.dial, phone)) {
-      setError("Укажите телефон");
-      return;
-    }
-    const telegramOk = isNickname(telegram) ? telegramReady(telegram) : phoneReady(telegramCode, telegram);
-    const whatsappOk = phoneReady(phoneCode, phone);
-    if (channel === "messenger" && !telegramOk && !whatsappOk) {
-      const telegramPhone = !isNickname(telegram) && telegram.replace(/\D/g, "").length > 0;
-      const whatsappPhone = phone.replace(/\D/g, "").length > 0;
-      const missingCode = (telegramPhone && telegramCode === "") || (whatsappPhone && phoneCode === "");
-      if (missingCode) setError("Укажите код");
-      else if (telegramPhone || whatsappPhone || telegramCode !== "" || phoneCode !== "") setError("Укажите номер");
-      else setError("Укажите ник или номер");
+    if (!contactReady) {
+      setError(channel === "call" ? "Укажите телефон" : "Укажите ник или номер");
       return;
     }
     setError("");
@@ -353,11 +338,11 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
                 </div>
               </div>
               <div className="flex min-h-[498px] w-[221px] flex-col">
-                <div className="flex flex-col gap-[12px]">
+                <div className="flex w-full flex-col gap-[12px]">
                   {slotGroups.map((group) => {
                     const open = openGroups.includes(group.id);
                     return (
-                      <div key={group.id} className="flex flex-col gap-[12px]">
+                      <div key={group.id} className={`flex flex-col gap-[12px] ${open ? "pb-[10px]" : ""}`}>
                         <button
                           type="button"
                           aria-expanded={open}
@@ -366,13 +351,13 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
                               current.includes(group.id) ? current.filter((id) => id !== group.id) : [...current, group.id],
                             )
                           }
-                          className="flex h-[26px] w-full items-center justify-between"
+                          className="flex h-[27px] w-full items-center justify-between pb-[2px]"
                         >
-                          <span className="flex items-center gap-[6px] text-16">
+                          <span className="flex items-center gap-[6px] text-[14px] leading-[24px] font-medium">
                             <PeriodMark />
                             {group.label}
                           </span>
-                          <Chevron direction={open ? "up" : "down"} />
+                          <SlotChevron open={open} />
                         </button>
                         {open ? (
                           <div className="grid grid-cols-2 gap-[6px]">
@@ -383,8 +368,8 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
                                   key={slot}
                                   type="button"
                                   onClick={() => setTime(slot)}
-                                  className={`flex h-[32px] items-center justify-center rounded-[4px] text-13 ${
-                                    selected ? "bg-[#e1f300]" : "bg-[#e7e7e7]"
+                                  className={`flex h-[32px] items-center justify-center rounded-[4px] text-[14px] leading-[20px] text-[#27292d] ${
+                                    selected ? "bg-[#e1f300]" : "bg-[rgba(231,231,231,0.4)]"
                                   }`}
                                 >
                                   {slot}
@@ -535,8 +520,32 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
 
 function PeriodMark() {
   return (
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden>
-      <circle cx="8" cy="8" r="5" stroke="#27292D" strokeWidth="1.4" />
+    <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden className="shrink-0">
+      <path
+        fill="#001024"
+        fillOpacity="0.32"
+        fillRule="evenodd"
+        d="M3.333 2h9.334c.736 0 1.333.597 1.333 1.333v9.334c0 .736-.597 1.333-1.333 1.333H3.333A1.333 1.333 0 0 1 2 12.667V3.333C2 2.597 2.597 2 3.333 2ZM3.333 3.333h9.334v9.334H3.333V3.333Z"
+      />
+    </svg>
+  );
+}
+
+function SlotChevron({ open }: { open: boolean }) {
+  return (
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      aria-hidden
+      className={`shrink-0 ${open ? "-rotate-90" : "rotate-90"}`}
+      style={{ opacity: 0.9 }}
+    >
+      <path
+        fill="#001024"
+        fillOpacity="0.36"
+        d="M13.172 12.001 8.222 7.051l1.414-1.414 6.364 6.364-6.364 6.364-1.414-1.414 4.95-4.95Z"
+      />
     </svg>
   );
 }

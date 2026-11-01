@@ -37,6 +37,39 @@ export function formatNational(value: string, code: string) {
   return formatPhone(value, code);
 }
 
+function caretAfterDigits(formatted: string, count: number) {
+  if (count <= 0) return 0;
+  let seen = 0;
+  for (let index = 0; index < formatted.length; index += 1) {
+    if (/\d/.test(formatted[index])) {
+      seen += 1;
+      if (seen === count) return index + 1;
+    }
+  }
+  return formatted.length;
+}
+
+/** Backspace/Delete on a mask character drops the neighbouring digit instead of restoring the mask. */
+function editMaskedPhone(value: string, start: number, end: number, key: string, code: string) {
+  if (key !== "Backspace" && key !== "Delete") return null;
+  if (isNickname(value)) return null;
+  const digits = nationalDigits(value, code);
+  if (!digits) return null;
+  if (start === end) {
+    const index = key === "Backspace" ? start - 1 : start;
+    if (index < 0 || index >= value.length || /\d/.test(value[index])) return null;
+  } else if (/\d/.test(value.slice(start, end))) {
+    return null;
+  }
+  const boundary = key === "Backspace" ? (start === end ? start - 1 : start) : start;
+  const before = value.slice(0, Math.max(boundary, 0)).replace(/\D/g, "").length;
+  let drop = key === "Backspace" ? before - 1 : before;
+  if (drop < 0) drop = 0;
+  if (drop >= digits.length) drop = digits.length - 1;
+  const next = formatPhone(digits.slice(0, drop) + digits.slice(drop + 1), code);
+  return { value: next, caret: caretAfterDigits(next, drop) };
+}
+
 export function phoneReady(code: string, value: string) {
   if (!/^\d{1,3}$/.test(code)) return false;
   const count = value.replace(/\D/g, "").length;
@@ -180,7 +213,17 @@ export function MessengerField({
 }) {
   const [focused, setFocused] = useState(false);
   const rootRef = useRef<HTMLLabelElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const caretRef = useRef<number | null>(null);
   const code = dialCode ?? "";
+
+  useEffect(() => {
+    const input = inputRef.current;
+    if (caretRef.current == null || !input) return;
+    const caret = caretRef.current;
+    caretRef.current = null;
+    input.setSelectionRange(caret, caret);
+  }, [value]);
   const typedPhone = value.length > 0 && !isNickname(value);
   const showPlus = plusMode === "focus" ? focused || typedPhone || code.length > 0 : typedPhone || code.length > 0;
 
@@ -209,9 +252,22 @@ export function MessengerField({
   }
 
   function onPhoneKeyDown(event: ReactKeyboardEvent<HTMLInputElement>) {
-    if (event.key !== "Backspace" || value !== "" || code.length === 0) return;
+    if (event.key === "Backspace" && value === "" && code.length > 0) {
+      event.preventDefault();
+      onCodeChange?.(code.slice(0, -1));
+      return;
+    }
+    const edited = editMaskedPhone(
+      value,
+      event.currentTarget.selectionStart ?? 0,
+      event.currentTarget.selectionEnd ?? 0,
+      event.key,
+      code || "7",
+    );
+    if (!edited) return;
     event.preventDefault();
-    onCodeChange?.(code.slice(0, -1));
+    caretRef.current = edited.caret;
+    onChange(edited.value);
   }
 
   return (
@@ -225,6 +281,7 @@ export function MessengerField({
       <span className="h-[24px] w-px shrink-0 bg-[#dedede]" />
       <span className="flex min-w-0 flex-1 items-center gap-[4px]">
         <input
+          ref={inputRef}
           value={value}
           onChange={(event) => onPhoneChange(event.target.value)}
           onKeyDown={onPhoneKeyDown}
@@ -270,7 +327,17 @@ export function PhoneField({
 }) {
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLLabelElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const caretRef = useRef<number | null>(null);
   const country = countries.find((item) => item.id === countryId) ?? countries[0];
+
+  useEffect(() => {
+    const input = inputRef.current;
+    if (caretRef.current == null || !input) return;
+    const caret = caretRef.current;
+    caretRef.current = null;
+    input.setSelectionRange(caret, caret);
+  }, [value]);
 
   useEffect(() => {
     if (!open) return;
@@ -313,8 +380,22 @@ export function PhoneField({
       </button>
       <span className="h-[24px] w-px bg-[#dedede]" />
       <input
+        ref={inputRef}
         value={value}
         onChange={(event) => onChange(formatNational(event.target.value, country.dial))}
+        onKeyDown={(event) => {
+          const edited = editMaskedPhone(
+            value,
+            event.currentTarget.selectionStart ?? 0,
+            event.currentTarget.selectionEnd ?? 0,
+            event.key,
+            country.dial,
+          );
+          if (!edited) return;
+          event.preventDefault();
+          caretRef.current = edited.caret;
+          onChange(edited.value);
+        }}
         inputMode="tel"
         autoComplete="tel"
         placeholder={country.dial === "7" ? "(999) 123-45-67" : "Номер телефона"}
