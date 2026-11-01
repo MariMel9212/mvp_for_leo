@@ -10,6 +10,7 @@ import {
   phoneReady,
   telegramReady,
 } from "@/components/consult-form";
+import { FilterCheckbox } from "@/components/institutions";
 
 type Path = "soon" | "plan";
 type Step = "format" | "schedule" | "contact";
@@ -257,7 +258,7 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
             </div>
             <div className="flex w-[605px] items-start gap-[16px]">
               <div className="flex w-[368px] flex-col gap-[12px]">
-                <div className="rounded-[16px] bg-white px-[20px] pt-[20px] pb-[16px]">
+                <div className="rounded-[16px] bg-white px-[20px] pb-[20px]">
                   <div className="flex h-[36px] items-center justify-between rounded-[8px] bg-[#f6f8fa] px-[6px]">
                     <button
                       type="button"
@@ -291,7 +292,7 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
                       <Chevron direction="right" />
                     </button>
                   </div>
-                  <div className="mt-[8px] grid grid-cols-7 gap-x-[8px]">
+                  <div className="mt-[8px] grid grid-cols-7 gap-x-[8px] gap-y-[8px]">
                     {weekdays.map((label) => (
                       <span key={label} className="flex h-[40px] items-center justify-center text-[14px] leading-[20px] opacity-40">
                         {label}
@@ -353,8 +354,8 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
                   ) : null}
                 </div>
               </div>
-              <div className="flex h-[514px] w-[221px] flex-col">
-                <div className="flex w-full flex-col gap-[12px]">
+              <div className="flex h-[546px] w-[221px] flex-col">
+                <div className="flex w-full flex-col gap-[14px]">
                   {slotGroups.map((group) => {
                     const open = openGroups.includes(group.id);
                     return (
@@ -364,9 +365,13 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
                             type="button"
                             aria-pressed={period === group.id}
                             onClick={() => choosePeriod(group.id)}
-                            className="flex items-center gap-[6px] text-[14px] leading-[24px] font-medium"
+                            className="group flex items-center gap-[6px] text-16 leading-[24px]"
                           >
-                            <PeriodMark checked={period === group.id} />
+                            <span className="relative size-[16px] shrink-0">
+                              <span className="absolute top-0 left-0 origin-top-left scale-[0.86935]">
+                                <FilterCheckbox checked={period === group.id} />
+                              </span>
+                            </span>
                             {group.label}
                           </button>
                           <button
@@ -539,27 +544,6 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
         ) : null}
       </div>
     </div>
-  );
-}
-
-function PeriodMark({ checked }: { checked: boolean }) {
-  if (checked) {
-    return (
-      <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden className="shrink-0">
-        <rect x="2" y="2" width="12" height="12" rx="1.33" fill="#e1f300" />
-        <path d="M4.7 8.1 6.9 10.3 11.3 5.8" stroke="#626262" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    );
-  }
-  return (
-    <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden className="shrink-0">
-      <path
-        fill="#001024"
-        fillOpacity="0.32"
-        fillRule="evenodd"
-        d="M3.333 2h9.334c.736 0 1.333.597 1.333 1.333v9.334c0 .736-.597 1.333-1.333 1.333H3.333A1.333 1.333 0 0 1 2 12.667V3.333C2 2.597 2.597 2 3.333 2ZM3.333 3.333h9.334v9.334H3.333V3.333Z"
-      />
-    </svg>
   );
 }
 

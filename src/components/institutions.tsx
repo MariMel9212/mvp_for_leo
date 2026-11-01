@@ -266,7 +266,7 @@ function FilterMenu({
   );
 }
 
-function FilterCheckbox({ checked }: { checked: boolean }) {
+export function FilterCheckbox({ checked }: { checked: boolean }) {
   if (checked) {
     return (
       <span className="relative size-[18.406px] shrink-0">
