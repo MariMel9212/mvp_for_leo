@@ -6,6 +6,7 @@ import { HeroField } from "@/components/hero-field";
 import { ConsultForm } from "@/components/consult-form";
 import { LicensedCenters } from "@/components/licensed-centers";
 import { RecoverySteps } from "@/components/recovery-steps";
+import { CallRequestButton } from "@/components/call-request-modal";
 import { FaqSection } from "@/components/faq-section";
 import { SelectionCriteria } from "@/components/selection-criteria";
 import { SiteHeader } from "@/components/site-header";
@@ -150,12 +151,7 @@ function SituationCard({
           }}
         />
         <div className="absolute bottom-0 left-0 flex w-[588px] px-[32px] pb-[24px]">
-          <a
-            href="#situacii"
-            className="lime-control flex h-[44px] items-center justify-center rounded-[8px] px-[20px] text-16 shadow-[0_4px_4px_rgba(173,173,173,20%)]"
-          >
-            {action}
-          </a>
+          <CallRequestButton label={action} topic={title} />
         </div>
       </div>
     </article>

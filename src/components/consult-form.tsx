@@ -25,7 +25,7 @@ function formatPhone(value: string, code = "7") {
   return result;
 }
 
-function isNickname(value: string) {
+export function isNickname(value: string) {
   return /[a-zа-яё@._]/i.test(value);
 }
 
@@ -33,24 +33,24 @@ function formatCode(value: string) {
   return value.replace(/\D/g, "").slice(0, 3);
 }
 
-function formatNational(value: string, code: string) {
+export function formatNational(value: string, code: string) {
   return formatPhone(value, code);
 }
 
-function phoneReady(code: string, value: string) {
+export function phoneReady(code: string, value: string) {
   if (!/^\d{1,3}$/.test(code)) return false;
   const count = value.replace(/\D/g, "").length;
   if (code === "7") return count >= 10;
   return count >= 6;
 }
 
-function telegramReady(value: string) {
+export function telegramReady(value: string) {
   const trimmed = value.trim();
   if (!trimmed || !isNickname(trimmed)) return false;
   return trimmed.replace(/^@/, "").length >= 2;
 }
 
-const countries: { id: string; name: string; dial: string; stripes: { color: string; className: string }[] }[] = [
+export const countries: { id: string; name: string; dial: string; stripes: { color: string; className: string }[] }[] = [
   {
     id: "ru",
     name: "Россия",
@@ -153,7 +153,7 @@ function Flag({ id }: { id: string }) {
   );
 }
 
-function MessengerField({
+export function MessengerField({
   icon,
   value,
   onChange,
@@ -255,7 +255,7 @@ function MessengerField({
   );
 }
 
-function PhoneField({
+export function PhoneField({
   value,
   onChange,
   invalid,
