@@ -206,7 +206,7 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
         aria-modal="true"
         aria-labelledby={titleId}
         tabIndex={-1}
-        className="relative flex h-[612px] w-[1100px] flex-col overflow-hidden rounded-[21px] bg-[#fdfdfd] outline-none"
+        className={`relative flex w-[1100px] flex-col rounded-[21px] bg-[#fdfdfd] outline-none ${step === "contact" ? "" : "h-[612px] overflow-hidden"}`}
       >
         <div className="flex h-[44px] items-center justify-between px-[26px] pt-[20px]">
           {step === "format" ? (
@@ -411,11 +411,11 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
         ) : null}
 
         {step === "contact" ? (
-          <form onSubmit={submit} noValidate className="mx-auto flex min-h-0 w-[415px] flex-1 flex-col items-center gap-[21px] pt-[38px] pb-[24px]">
-            <h2 id={titleId} className="w-[378px] shrink-0 text-center text-24 font-medium">
+          <form onSubmit={submit} noValidate className="mx-auto flex w-[415px] flex-col items-center gap-[21px] pt-[38px] pb-[46px]">
+            <h2 id={titleId} className="w-[378px] text-center text-24 font-medium">
               Заполните контактную информацию
             </h2>
-            <div className="flex min-h-0 w-full flex-1 flex-col gap-[18px] rounded-[20px] bg-white px-[18px] py-[18px]">
+            <div className="flex w-full flex-col gap-[18px] rounded-[20px] bg-white px-[18px] py-[18px]">
               <label className="flex flex-col gap-[8px]">
                 <span className="text-18">Имя</span>
                 <input
@@ -427,7 +427,7 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
                   className="h-[44px] rounded-[12px] border border-solid border-[#dedede] bg-white px-[24px] text-16 text-[#27292d] outline-none placeholder:text-[#27292d] placeholder:opacity-40"
                 />
               </label>
-              <div className="flex min-h-0 flex-1 flex-col gap-[12px]">
+              <div className="flex flex-col gap-[12px]">
                 <span className="text-18" id={`${titleId}-channel`}>
                   Способ связи
                 </span>
@@ -456,21 +456,12 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
                     );
                   })}
                 </div>
-                <div className="min-h-0 flex-1 overflow-y-auto">
-                {channel === "call" ? (
-                  <PhoneField
-                    value={phone}
-                    onChange={setPhone}
-                    countryId={countryId}
-                    onCountry={(id) => {
-                      const next = countries.find((item) => item.id === id) ?? countries[0];
-                      setCountryId(id);
-                      setPhone((current) => formatNational(current, next.dial));
-                    }}
-                    invalid={error !== "" && !phoneReady(country.dial, phone)}
-                  />
-                ) : (
-                  <div className="flex flex-col gap-[8px]">
+                <div className="grid">
+                  <div
+                    className={`col-start-1 row-start-1 flex flex-col gap-[8px] ${channel === "messenger" ? "" : "invisible"}`}
+                    aria-hidden={channel !== "messenger"}
+                    inert={channel !== "messenger"}
+                  >
                     <MessengerField
                       icon="/consult/telegram.svg"
                       value={telegram}
@@ -508,10 +499,24 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
                       invalid={error !== "" && !telegramReady(telegram) && !phoneReady(phoneCode, phone)}
                     />
                   </div>
-                )}
+                  {channel === "call" ? (
+                    <div className="col-start-1 row-start-1">
+                      <PhoneField
+                        value={phone}
+                        onChange={setPhone}
+                        countryId={countryId}
+                        onCountry={(id) => {
+                          const next = countries.find((item) => item.id === id) ?? countries[0];
+                          setCountryId(id);
+                          setPhone((current) => formatNational(current, next.dial));
+                        }}
+                        invalid={error !== "" && !phoneReady(country.dial, phone)}
+                      />
+                    </div>
+                  ) : null}
                 </div>
               </div>
-              <button type="submit" disabled={!canSend} className="lime-control h-[46px] shrink-0 rounded-[12px] text-16">
+              <button type="submit" disabled={!canSend} className="lime-control h-[46px] rounded-[12px] text-16">
                 {sent ? "Заявка отправлена" : "Отправить заявку"}
               </button>
               {error ? <p className="text-center text-16 opacity-60">{error}</p> : null}
