@@ -212,6 +212,7 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
   }
 
   const cells = monthCells(cursor.year, cursor.month);
+  const today = new Date();
   const zoneLabel = zones.find((item) => item.id === zone)?.label ?? zones[1].label;
 
   return (
@@ -315,14 +316,18 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
                     ))}
                     {cells.map((cell) => {
                       const selected = date ? sameDay(date, cell.date) : false;
+                      const current = sameDay(today, cell.date);
                       return (
                         <button
                           key={cell.date.toISOString()}
                           type="button"
                           disabled={cell.outside}
+                          aria-current={current ? "date" : undefined}
                           onClick={() => setDate(cell.date)}
                           className={`flex h-[40px] items-center justify-center rounded-[8px] text-[14px] leading-[20px] tracking-[-0.084px] ${
-                            selected ? "bg-[#e1f300] font-medium" : cell.outside ? "text-[#cdd0d5]" : "hover:bg-[#f6f8fa]"
+                            selected
+                              ? "bg-[#e1f300] font-medium"
+                              : `${current ? "bg-[#f6f8fa]" : "hover:bg-[#f6f8fa]"} ${cell.outside ? "text-[#cdd0d5]" : ""}`
                           }`}
                         >
                           {cell.date.getDate()}
