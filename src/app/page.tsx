@@ -43,7 +43,7 @@ export default function HomePage() {
         </div>
 
         <div className="relative z-10 flex flex-col items-center gap-[122px]">
-          <SiteHeader ctaHref="#situacii" />
+          <SiteHeader />
 
           <div id="podbor" className="flex w-[754px] flex-col items-center gap-[42px]">
             <h1 className="w-full text-center text-48 font-medium">
@@ -54,7 +54,7 @@ export default function HomePage() {
               href="#situacii"
               className="lime-control flex h-[56px] w-[377px] items-center justify-center rounded-[12px] px-[20px] text-18 leading-[24px] font-medium"
             >
-              Выбрать центр
+              Подобрать центр
             </a>
           </div>
         </div>

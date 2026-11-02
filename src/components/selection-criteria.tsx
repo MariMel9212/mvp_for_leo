@@ -38,7 +38,7 @@ const criteria: { n: string; title: string; text: ReactNode }[] = [
 
 export function SelectionCriteria() {
   return (
-    <section className="relative w-[1440px] pt-[120px] pb-[92px]">
+    <section id="pro-podbor" className="relative w-[1440px] pt-[120px] pb-[92px]">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0"

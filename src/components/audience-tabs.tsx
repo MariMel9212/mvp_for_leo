@@ -14,14 +14,14 @@ export function AudienceTabs() {
       <div
         role="tablist"
         aria-label="Кому нужна помощь"
-        className="flex w-full items-center gap-[4px] rounded-[10px] bg-[#f6f8fa] p-[4px]"
+        className="flex h-[46px] w-full items-start gap-[4px] rounded-[10px] bg-[#f6f8fa] p-[4px]"
       >
         <Tab
           label={audiences[0]}
           selected={active === audiences[0]}
           onSelect={() => setActive(audiences[0])}
         />
-        <div className="flex h-[32px] items-center">
+        <div className="flex h-full items-center">
           {audiences.slice(1).map((label) => (
             <Tab
               key={label}
@@ -56,8 +56,8 @@ function Tab({
       onClick={onSelect}
       className={
         selected
-          ? "flex h-[32px] items-center justify-center rounded-[8px] bg-white px-[14px] text-16 text-[#27292d]"
-          : "flex h-[32px] items-center justify-center rounded-[6px] px-[14px] text-16 text-[#27292d] opacity-50"
+          ? "flex h-full items-center justify-center rounded-[8px] bg-white px-[14px] py-[4px] text-16 text-[#27292d]"
+          : "flex h-full items-center justify-center rounded-[6px] px-[14px] py-[4px] text-16 text-[#27292d] opacity-50"
       }
     >
       {label}

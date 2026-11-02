@@ -1,12 +1,12 @@
 import Link from "next/link";
 
 const links = [
-  { label: "Все учереждения", href: "/uchrezhdeniya" },
-  { label: "Раздел", href: "/#podbor" },
-  { label: "Раздел", href: "/#podbor" },
+  { label: "Учереждения", href: "/uchrezhdeniya" },
+  { label: "Про подбор", href: "/#pro-podbor" },
+  { label: "Контакты", href: "/#zayavka" },
 ];
 
-export function SiteHeader({ ctaHref = "/#situacii" }: { ctaHref?: string }) {
+export function SiteHeader({ ctaHref = "/uchrezhdeniya" }: { ctaHref?: string }) {
   return (
     <header className="flex w-full justify-center pt-[32px]">
       <div className="flex h-[44px] w-[1180px] items-center justify-between px-[16px]">
@@ -14,7 +14,6 @@ export function SiteHeader({ ctaHref = "/#situacii" }: { ctaHref?: string }) {
           СвойЦентр
         </Link>
         <nav aria-label="Разделы" className="flex items-center gap-[42px] opacity-80">
-          <span aria-hidden className="block h-[24px] w-[55px]" />
           {links.map((link, index) => (
             <Link key={index} href={link.href} className="text-16 text-[#27292d]">
               {link.label}
