@@ -10,6 +10,7 @@ import {
   phoneReady,
   telegramReady,
 } from "@/components/consult-form";
+import { ThanksFigure, thanksLeaf } from "@/components/thanks-art";
 
 type Path = "soon" | "plan";
 type Step = "format" | "schedule" | "contact" | "done";
@@ -592,7 +593,7 @@ function ThanksPicture() {
             >
               <img
                 alt=""
-                src="/modal/thanks-leaf.png"
+                src={thanksLeaf}
                 width={109.248}
                 height={97.503}
                 className="absolute max-w-none"
@@ -602,13 +603,7 @@ function ThanksPicture() {
           </div>
         </div>
       </div>
-      <img
-        alt=""
-        src="/modal/thanks-figure.svg"
-        width={155.859}
-        height={150}
-        className="absolute top-[7px] left-[4px] max-w-none"
-      />
+      <ThanksFigure className="absolute top-[7px] left-[4px]" />
     </div>
   );
 }
