@@ -185,8 +185,10 @@ function matches(center: Center, filters: Filters) {
 }
 
 function CenterCard({ center }: { center: Center }) {
-  return (
-    <article className="relative h-[566px] w-[384px] overflow-hidden rounded-[14px] drop-shadow-[0_0_5px_rgba(91,90,90,0.08)]">
+  const className =
+    "relative block h-[566px] w-[384px] overflow-hidden rounded-[14px] drop-shadow-[0_0_5px_rgba(91,90,90,0.08)]";
+  const card = (
+    <>
       <div className="h-[400px] overflow-hidden rounded-t-[14px] bg-white">
         <CenterPhoto slides={center.slides} frameClassName="h-[396px]" />
       </div>
@@ -206,13 +208,7 @@ function CenterCard({ center }: { center: Center }) {
           </span>
         </div>
         <div className="flex flex-col gap-[8px] rounded-b-[14px] bg-white px-[12px] pt-[8px] pb-[14px]">
-          {center.href ? (
-            <h2 className="w-[283px] text-[22px] leading-[28px] font-medium text-[#0a0d14]">
-              <Link href={center.href}>{center.title}</Link>
-            </h2>
-          ) : (
-            <h2 className="w-[283px] text-[22px] leading-[28px] font-medium text-[#0a0d14]">{center.title}</h2>
-          )}
+          <h2 className="w-[283px] text-[22px] leading-[28px] font-medium text-[#0a0d14]">{center.title}</h2>
           <div className="w-full text-16 text-[#0a0d14]">
             <p>Московская область</p>
             <p className="opacity-50">{center.course}</p>
@@ -220,7 +216,14 @@ function CenterCard({ center }: { center: Center }) {
           <p className="text-16 text-black">{center.price}</p>
         </div>
       </div>
-    </article>
+    </>
+  );
+
+  if (!center.href) return <article className={className}>{card}</article>;
+  return (
+    <Link href={center.href} className={className}>
+      {card}
+    </Link>
   );
 }
 
