@@ -6,10 +6,16 @@ const links = [
   { label: "Контакты", href: "/#zayavka" },
 ];
 
-export function SiteHeader({ ctaHref = "/uchrezhdeniya" }: { ctaHref?: string }) {
+export function SiteHeader({ ctaHref = "/uchrezhdeniya", showCta = true }: { ctaHref?: string; showCta?: boolean }) {
   return (
     <header className="flex w-full justify-center pt-[32px]">
-      <div className="flex h-[44px] w-[1180px] items-center justify-between px-[16px]">
+      <div
+        className={
+          showCta
+            ? "flex h-[44px] w-[1180px] items-center justify-between px-[16px]"
+            : "grid h-[44px] w-[1200px] grid-cols-[1fr_auto_1fr] items-center"
+        }
+      >
         <Link href="/" className="text-24 font-bold text-[#27292d] opacity-80">
           СвойЦентр
         </Link>
@@ -20,12 +26,16 @@ export function SiteHeader({ ctaHref = "/uchrezhdeniya" }: { ctaHref?: string })
             </Link>
           ))}
         </nav>
-        <Link
-          href={ctaHref}
-          className="lime-control flex h-[38px] w-[153px] shrink-0 items-center justify-center rounded-[8px] px-[20px] text-16"
-        >
-          Выбрать центр
-        </Link>
+        {showCta ? (
+          <Link
+            href={ctaHref}
+            className="lime-control flex h-[38px] w-[153px] shrink-0 items-center justify-center rounded-[8px] px-[20px] text-16"
+          >
+            Выбрать центр
+          </Link>
+        ) : (
+          <span />
+        )}
       </div>
     </header>
   );

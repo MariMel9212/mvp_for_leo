@@ -20,6 +20,7 @@ type Center = {
   typeLabel: string;
   typeClassName: string;
   badge?: { label: string; className: string };
+  href?: string;
 };
 
 const kindOptions: { value: Kind; label: string }[] = [
@@ -51,6 +52,7 @@ const centers: Center[] = [
     typeLabel: "Алко / Нарко / Игро",
     typeClassName: "w-[141px]",
     badge: { label: "Подходит для подростков", className: "left-[128px] w-[188px] bg-[#e1f300]" },
+    href: "/uchrezhdeniya/himki",
   },
   {
     title: "Реабилитационный центр в Серпухово",
@@ -122,6 +124,7 @@ const centers: Center[] = [
     typeLabel: "Алко / Нарко / Игро",
     typeClassName: "w-[141px]",
     badge: { label: "Подходит для подростков", className: "left-[128px] w-[188px] bg-[#e1f300]" },
+    href: "/uchrezhdeniya/himki",
   },
   {
     title: "Реабилитационный центр в Серпухово",
@@ -203,7 +206,13 @@ function CenterCard({ center }: { center: Center }) {
           </span>
         </div>
         <div className="flex flex-col gap-[8px] rounded-b-[14px] bg-white px-[12px] pt-[8px] pb-[14px]">
-          <h2 className="w-[283px] text-[22px] leading-[28px] font-medium text-[#0a0d14]">{center.title}</h2>
+          {center.href ? (
+            <h2 className="w-[283px] text-[22px] leading-[28px] font-medium text-[#0a0d14]">
+              <Link href={center.href}>{center.title}</Link>
+            </h2>
+          ) : (
+            <h2 className="w-[283px] text-[22px] leading-[28px] font-medium text-[#0a0d14]">{center.title}</h2>
+          )}
           <div className="w-full text-16 text-[#0a0d14]">
             <p>Московская область</p>
             <p className="opacity-50">{center.course}</p>

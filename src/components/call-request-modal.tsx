@@ -748,15 +748,19 @@ function FormatCard({
   );
 }
 
-export function CallRequestButton({ label, topic }: { label: string; topic: string }) {
+export function CallRequestButton({
+  label,
+  topic,
+  className = "lime-control flex h-[44px] items-center justify-center rounded-[8px] px-[20px] text-16 shadow-[0_4px_4px_rgba(173,173,173,20%)]",
+}: {
+  label: string;
+  topic: string;
+  className?: string;
+}) {
   const [open, setOpen] = useState(false);
   return (
     <>
-      <button
-        type="button"
-        onClick={() => setOpen(true)}
-        className="lime-control flex h-[44px] items-center justify-center rounded-[8px] px-[20px] text-16 shadow-[0_4px_4px_rgba(173,173,173,20%)]"
-      >
+      <button type="button" onClick={() => setOpen(true)} className={className}>
         {label}
       </button>
       {open ? <CallRequestModal topic={topic} onClose={() => setOpen(false)} /> : null}
