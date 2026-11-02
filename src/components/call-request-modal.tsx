@@ -398,12 +398,8 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
                           <button
                             type="button"
                             aria-expanded={open}
-                            aria-label={open ? `Свернуть ${group.label}` : `Развернуть ${group.label}`}
-                            onClick={() =>
-                              setOpenGroups((current) =>
-                                current.includes(group.id) ? current.filter((id) => id !== group.id) : [...current, group.id],
-                              )
-                            }
+                            aria-label={open ? group.label : `Развернуть ${group.label}`}
+                            onClick={() => setOpenGroups([group.id])}
                           >
                             <SlotChevron open={open} />
                           </button>
