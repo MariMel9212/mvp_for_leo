@@ -33,10 +33,10 @@ const months = [
 
 const weekdays = ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"];
 
-const slotGroups: { id: string; label: string; slots: string[] }[] = [
-  { id: "morning", label: "Утро", slots: ["10:00", "10:30", "11:00", "11:30", "12:00", "12:30"] },
-  { id: "day", label: "День", slots: ["13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30"] },
-  { id: "evening", label: "Вечер", slots: ["17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00"] },
+const slotGroups: { id: string; label: string; range: string; slots: string[] }[] = [
+  { id: "morning", label: "Утро", range: "С 10 до 12", slots: ["10:00", "10:30", "11:00", "11:30", "12:00", "12:30"] },
+  { id: "day", label: "День", range: "С 12 до 18", slots: ["13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30"] },
+  { id: "evening", label: "Вечер", range: "С 18 до 22", slots: ["17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00"] },
 ];
 
 const zones = [
@@ -457,7 +457,7 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
                 <div className="flex items-center gap-[6px] text-[20px] leading-[28px] font-medium">
                   <span>{date ? scheduledDate(date) : ""}</span>
                   <span aria-hidden className="size-[3px] rounded-full bg-[#27292d]" />
-                  <span>{time ?? slotGroups.find((group) => group.id === period)?.label}</span>
+                  <span>{time ?? slotGroups.find((group) => group.id === period)?.range}</span>
                 </div>
               </div>
             ) : (
