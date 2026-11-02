@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useId, useState } from "react";
-import { ChartArt, MagnifierArt } from "@/components/catalog-art";
+import { InstitutionArt, ProgramArt } from "@/components/banner-art";
 import { CenterPhoto, type CenterSlide } from "@/components/center-photo";
 
 type Kind = "rehab" | "detox";
@@ -329,31 +329,37 @@ function CheckFilter({
 
 function CallBanner() {
   return (
-    <section className="relative -mx-[22px] mt-[50px] w-[1244px] overflow-hidden rounded-[24px] bg-[linear-gradient(180deg,rgba(238,242,249,0.87)_0%,rgba(158,187,230,0.87)_100%)] px-[22px] pt-[32px] pb-[26px]">
+    <section className="relative -mx-[22px] mt-[50px] w-[1244px] overflow-hidden rounded-[34px] bg-gradient-to-b from-[rgba(222,234,255,0.45)] to-[rgba(210,222,243,0.45)] px-[22px] pt-[32px] pb-[26px]">
       <div className="mx-auto flex w-[611px] flex-col items-center gap-[15px] text-center text-[#27292d]">
         <h2 className="text-40 font-medium">Запланируйте звонок, чтобы&nbsp;не&nbsp;ошибиться с&nbsp;выбором</h2>
         <p className="text-16 opacity-60">
           На бесплатной и анонимной консультации погрузимся в&nbsp;Вашу проблему и&nbsp;подберем подходящее учереждение
         </p>
       </div>
-      <div className="mt-[48px] flex gap-[24px]">
-        <Link href="/#zayavka" className="relative h-[213px] w-[588px] overflow-hidden rounded-[20px] bg-[rgba(255,255,255,0.7)]">
+      <div className="mt-[48px] flex items-center justify-between">
+        <Link
+          href="/#zayavka"
+          className="relative h-[213px] w-[588px] overflow-hidden rounded-[20px] border border-[rgba(0,0,0,0.04)] bg-[rgba(255,255,255,0.8)]"
+        >
           <span className="flex items-center justify-between px-[20px] py-[19px]">
             <span className="text-24 font-medium">Подобрать учереждение</span>
             <span className="flex size-[24px] items-center justify-center">
               <img alt="" src="/icons/angle-right.svg" width={7.286} height={13.414} />
             </span>
           </span>
-          <MagnifierArt className="pointer-events-none absolute top-px left-[250.18px]" />
+          <InstitutionArt />
         </Link>
-        <Link href="/#zayavka" className="relative h-[213px] w-[588px] overflow-hidden rounded-[20px] bg-[rgba(255,255,255,0.7)]">
+        <Link
+          href="/#zayavka"
+          className="relative h-[213px] w-[588px] overflow-hidden rounded-[20px] border border-[rgba(0,0,0,0.04)] bg-[rgba(255,255,255,0.8)]"
+        >
           <span className="flex items-center justify-between px-[20px] py-[19px]">
             <span className="text-24 font-medium">Подбрать программу</span>
             <span className="flex size-[24px] items-center justify-center">
               <img alt="" src="/icons/angle-right.svg" width={7.286} height={13.414} />
             </span>
           </span>
-          <ChartArt className="pointer-events-none absolute top-[48px] left-[201px] h-[216.993px] w-[389px]" />
+          <ProgramArt />
         </Link>
       </div>
     </section>
