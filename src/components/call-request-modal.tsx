@@ -210,7 +210,7 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
     }
     setError("");
     setSent(true);
-    if (path === "soon") setStep("done");
+    setStep("done");
   }
 
   const cells = monthCells(cursor.year, cursor.month);
@@ -451,9 +451,20 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
               Спасибо за доверие
             </h2>
             <ThanksPicture />
-            <p className="w-full text-center text-18">
-              Специалист свяжется с вами в ближайшее время, чтобы ответить на ваши вопросы
-            </p>
+            {path === "plan" ? (
+              <div className="flex w-full flex-col items-center gap-[4px] text-center">
+                <p className="text-18">Звонок со специалистом запланирован</p>
+                <div className="flex items-center gap-[6px] text-[20px] leading-[28px] font-medium">
+                  <span>{date ? scheduledDate(date) : ""}</span>
+                  <span aria-hidden className="size-[3px] rounded-full bg-[#27292d]" />
+                  <span>{time ?? slotGroups.find((group) => group.id === period)?.label}</span>
+                </div>
+              </div>
+            ) : (
+              <p className="w-full text-center text-18">
+                Специалист свяжется с вами в ближайшее время, чтобы ответить на ваши вопросы
+              </p>
+            )}
           </div>
         ) : null}
 
@@ -578,11 +589,18 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
   );
 }
 
+const weekdayNames = ["Воскресенье", "Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"];
+const monthNames = ["января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря"];
+
+function scheduledDate(date: Date) {
+  return `${weekdayNames[date.getDay()]}, ${date.getDate()} ${monthNames[date.getMonth()]}`;
+}
+
 function ThanksPicture() {
   return (
-    <div className="relative size-[164px] shrink-0" aria-hidden>
-      <div className="absolute top-[55.86px] left-[calc(50%+10.5px)] flex h-[102.279px] w-[135.21px] -translate-x-1/2 items-center justify-center">
-        <div className="relative h-[102px] w-[135px] rotate-[0.12deg] overflow-hidden">
+    <div className="relative size-[184px] shrink-0" aria-hidden>
+      <div className="absolute top-[62.67px] left-[calc(50%+11.78px)] flex h-[114.752px] w-[151.699px] -translate-x-1/2 items-center justify-center">
+        <div className="relative h-[114.439px] w-[151.463px] rotate-[0.12deg] overflow-hidden">
           <div
             className="absolute flex items-center justify-center"
             style={{ inset: "-17.43% -0.83% -13.33% -1.26%", containerType: "size" }}
@@ -594,16 +612,16 @@ function ThanksPicture() {
               <img
                 alt=""
                 src={thanksLeaf}
-                width={109.248}
-                height={97.503}
+                width={122.571}
+                height={109.394}
                 className="absolute max-w-none"
-                style={{ top: "6.66%", right: "1.87%", width: "109.248px", height: "97.503px" }}
+                style={{ top: "6.66%", right: "1.87%", width: "122.571px", height: "109.394px" }}
               />
             </div>
           </div>
         </div>
       </div>
-      <ThanksFigure className="absolute top-[7px] left-[4px]" />
+      <ThanksFigure className="absolute top-[7.85px] left-[4.49px]" />
     </div>
   );
 }
