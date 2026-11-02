@@ -438,7 +438,7 @@ export function Institutions() {
               setApplied(emptyFilters);
               setOpenMenu(null);
             }}
-            className="flex items-center gap-[4px] rounded-[12px] bg-[#f6ffc8] px-[12px] py-[9px] text-16 text-[#27292d] disabled:opacity-40"
+            className="flex items-center gap-[4px] rounded-[12px] px-[12px] py-[9px] text-16 text-[#27292d] disabled:opacity-40"
           >
             <img alt="" src="/icons/filter.svg" width={20} height={20} />
             Очистить фильтр
