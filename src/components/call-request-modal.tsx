@@ -12,7 +12,7 @@ import {
 } from "@/components/consult-form";
 
 type Path = "soon" | "plan";
-type Step = "format" | "schedule" | "contact";
+type Step = "format" | "schedule" | "contact" | "done";
 type Channel = "call" | "messenger";
 
 const months = [
@@ -209,6 +209,7 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
     }
     setError("");
     setSent(true);
+    if (path === "soon") setStep("done");
   }
 
   const cells = monthCells(cursor.year, cursor.month);
@@ -227,14 +228,14 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
         className="relative flex h-[650px] w-[1100px] flex-col overflow-hidden rounded-[21px] bg-white outline-none"
       >
         <div className="flex h-[44px] items-center justify-between px-[26px] pt-[20px]">
-          {step === "format" ? (
+          {step === "format" || step === "done" ? (
             <span className="size-[24px]" />
           ) : (
             <button type="button" aria-label="Назад" onClick={back} className="flex size-[24px] items-center justify-center opacity-70">
               <Chevron direction="left" />
             </button>
           )}
-          <Steps count={stepCount} current={stepIndex} />
+          <Steps count={step === "done" ? 1 : stepCount} current={step === "done" ? 0 : stepIndex} />
           <button type="button" aria-label="Закрыть" onClick={onClose} className="opacity-70">
             <CloseIcon />
           </button>
@@ -443,6 +444,18 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
           </div>
         ) : null}
 
+        {step === "done" ? (
+          <div className="mx-auto flex w-[420px] flex-col items-center gap-[48px] pt-[38px]">
+            <h2 id={titleId} className="w-full text-center text-28 font-medium">
+              Спасибо за доверие
+            </h2>
+            <ThanksPicture />
+            <p className="w-full text-center text-18">
+              Специалист свяжется с вами в ближайшее время, чтобы ответить на ваши вопросы
+            </p>
+          </div>
+        ) : null}
+
         {step === "contact" ? (
           <form onSubmit={submit} noValidate className="mx-auto flex w-[415px] flex-col items-center gap-[21px] pt-[38px]">
             <h2 id={titleId} className="w-[351px] text-center text-28 font-medium">
@@ -560,6 +573,42 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
           </form>
         ) : null}
       </div>
+    </div>
+  );
+}
+
+function ThanksPicture() {
+  return (
+    <div className="relative size-[164px] shrink-0" aria-hidden>
+      <div className="absolute top-[55.86px] left-[calc(50%+10.5px)] flex h-[102.279px] w-[135.21px] -translate-x-1/2 items-center justify-center">
+        <div className="relative h-[102px] w-[135px] rotate-[0.12deg] overflow-hidden">
+          <div
+            className="absolute flex items-center justify-center"
+            style={{ inset: "-17.43% -0.83% -13.33% -1.26%", containerType: "size" }}
+          >
+            <div
+              className="relative rotate-[17.71deg]"
+              style={{ height: "hypot(-23.056cqw, 74.6071cqh)", width: "hypot(76.944cqw, 25.3929cqh)" }}
+            >
+              <img
+                alt=""
+                src="/modal/thanks-leaf.png"
+                width={109.248}
+                height={97.503}
+                className="absolute max-w-none"
+                style={{ top: "6.66%", right: "1.87%", width: "109.248px", height: "97.503px" }}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <img
+        alt=""
+        src="/modal/thanks-figure.svg"
+        width={155.859}
+        height={150}
+        className="absolute top-[7px] left-[4px] max-w-none"
+      />
     </div>
   );
 }
