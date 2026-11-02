@@ -169,6 +169,10 @@ type Filters = {
 
 const emptyFilters: Filters = { kind: "", dependency: "", aftercare: false, teen: false };
 
+function filtersActive(filters: Filters) {
+  return Boolean(filters.kind || filters.dependency || filters.aftercare || filters.teen);
+}
+
 function matches(center: Center, filters: Filters) {
   if (filters.kind && center.kind !== filters.kind) return false;
   if (filters.dependency && !center.dependencies.includes(filters.dependency)) return false;
@@ -361,6 +365,7 @@ export function Institutions() {
   const [applied, setApplied] = useState<Filters>(emptyFilters);
   const [openMenu, setOpenMenu] = useState<"kind" | "dependency" | null>(null);
   const visible = centers.filter((center) => matches(center, applied));
+  const canFilter = filtersActive(draft) || filtersActive(applied);
   const firstRows = visible.slice(0, 6);
   const rest = visible.slice(6);
 
@@ -427,18 +432,20 @@ export function Institutions() {
         <div className="flex items-center justify-between">
           <button
             type="button"
+            disabled={!canFilter}
             onClick={() => {
               setDraft(emptyFilters);
               setApplied(emptyFilters);
               setOpenMenu(null);
             }}
-            className="flex items-center gap-[4px] rounded-[12px] bg-[#f6ffc8] px-[12px] py-[9px] text-16 text-[#27292d] opacity-40"
+            className="flex items-center gap-[4px] rounded-[12px] bg-[#f6ffc8] px-[12px] py-[9px] text-16 text-[#27292d] disabled:opacity-40"
           >
             <img alt="" src="/icons/filter.svg" width={20} height={20} />
             Очистить фильтр
           </button>
           <button
             type="submit"
+            disabled={!canFilter}
             className="lime-control flex h-[42px] w-[142px] items-center justify-center rounded-[8px] px-[20px] text-16"
           >
             Применить
