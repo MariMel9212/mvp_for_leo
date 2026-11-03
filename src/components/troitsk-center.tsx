@@ -229,8 +229,8 @@ export function TroitskCenter() {
                   <h2 className="text-18 font-medium">Расписание дня</h2>
                   <ul className="flex flex-col gap-[8px] text-16">
                     {schedule.map(([time, event]) => (
-                      <li key={time} className="grid grid-cols-[112px_minmax(0,1fr)] items-baseline gap-x-[24px]">
-                        <span className="whitespace-nowrap tabular-nums">{time}</span>
+                      <li key={time} className="flex items-baseline gap-[8px]">
+                        <span className="shrink-0 whitespace-nowrap tabular-nums">{time}</span>
                         <span>{event}</span>
                       </li>
                     ))}
