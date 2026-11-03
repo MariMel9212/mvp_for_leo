@@ -1,11 +1,10 @@
+"use client";
+
+import { useState } from "react";
 import { CallRequestButton } from "@/components/call-request-modal";
 
 const facts = [
-  {
-    label: "Направления:",
-    value: "алкоголизм, наркомания",
-    extra: "+2",
-  },
+  { label: "Направления:", value: "алкоголизм, наркомания", extra: "+2" },
   { label: "Формат:", value: "с проживанием" },
   { label: "Программа:", value: "АН, АА, АИ" },
   { label: "Курс:", value: "от 3 до 12 месяцев" },
@@ -25,61 +24,97 @@ const amenities = [
   ],
 ];
 
+const schedule = [
+  ["07:00–07:30", "Подъём, утренняя гигиена"],
+  ["07:30–08:00", "Зарядка"],
+  ["08:00–08:30", "Завтрак"],
+  ["08:30–09:00", "Утренняя группа, планирование дня"],
+  ["09:00–10:30", "Групповая психотерапия"],
+  ["10:30–11:00", "Перерыв"],
+  ["11:00–12:30", "Лекции и образовательные занятия"],
+  ["12:30–13:30", "Обед, свободное время"],
+  ["13:30–15:00", "Индивидуальная работа с психологом"],
+  ["15:00–16:30", "Арт-терапия и практические занятия"],
+  ["16:30–18:00", "Спорт, прогулки"],
+  ["18:00–19:00", "Ужин"],
+  ["19:00–20:30", "Группы взаимопомощи"],
+  ["20:30–21:30", "Личное время"],
+  ["21:30–22:00", "Вечерняя рефлексия, подведение итогов"],
+  ["22:30", "Отбой"],
+];
+
+const staff = [
+  ["5", "Дежурных консультантов"],
+  ["2", "Психиатра - нарколога"],
+  ["3", "Психолога"],
+];
+
+const features = [
+  "Индивидуальная программа",
+  "Работа с двойным диагнозом",
+  "Семейная терапия",
+  "Постлечебная программа",
+];
+
 export function CenterDetail() {
+  const [scheduleOpen, setScheduleOpen] = useState(false);
+
   return (
     <div className="mx-auto mt-[58px] w-[1200px] pb-[160px]">
-      <div className="relative h-[400px] overflow-hidden rounded-[23px]">
-        <div className="absolute top-0 left-0 h-[400px] w-[598px] overflow-hidden bg-[#cfcece]">
-          <div className="absolute top-0 left-[calc(50%-13.5px)] h-[528px] w-[719px] -translate-x-1/2">
+      <div className="relative h-[480px] overflow-hidden rounded-[22px] bg-white">
+        <div className="absolute top-0 left-0 h-[480px] w-[598px] overflow-hidden">
+          <div className="absolute top-[-10px] left-[-87px] h-[579px] w-[811px]">
             <img
               alt="Дом реабилитационного центра"
               src="/centers/himki/house.png"
-              className="absolute top-[0.02%] left-[-2.82%] h-[99.98%] w-[105.64%] max-w-none"
+              className="absolute top-[0.04%] left-0 h-[103.04%] w-full max-w-none"
             />
           </div>
         </div>
-        <div className="absolute top-0 right-[301px] h-[198px] w-[297px] overflow-hidden bg-[#cfcece]">
+        <div className="absolute top-0 right-[301px] h-[238px] w-[297px] overflow-hidden bg-[#ebebeb]">
           <img
             alt="Спальня"
             src="/centers/himki/yoga.png"
-            width={303}
-            height={227}
-            className="absolute top-0 left-0 h-[227px] w-[303px] max-w-none object-cover"
+            width={329}
+            height={246}
+            className="absolute top-0 left-[-13px] h-[246px] w-[329px] max-w-none object-cover"
           />
         </div>
-        <div className="absolute top-0 right-0 h-[198px] w-[297px] overflow-hidden bg-[#cfcece]">
+        <div className="absolute top-0 right-0 h-[238px] w-[297px] overflow-hidden bg-[#ebebeb]">
           <img
             alt="Бассейн"
             src="/centers/himki/bedroom.png"
-            width={339}
-            height={254}
-            className="absolute top-[-26px] left-0 h-[254px] w-[339px] max-w-none object-cover"
+            width={357}
+            height={268}
+            className="absolute top-[-23px] left-[-11px] h-[268px] w-[357px] max-w-none object-cover"
           />
         </div>
-        <div className="absolute right-[301px] bottom-0 h-[198px] w-[297px] overflow-hidden bg-[#cfcece]">
+        <div className="absolute right-[301px] bottom-0 h-[238px] w-[297px] overflow-hidden bg-[#ebebeb]">
           <img
             alt="Зал для занятий"
             src="/centers/himki/pool.png"
-            width={301}
-            height={201}
-            className="absolute top-0 left-0 h-[201px] w-[301px] max-w-none object-cover"
+            width={371}
+            height={248}
+            className="absolute top-0 left-[-6px] h-[248px] w-[371px] max-w-none object-cover"
           />
         </div>
-        <div className="absolute right-0 bottom-0 h-[198px] w-[297px] overflow-hidden bg-[#cfcece]">
+        <div className="absolute right-0 bottom-0 h-[238px] w-[297px] overflow-hidden bg-[#ebebeb]">
           <img
             alt=""
-            src="/centers/himki/kitchen.png"
-            width={301}
-            height={200}
-            className="absolute top-0 left-0 h-[200px] w-[301px] max-w-none object-cover"
+            src="/centers/himki/dining.jpg"
+            width={368}
+            height={246}
+            className="absolute top-[-8px] left-[-36px] h-[246px] w-[368px] max-w-none object-cover blur-[1px]"
           />
-          <div className="absolute inset-0 bg-[rgba(74,74,74,0.38)]" />
-          <p className="absolute top-[85px] left-[81px] text-18 font-medium text-white">+ 8 фотографий</p>
+          <div className="absolute inset-0 bg-[rgba(74,74,74,0.37)]" />
+          <p className="absolute top-[calc(50%-14px)] left-[calc(50%-67.5px)] text-18 font-medium whitespace-nowrap text-white">
+            + 8 фотографий
+          </p>
         </div>
       </div>
 
-      <div className="mt-[34px] flex items-start justify-between">
-        <div className="w-[699px]">
+      <div className="mt-[32px] flex items-start gap-[190px]">
+        <div className="flex w-[612px] flex-col gap-[30px]">
           <div className="flex flex-col gap-[16px] border-b border-[rgba(0,0,0,0.04)] pb-[32px]">
             <div className="flex flex-col gap-[6px]">
               <h1 className="text-28 font-medium">Реабилитационный центр в Химках</h1>
@@ -92,9 +127,9 @@ export function CenterDetail() {
             />
           </div>
 
-          <div className="mt-[33px] flex w-[612px] flex-col gap-[24px]">
+          <div className="flex flex-col gap-[24px] border-b border-[rgba(0,0,0,0.04)] pb-[32px]">
             <div className="flex flex-col gap-[10px]">
-              <h2 className="text-18 font-medium text-black">Про центр</h2>
+              <h2 className="text-24 font-medium">Про центр</h2>
               <div>
                 <p className="text-16">
                   Реабилитационный центр предлагает комплексную программу восстановления для людей, столкнувшихся с
@@ -114,12 +149,9 @@ export function CenterDetail() {
                 {amenities.map((row) => (
                   <div key={row[0].label} className="flex items-center gap-[24px]">
                     {row.map((item, index) => (
-                      <div
-                        key={item.label}
-                        className={`flex items-center gap-[6px] ${index < 2 ? "w-[180px]" : ""}`}
-                      >
+                      <div key={item.label} className={`flex items-center gap-[6px] ${index < 2 ? "w-[180px]" : ""}`}>
                         <img alt="" src={item.icon} width={20} height={20} className="size-[20px] shrink-0" />
-                        <span className="text-18 font-medium whitespace-nowrap">{item.label}</span>
+                        <span className="text-16 font-medium whitespace-nowrap">{item.label}</span>
                       </div>
                     ))}
                   </div>
@@ -133,9 +165,61 @@ export function CenterDetail() {
               </button>
             </div>
           </div>
+
+          <div className="flex flex-col gap-[8px] border-b border-[rgba(0,0,0,0.04)] pb-[32px]">
+            <div className={`relative flex items-start justify-between ${scheduleOpen ? "" : "h-[134px] overflow-hidden"}`}>
+              <div className="flex w-[312px] flex-col gap-[10px]">
+                <h2 className="text-18 font-medium">Расписание дня</h2>
+                <ul className="flex flex-col gap-[8px] text-16">
+                  {schedule.map(([time, event]) => (
+                    <li key={time} className="flex gap-[6px]">
+                      <span className="shrink-0 whitespace-nowrap">{time}</span>
+                      <span>{event}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="flex flex-col gap-[10px]">
+                <h2 className="text-18 font-medium">Персонал дома</h2>
+                <ul className="flex flex-col gap-[8px] text-16 whitespace-nowrap">
+                  {staff.map(([count, role]) => (
+                    <li key={role} className="flex gap-[4px]">
+                      <span>{count}</span>
+                      <span>{role}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              {scheduleOpen ? null : (
+                <img
+                  alt=""
+                  src="/centers/himki/schedule-fade.png"
+                  width={612}
+                  height={34}
+                  className="pointer-events-none absolute bottom-0 left-0 h-[34px] w-[612px] max-w-none"
+                />
+              )}
+            </div>
+            {scheduleOpen ? null : (
+              <button type="button" onClick={() => setScheduleOpen(true)} className="w-fit text-16 font-medium opacity-80">
+                Подробнее
+              </button>
+            )}
+          </div>
+
+          <div className="flex flex-col gap-[10px]">
+            <h2 className="text-18 font-medium">Особенности</h2>
+            <ul className="flex flex-wrap content-center gap-[8px]">
+              {features.map((feature) => (
+                <li key={feature} className="rounded-[8px] bg-[#ebeff8] p-[10px] text-16">
+                  {feature}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
 
-        <aside className="flex flex-col gap-[12px] rounded-[19px] border border-[rgba(0,0,0,0.04)] bg-white p-[20px] text-18 whitespace-nowrap">
+        <aside className="flex shrink-0 flex-col gap-[12px] rounded-[19px] border border-[rgba(0,0,0,0.04)] bg-white p-[20px] text-18 whitespace-nowrap">
           {facts.map((fact) => (
             <p key={fact.label} className="flex items-center gap-[6px]">
               <span className="font-medium">{fact.label}</span>
