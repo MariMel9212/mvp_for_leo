@@ -24,6 +24,13 @@ const amenities = [
   ],
 ];
 
+const allAmenities = [
+  ...amenities.flat(),
+  { icon: "/icons/amenity-classroom.svg", label: "Учебный класс" },
+  { icon: "/icons/amenity-living.svg", label: "Гостиная" },
+  { icon: "/icons/amenity-foosball.svg", label: "Настольный футбол" },
+];
+
 const schedule = [
   ["07:00–07:30", "Подъём, утренняя гигиена"],
   ["07:30–08:00", "Зарядка"],
@@ -80,20 +87,23 @@ export function TroitskCenter() {
   const [aboutOpen, setAboutOpen] = useState(false);
   const [scheduleOpen, setScheduleOpen] = useState(false);
   const [galleryOpen, setGalleryOpen] = useState(false);
+  const [amenitiesOpen, setAmenitiesOpen] = useState(false);
 
   useEffect(() => {
-    if (!galleryOpen) return;
+    if (!galleryOpen && !amenitiesOpen) return;
     const previous = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     function onKey(event: KeyboardEvent) {
-      if (event.key === "Escape") setGalleryOpen(false);
+      if (event.key !== "Escape") return;
+      setGalleryOpen(false);
+      setAmenitiesOpen(false);
     }
     window.addEventListener("keydown", onKey);
     return () => {
       document.body.style.overflow = previous;
       window.removeEventListener("keydown", onKey);
     };
-  }, [galleryOpen]);
+  }, [galleryOpen, amenitiesOpen]);
 
   return (
     <div className="mx-auto mt-[58px] w-[1200px] pb-[160px]">
@@ -215,6 +225,7 @@ export function TroitskCenter() {
               </div>
               <button
                 type="button"
+                onClick={() => setAmenitiesOpen(true)}
                 className="flex h-[38px] w-fit items-center justify-center rounded-[8px] bg-[#e7e7e7] px-[20px] text-16"
               >
                 Смотреть все
@@ -308,6 +319,40 @@ export function TroitskCenter() {
         </aside>
       </div>
       {galleryOpen ? <PhotoGallery onClose={() => setGalleryOpen(false)} /> : null}
+      {amenitiesOpen ? <AmenitiesModal onClose={() => setAmenitiesOpen(false)} /> : null}
+    </div>
+  );
+}
+
+function AmenitiesModal({ onClose }: { onClose: () => void }) {
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-[rgba(39,41,45,0.45)] p-[24px]">
+      <button type="button" aria-label="Закрыть" className="absolute inset-0 cursor-default" onClick={onClose} />
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="center-amenities-title"
+        className="relative w-[720px] rounded-[21px] bg-white"
+      >
+        <div className="flex items-center justify-between px-[26px] pt-[20px] pb-[20px]">
+          <h2 id="center-amenities-title" className="text-24 font-medium">
+            Показатели
+          </h2>
+          <button type="button" aria-label="Закрыть" onClick={onClose} className="opacity-70">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden>
+              <path d="M7 7L17 17M17 7L7 17" stroke="#27292D" strokeWidth="1.75" strokeLinecap="round" />
+            </svg>
+          </button>
+        </div>
+        <ul className="grid grid-cols-3 gap-x-[24px] gap-y-[16px] px-[26px] pb-[28px]">
+          {allAmenities.map((item) => (
+            <li key={item.label} className="flex items-center gap-[6px]">
+              <img alt="" src={item.icon} width={20} height={20} className="size-[20px] shrink-0" />
+              <span className="text-16 font-medium whitespace-nowrap">{item.label}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
