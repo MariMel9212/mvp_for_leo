@@ -210,7 +210,7 @@ function CenterCard({ center }: { center: Center }) {
       <div className="h-[400px] overflow-hidden rounded-t-[14px] bg-white">
         <CenterPhoto slides={center.slides} frameClassName="h-[396px]" />
       </div>
-      <div className="absolute top-[372px] left-0 w-[384px]">
+      <div className="absolute top-[372px] left-0 z-20 w-[384px]">
         <div className="relative h-[28px] w-[320px]">
           {center.badge ? (
             <span
