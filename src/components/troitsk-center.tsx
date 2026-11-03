@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CallRequestButton } from "@/components/call-request-modal";
 
 const facts: { label: string; value: string; extra?: string; extraHint?: string }[] = [
@@ -64,9 +64,36 @@ const aboutLead =
 const aboutRest =
   "и употреблением психоактивных веществ. В основе программы — индивидуальный подход к каждому подростку. Специалисты изучают причины возникших трудностей и разрабатывают план восстановления, который сочетает психологическую поддержку, образовательные занятия, развитие социальных навыков и формирование самостоятельности.";
 
+const galleryPhotos = [
+  { src: "/centers/troitsk/house.png", alt: "Дом центра" },
+  { src: "/centers/troitsk/attic.png", alt: "Мансарда" },
+  { src: "/centers/troitsk/room.png", alt: "Комната для занятий" },
+  { src: "/centers/troitsk/living.png", alt: "Гостиная" },
+  { src: "/centers/troitsk/bunk.jpg", alt: "Спальня с двухъярусными кроватями" },
+  ...Array.from({ length: 19 }, (_, index) => ({
+    src: `/centers/troitsk/gallery/${String(index + 1).padStart(2, "0")}.jpg`,
+    alt: `Фотография центра ${index + 1}`,
+  })),
+];
+
 export function TroitskCenter() {
   const [aboutOpen, setAboutOpen] = useState(false);
   const [scheduleOpen, setScheduleOpen] = useState(false);
+  const [galleryOpen, setGalleryOpen] = useState(false);
+
+  useEffect(() => {
+    if (!galleryOpen) return;
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    function onKey(event: KeyboardEvent) {
+      if (event.key === "Escape") setGalleryOpen(false);
+    }
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = previous;
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [galleryOpen]);
 
   return (
     <div className="mx-auto mt-[58px] w-[1200px] pb-[160px]">
@@ -107,19 +134,24 @@ export function TroitskCenter() {
             />
           </div>
         </div>
-        <div className="absolute right-0 bottom-0 h-[238px] w-[297px] overflow-hidden bg-[#cfcece]">
+        <button
+          type="button"
+          aria-label="Открыть все фотографии"
+          onClick={() => setGalleryOpen(true)}
+          className="group absolute right-0 bottom-0 h-[238px] w-[297px] cursor-pointer overflow-hidden bg-[#cfcece] p-0"
+        >
           <img
-            alt="Спальня с двухъярусными кроватями"
+            alt=""
             src="/centers/troitsk/bunk.jpg"
             width={311}
             height={414}
-            className="absolute top-[-91px] left-0 h-[414px] w-[311px] max-w-none object-cover"
+            className="absolute top-[-91px] left-0 h-[414px] w-[311px] max-w-none object-cover transition-transform duration-300 group-hover:scale-[1.04]"
           />
-          <div className="absolute inset-0 bg-[rgba(74,74,74,0.37)]" />
+          <div className="absolute inset-0 bg-[rgba(74,74,74,0.37)] transition-colors duration-200 group-hover:bg-[rgba(39,41,45,0.52)]" />
           <p className="absolute top-[calc(50%-14px)] left-[calc(50%-67.5px)] text-18 font-medium whitespace-nowrap text-white">
             + 8 фотографий
           </p>
-        </div>
+        </button>
       </div>
 
       <div className="mt-[32px] flex items-start justify-between">
@@ -270,6 +302,37 @@ export function TroitskCenter() {
             </p>
           ))}
         </aside>
+      </div>
+      {galleryOpen ? <PhotoGallery onClose={() => setGalleryOpen(false)} /> : null}
+    </div>
+  );
+}
+
+function PhotoGallery({ onClose }: { onClose: () => void }) {
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-[rgba(39,41,45,0.45)] p-[24px]">
+      <button type="button" aria-label="Закрыть" className="absolute inset-0 cursor-default" onClick={onClose} />
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="center-photos-title"
+        className="relative flex max-h-[calc(100vh-48px)] w-[1100px] flex-col overflow-hidden rounded-[21px] bg-white"
+      >
+        <div className="flex items-center justify-between px-[26px] pt-[20px] pb-[16px]">
+          <h2 id="center-photos-title" className="text-24 font-medium">
+            Фотографии
+          </h2>
+          <button type="button" aria-label="Закрыть" onClick={onClose} className="opacity-70">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden>
+              <path d="M7 7L17 17M17 7L7 17" stroke="#27292D" strokeWidth="1.75" strokeLinecap="round" />
+            </svg>
+          </button>
+        </div>
+        <div className="grid grid-cols-3 gap-[8px] overflow-y-auto px-[26px] pb-[26px]">
+          {galleryPhotos.map((photo) => (
+            <img key={photo.src} alt={photo.alt} src={photo.src} className="h-[220px] w-full rounded-[12px] object-cover" />
+          ))}
+        </div>
       </div>
     </div>
   );
