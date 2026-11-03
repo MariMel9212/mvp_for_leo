@@ -122,7 +122,7 @@ export function TroitskCenter() {
         </div>
       </div>
 
-      <div className="mt-[32px] flex items-start gap-[190px]">
+      <div className="mt-[32px] flex items-start justify-between">
         <div className="flex w-[612px] flex-col gap-[30px]">
           <div className="flex flex-col gap-[16px] border-b border-[rgba(0,0,0,0.04)] pb-[32px]">
             <div className="flex flex-col gap-[6px]">
