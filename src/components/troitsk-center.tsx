@@ -223,28 +223,30 @@ export function TroitskCenter() {
           </div>
 
           <div className="flex flex-col gap-[8px] border-b border-[rgba(0,0,0,0.04)] pb-[32px]">
-            <div className={`relative flex items-start justify-between ${scheduleOpen ? "" : "h-[134px] overflow-hidden"}`}>
-              <div className="flex w-[312px] flex-col gap-[10px]">
-                <h2 className="text-18 font-medium">Расписание дня</h2>
-                <ul className="flex flex-col gap-[8px] text-16">
-                  {schedule.map(([time, event]) => (
-                    <li key={time} className="flex gap-[6px]">
-                      <span className="shrink-0 whitespace-nowrap">{time}</span>
-                      <span>{event}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="flex flex-col gap-[10px]">
-                <h2 className="text-18 font-medium">Персонал дома</h2>
-                <ul className="flex flex-col gap-[8px] text-16 whitespace-nowrap">
-                  {staff.map(([count, role]) => (
-                    <li key={role} className="flex gap-[4px]">
-                      <span>{count}</span>
-                      <span>{role}</span>
-                    </li>
-                  ))}
-                </ul>
+            <div className={`relative ${scheduleOpen ? "" : "h-[134px] overflow-hidden"}`}>
+              <div className="flex flex-col gap-[28px]">
+                <div className="flex flex-col gap-[10px]">
+                  <h2 className="text-18 font-medium">Расписание дня</h2>
+                  <ul className="flex flex-col gap-[8px] text-16">
+                    {schedule.map(([time, event]) => (
+                      <li key={time} className="grid grid-cols-[104px_minmax(0,1fr)] items-baseline gap-x-[16px]">
+                        <span className="text-right whitespace-nowrap tabular-nums">{time}</span>
+                        <span>{event}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="flex flex-col gap-[10px]">
+                  <h2 className="text-18 font-medium">Персонал дома</h2>
+                  <ul className="flex flex-wrap gap-x-[28px] gap-y-[8px] text-16">
+                    {staff.map(([count, role]) => (
+                      <li key={role} className="flex items-baseline gap-[8px] whitespace-nowrap">
+                        <span className="font-medium tabular-nums">{count}</span>
+                        <span>{role}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
               {scheduleOpen ? null : (
                 <img
