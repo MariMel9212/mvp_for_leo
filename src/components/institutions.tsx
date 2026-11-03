@@ -11,7 +11,7 @@ type Dependency = "alco" | "narco" | "game";
 type Center = {
   title: string;
   course: string;
-  price: string;
+  price?: string;
   slides: CenterSlide[];
   kind: Kind;
   dependencies: Dependency[];
@@ -35,6 +35,24 @@ const dependencyOptions: { value: Dependency; label: string }[] = [
 ];
 
 const centers: Center[] = [
+  {
+    title: "Реабилитационный центр в Троицке",
+    course: "Курс от 3 до 12 месяцев",
+    slides: [
+      { src: "/centers/troitsk/house.png", className: "cover" },
+      { src: "/centers/troitsk/attic.png", className: "cover" },
+      { src: "/centers/troitsk/room.png", className: "cover" },
+      { src: "/centers/troitsk/living.png", className: "cover" },
+    ],
+    kind: "rehab",
+    dependencies: ["alco", "narco"],
+    teen: true,
+    aftercare: true,
+    typeLabel: "Алко / Нарко",
+    typeClassName: "w-[100px]",
+    badge: { label: "Подходит для подростков", className: "left-[87px] w-[188px] bg-[#e1f300]" },
+    href: "/uchrezhdeniya/troitsk",
+  },
   {
     title: "Реабилитационный центр в Химках",
     course: "Курс от 3 до 12 месяцев • группа до 20 человек",
@@ -207,13 +225,13 @@ function CenterCard({ center }: { center: Center }) {
             {center.typeLabel}
           </span>
         </div>
-        <div className="flex flex-col gap-[8px] rounded-b-[14px] bg-white px-[12px] pt-[8px] pb-[14px]">
+        <div className="flex min-h-[166px] flex-col gap-[8px] rounded-b-[14px] bg-white px-[12px] pt-[8px] pb-[14px]">
           <h2 className="w-[283px] text-[22px] leading-[28px] font-medium text-[#0a0d14]">{center.title}</h2>
           <div className="w-full text-16 text-[#0a0d14]">
             <p>Московская область</p>
             <p className="opacity-50">{center.course}</p>
           </div>
-          <p className="text-16 text-black">{center.price}</p>
+          {center.price ? <p className="text-16 text-black">{center.price}</p> : null}
         </div>
       </div>
     </>
