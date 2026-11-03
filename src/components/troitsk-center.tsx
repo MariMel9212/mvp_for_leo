@@ -3,8 +3,8 @@
 import { useState } from "react";
 import { CallRequestButton } from "@/components/call-request-modal";
 
-const facts = [
-  { label: "Направления:", value: "алкоголизм, наркомания", extra: "+2" },
+const facts: { label: string; value: string; extra?: string; extraHint?: string }[] = [
+  { label: "Направления:", value: "алкоголизм", extra: "+2", extraHint: "наркомания, лудомания" },
   { label: "Формат:", value: "с проживанием" },
   { label: "Программа:", value: "АН, АА, АИ" },
   { label: "Курс:", value: "от 3 до 12 месяцев" },
@@ -249,7 +249,23 @@ export function TroitskCenter() {
               <span className="font-medium">{fact.label}</span>
               <span className="flex items-center gap-[4px]">
                 {fact.value}
-                {fact.extra ? <span className="font-medium opacity-70">{fact.extra}</span> : null}
+                {fact.extra ? (
+                  <span className="group/extra relative">
+                    <button type="button" className="font-medium opacity-70 outline-none hover:opacity-100">
+                      {fact.extra}
+                    </button>
+                    {fact.extraHint ? (
+                      <span className="absolute top-full right-0 z-20 hidden pt-[4px] group-hover/extra:block group-focus-within/extra:block">
+                        <span
+                          role="tooltip"
+                          className="block rounded-[10px] bg-white px-[12px] py-[8px] text-16 font-normal text-[#27292d] shadow-[0_8px_24px_rgba(36,74,127,0.12)]"
+                        >
+                          {fact.extraHint}
+                        </span>
+                      </span>
+                    ) : null}
+                  </span>
+                ) : null}
               </span>
             </p>
           ))}
