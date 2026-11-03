@@ -108,14 +108,14 @@ export function TroitskCenter() {
           </div>
         </div>
         <div className="absolute right-0 bottom-0 h-[238px] w-[297px] overflow-hidden bg-[#cfcece]">
-          <div className="pointer-events-none absolute top-[-91px] left-0 h-[414px] w-[311px]">
-            <img
-              alt=""
-              src="/centers/troitsk/bunk.png"
-              className="absolute inset-0 size-full max-w-none object-cover"
-            />
-            <div className="absolute inset-0 bg-[rgba(74,74,74,0.37)]" />
-          </div>
+          <img
+            alt="Спальня с двухъярусными кроватями"
+            src="/centers/troitsk/bunk.jpg"
+            width={311}
+            height={414}
+            className="absolute top-[-91px] left-0 h-[414px] w-[311px] max-w-none object-cover"
+          />
+          <div className="absolute inset-0 bg-[rgba(74,74,74,0.37)]" />
           <p className="absolute top-[calc(50%-14px)] left-[calc(50%-67.5px)] text-18 font-medium whitespace-nowrap text-white">
             + 8 фотографий
           </p>
@@ -140,10 +140,17 @@ export function TroitskCenter() {
             <div className="flex flex-col gap-[10px]">
               <h2 className="text-24 font-medium">Про центр</h2>
               {aboutOpen ? (
-                <p className="text-16">
+                <div className="text-16">
                   {aboutLead}
-                  {aboutRest}
-                </p>
+                  {aboutRest}{" "}
+                  <button
+                    type="button"
+                    onClick={() => setAboutOpen(false)}
+                    className="inline px-[2px] font-medium whitespace-nowrap opacity-80"
+                  >
+                    Свернуть
+                  </button>
+                </div>
               ) : (
                 <div>
                   <p className="h-[72px] overflow-hidden text-16 text-ellipsis">{aboutLead}</p>
