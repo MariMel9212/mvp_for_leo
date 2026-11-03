@@ -222,9 +222,9 @@ export function TroitskCenter() {
             </div>
           </div>
 
-          <div className="flex flex-col gap-[8px] border-b border-[rgba(0,0,0,0.04)] pb-[32px]">
-            <div className={`relative ${scheduleOpen ? "" : "h-[134px] overflow-hidden"}`}>
-              <div className="flex flex-col gap-[28px]">
+          <div className="flex flex-col gap-[28px] border-b border-[rgba(0,0,0,0.04)] pb-[32px]">
+            <div className="flex flex-col gap-[8px]">
+              <div className={`relative ${scheduleOpen ? "" : "h-[134px] overflow-hidden"}`}>
                 <div className="flex flex-col gap-[10px]">
                   <h2 className="text-18 font-medium">Расписание дня</h2>
                   <ul className="flex flex-col gap-[8px] text-16">
@@ -236,33 +236,35 @@ export function TroitskCenter() {
                     ))}
                   </ul>
                 </div>
-                <div className="flex flex-col gap-[10px]">
-                  <h2 className="text-18 font-medium">Персонал дома</h2>
-                  <ul className="flex flex-wrap gap-x-[28px] gap-y-[8px] text-16">
-                    {staff.map(([count, role]) => (
-                      <li key={role} className="flex items-baseline gap-[8px] whitespace-nowrap">
-                        <span className="font-medium tabular-nums">{count}</span>
-                        <span>{role}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                {scheduleOpen ? null : (
+                  <img
+                    alt=""
+                    src="/centers/himki/schedule-fade.png"
+                    width={612}
+                    height={34}
+                    className="pointer-events-none absolute bottom-0 left-0 h-[34px] w-[612px] max-w-none"
+                  />
+                )}
               </div>
-              {scheduleOpen ? null : (
-                <img
-                  alt=""
-                  src="/centers/himki/schedule-fade.png"
-                  width={612}
-                  height={34}
-                  className="pointer-events-none absolute bottom-0 left-0 h-[34px] w-[612px] max-w-none"
-                />
-              )}
-            </div>
-            {scheduleOpen ? null : (
-              <button type="button" onClick={() => setScheduleOpen(true)} className="w-fit text-16 font-medium opacity-80">
-                Подробнее
+              <button
+                type="button"
+                onClick={() => setScheduleOpen((open) => !open)}
+                className="w-fit text-16 font-medium opacity-80"
+              >
+                {scheduleOpen ? "Свернуть" : "Подробнее"}
               </button>
-            )}
+            </div>
+            <div className="flex flex-col gap-[10px]">
+              <h2 className="text-18 font-medium">Персонал дома</h2>
+              <ul className="flex flex-wrap gap-x-[28px] gap-y-[8px] text-16">
+                {staff.map(([count, role]) => (
+                  <li key={role} className="flex items-baseline gap-[8px] whitespace-nowrap">
+                    <span className="font-medium tabular-nums">{count}</span>
+                    <span>{role}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
 
           <div className="flex flex-col gap-[10px]">
