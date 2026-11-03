@@ -72,15 +72,19 @@ const aboutRest =
   "и употреблением психоактивных веществ. В основе программы — индивидуальный подход к каждому подростку. Специалисты изучают причины возникших трудностей и разрабатывают план восстановления, который сочетает психологическую поддержку, образовательные занятия, развитие социальных навыков и формирование самостоятельности.";
 
 const galleryPhotos = [
-  { src: "/centers/troitsk/house.png", alt: "Дом центра" },
-  { src: "/centers/troitsk/attic.png", alt: "Мансарда" },
-  { src: "/centers/troitsk/room.png", alt: "Комната для занятий" },
-  { src: "/centers/troitsk/living.png", alt: "Гостиная" },
-  { src: "/centers/troitsk/bunk.jpg", alt: "Спальня с двухъярусными кроватями" },
-  ...Array.from({ length: 19 }, (_, index) => ({
-    src: `/centers/troitsk/gallery/${String(index + 1).padStart(2, "0")}.jpg`,
-    alt: `Фотография центра ${index + 1}`,
-  })),
+  { src: "/centers/troitsk/modal/01.jpg", alt: "Дом центра" },
+  { src: "/centers/troitsk/modal/02.jpg", alt: "Мансарда" },
+  { src: "/centers/troitsk/modal/03.jpg", alt: "Комната для занятий" },
+  { src: "/centers/troitsk/modal/04.jpg", alt: "Гостиная" },
+  { src: "/centers/troitsk/modal/05.jpg", alt: "Спальня с двухъярусными кроватями" },
+  { src: "/centers/troitsk/modal/06.jpg", alt: "Комната с флипчартом" },
+  { src: "/centers/troitsk/modal/07.jpg", alt: "Свободная комната" },
+  { src: "/centers/troitsk/modal/08.jpg", alt: "Территория" },
+  { src: "/centers/troitsk/modal/09.jpg", alt: "Комната с телевизором" },
+  { src: "/centers/troitsk/modal/10.jpg", alt: "Спальня" },
+  { src: "/centers/troitsk/modal/11.jpg", alt: "Общая комната" },
+  { src: "/centers/troitsk/modal/12.jpg", alt: "Зал" },
+  { src: "/centers/troitsk/modal/13.jpg", alt: "Кабинет" },
 ];
 
 export function TroitskCenter() {
@@ -379,7 +383,14 @@ function PhotoGallery({ onClose }: { onClose: () => void }) {
         </div>
         <div className="grid grid-cols-3 gap-[8px] overflow-y-auto px-[26px] pb-[26px]">
           {galleryPhotos.map((photo) => (
-            <img key={photo.src} alt={photo.alt} src={photo.src} className="h-[220px] w-full rounded-[12px] object-cover" />
+            <img
+              key={photo.src}
+              alt={photo.alt}
+              src={photo.src}
+              loading="lazy"
+              decoding="async"
+              className="h-[220px] w-full rounded-[12px] object-cover"
+            />
           ))}
         </div>
       </div>
