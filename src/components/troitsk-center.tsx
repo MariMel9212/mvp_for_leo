@@ -346,7 +346,7 @@ export function TroitskCenter() {
             </div>
             <div className="flex flex-col gap-[12px]">
               <h2 className="text-18 font-medium">Персонал</h2>
-              <div className={`relative ${staffOpen ? "" : "h-[392px] overflow-hidden"}`}>
+              <div className={`relative ${staffOpen ? "" : "h-[460px] overflow-hidden"}`}>
                 <ul className="grid grid-cols-3 gap-x-[24px] gap-y-[24px]">
                   {staffCards.map((person) => (
                     <li key={person.name} className="flex min-w-0 flex-col gap-[10px]">
@@ -365,7 +365,7 @@ export function TroitskCenter() {
                   ))}
                 </ul>
                 {staffOpen ? null : (
-                  <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[78px] bg-[linear-gradient(to_bottom,rgba(253,253,253,0)_0%,rgba(253,253,253,0.78)_100%)]" />
+                  <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[96px] bg-[linear-gradient(to_bottom,rgba(253,253,253,0)_0%,#fdfdfd_100%)]" />
                 )}
               </div>
               <button
