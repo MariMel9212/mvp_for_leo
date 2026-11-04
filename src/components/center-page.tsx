@@ -7,7 +7,8 @@ import type { CenterPageData, CenterPhoto } from "@/content/centers/types";
 import { tie } from "@/lib/tie";
 
 const textAction =
-  "w-fit cursor-pointer text-16 font-medium opacity-80 transition-opacity duration-150 hover:opacity-100";
+  "inline-flex h-[24px] cursor-pointer items-center text-[16px] leading-none font-medium whitespace-nowrap opacity-80 transition-opacity duration-150 hover:opacity-100";
+const textActionSlot = `${textAction} w-[112px] justify-end px-[2px]`;
 
 const previewAmenityCount = 6;
 
@@ -62,7 +63,7 @@ export function CenterPage({ center }: { center: CenterPageData }) {
                 <div className="text-16">
                   {tie(center.about.lead)}
                   {tie(center.about.rest)}{" "}
-                  <button type="button" onClick={() => setAboutOpen(false)} className={`${textAction} inline px-[2px]`}>
+                  <button type="button" onClick={() => setAboutOpen(false)} className={`${textAction} px-[2px]`}>
                     Свернуть
                   </button>
                 </div>
@@ -71,7 +72,7 @@ export function CenterPage({ center }: { center: CenterPageData }) {
                   <p className="h-[72px] overflow-hidden text-16 text-ellipsis">{tie(center.about.lead)}</p>
                   <div className="flex items-center gap-[2px]">
                     <p className="min-w-0 flex-1 truncate text-16 whitespace-pre">{tie(center.about.rest)}</p>
-                    <button type="button" onClick={() => setAboutOpen(true)} className={`${textAction} px-[2px]`}>
+                    <button type="button" onClick={() => setAboutOpen(true)} className={textActionSlot}>
                       Читать
                     </button>
                   </div>
@@ -80,7 +81,7 @@ export function CenterPage({ center }: { center: CenterPageData }) {
             </div>
 
             {center.amenities.length ? (
-              <div className="flex flex-col gap-[18px]">
+              <div className="flex flex-col gap-[8px]">
                 <div className="flex flex-col gap-[16px]">
                   {amenityRows.map((row) => (
                     <div key={row[0].label} className="flex items-center gap-[24px]">
@@ -94,7 +95,7 @@ export function CenterPage({ center }: { center: CenterPageData }) {
                   ))}
                 </div>
                 {hasMoreAmenities ? (
-                  <button type="button" onClick={() => setAmenitiesOpen(true)} className={`${textAction} self-end px-[2px]`}>
+                  <button type="button" onClick={() => setAmenitiesOpen(true)} className={`${textActionSlot} self-end`}>
                     Смотреть все
                   </button>
                 ) : null}
@@ -119,7 +120,7 @@ export function CenterPage({ center }: { center: CenterPageData }) {
                     <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[40px] bg-[linear-gradient(to_bottom,rgba(253,253,253,0),#fdfdfd)]" />
                   )}
                 </div>
-                <button type="button" onClick={() => setScheduleOpen((open) => !open)} className={`${textAction} self-end px-[2px]`}>
+                <button type="button" onClick={() => setScheduleOpen((open) => !open)} className={`${textActionSlot} self-end`}>
                   {scheduleOpen ? "Свернуть" : "Подробнее"}
                 </button>
               </div>
@@ -278,7 +279,7 @@ function StaffBlock({
           <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[96px] bg-[linear-gradient(to_bottom,rgba(253,253,253,0)_0%,#fdfdfd_100%)]" />
         )}
       </div>
-      <button type="button" onClick={onToggle} className={textAction}>
+      <button type="button" onClick={onToggle} className={`${textActionSlot} self-end`}>
         {open ? "Свернуть" : "Смотреть"}
       </button>
       <p className="text-16">{tie(staff.summary)}</p>
