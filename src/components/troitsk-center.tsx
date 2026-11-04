@@ -108,16 +108,41 @@ const schedule = [
   ["22:30", "Отбой"],
 ];
 
-const staff = [
-  { role: "Основатель Института психологии", count: 1 },
-  { role: "Руководитель центра", count: 1 },
-  { role: "Руководитель психологической службы", count: 1 },
-  { role: "Клинический психолог", count: 1 },
-  { role: "Педагог-психолог", count: 1 },
-  { role: "Врач-психиатр", count: 1 },
-  { role: "Учебные кураторы", count: 2 },
-  { role: "Консультанты по коррекции поведения", count: 4 },
+const staffCards: { name: string; role: string; photo?: { src: string; className: string } }[] = [
+  {
+    name: "Владимир Земелькин",
+    role: "Педагог\u2011психолог",
+    photo: {
+      src: "/centers/troitsk/staff/zemelkin.jpg",
+      className: "absolute top-[-55px] left-0 h-[319px] w-full max-w-none",
+    },
+  },
+  {
+    name: "Аревик Саркисян",
+    role: "Учебный куратор",
+    photo: {
+      src: "/centers/troitsk/staff/sarkisyan.jpg",
+      className: "absolute top-[-40px] right-0 h-[320px] w-full max-w-none",
+    },
+  },
+  {
+    name: "Алина Ефремова",
+    role: "Врач-психиатр",
+    photo: {
+      src: "/centers/troitsk/staff/efremova.jpg",
+      className: "absolute top-[-9px] left-[calc(50%-17.5px)] h-[269px] w-[215px] max-w-none -translate-x-1/2",
+    },
+  },
+  { name: "Основатель Института психологии", role: "1 специалист" },
+  { name: "Руководитель центра", role: "1 специалист" },
+  { name: "Руководитель психологической службы", role: "1 специалист" },
+  { name: "Клинический психолог", role: "1 специалист" },
+  { name: "Консультанты по коррекции поведения", role: "4 специалиста" },
 ];
+
+const staffSummary = tie(
+  "12 специалистов: основатель Института психологии, руководитель центра, руководитель психологической службы, клинический психолог, педагог\u2011психолог, врач-психиатр, 2 учебных куратора и 4 консультанта по коррекции поведения.",
+);
 
 const features = [
   "Программа «Пифагор»",
@@ -161,6 +186,7 @@ export function TroitskCenter() {
   const [scheduleOpen, setScheduleOpen] = useState(false);
   const [galleryOpen, setGalleryOpen] = useState(false);
   const [amenitiesOpen, setAmenitiesOpen] = useState(false);
+  const [staffOpen, setStaffOpen] = useState(false);
 
   useEffect(() => {
     if (!galleryOpen && !amenitiesOpen) return;
@@ -338,28 +364,44 @@ export function TroitskCenter() {
                 {scheduleOpen ? "Свернуть" : "Подробнее"}
               </button>
             </div>
-            <div className="flex flex-col gap-[14px]">
-              <div className="flex items-baseline justify-between gap-[16px]">
-                <h2 className="text-18 font-medium">Персонал дома</h2>
-                <p className="text-16 opacity-60">12 специалистов</p>
+            <div className="flex flex-col gap-[12px]">
+              <h2 className="text-18 font-medium">Персонал</h2>
+              <div className={`relative ${staffOpen ? "" : "h-[360px] overflow-hidden"}`}>
+                <ul className="grid grid-cols-3 gap-x-[24px] gap-y-[24px]">
+                  {staffCards.map((person) => (
+                    <li key={person.name} className="flex min-w-0 flex-col gap-[10px]">
+                      <div
+                        className={`relative h-[180px] overflow-hidden rounded-[12px] ${person.photo ? "bg-[#c4c4c4]" : "bg-[#ebeff8]"}`}
+                      >
+                        {person.photo ? (
+                          <img alt="" src={person.photo.src} className={person.photo.className} />
+                        ) : (
+                          <p className="px-[14px] pt-[14px] text-16 leading-[22px] font-medium text-[#27292d]">
+                            {tie(person.name)}
+                          </p>
+                        )}
+                      </div>
+                      <div className="flex flex-col gap-[2px]">
+                        {person.photo ? (
+                          <p className="text-16 leading-[24px] font-medium text-black">{tie(person.name)}</p>
+                        ) : null}
+                        <p className="text-13 leading-[20px] text-[#27292d]">{tie(person.role)}</p>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+                {staffOpen ? null : (
+                  <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[78px] bg-[linear-gradient(to_bottom,rgba(253,253,253,0)_0%,rgba(253,253,253,0.78)_100%)]" />
+                )}
               </div>
-              <ul>
-                {staff.map((person) => (
-                  <li
-                    key={person.role}
-                    className="flex items-baseline justify-between gap-[24px] border-t border-[rgba(0,0,0,0.06)] py-[8px] text-16"
-                  >
-                    <span>{tie(person.role)}</span>
-                    <span className="w-[16px] shrink-0 text-right tabular-nums opacity-60">{person.count}</span>
-                  </li>
-                ))}
-              </ul>
-              <div className="flex flex-col gap-[4px]">
-                <p className="text-16 font-medium">На смене</p>
-                <p className="text-16">
-                  {tie("С подростками работают два консультанта\u2011мужчины, один консультант\u2011женщина и\u00A0психолог.")}
-                </p>
-              </div>
+              <button
+                type="button"
+                onClick={() => setStaffOpen((open) => !open)}
+                className="w-fit text-16 font-medium opacity-80"
+              >
+                {staffOpen ? "Свернуть" : "Смотреть"}
+              </button>
+              <p className="text-16">{staffSummary}</p>
             </div>
           </div>
 
