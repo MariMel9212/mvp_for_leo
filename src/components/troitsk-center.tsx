@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { AmenityIcon } from "@/components/amenity-icons";
 import { CallRequestButton } from "@/components/call-request-modal";
 
 const prepositions = new Set([
@@ -72,22 +73,22 @@ const facts: { label: string; value: string; extra?: string; extraHint?: string 
 
 const amenities = [
   [
-    { icon: "/icons/amenity-gym.svg", label: "Спортзал" },
-    { icon: "/icons/amenity-group.svg", label: "Групповая" },
-    { icon: "/icons/amenity-field.svg", label: "Спортивная площадка" },
+    { icon: "gym", label: "Спортзал" },
+    { icon: "group", label: "Групповая" },
+    { icon: "field", label: "Спортивная площадка" },
   ],
   [
-    { icon: "/icons/amenity-dining.svg", label: "Столовая" },
-    { icon: "/icons/amenity-rooms.svg", label: "Общие комнаты" },
-    { icon: "/icons/amenity-classroom.svg", label: "Учебный класс" },
+    { icon: "dining", label: "Столовая" },
+    { icon: "rooms", label: "Общие комнаты" },
+    { icon: "classroom", label: "Учебный класс" },
   ],
-];
+] as const;
 
 const allAmenities = [
   ...amenities.flat(),
-  { icon: "/icons/amenity-territory.svg", label: "Частная территория" },
-  { icon: "/icons/amenity-living.svg", label: "Большая гостиная" },
-];
+  { icon: "territory", label: "Частная территория" },
+  { icon: "living", label: "Большая гостиная" },
+] as const;
 
 const schedule = [
   ["07:00–07:30", "Подъём, утренняя гигиена"],
@@ -294,7 +295,7 @@ export function TroitskCenter() {
                   <div key={row[0].label} className="flex items-center gap-[24px]">
                     {row.map((item, index) => (
                       <div key={item.label} className={`flex items-center gap-[6px] ${index < 2 ? "w-[180px]" : ""}`}>
-                        <img alt="" src={item.icon} width={20} height={20} className="size-[20px] shrink-0" />
+                        <AmenityIcon name={item.icon} />
                         <span className="text-16 font-medium whitespace-nowrap">{item.label}</span>
                       </div>
                     ))}
@@ -447,7 +448,7 @@ function AmenitiesModal({ onClose }: { onClose: () => void }) {
         <ul className="grid grid-cols-3 gap-x-[24px] gap-y-[16px] px-[26px] pb-[28px]">
           {allAmenities.map((item) => (
             <li key={item.label} className="flex items-center gap-[6px]">
-              <img alt="" src={item.icon} width={20} height={20} className="size-[20px] shrink-0" />
+              <AmenityIcon name={item.icon} />
               <span className="text-16 font-medium whitespace-nowrap">{item.label}</span>
             </li>
           ))}

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { AmenityIcon } from "@/components/amenity-icons";
 import { CallRequestButton } from "@/components/call-request-modal";
 
 const facts = [
@@ -13,16 +14,16 @@ const facts = [
 
 const amenities = [
   [
-    { icon: "/icons/amenity-pool.svg", label: "Бассейн" },
-    { icon: "/icons/amenity-group.svg", label: "Групповая" },
-    { icon: "/icons/amenity-territory.svg", label: "Частная территория" },
+    { icon: "pool", label: "Бассейн" },
+    { icon: "group", label: "Групповая" },
+    { icon: "territory", label: "Частная территория" },
   ],
   [
-    { icon: "/icons/amenity-gym.svg", label: "Спортзал" },
-    { icon: "/icons/amenity-dining.svg", label: "Столовая" },
-    { icon: "/icons/amenity-rooms.svg", label: "Отдельные комнаты" },
+    { icon: "gym", label: "Спортзал" },
+    { icon: "dining", label: "Столовая" },
+    { icon: "rooms", label: "Отдельные комнаты" },
   ],
-];
+] as const;
 
 const schedule = [
   ["07:00–07:30", "Подъём, утренняя гигиена"],
@@ -150,7 +151,7 @@ export function CenterDetail() {
                   <div key={row[0].label} className="flex items-center gap-[24px]">
                     {row.map((item, index) => (
                       <div key={item.label} className={`flex items-center gap-[6px] ${index < 2 ? "w-[180px]" : ""}`}>
-                        <img alt="" src={item.icon} width={20} height={20} className="size-[20px] shrink-0" />
+                        <AmenityIcon name={item.icon} />
                         <span className="text-16 font-medium whitespace-nowrap">{item.label}</span>
                       </div>
                     ))}
