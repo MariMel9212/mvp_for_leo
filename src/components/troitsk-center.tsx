@@ -127,17 +127,22 @@ const staffSummary = tie(
   "12 специалистов: основатель Института психологии, руководитель центра, руководитель психологической службы, клинический психолог, педагог\u2011психолог, врач-психиатр, 2 учебных куратора и 4 консультанта по коррекции поведения.",
 );
 
-const features = [
-  "Программа «Пифагор»",
-  "Диагностический месяц",
-  "Индивидуальный подход",
-  "Психологическое сопровождение",
-  "Семейная психотерапия",
-  "Группы для созависимых",
-  "Групповые занятия",
-  "Образовательные занятия",
-  "Спортзал и площадка",
-  "Распорядок дня",
+const programSteps = [
+  ["Диагностика ситуации", "Первый месяц: интервью с родителями, история и факторы кризиса."],
+  ["Индивидуальный план", "Цели, формат сопровождения, учёба и понятные критерии прогресса."],
+  ["Работа с подростком", "Распорядок, занятия, социализация и ответственность за свои поступки."],
+  ["Работа с родителями", "Встречи, рекомендации по общению и новые семейные правила."],
+  ["Оценка прогресса", "Точки контроля, обратная связь семье и корректировка программы."],
+  ["Возвращение в среду", "Постепенная адаптация и поддержка семьи после основного этапа."],
+];
+
+const programOutcomes = [
+  "Возвращение к образовательному маршруту",
+  "Снижение числа конфликтов",
+  "Восстановление диалога с родителями",
+  "Самостоятельность и ответственность",
+  "Новые интересы и социальные связи",
+  "Устойчивое поведение в сложных ситуациях",
 ];
 
 const aboutLead = tie(
@@ -382,15 +387,34 @@ export function TroitskCenter() {
             </div>
           </div>
 
-          <div className="flex flex-col gap-[10px]">
-            <h2 className="text-18 font-medium">Особенности</h2>
-            <ul className="flex flex-wrap content-center gap-[8px]">
-              {features.map((feature) => (
-                <li key={feature} className="rounded-[8px] bg-[#ebeff8] p-[10px] text-16">
-                  {tie(feature)}
+          <div className="flex flex-col gap-[16px]">
+            <div className="flex flex-col gap-[8px]">
+              <h2 className="text-18 font-medium">Как строится работа</h2>
+              <p className="text-16">
+                {tie("Программа «Пифагор». Цели и срок определяются после диагностики. Семья\u00A0понимает, что происходит на каждом этапе.")}
+              </p>
+            </div>
+            <ol className="flex flex-col gap-[12px]">
+              {programSteps.map(([title, text], index) => (
+                <li key={title} className="flex gap-[12px]">
+                  <span className="w-[18px] shrink-0 text-16 leading-[24px] font-medium tabular-nums">{index + 1}</span>
+                  <div className="flex min-w-0 flex-col gap-[2px]">
+                    <p className="text-16 leading-[24px] font-medium">{tie(title)}</p>
+                    <p className="text-13 leading-[20px] text-[#27292d] opacity-70">{tie(text)}</p>
+                  </div>
                 </li>
               ))}
-            </ul>
+            </ol>
+            <div className="flex flex-col gap-[8px]">
+              <h3 className="text-16 font-medium">Над чем работаем</h3>
+              <ul className="flex flex-col gap-[8px]">
+                {programOutcomes.map((outcome) => (
+                  <li key={outcome} className="text-16 leading-[24px]">
+                    {tie(outcome)}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
 
