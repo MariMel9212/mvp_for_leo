@@ -28,6 +28,18 @@ const prepositions = new Set([
   "со",
   "у",
   "через",
+  "и",
+  "а",
+  "но",
+  "да",
+  "или",
+  "либо",
+  "не",
+  "ни",
+  "же",
+  "бы",
+  "ли",
+  "один",
 ]);
 
 function tie(text: string) {
@@ -35,6 +47,12 @@ function tie(text: string) {
   const out: string[] = [];
   for (let i = 0; i < parts.length; i++) {
     const bare = parts[i].replace(/^[«"(\[]+|[»".,:;!?)\]]+$/g, "").toLowerCase();
+    if ((bare === "—" || bare === "–") && out.length && parts[i + 1]) {
+      const prev = out.pop();
+      out.push(`${prev}\u00A0${parts[i]}\u00A0${parts[i + 1]}`);
+      i += 1;
+      continue;
+    }
     if (prepositions.has(bare) && parts[i + 1]) {
       out.push(`${parts[i]}\u00A0${parts[i + 1]}`);
       i += 1;
@@ -86,7 +104,7 @@ const schedule = [
   ["18:00–19:00", "Ужин"],
   ["19:00–20:30", "Группы взаимопомощи"],
   ["20:30–21:30", "Личное время"],
-  ["21:30–22:00", "Вечерняя рефлексия, подведение итогов"],
+  ["21:30–22:00", "Вечерняя рефлексия, подведение\u00A0итогов"],
   ["22:30", "Отбой"],
 ];
 
@@ -339,7 +357,7 @@ export function TroitskCenter() {
               <div className="flex flex-col gap-[4px]">
                 <p className="text-16 font-medium">На смене</p>
                 <p className="text-16">
-                  {tie("С подростками работают два консультанта\u2011мужчины, один консультант\u2011женщина и психолог.")}
+                  {tie("С подростками работают два консультанта\u2011мужчины, один консультант\u2011женщина и\u00A0психолог.")}
                 </p>
               </div>
             </div>
