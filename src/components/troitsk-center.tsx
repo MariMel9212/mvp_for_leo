@@ -7,7 +7,7 @@ const facts: { label: string; value: string; extra?: string; extraHint?: string 
   { label: "Возраст:", value: "14–17 лет" },
   { label: "Формат:", value: "с проживанием" },
   { label: "Программа:", value: "«Пифагора»" },
-  { label: "Стоимость:", value: "200 000 ₽" },
+  { label: "Стоимость:", value: "200 000 ₽ / мес" },
 ];
 
 const amenities = [

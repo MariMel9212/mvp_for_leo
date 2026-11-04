@@ -39,7 +39,7 @@ const centers: Center[] = [
   {
     title: "Реабилитационно-образовательный центр в Троицке",
     course: "Подростки от 14 до 17 лет",
-    price: "200 000 ₽",
+    price: "200 000 ₽ / мес",
     slides: [
       { src: "/centers/troitsk/house.png", className: "cover" },
       { src: "/centers/troitsk/attic.png", className: "cover" },
