@@ -108,36 +108,19 @@ const schedule = [
   ["22:30", "Отбой"],
 ];
 
-const staffCards: { name: string; role: string; photo?: { src: string; className: string } }[] = [
-  {
-    name: "Владимир Земелькин",
-    role: "Педагог\u2011психолог",
-    photo: {
-      src: "/centers/troitsk/staff/zemelkin.jpg",
-      className: "absolute top-[-55px] left-0 h-[319px] w-full max-w-none",
-    },
-  },
-  {
-    name: "Аревик Саркисян",
-    role: "Учебный куратор",
-    photo: {
-      src: "/centers/troitsk/staff/sarkisyan.jpg",
-      className: "absolute top-[-40px] right-0 h-[320px] w-full max-w-none",
-    },
-  },
-  {
-    name: "Алина Ефремова",
-    role: "Врач-психиатр",
-    photo: {
-      src: "/centers/troitsk/staff/efremova.jpg",
-      className: "absolute top-[-9px] left-[calc(50%-17.5px)] h-[269px] w-[215px] max-w-none -translate-x-1/2",
-    },
-  },
-  { name: "Основатель Института психологии", role: "1 специалист" },
-  { name: "Руководитель центра", role: "1 специалист" },
-  { name: "Руководитель психологической службы", role: "1 специалист" },
-  { name: "Клинический психолог", role: "1 специалист" },
-  { name: "Консультанты по коррекции поведения", role: "4 специалиста" },
+const staffCards: { name: string; role: string; photo: string }[] = [
+  { name: "Руслан Молодцов", role: "Основатель Института психологии", photo: "/centers/troitsk/staff/molodtsov.jpg" },
+  { name: "Михаил Анисимов", role: "Руководитель центра", photo: "/centers/troitsk/staff/anisimov.jpg" },
+  { name: "Ева Артамонова", role: "Руководитель психологической службы", photo: "/centers/troitsk/staff/artamonova.jpg" },
+  { name: "Мария Падурец", role: "Клинический психолог", photo: "/centers/troitsk/staff/padurets.jpg" },
+  { name: "Владимир Земелькин", role: "Педагог\u2011психолог", photo: "/centers/troitsk/staff/zemelkin.jpg" },
+  { name: "Аревик Саркисян", role: "Учебный куратор", photo: "/centers/troitsk/staff/sarkisyan.jpg" },
+  { name: "Алина Ефремова", role: "Врач-психиатр", photo: "/centers/troitsk/staff/efremova.jpg" },
+  { name: "Виктория Медовая", role: "Учебный куратор", photo: "/centers/troitsk/staff/medovaya.jpg" },
+  { name: "Илья Куприянов", role: "Консультант по коррекции поведения", photo: "/centers/troitsk/staff/kupriyanov.jpg" },
+  { name: "Данила Куколкин", role: "Консультант по коррекции поведения", photo: "/centers/troitsk/staff/kukolkin.jpg" },
+  { name: "Ильдар Зарипов", role: "Консультант по коррекции поведения", photo: "/centers/troitsk/staff/zaripov.jpg" },
+  { name: "Денис Поляков", role: "Консультант по коррекции поведения", photo: "/centers/troitsk/staff/polyakov.jpg" },
 ];
 
 const staffSummary = tie(
@@ -366,25 +349,19 @@ export function TroitskCenter() {
             </div>
             <div className="flex flex-col gap-[12px]">
               <h2 className="text-18 font-medium">Персонал</h2>
-              <div className={`relative ${staffOpen ? "" : "h-[360px] overflow-hidden"}`}>
+              <div className={`relative ${staffOpen ? "" : "h-[392px] overflow-hidden"}`}>
                 <ul className="grid grid-cols-3 gap-x-[24px] gap-y-[24px]">
                   {staffCards.map((person) => (
                     <li key={person.name} className="flex min-w-0 flex-col gap-[10px]">
-                      <div
-                        className={`relative h-[180px] overflow-hidden rounded-[12px] ${person.photo ? "bg-[#c4c4c4]" : "bg-[#ebeff8]"}`}
-                      >
-                        {person.photo ? (
-                          <img alt="" src={person.photo.src} className={person.photo.className} />
-                        ) : (
-                          <p className="px-[14px] pt-[14px] text-16 leading-[22px] font-medium text-[#27292d]">
-                            {tie(person.name)}
-                          </p>
-                        )}
+                      <div className="relative h-[180px] overflow-hidden rounded-[12px] bg-[#c4c4c4]">
+                        <img
+                          alt=""
+                          src={person.photo}
+                          className="absolute inset-0 h-full w-full object-cover object-[center_18%]"
+                        />
                       </div>
                       <div className="flex flex-col gap-[2px]">
-                        {person.photo ? (
-                          <p className="text-16 leading-[24px] font-medium text-black">{tie(person.name)}</p>
-                        ) : null}
+                        <p className="text-16 leading-[24px] font-medium text-black">{person.name}</p>
                         <p className="text-13 leading-[20px] text-[#27292d]">{tie(person.role)}</p>
                       </div>
                     </li>
