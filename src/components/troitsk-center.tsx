@@ -3,10 +3,52 @@
 import { useEffect, useState } from "react";
 import { CallRequestButton } from "@/components/call-request-modal";
 
+const prepositions = new Set([
+  "в",
+  "во",
+  "без",
+  "до",
+  "для",
+  "за",
+  "из",
+  "изо",
+  "к",
+  "ко",
+  "на",
+  "над",
+  "о",
+  "об",
+  "обо",
+  "от",
+  "по",
+  "под",
+  "при",
+  "про",
+  "с",
+  "со",
+  "у",
+  "через",
+]);
+
+function tie(text: string) {
+  const parts = text.split(" ");
+  const out: string[] = [];
+  for (let i = 0; i < parts.length; i++) {
+    const bare = parts[i].replace(/^[«"(\[]+|[»".,:;!?)\]]+$/g, "").toLowerCase();
+    if (prepositions.has(bare) && parts[i + 1]) {
+      out.push(`${parts[i]}\u00A0${parts[i + 1]}`);
+      i += 1;
+    } else {
+      out.push(parts[i]);
+    }
+  }
+  return out.join(" ");
+}
+
 const facts: { label: string; value: string; extra?: string; extraHint?: string }[] = [
   { label: "Возраст:", value: "14–17 лет" },
-  { label: "Формат:", value: "с проживанием" },
-  { label: "Программа:", value: "«Пифагора»" },
+  { label: "Формат:", value: tie("с проживанием") },
+  { label: "Программа:", value: "«Пифагор»" },
   { label: "Стоимость:", value: "200 000 ₽ / мес" },
 ];
 
@@ -55,18 +97,18 @@ const schedule = [
 ];
 
 const staff = [
-  "Основатель Института психологии — 1",
-  "Руководитель центра — 1",
-  "Руководитель психологической службы — 1",
-  "Клинический психолог — 1",
-  "Педагог-психолог — 1",
-  "Врач-психиатр — 1",
-  "Учебные кураторы — 2",
-  "Консультанты по коррекции поведения — 4",
+  { role: "Основатель Института психологии", count: 1 },
+  { role: "Руководитель центра", count: 1 },
+  { role: "Руководитель психологической службы", count: 1 },
+  { role: "Клинический психолог", count: 1 },
+  { role: "Педагог-психолог", count: 1 },
+  { role: "Врач-психиатр", count: 1 },
+  { role: "Учебные кураторы", count: 2 },
+  { role: "Консультанты по коррекции поведения", count: 4 },
 ];
 
 const features = [
-  "Программа «Пифагора»",
+  "Программа «Пифагор»",
   "Диагностический месяц",
   "Индивидуальный подход",
   "Психологическое сопровождение",
@@ -78,11 +120,13 @@ const features = [
   "Распорядок дня",
 ];
 
-const aboutLead =
-  "Центр для подростков от 14 до 17 лет помогает изменить деструктивные модели поведения, сформировать ответственность за свои поступки и восстановить отношения с близкими. ";
+const aboutLead = tie(
+  "Центр для подростков от 14 до 17 лет помогает изменить деструктивные модели поведения, сформировать ответственность за свои поступки и восстановить отношения с близкими. ",
+);
 
-const aboutRest =
-  "Основные направления — коррекция девиантного поведения, эмоциональные и поведенческие трудности, социальные навыки, семейные отношения и психологическое сопровождение. В основе работы — программа «Пифагора»: первый месяц уходит на диагностику поведения, эмоционального состояния и семейной ситуации. Дальше идут психологическое сопровождение, групповые занятия, учёба и развитие самостоятельности. На территории есть спортивный зал и спортивная площадка, а день расписан: занятия, тренинги, физическая активность, труд, прогулки и отдых.";
+const aboutRest = tie(
+  "Основные направления — коррекция девиантного поведения, эмоциональные и поведенческие трудности, социальные навыки, семейные отношения и психологическое сопровождение. В основе работы — программа «Пифагор»: первый месяц уходит на диагностику поведения, эмоционального состояния и семейной ситуации. Дальше идут психологическое сопровождение, групповые занятия, учёба и развитие самостоятельности. На территории есть спортивный зал и спортивная площадка, а день расписан: занятия, тренинги, физическая активность, труд, прогулки и отдых.",
+);
 
 const galleryPhotos = [
   { src: "/centers/troitsk/modal/01.jpg", alt: "Дом центра" },
@@ -185,7 +229,7 @@ export function TroitskCenter() {
         <div className="flex w-[612px] flex-col gap-[30px]">
           <div className="flex flex-col gap-[16px] border-b border-[rgba(0,0,0,0.04)] pb-[32px]">
             <div className="flex flex-col gap-[6px]">
-              <h1 className="text-28 font-medium">Реабилитационно-образовательный центр в Троицке</h1>
+              <h1 className="text-28 font-medium">{tie("Реабилитационно-образовательный центр в Троицке")}</h1>
               <p className="text-18">Московская область</p>
             </div>
             <CallRequestButton
@@ -254,15 +298,12 @@ export function TroitskCenter() {
             <div className="flex flex-col gap-[8px]">
               <div className={`relative ${scheduleOpen ? "" : "h-[134px] overflow-hidden"}`}>
                 <div className="flex flex-col gap-[10px]">
-                  <div className="flex items-baseline gap-[8px]">
-                    <h2 className="text-18 font-medium">Расписание дня</h2>
-                    <span className="text-16 opacity-60">понедельник</span>
-                  </div>
+                  <h2 className="text-18 font-medium">Расписание дня</h2>
                   <ul className="flex flex-col gap-[8px] text-16">
                     {schedule.map(([time, event]) => (
                       <li key={time} className="flex items-baseline gap-[8px]">
                         <span className="shrink-0 whitespace-nowrap tabular-nums">{time}</span>
-                        <span>{event}</span>
+                        <span>{tie(event)}</span>
                       </li>
                     ))}
                   </ul>
@@ -285,17 +326,28 @@ export function TroitskCenter() {
                 {scheduleOpen ? "Свернуть" : "Подробнее"}
               </button>
             </div>
-            <div className="flex flex-col gap-[10px]">
-              <h2 className="text-18 font-medium">Персонал дома</h2>
-              <p className="text-16">12 специалистов</p>
-              <ul className="flex flex-col gap-[8px] text-16">
-                {staff.map((line) => (
-                  <li key={line}>{line}</li>
+            <div className="flex flex-col gap-[14px]">
+              <div className="flex items-baseline justify-between gap-[16px]">
+                <h2 className="text-18 font-medium">Персонал дома</h2>
+                <p className="text-16 opacity-60">12 специалистов</p>
+              </div>
+              <ul>
+                {staff.map((person) => (
+                  <li
+                    key={person.role}
+                    className="flex items-baseline justify-between gap-[24px] border-t border-[rgba(0,0,0,0.06)] py-[8px] text-16"
+                  >
+                    <span>{tie(person.role)}</span>
+                    <span className="w-[16px] shrink-0 text-right tabular-nums opacity-60">{person.count}</span>
+                  </li>
                 ))}
               </ul>
-              <p className="text-16">
-                На смене с подростками работают два консультанта-мужчины, один консультант-женщина и психолог.
-              </p>
+              <div className="flex flex-col gap-[4px]">
+                <p className="text-16 font-medium">На смене</p>
+                <p className="text-16">
+                  {tie("С подростками работают два консультанта\u2011мужчины, один консультант\u2011женщина и психолог.")}
+                </p>
+              </div>
             </div>
           </div>
 
@@ -304,7 +356,7 @@ export function TroitskCenter() {
             <ul className="flex flex-wrap content-center gap-[8px]">
               {features.map((feature) => (
                 <li key={feature} className="rounded-[8px] bg-[#ebeff8] p-[10px] text-16">
-                  {feature}
+                  {tie(feature)}
                 </li>
               ))}
             </ul>
