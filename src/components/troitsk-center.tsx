@@ -128,13 +128,13 @@ const staffSummary = tie(
   "12 специалистов: основатель Института психологии, руководитель центра, руководитель психологической службы, клинический психолог, педагог\u2011психолог, врач-психиатр, 2 учебных куратора и 4 консультанта по коррекции поведения.",
 );
 
-const programSteps = [
-  "Диагностика ситуации",
-  "Индивидуальный план",
-  "Работа с подростком",
-  "Работа с родителями",
-  "Оценка прогресса",
-  "Возвращение в среду",
+const features = [
+  "Подходит для подростков",
+  "Индивидуальная программа",
+  "Работа с семьёй",
+  "Репетиторы по предметам",
+  "Психологическое сопровождение",
+  "Врач-психиатр",
 ];
 
 const aboutLead = tie(
@@ -380,11 +380,11 @@ export function TroitskCenter() {
           </div>
 
           <div className="flex flex-col gap-[10px]">
-            <h2 className="text-18 font-medium">Как строится работа</h2>
+            <h2 className="text-18 font-medium">Особенности</h2>
             <ul className="flex flex-wrap content-center gap-[8px]">
-              {programSteps.map((step) => (
-                <li key={step} className="rounded-[8px] bg-[#ebeff8] p-[10px] text-16">
-                  {step}
+              {features.map((feature) => (
+                <li key={feature} className="rounded-[8px] bg-[#ebeff8] p-[10px] text-16">
+                  {feature}
                 </li>
               ))}
             </ul>
