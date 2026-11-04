@@ -37,7 +37,8 @@ const dependencyOptions: { value: Dependency; label: string }[] = [
 const centers: Center[] = [
   {
     title: "Реабилитационный центр в Троицке",
-    course: "Курс от 3 до 12 месяцев",
+    course: "Подростки от 14 до 17 лет",
+    price: "200 000 ₽",
     slides: [
       { src: "/centers/troitsk/house.png", className: "cover" },
       { src: "/centers/troitsk/attic.png", className: "cover" },
@@ -45,12 +46,12 @@ const centers: Center[] = [
       { src: "/centers/troitsk/living.png", className: "cover" },
     ],
     kind: "rehab",
-    dependencies: ["alco", "narco"],
+    dependencies: [],
     teen: true,
-    aftercare: true,
-    typeLabel: "Алко / Нарко",
-    typeClassName: "w-[100px]",
-    badge: { label: "Подходит для подростков", className: "left-[87px] w-[188px] bg-[#e1f300]" },
+    aftercare: false,
+    typeLabel: "14–17 лет",
+    typeClassName: "w-[84px]",
+    badge: { label: "Подходит для подростков", className: "left-[71px] w-[188px] bg-[#e1f300]" },
     href: "/uchrezhdeniya/troitsk",
   },
   {
