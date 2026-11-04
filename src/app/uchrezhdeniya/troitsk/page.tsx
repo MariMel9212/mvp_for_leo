@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import { SiteHeader } from "@/components/site-header";
-import { TroitskCenter } from "@/components/troitsk-center";
+import { CenterFrame } from "@/components/center-frame";
+import { CenterPage } from "@/components/center-page";
+import { troitskCenter } from "@/content/centers/troitsk";
 
 export const metadata: Metadata = {
   title: "Реабилитационно-образовательный центр в Троицке — СвойЦентр",
@@ -10,15 +11,8 @@ export const metadata: Metadata = {
 
 export default function TroitskCenterPage() {
   return (
-    <main className="relative mx-auto w-[1440px] bg-[#fdfdfd] text-[#27292d]">
-      <div
-        aria-hidden
-        className="pointer-events-none absolute top-0 left-1/2 h-[356px] w-screen -translate-x-1/2 bg-[linear-gradient(180deg,#d3def3_0%,#fdfdfd_85.955%)]"
-      />
-      <div className="relative">
-        <SiteHeader showCta={false} />
-        <TroitskCenter />
-      </div>
-    </main>
+    <CenterFrame>
+      <CenterPage center={troitskCenter} />
+    </CenterFrame>
   );
 }
