@@ -94,46 +94,48 @@ export function CenterPage({ center }: { center: CenterPageData }) {
                   ))}
                 </div>
                 {hasMoreAmenities ? (
-                  <button type="button" onClick={() => setAmenitiesOpen(true)} className={textAction}>
+                  <button type="button" onClick={() => setAmenitiesOpen(true)} className={`${textAction} self-end px-[2px]`}>
                     Смотреть все
                   </button>
                 ) : null}
               </div>
             ) : null}
+
+            {center.schedule.length ? (
+              <div className="flex flex-col gap-[8px]">
+                <div className={`relative ${scheduleOpen ? "" : "h-[152px] overflow-hidden"}`}>
+                  <div className="flex flex-col gap-[10px]">
+                    <h3 className="text-18 font-medium">Расписание дня</h3>
+                    <ul className="grid grid-cols-2 gap-x-[28px] gap-y-[8px]">
+                      {center.schedule.map((item) => (
+                        <li key={item.time} className="flex min-w-0 flex-col">
+                          <p className="text-16 leading-[20px]">{tie(item.event)}</p>
+                          <p className="text-13 leading-[16px] opacity-60 tabular-nums">{item.time}</p>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  {scheduleOpen ? null : (
+                    <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[40px] bg-[linear-gradient(to_bottom,rgba(253,253,253,0),#fdfdfd)]" />
+                  )}
+                </div>
+                <button type="button" onClick={() => setScheduleOpen((open) => !open)} className={`${textAction} self-end px-[2px]`}>
+                  {scheduleOpen ? "Свернуть" : "Подробнее"}
+                </button>
+              </div>
+            ) : null}
           </section>
 
-          {center.schedule.length || center.staff ? (
-            <section className="flex flex-col gap-[28px] border-b border-[rgba(0,0,0,0.04)] pb-[32px]">
-              {center.schedule.length ? (
-                <div className="flex flex-col gap-[8px]">
-                  <div className={`relative ${scheduleOpen ? "" : "h-[152px] overflow-hidden"}`}>
-                    <div className="flex flex-col gap-[10px]">
-                      <h2 className="text-18 font-medium">Расписание дня</h2>
-                      <ul className="grid grid-cols-2 gap-x-[28px] gap-y-[8px]">
-                        {center.schedule.map((item) => (
-                          <li key={item.time} className="flex min-w-0 flex-col">
-                            <p className="text-16 leading-[20px]">{tie(item.event)}</p>
-                            <p className="text-13 leading-[16px] opacity-60 tabular-nums">{item.time}</p>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                    {scheduleOpen ? null : (
-                      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[40px] bg-[linear-gradient(to_bottom,rgba(253,253,253,0),#fdfdfd)]" />
-                    )}
-                  </div>
-                  <button type="button" onClick={() => setScheduleOpen((open) => !open)} className={textAction}>
-                    {scheduleOpen ? "Свернуть" : "Подробнее"}
-                  </button>
-                </div>
-              ) : null}
+          {center.staff ? (
+            <section className="flex flex-col gap-[12px] border-b border-[rgba(0,0,0,0.04)] pb-[32px]">
+              <h2 className="text-24 font-medium">Персонал</h2>
               <StaffBlock staff={center.staff} open={staffOpen} onToggle={() => setStaffOpen((open) => !open)} />
             </section>
           ) : null}
 
           {center.features.length ? (
             <section className="flex flex-col gap-[10px]">
-              <h2 className="text-18 font-medium">Особенности</h2>
+              <h2 className="text-24 font-medium">Особенности</h2>
               <ul className="flex flex-wrap content-center gap-[8px]">
                 {center.features.map((feature) => (
                   <li key={feature} className="rounded-[8px] bg-[#ebeff8] p-[10px] text-16">
@@ -240,7 +242,6 @@ function StaffBlock({
   if (staff.kind === "counts") {
     return (
       <div className="flex flex-col gap-[12px]">
-        <h2 className="text-18 font-medium">Персонал</h2>
         <ul className="flex flex-col gap-[8px] text-16">
           {staff.counts.map((row) => (
             <li key={row.role} className="flex gap-[6px]">
@@ -255,7 +256,6 @@ function StaffBlock({
 
   return (
     <div className="flex flex-col gap-[12px]">
-      <h2 className="text-18 font-medium">Персонал</h2>
       <div className={`relative ${open ? "" : "h-[460px] overflow-hidden"}`}>
         <ul className="grid grid-cols-3 gap-x-[24px] gap-y-[24px]">
           {staff.people.map((person) => (
