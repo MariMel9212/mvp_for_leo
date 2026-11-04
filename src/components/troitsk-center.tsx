@@ -296,14 +296,14 @@ export function TroitskCenter() {
 
           <div className="flex flex-col gap-[28px] border-b border-[rgba(0,0,0,0.04)] pb-[32px]">
             <div className="flex flex-col gap-[8px]">
-              <div className={`relative ${scheduleOpen ? "" : "h-[134px] overflow-hidden"}`}>
-                <div className="flex flex-col gap-[10px]">
+              <div className={`relative ${scheduleOpen ? "" : "h-[202px] overflow-hidden"}`}>
+                <div className="flex flex-col gap-[12px]">
                   <h2 className="text-18 font-medium">Расписание дня</h2>
-                  <ul className="flex flex-col gap-[8px] text-16">
+                  <ul className="flex flex-col gap-[12px]">
                     {schedule.map(([time, event]) => (
-                      <li key={time} className="flex items-baseline gap-[8px]">
-                        <span className="shrink-0 whitespace-nowrap tabular-nums">{time}</span>
-                        <span>{tie(event)}</span>
+                      <li key={time} className="flex flex-col gap-[6px]">
+                        <p className="text-18 leading-[28px]">{tie(event)}</p>
+                        <p className="text-16 leading-[24px] opacity-60 tabular-nums">{time}</p>
                       </li>
                     ))}
                   </ul>
