@@ -79,14 +79,11 @@ function CenterCard({ title, course, slides, badge }: Center) {
         <div className="relative h-[28px] w-[320px]">
           {badge ? (
             <span
-              className={`absolute top-0 left-[128px] flex h-[28px] items-start rounded-tr-[14px] pt-[6px] pr-[10px] pb-[2px] pl-[18px] text-13 ${badge.className}`}
+              className={`absolute top-0 left-0 flex h-[28px] items-start rounded-tr-[14px] pt-[6px] pr-[10px] pb-[2px] pl-[12px] text-13 ${badge.className}`}
             >
               {badge.label}
             </span>
           ) : null}
-          <span className="absolute top-0 left-0 flex h-[28px] w-[141px] items-start rounded-tr-[14px] bg-white pt-[6px] pr-[10px] pb-[2px] pl-[12px] text-13 text-[#27292d]">
-            Алко / Нарко / Игро
-          </span>
         </div>
         <div className="flex flex-col gap-[8px] rounded-b-[14px] bg-white px-[12px] pt-[8px] pb-[14px]">
           <h3 className="w-[283px] text-[22px] leading-[28px] font-medium text-[#27292d]">{title}</h3>

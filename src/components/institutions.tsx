@@ -17,8 +17,6 @@ type Center = {
   dependencies: Dependency[];
   teen: boolean;
   aftercare: boolean;
-  typeLabel: string;
-  typeClassName: string;
   titleLines?: string[];
   badge?: { label: string; className: string };
   href?: string;
@@ -50,10 +48,8 @@ const centers: Center[] = [
     dependencies: [],
     teen: true,
     aftercare: false,
-    typeLabel: "14–17 лет",
-    typeClassName: "w-[84px]",
     titleLines: ["Реабилитационно-образовательный", "центр в Троицке"],
-    badge: { label: "Подходит для подростков", className: "left-[71px] w-[188px] bg-[#e1f300]" },
+    badge: { label: "Подходит для подростков", className: "w-[188px] bg-[#e1f300]" },
     href: "/uchrezhdeniya/troitsk",
   },
   {
@@ -70,9 +66,7 @@ const centers: Center[] = [
     dependencies: ["alco", "narco", "game"],
     teen: true,
     aftercare: false,
-    typeLabel: "Алко / Нарко / Игро",
-    typeClassName: "w-[141px]",
-    badge: { label: "Подходит для подростков", className: "left-[128px] w-[188px] bg-[#e1f300]" },
+    badge: { label: "Подходит для подростков", className: "w-[188px] bg-[#e1f300]" },
     href: "/uchrezhdeniya/himki",
   },
   {
@@ -89,8 +83,6 @@ const centers: Center[] = [
     dependencies: ["alco", "narco"],
     teen: false,
     aftercare: false,
-    typeLabel: "Алко / Нарко",
-    typeClassName: "w-[100px]",
   },
   {
     title: "Детокс клиника в\u00a0Зеленограде",
@@ -106,9 +98,7 @@ const centers: Center[] = [
     dependencies: ["alco", "narco"],
     teen: false,
     aftercare: false,
-    typeLabel: "Алко / Нарко",
-    typeClassName: "w-[100px]",
-    badge: { label: "Медицинское наблюдение", className: "left-[87px] w-[192px] bg-[#deeaff]" },
+    badge: { label: "Медицинское наблюдение", className: "w-[192px] bg-[#deeaff]" },
   },
   {
     title: "Детокс клиника в\u00a0Зеленограде",
@@ -124,9 +114,7 @@ const centers: Center[] = [
     dependencies: ["alco", "narco"],
     teen: false,
     aftercare: false,
-    typeLabel: "Алко / Нарко",
-    typeClassName: "w-[100px]",
-    badge: { label: "Медицинское наблюдение", className: "left-[87px] w-[192px] bg-[#deeaff]" },
+    badge: { label: "Медицинское наблюдение", className: "w-[192px] bg-[#deeaff]" },
   },
   {
     title: "Реабилитационный центр в Химках",
@@ -142,9 +130,7 @@ const centers: Center[] = [
     dependencies: ["alco", "narco", "game"],
     teen: true,
     aftercare: false,
-    typeLabel: "Алко / Нарко / Игро",
-    typeClassName: "w-[141px]",
-    badge: { label: "Подходит для подростков", className: "left-[128px] w-[188px] bg-[#e1f300]" },
+    badge: { label: "Подходит для подростков", className: "w-[188px] bg-[#e1f300]" },
     href: "/uchrezhdeniya/himki",
   },
   {
@@ -161,8 +147,6 @@ const centers: Center[] = [
     dependencies: ["alco", "narco"],
     teen: false,
     aftercare: false,
-    typeLabel: "Алко / Нарко",
-    typeClassName: "w-[100px]",
   },
   {
     title: "Детокс клиника в\u00a0Зеленограде",
@@ -178,9 +162,7 @@ const centers: Center[] = [
     dependencies: ["alco", "narco"],
     teen: false,
     aftercare: false,
-    typeLabel: "Алко / Нарко",
-    typeClassName: "w-[100px]",
-    badge: { label: "Медицинское наблюдение", className: "left-[87px] w-[192px] bg-[#deeaff]" },
+    badge: { label: "Медицинское наблюдение", className: "w-[192px] bg-[#deeaff]" },
   },
 ];
 
@@ -217,16 +199,11 @@ function CenterCard({ center }: { center: Center }) {
         <div className="relative h-[28px] w-[320px]">
           {center.badge ? (
             <span
-              className={`absolute top-0 flex h-[28px] items-start rounded-tr-[14px] pt-[6px] pr-[10px] pb-[2px] pl-[18px] text-13 text-[#0a0d14] ${center.badge.className}`}
+              className={`absolute top-0 left-0 flex h-[28px] items-start rounded-tr-[14px] pt-[6px] pr-[10px] pb-[2px] pl-[12px] text-13 text-[#0a0d14] ${center.badge.className}`}
             >
               {center.badge.label}
             </span>
           ) : null}
-          <span
-            className={`absolute top-0 left-0 z-10 flex h-[28px] items-start rounded-tr-[14px] bg-white pt-[6px] pr-[10px] pb-[2px] pl-[12px] text-13 text-[#0a0d14] ${center.typeClassName}`}
-          >
-            {center.typeLabel}
-          </span>
         </div>
         <div className="flex min-h-[166px] flex-col gap-[8px] rounded-b-[14px] bg-white px-[12px] pt-[8px] pb-[14px]">
           <h2 className={`${center.titleLines ? "w-full" : "w-[283px]"} text-[22px] leading-[28px] font-medium text-[#0a0d14]`}>
