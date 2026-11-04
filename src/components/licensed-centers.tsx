@@ -79,7 +79,7 @@ function CenterCard({ title, course, slides, badge }: Center) {
         <div className="relative h-[28px] w-[320px]">
           {badge ? (
             <span
-              className={`absolute top-0 left-0 flex h-[28px] items-start rounded-tr-[14px] pt-[6px] pr-[10px] pb-[2px] pl-[12px] text-13 ${badge.className}`}
+              className={`absolute top-0 left-[4px] flex h-[28px] items-start rounded-tr-[14px] pt-[6px] pr-[10px] pb-[2px] pl-[12px] text-13 ${badge.className}`}
             >
               {badge.label}
             </span>
