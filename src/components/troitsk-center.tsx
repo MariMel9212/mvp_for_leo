@@ -267,7 +267,7 @@ export function TroitskCenter() {
                   <button
                     type="button"
                     onClick={() => setAboutOpen(false)}
-                    className="inline px-[2px] font-medium whitespace-nowrap opacity-80"
+                    className="inline cursor-pointer px-[2px] font-medium whitespace-nowrap opacity-80 transition-opacity duration-150 hover:opacity-100"
                   >
                     Свернуть
                   </button>
@@ -280,7 +280,7 @@ export function TroitskCenter() {
                     <button
                       type="button"
                       onClick={() => setAboutOpen(true)}
-                      className="px-[2px] text-16 font-medium whitespace-nowrap opacity-80"
+                      className="cursor-pointer px-[2px] text-16 font-medium whitespace-nowrap opacity-80 transition-opacity duration-150 hover:opacity-100"
                     >
                       Читать
                     </button>
@@ -305,7 +305,7 @@ export function TroitskCenter() {
               <button
                 type="button"
                 onClick={() => setAmenitiesOpen(true)}
-                className="flex h-[38px] w-fit items-center justify-center rounded-[8px] bg-[#e7e7e7] px-[20px] text-16"
+                className="w-fit cursor-pointer text-16 font-medium opacity-80 transition-opacity duration-150 hover:opacity-100"
               >
                 Смотреть все
               </button>
@@ -339,7 +339,7 @@ export function TroitskCenter() {
               <button
                 type="button"
                 onClick={() => setScheduleOpen((open) => !open)}
-                className="w-fit text-16 font-medium opacity-80"
+                className="w-fit cursor-pointer text-16 font-medium opacity-80 transition-opacity duration-150 hover:opacity-100"
               >
                 {scheduleOpen ? "Свернуть" : "Подробнее"}
               </button>
@@ -371,7 +371,7 @@ export function TroitskCenter() {
               <button
                 type="button"
                 onClick={() => setStaffOpen((open) => !open)}
-                className="w-fit text-16 font-medium opacity-80"
+                className="w-fit cursor-pointer text-16 font-medium opacity-80 transition-opacity duration-150 hover:opacity-100"
               >
                 {staffOpen ? "Свернуть" : "Смотреть"}
               </button>
