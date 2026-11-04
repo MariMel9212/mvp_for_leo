@@ -19,6 +19,7 @@ type Center = {
   aftercare: boolean;
   typeLabel: string;
   typeClassName: string;
+  titleClassName?: string;
   badge?: { label: string; className: string };
   href?: string;
 };
@@ -36,7 +37,7 @@ const dependencyOptions: { value: Dependency; label: string }[] = [
 
 const centers: Center[] = [
   {
-    title: "Реабилитационный центр в Троицке",
+    title: "Реабилитационно-образовательный центр в Троицке",
     course: "Подростки от 14 до 17 лет",
     price: "200 000 ₽",
     slides: [
@@ -51,6 +52,7 @@ const centers: Center[] = [
     aftercare: false,
     typeLabel: "14–17 лет",
     typeClassName: "w-[84px]",
+    titleClassName: "w-full text-[20px] leading-[26px]",
     badge: { label: "Подходит для подростков", className: "left-[71px] w-[188px] bg-[#e1f300]" },
     href: "/uchrezhdeniya/troitsk",
   },
@@ -227,7 +229,11 @@ function CenterCard({ center }: { center: Center }) {
           </span>
         </div>
         <div className="flex min-h-[166px] flex-col gap-[8px] rounded-b-[14px] bg-white px-[12px] pt-[8px] pb-[14px]">
-          <h2 className="w-[283px] text-[22px] leading-[28px] font-medium text-[#0a0d14]">{center.title}</h2>
+          <h2
+            className={`${center.titleClassName ?? "w-[283px] text-[22px] leading-[28px]"} font-medium text-[#0a0d14]`}
+          >
+            {center.title}
+          </h2>
           <div className="w-full text-16 text-[#0a0d14]">
             <p>Московская область</p>
             <p className="opacity-50">{center.course}</p>

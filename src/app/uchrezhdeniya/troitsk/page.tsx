@@ -3,9 +3,9 @@ import { SiteHeader } from "@/components/site-header";
 import { TroitskCenter } from "@/components/troitsk-center";
 
 export const metadata: Metadata = {
-  title: "Реабилитационный центр в Троицке — СвойЦентр",
+  title: "Реабилитационно-образовательный центр в Троицке — СвойЦентр",
   description:
-    "Реабилитационно-образовательный центр «Образ Мысли» в Троицке для подростков 14–17 лет. Программа «Пифагора», проживание, 200 000 ₽.",
+    "Реабилитационно-образовательный центр в Троицке для подростков 14–17 лет. Программа «Пифагора», проживание, 200 000 ₽.",
 };
 
 export default function TroitskCenterPage() {

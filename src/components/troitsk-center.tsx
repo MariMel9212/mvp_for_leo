@@ -26,8 +26,7 @@ const amenities = [
 const allAmenities = [
   ...amenities.flat(),
   { icon: "/icons/amenity-territory.svg", label: "Частная территория" },
-  { icon: "/icons/amenity-living.svg", label: "Гостиная" },
-  { icon: "/icons/amenity-foosball.svg", label: "Настольный футбол" },
+  { icon: "/icons/amenity-living.svg", label: "Большая гостиная" },
 ];
 
 const schedule = [
@@ -80,7 +79,7 @@ const features = [
 ];
 
 const aboutLead =
-  "«Образ Мысли» — реабилитационно-образовательный центр для подростков от 14 до 17 лет. Центр помогает изменить деструктивные модели поведения, сформировать ответственность за свои поступки и восстановить отношения с близкими. ";
+  "Центр для подростков от 14 до 17 лет помогает изменить деструктивные модели поведения, сформировать ответственность за свои поступки и восстановить отношения с близкими. ";
 
 const aboutRest =
   "Основные направления — коррекция девиантного поведения, эмоциональные и поведенческие трудности, социальные навыки, семейные отношения и психологическое сопровождение. В основе работы — программа «Пифагора»: первый месяц уходит на диагностику поведения, эмоционального состояния и семейной ситуации. Дальше идут психологическое сопровождение, групповые занятия, учёба и развитие самостоятельности. На территории есть спортивный зал и спортивная площадка, а день расписан: занятия, тренинги, физическая активность, труд, прогулки и отдых.";
@@ -186,12 +185,12 @@ export function TroitskCenter() {
         <div className="flex w-[612px] flex-col gap-[30px]">
           <div className="flex flex-col gap-[16px] border-b border-[rgba(0,0,0,0.04)] pb-[32px]">
             <div className="flex flex-col gap-[6px]">
-              <h1 className="text-28 font-medium">Реабилитационный центр в Троицке</h1>
-              <p className="text-18">Троицк, Фоминское</p>
+              <h1 className="text-28 font-medium">Реабилитационно-образовательный центр в Троицке</h1>
+              <p className="text-18">Московская область</p>
             </div>
             <CallRequestButton
               label="Выбрать центр"
-              topic="Реабилитационный центр в Троицке"
+              topic="Реабилитационно-образовательный центр в Троицке"
               className="lime-control flex h-[38px] w-fit items-center justify-center rounded-[8px] px-[20px] text-16 drop-shadow-[0_4px_2px_rgba(173,173,173,0.1)]"
             />
           </div>
@@ -358,7 +357,7 @@ function AmenitiesModal({ onClose }: { onClose: () => void }) {
       >
         <div className="flex items-center justify-between px-[26px] pt-[20px] pb-[20px]">
           <h2 id="center-amenities-title" className="text-24 font-medium">
-            Показатели
+            Условия
           </h2>
           <button type="button" aria-label="Закрыть" onClick={onClose} className="opacity-70">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden>
