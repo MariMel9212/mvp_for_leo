@@ -3,7 +3,7 @@ import type { CenterPageData } from "@/content/centers/types";
 const cover = "absolute inset-0";
 
 export const klyuchiCenter: CenterPageData = {
-  title: "Реабилитационный центр «Ключи»",
+  title: "Реабилитационный центр в Москве",
   region: "Москва",
   facts: [
     { label: "Направления:", value: "алкоголизм, наркомания" },
@@ -12,7 +12,7 @@ export const klyuchiCenter: CenterPageData = {
     { label: "Стоимость:", value: "от 120 000 ₽ / мес" },
   ],
   about: {
-    lead: "Центр «Ключи» с 2011 года помогает людям с алкогольной и наркотической зависимостью. Это лицензированный загородный стационар: небольшие группы, общая кухня и специалисты, к которым можно подойти между занятиями. ",
+    lead: "С 2011 года центр помогает людям с алкогольной и наркотической зависимостью. Это лицензированный загородный стационар: небольшие группы, общая кухня и специалисты, к которым можно подойти между занятиями. ",
     rest: "Программа собирается после приёма нарколога: детоксикация, индивидуальная и групповая психотерапия, работа с семьёй. Первый месяц уходит на адаптацию и работу с отрицанием, затем начинаются семейные сессии. После курса остаются группы поддержки, куратор и встречи через 3 и 6 месяцев. Обращение анонимное, без постановки на учёт.",
   },
   amenities: [
@@ -44,21 +44,21 @@ export const klyuchiCenter: CenterPageData = {
     "Домашнее питание",
   ],
   gallery: {
-    main: { src: "/centers/klyuchi/hall.webp", alt: "Холлы центра", frameClassName: cover },
-    topMiddle: { src: "/centers/klyuchi/room.webp", alt: "Комнаты", frameClassName: cover },
+    main: { src: "/centers/klyuchi/group.webp", alt: "Зал для занятий", frameClassName: cover },
+    topMiddle: { src: "/centers/klyuchi/single.webp", alt: "Отдельная комната", frameClassName: cover },
     topRight: { src: "/centers/klyuchi/pool.webp", alt: "Бассейн", frameClassName: cover },
     bottomMiddle: { src: "/centers/klyuchi/dining.webp", alt: "Домашнее питание", frameClassName: cover },
-    more: { src: "/centers/klyuchi/single.webp", alt: "Отдельная комната", frameClassName: cover },
+    more: { src: "/centers/klyuchi/rest.webp", alt: "Комната отдыха", frameClassName: cover },
     moreLabel: "+ 3 фотографии",
     photos: [
       { src: "/centers/klyuchi/hall.webp", alt: "Холлы центра" },
       { src: "/centers/klyuchi/room.webp", alt: "Комнаты" },
-      { src: "/centers/klyuchi/single.webp", alt: "Отдельная комната" },
+      { src: "/centers/klyuchi/pool.webp", alt: "Бассейн" },
       { src: "/centers/klyuchi/bath.webp", alt: "Ванная" },
       { src: "/centers/klyuchi/group.webp", alt: "Зал для занятий" },
       { src: "/centers/klyuchi/dining.webp", alt: "Домашнее питание" },
       { src: "/centers/klyuchi/rest.webp", alt: "Комната отдыха" },
-      { src: "/centers/klyuchi/pool.webp", alt: "Бассейн" },
+      { src: "/centers/klyuchi/single.webp", alt: "Отдельная комната" },
     ],
   },
 };

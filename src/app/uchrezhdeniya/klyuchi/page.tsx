@@ -4,7 +4,7 @@ import { CenterPage } from "@/components/center-page";
 import { klyuchiCenter } from "@/content/centers/klyuchi";
 
 export const metadata: Metadata = {
-  title: "Реабилитационный центр «Ключи» — СвойЦентр",
+  title: "Реабилитационный центр в Москве — СвойЦентр",
   description:
     "Лицензированный загородный стационар в Москве. Алкоголизм и наркомания, палата на 4 человека, от 120 000 ₽ / мес.",
 };
