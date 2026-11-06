@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function TroitskCenterPage() {
   return (
-    <CenterFrame>
+    <CenterFrame ctaTopic="Реабилитационно-образовательный центр в Троицке">
       <CenterPage center={troitskCenter} />
     </CenterFrame>
   );

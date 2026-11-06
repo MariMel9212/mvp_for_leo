@@ -4,14 +4,14 @@ import { CenterPage } from "@/components/center-page";
 import { klyuchiCenter } from "@/content/centers/klyuchi";
 
 export const metadata: Metadata = {
-  title: "Реабилитационный центр в Москве — СвойЦентр",
+  title: "Реабилитационный центр в Троицке — СвойЦентр",
   description:
-    "Лицензированный загородный стационар в Москве. Алкоголизм и наркомания, палата на 4 человека, от 120 000 ₽ / мес.",
+    "Лицензированный загородный стационар в Троицке. Алкоголизм и наркомания, индивидуальное и общее размещение, от 120 000 ₽ / мес.",
 };
 
 export default function KlyuchiCenterPage() {
   return (
-    <CenterFrame>
+    <CenterFrame ctaTopic={klyuchiCenter.title}>
       <CenterPage center={klyuchiCenter} />
     </CenterFrame>
   );

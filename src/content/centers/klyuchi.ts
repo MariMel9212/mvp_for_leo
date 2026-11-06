@@ -3,8 +3,8 @@ import type { CenterPageData } from "@/content/centers/types";
 const cover = "absolute inset-0";
 
 export const klyuchiCenter: CenterPageData = {
-  title: "Реабилитационный центр в Москве",
-  region: "Москва",
+  title: "Реабилитационный центр в Троицке",
+  region: "Московская область",
   facts: [
     { label: "Направления:", value: "алкоголизм, наркомания" },
     { label: "Формат:", value: "с проживанием" },

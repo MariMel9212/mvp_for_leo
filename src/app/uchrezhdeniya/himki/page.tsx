@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function HimkiCenterPage() {
   return (
-    <CenterFrame>
+    <CenterFrame ctaTopic={himkiCenter.title}>
       <CenterPage center={himkiCenter} />
     </CenterFrame>
   );
