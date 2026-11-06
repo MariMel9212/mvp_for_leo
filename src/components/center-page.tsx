@@ -7,7 +7,7 @@ import type { CenterPageData, CenterPhoto } from "@/content/centers/types";
 import { tie } from "@/lib/tie";
 
 const textAction =
-  "ml-auto flex h-[24px] w-[112px] shrink-0 cursor-pointer items-center justify-end text-[16px] leading-[24px] font-medium tracking-normal whitespace-nowrap text-[#525357] transition-colors duration-150 hover:text-[#27292d]";
+  "ml-auto inline-flex w-fit cursor-pointer items-center text-16 font-medium whitespace-nowrap text-[#525357] transition-colors duration-150 hover:text-[#27292d]";
 
 const previewAmenityCount = 6;
 
