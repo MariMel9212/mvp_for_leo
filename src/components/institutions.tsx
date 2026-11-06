@@ -69,6 +69,23 @@ const centers: Center[] = [
     aftercare: true,
     href: "/uchrezhdeniya/klyuchi",
   },
+  {
+    title: "Реабилитационный центр в Москве",
+    course: "Стационар и выезд на дом • 24/7",
+    place: "Москва",
+    slides: [
+      { src: "/centers/narkolog/house.jpg", className: "cover" },
+      { src: "/centers/narkolog/room-3.webp", className: "cover" },
+      { src: "/centers/narkolog/dining.webp", className: "cover" },
+      { src: "/centers/narkolog/group.webp", className: "cover" },
+    ],
+    kind: "rehab",
+    dependencies: ["alco", "narco", "game"],
+    teen: true,
+    aftercare: false,
+    badge: { label: "Подходит для подростков", className: "w-[188px] bg-[#e1f300]" },
+    href: "/uchrezhdeniya/narkolog",
+  },
 ];
 
 
