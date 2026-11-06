@@ -20,6 +20,7 @@ type Center = {
   titleLines?: string[];
   badge?: { label: string; className: string };
   href?: string;
+  place?: string;
 };
 
 const kindOptions: { value: Kind; label: string }[] = [
@@ -51,6 +52,25 @@ const centers: Center[] = [
     titleLines: ["Реабилитационно-образовательный", "центр в Троицке"],
     badge: { label: "Подходит для подростков", className: "w-[188px] bg-[#e1f300]" },
     href: "/uchrezhdeniya/troitsk",
+  },
+  {
+    title: "Реабилитационный центр «Ключи»",
+    course: "Загородный стационар • от 1 месяца",
+    price: "от 120 000 ₽ / месяц",
+    place: "Москва",
+    slides: [
+      { src: "/centers/klyuchi/hall.webp", className: "cover" },
+      { src: "/centers/klyuchi/room.webp", className: "cover" },
+      { src: "/centers/klyuchi/pool.webp", className: "cover" },
+      { src: "/centers/klyuchi/dining.webp", className: "cover" },
+    ],
+    kind: "rehab",
+    dependencies: ["alco", "narco"],
+    teen: false,
+    aftercare: true,
+    titleLines: ["Реабилитационный центр", "«Ключи»"],
+    badge: { label: "Без постановки на учёт", className: "w-fit bg-[#deeaff]" },
+    href: "/uchrezhdeniya/klyuchi",
   },
   {
     title: "Реабилитационный центр в Химках",
@@ -217,7 +237,7 @@ function CenterCard({ center }: { center: Center }) {
             )}
           </h2>
           <div className="w-full text-16 text-[#0a0d14]">
-            <p>Московская область</p>
+            <p>{center.place ?? "Московская область"}</p>
             <p className="opacity-50">{center.course}</p>
           </div>
           {center.price ? <p className="text-16 text-black">{center.price}</p> : null}
