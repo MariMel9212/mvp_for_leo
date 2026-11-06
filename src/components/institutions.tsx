@@ -67,7 +67,6 @@ const centers: Center[] = [
     dependencies: ["alco", "narco"],
     teen: false,
     aftercare: true,
-    badge: { label: "Без постановки на учёт", className: "w-fit bg-[#deeaff]" },
     href: "/uchrezhdeniya/klyuchi",
   },
 ];
