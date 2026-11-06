@@ -74,8 +74,8 @@ const centers: Center[] = [
     course: "Стационар и выезд на дом • 24/7",
     place: "Москва",
     slides: [
-      { src: "/centers/narkolog/house.jpg", className: "cover" },
-      { src: "/centers/narkolog/room-3.webp", className: "cover" },
+      { src: "/centers/narkolog/house.webp", className: "cover" },
+      { src: "/centers/narkolog/room.webp", className: "cover" },
       { src: "/centers/narkolog/dining.webp", className: "cover" },
       { src: "/centers/narkolog/group.webp", className: "cover" },
     ],
