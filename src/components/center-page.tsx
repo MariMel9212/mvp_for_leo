@@ -18,7 +18,6 @@ export function CenterPage({ center }: { center: CenterPageData }) {
   const [amenitiesOpen, setAmenitiesOpen] = useState(false);
   const [staffOpen, setStaffOpen] = useState(false);
   const previewAmenities = center.amenities.slice(0, previewAmenityCount);
-  const amenityRows = chunk(previewAmenities, 3);
   const hasMoreAmenities = center.amenities.length > previewAmenityCount;
 
   useEffect(() => {
@@ -38,12 +37,12 @@ export function CenterPage({ center }: { center: CenterPageData }) {
   }, [galleryOpen, amenitiesOpen]);
 
   return (
-    <div className="mx-auto mt-[24px] w-[1200px] pb-[160px]">
+    <div className="mx-auto mt-6 w-full max-w-[1200px] px-0 pb-24 max-[1439px]:px-4 min-[1440px]:pb-[160px]">
       <GalleryCollage center={center} onOpen={() => setGalleryOpen(true)} />
 
-      <div className="mt-[32px] flex items-start justify-between">
-        <div className="flex w-[612px] flex-col gap-[30px]">
-          <header className="flex flex-col gap-[16px] border-b border-[rgba(0,0,0,0.04)] pb-[32px]">
+      <div className="mt-8 flex flex-col gap-8 min-[1100px]:flex-row min-[1100px]:items-start min-[1100px]:justify-between">
+        <div className="contents min-[1100px]:flex min-[1100px]:w-[612px] min-[1100px]:shrink-0 min-[1100px]:flex-col min-[1100px]:gap-[30px]">
+          <header className="order-1 flex flex-col gap-[16px] border-b border-[rgba(0,0,0,0.04)] pb-[32px] min-[1100px]:order-none">
             <div className="flex flex-col gap-[6px]">
               <h1 className="text-28 font-medium">{tie(center.title)}</h1>
               <p className="text-18">{center.region}</p>
@@ -55,7 +54,7 @@ export function CenterPage({ center }: { center: CenterPageData }) {
             />
           </header>
 
-          <section className="flex flex-col gap-[24px] border-b border-[rgba(0,0,0,0.04)] pb-[32px]">
+          <section className="order-3 flex flex-col gap-[24px] border-b border-[rgba(0,0,0,0.04)] pb-[32px] min-[1100px]:order-none">
             <div className="flex flex-col gap-[10px]">
               <h2 className="text-24 font-medium">Про центр</h2>
               {aboutOpen ? (
@@ -83,15 +82,11 @@ export function CenterPage({ center }: { center: CenterPageData }) {
 
             {center.amenities.length ? (
               <div className="flex flex-col gap-[8px]">
-                <div className="flex flex-col gap-[16px]">
-                  {amenityRows.map((row) => (
-                    <div key={row[0].label} className="flex items-center gap-[24px]">
-                      {row.map((item, index) => (
-                        <div key={item.label} className={`flex items-center gap-[6px] ${index < 2 ? "w-[180px]" : ""}`}>
-                          <AmenityIcon name={item.icon} />
-                          <span className="text-16 font-medium whitespace-nowrap">{item.label}</span>
-                        </div>
-                      ))}
+                <div className="grid grid-cols-3 gap-x-6 gap-y-4 max-[1099px]:grid-cols-2 max-[419px]:grid-cols-1">
+                  {previewAmenities.map((item) => (
+                    <div key={item.label} className="flex min-w-0 items-center gap-[6px]">
+                      <AmenityIcon name={item.icon} />
+                      <span className="text-16 font-medium">{item.label}</span>
                     </div>
                   ))}
                 </div>
@@ -108,7 +103,7 @@ export function CenterPage({ center }: { center: CenterPageData }) {
                 <div className={`relative ${scheduleOpen ? "" : "h-[152px] overflow-hidden"}`}>
                   <div className="flex flex-col gap-[10px]">
                     <h3 className="text-18 font-medium">Расписание дня</h3>
-                    <ul className="grid grid-cols-2 gap-x-[28px] gap-y-[8px]">
+                    <ul className="grid grid-cols-1 gap-x-[28px] gap-y-[8px] sm:grid-cols-2">
                       {center.schedule.map((item) => (
                         <li key={item.time} className="flex min-w-0 flex-col">
                           <p className="text-16 leading-[20px]">{tie(item.event)}</p>
@@ -129,14 +124,14 @@ export function CenterPage({ center }: { center: CenterPageData }) {
           </section>
 
           {center.staff ? (
-            <section className="flex flex-col gap-[12px] border-b border-[rgba(0,0,0,0.04)] pb-[32px]">
+            <section className="order-4 flex flex-col gap-[12px] border-b border-[rgba(0,0,0,0.04)] pb-[32px] min-[1100px]:order-none">
               <h2 className="text-24 font-medium">Персонал</h2>
               <StaffBlock staff={center.staff} open={staffOpen} onToggle={() => setStaffOpen((open) => !open)} />
             </section>
           ) : null}
 
           {center.features.length ? (
-            <section className="flex flex-col gap-[10px]">
+            <section className="order-5 flex flex-col gap-[10px] min-[1100px]:order-none">
               <h2 className="text-24 font-medium">Особенности</h2>
               <ul className="flex flex-wrap content-center gap-[8px]">
                 {center.features.map((feature) => (
@@ -149,7 +144,7 @@ export function CenterPage({ center }: { center: CenterPageData }) {
           ) : null}
         </div>
 
-        <aside className="sticky top-[24px] flex shrink-0 flex-col gap-[12px] self-start rounded-[19px] border border-[rgba(0,0,0,0.04)] bg-white p-[20px] text-18 whitespace-nowrap">
+        <aside className="order-2 flex w-full shrink-0 flex-col gap-[12px] self-start rounded-[19px] border border-[rgba(0,0,0,0.04)] bg-white p-[20px] text-18 min-[1100px]:sticky min-[1100px]:top-[24px] min-[1100px]:order-none min-[1100px]:w-auto min-[1100px]:whitespace-nowrap">
           {center.facts.map((fact) => (
             <p key={fact.label} className="flex items-center gap-[6px]">
               <span className="font-medium">{fact.label}</span>
@@ -186,37 +181,66 @@ export function CenterPage({ center }: { center: CenterPageData }) {
 
 function GalleryCollage({ center, onOpen }: { center: CenterPageData; onOpen: () => void }) {
   const { gallery } = center;
+  const more = (
+    <>
+      <CroppedPhoto photo={gallery.more} hover />
+      {gallery.moreLabel ? (
+        <>
+          <div className="absolute inset-0 bg-[rgba(74,74,74,0.37)] transition-colors duration-200 group-hover:bg-[rgba(39,41,45,0.52)]" />
+          <p className="absolute inset-0 flex items-center justify-center text-18 font-medium whitespace-nowrap text-white">
+            {gallery.moreLabel}
+          </p>
+        </>
+      ) : null}
+    </>
+  );
   return (
-    <div className="relative h-[480px] overflow-hidden rounded-[22px] bg-white">
-      <div className="absolute top-0 left-0 h-[480px] w-[598px] overflow-hidden">
-        <CroppedPhoto photo={gallery.main} />
+    <>
+      <div className="grid grid-cols-2 gap-1 overflow-hidden rounded-[22px] min-[1100px]:hidden">
+        <div className="relative col-span-2 aspect-[16/10] overflow-hidden bg-[#ebebeb]">
+          <CroppedPhoto photo={gallery.main} />
+        </div>
+        <div className="relative aspect-[4/3] overflow-hidden bg-[#ebebeb]">
+          <CroppedPhoto photo={gallery.topMiddle} />
+        </div>
+        <div className="relative aspect-[4/3] overflow-hidden bg-[#ebebeb]">
+          <CroppedPhoto photo={gallery.topRight} />
+        </div>
+        <div className="relative aspect-[4/3] overflow-hidden bg-[#ebebeb]">
+          <CroppedPhoto photo={gallery.bottomMiddle} />
+        </div>
+        <button
+          type="button"
+          aria-label="Открыть все фотографии"
+          onClick={onOpen}
+          className="group relative aspect-[4/3] cursor-pointer overflow-hidden bg-[#cfcece] p-0"
+        >
+          {more}
+        </button>
       </div>
-      <div className="absolute top-0 right-[301px] h-[238px] w-[297px] overflow-hidden bg-[#ebebeb]">
-        <CroppedPhoto photo={gallery.topMiddle} />
+      <div className="hidden h-[480px] grid-cols-[598fr_297fr_297fr] grid-rows-2 gap-1 overflow-hidden rounded-[22px] min-[1100px]:grid">
+        <div className="relative row-span-2 overflow-hidden bg-[#ebebeb]">
+          <CroppedPhoto photo={gallery.main} />
+        </div>
+        <div className="relative overflow-hidden bg-[#ebebeb]">
+          <CroppedPhoto photo={gallery.topMiddle} />
+        </div>
+        <div className="relative overflow-hidden bg-[#ebebeb]">
+          <CroppedPhoto photo={gallery.topRight} />
+        </div>
+        <div className="relative overflow-hidden bg-[#ebebeb]">
+          <CroppedPhoto photo={gallery.bottomMiddle} />
+        </div>
+        <button
+          type="button"
+          aria-label="Открыть все фотографии"
+          onClick={onOpen}
+          className="group relative cursor-pointer overflow-hidden bg-[#cfcece] p-0"
+        >
+          {more}
+        </button>
       </div>
-      <div className="absolute top-0 right-0 h-[238px] w-[297px] overflow-hidden bg-[#ebebeb]">
-        <CroppedPhoto photo={gallery.topRight} />
-      </div>
-      <div className="absolute right-[301px] bottom-0 h-[238px] w-[297px] overflow-hidden bg-[#ebebeb]">
-        <CroppedPhoto photo={gallery.bottomMiddle} />
-      </div>
-      <button
-        type="button"
-        aria-label="Открыть все фотографии"
-        onClick={onOpen}
-        className="group absolute right-0 bottom-0 h-[238px] w-[297px] cursor-pointer overflow-hidden bg-[#cfcece] p-0"
-      >
-        <CroppedPhoto photo={gallery.more} hover />
-        {gallery.moreLabel ? (
-          <>
-            <div className="absolute inset-0 bg-[rgba(74,74,74,0.37)] transition-colors duration-200 group-hover:bg-[rgba(39,41,45,0.52)]" />
-            <p className="absolute inset-0 flex items-center justify-center text-18 font-medium whitespace-nowrap text-white">
-              {gallery.moreLabel}
-            </p>
-          </>
-        ) : null}
-      </button>
-    </div>
+    </>
   );
 }
 
@@ -261,7 +285,7 @@ function StaffBlock({
   return (
     <div className="flex flex-col gap-[12px]">
       <div className={`relative ${open || !clips ? "" : "h-[460px] overflow-hidden"}`}>
-        <ul className="grid grid-cols-3 gap-x-[24px] gap-y-[24px]">
+        <ul className="grid grid-cols-3 gap-x-[24px] gap-y-[24px] max-[1099px]:grid-cols-2 max-[1099px]:gap-x-[16px]">
           {staff.people.map((person) => (
             <li key={person.name} className="flex min-w-0 flex-col gap-[10px]">
               <div className="relative h-[180px] overflow-hidden rounded-[12px] bg-[#c4c4c4]">
@@ -302,18 +326,18 @@ function AmenitiesModal({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-[rgba(39,41,45,0.45)] p-[24px]">
       <button type="button" aria-label="Закрыть" className="absolute inset-0 cursor-default" onClick={onClose} />
-      <div role="dialog" aria-modal="true" aria-labelledby="center-amenities-title" className="relative w-[720px] rounded-[21px] bg-white">
+      <div role="dialog" aria-modal="true" aria-labelledby="center-amenities-title" className="relative w-full max-w-[720px] rounded-[21px] bg-white">
         <div className="flex items-center justify-between px-[26px] pt-[20px] pb-[20px]">
           <h2 id="center-amenities-title" className="text-24 font-medium">
             Условия
           </h2>
           <CloseButton onClick={onClose} />
         </div>
-        <ul className="grid grid-cols-3 gap-x-[24px] gap-y-[16px] px-[26px] pb-[28px]">
+        <ul className="grid grid-cols-3 gap-x-[24px] gap-y-[16px] px-[26px] pb-[28px] max-[1099px]:grid-cols-2 max-[639px]:grid-cols-1">
           {amenities.map((item) => (
             <li key={item.label} className="flex items-center gap-[6px]">
               <AmenityIcon name={item.icon} />
-              <span className="text-16 font-medium whitespace-nowrap">{item.label}</span>
+              <span className="text-16 font-medium">{item.label}</span>
             </li>
           ))}
         </ul>
@@ -330,7 +354,7 @@ function PhotoGallery({ photos, onClose }: { photos: { src: string; alt: string 
         role="dialog"
         aria-modal="true"
         aria-labelledby="center-photos-title"
-        className="relative flex max-h-[calc(100vh-48px)] w-[1100px] flex-col overflow-hidden rounded-[21px] bg-white"
+        className="relative flex max-h-[calc(100dvh-32px)] w-full max-w-[1100px] flex-col overflow-hidden rounded-[21px] bg-white"
       >
         <div className="flex items-center justify-between px-[26px] pt-[20px] pb-[16px]">
           <h2 id="center-photos-title" className="text-24 font-medium">
@@ -338,7 +362,7 @@ function PhotoGallery({ photos, onClose }: { photos: { src: string; alt: string 
           </h2>
           <CloseButton onClick={onClose} />
         </div>
-        <div className="grid grid-cols-3 gap-[8px] overflow-y-auto px-[26px] pb-[26px]">
+        <div className="grid grid-cols-3 gap-[8px] overflow-y-auto px-[26px] pb-[26px] max-[1099px]:grid-cols-2 max-[639px]:grid-cols-1 max-[639px]:px-4">
           {photos.map((photo) => (
             <img
               key={photo.src}
@@ -365,8 +389,3 @@ function CloseButton({ onClick }: { onClick: () => void }) {
   );
 }
 
-function chunk<T>(items: T[], size: number) {
-  const rows: T[][] = [];
-  for (let index = 0; index < items.length; index += size) rows.push(items.slice(index, index + size));
-  return rows;
-}

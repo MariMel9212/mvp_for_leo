@@ -19,12 +19,12 @@ export function SiteHeader({
     "lime-control flex h-[38px] w-[153px] shrink-0 items-center justify-center rounded-[8px] px-[20px] text-16 shadow-[0_4px_4px_rgba(173,173,173,0.1)]";
 
   return (
-    <header className="flex w-full justify-center pt-[32px]">
-      <div className="flex h-[44px] w-[1200px] items-center justify-between">
+    <header className="mx-auto flex w-full max-w-[1440px] justify-center px-[120px] pt-5 max-[1439px]:px-4 min-[1440px]:pt-[32px]">
+      <div className="flex w-full max-w-[1200px] flex-wrap items-center justify-between gap-x-6 gap-y-3 md:h-[44px] md:flex-nowrap">
         <Link href="/" className="text-[20px] leading-[25px] font-bold text-[#161616]">
           Принятие
         </Link>
-        <nav aria-label="Разделы" className="flex items-center gap-[42px]">
+        <nav aria-label="Разделы" className="order-3 flex w-full items-center justify-center gap-8 md:order-none md:w-auto md:gap-[42px]">
           {links.map((link) => (
             <Link key={link.href} href={link.href} className="text-16 text-[#27292d]">
               {link.label}

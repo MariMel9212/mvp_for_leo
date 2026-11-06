@@ -14,11 +14,11 @@ const criteria: { n: string; title: string; text: ReactNode }[] = [
   {
     n: "03",
     title: "Персонал и специалисты",
-    text: (
+        text: (
       <>
-        Проверяем, есть ли в учреждении профильные врачи, психологи
+        Проверяем, есть ли в учреждении профильные врачи, психологи{" "}
         <br />
-        и&nbsp;другие специалисты, необходимые для конкретного формата
+        и&nbsp;другие специалисты, необходимые для конкретного формата{" "}
         <br />
         помощи
       </>
@@ -38,7 +38,7 @@ const criteria: { n: string; title: string; text: ReactNode }[] = [
 
 export function SelectionCriteria() {
   return (
-    <section id="pro-podbor" className="relative w-[1440px] pt-[120px] pb-[92px]">
+    <section id="pro-podbor" className="relative w-full pt-16 pb-16 min-[1440px]:pt-[120px] min-[1440px]:pb-[92px]">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0"
@@ -59,26 +59,26 @@ export function SelectionCriteria() {
         className="pointer-events-none absolute inset-x-0 bottom-0 h-[73px]"
         style={{ backgroundImage: "linear-gradient(to top, #fdfdfd 0%, rgba(253,253,253,0) 100%)" }}
       />
-      <div className="relative mx-auto flex w-[1200px] items-start">
-        <div className="flex w-[483px] shrink-0 flex-col gap-[24px]">
-          <h2 className="text-40 font-medium">
-            Отбираем учреждения
+      <div className="relative mx-auto flex w-full max-w-[1200px] flex-col items-start px-0 max-[1439px]:px-4 min-[1440px]:flex-row">
+        <div className="flex w-full shrink-0 flex-col gap-[24px] min-[1440px]:w-[483px] max-[1439px]:[&_br]:hidden">
+          <h2 className="text-40 font-medium max-[1439px]:text-[32px] max-[1439px]:leading-[40px]">
+            Отбираем учреждения{" "}
             <br />
             по понятным критериям
           </h2>
           <p className="text-16 opacity-60">
-            При подборе специализированного учреждения мы оцениваем
+            При подборе специализированного учреждения мы оцениваем{" "}
             <br />
-            весь комплекс факторов: качество и формат оказываемых
+            весь комплекс факторов: качество и формат оказываемых{" "}
             <br />
-            услуг, соответствие требованиям законодательства,
+            услуг, соответствие требованиям законодательства,{" "}
             <br />
-            квалификацию специалистов, безопасность и прозрачность
+            квалификацию специалистов, безопасность и прозрачность{" "}
             <br />
             условий
           </p>
         </div>
-        <ol className="mt-[120px] ml-auto flex w-[588px] flex-col gap-[12px]">
+        <ol className="mt-10 flex w-full flex-col gap-[12px] max-[1439px]:[&_br]:hidden min-[1440px]:mt-[120px] min-[1440px]:ml-auto min-[1440px]:w-[588px]">
           {criteria.map((item, index) => (
             <li key={item.n} className={index < criteria.length - 1 ? "flex flex-col gap-[12px]" : undefined}>
               <div className="flex items-start gap-[16px]">

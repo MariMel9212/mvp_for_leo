@@ -28,8 +28,8 @@ const stats = [
 
 export default function HomePage() {
   return (
-    <main className="mx-auto w-[1440px] bg-[#fdfdfd] text-[#27292d]">
-      <section className="relative h-[772px]">
+    <main className="mx-auto w-full max-w-[1440px] bg-[#fdfdfd] text-[#27292d]">
+      <section className="relative h-auto pb-16 min-[1440px]:h-[772px] min-[1440px]:pb-0">
         <div className="pointer-events-none absolute top-0 left-1/2 h-full w-screen -translate-x-1/2 overflow-hidden">
           <div
             aria-hidden
@@ -42,17 +42,17 @@ export default function HomePage() {
           <HeroField />
         </div>
 
-        <div className="relative z-10 flex flex-col items-center gap-[122px]">
+        <div className="relative z-10 flex flex-col items-center gap-[122px] max-[1439px]:gap-12">
           <SiteHeader />
 
-          <div id="podbor" className="flex w-[754px] flex-col items-center gap-[42px]">
-            <h1 className="w-full text-center text-48 font-medium">
+          <div id="podbor" className="flex w-full max-w-[754px] flex-col items-center gap-8 px-4 min-[1440px]:gap-[42px] min-[1440px]:px-0">
+            <h1 className="w-full text-center text-48 font-medium max-[1439px]:text-[32px] max-[1439px]:leading-[40px]">
               Проверенные ребцентра для&nbsp;лечения и восстановления при зависимостях
             </h1>
             <AudienceTabs />
             <a
               href="#situacii"
-              className="lime-control flex h-[56px] w-[377px] items-center justify-center rounded-[12px] px-[20px] text-18 leading-[24px] font-medium"
+              className="lime-control flex h-[56px] w-full max-w-[377px] items-center justify-center rounded-[12px] px-[20px] text-18 leading-[24px] font-medium"
             >
               Подобрать центр
             </a>
@@ -61,19 +61,19 @@ export default function HomePage() {
       </section>
       <script dangerouslySetInnerHTML={{ __html: heroFieldBoot }} />
 
-      <section className="flex w-[1440px] items-start justify-between px-[120px]">
+      <section className="grid grid-cols-2 gap-6 px-[120px] max-[1439px]:px-4 min-[1440px]:flex min-[1440px]:justify-between">
         {stats.map((item) => (
-          <div key={item.value} className="flex w-[220px] flex-col items-center gap-[2px]">
+          <div key={item.value} className="flex w-full flex-col items-center gap-[2px] min-[1440px]:w-[220px]">
             <p className="text-32 font-medium">{item.value}</p>
-            <p className="w-[220px] text-center text-16 opacity-40">{item.label}</p>
+            <p className="w-full text-center text-16 opacity-40 min-[1440px]:w-[220px]">{item.label}</p>
           </div>
         ))}
       </section>
 
-      <section id="situacii" className="mt-[120px] px-[120px]">
-        <div className="flex w-[1200px] flex-col gap-[52px]">
-          <h2 className="text-40 font-medium">Подбираем помощь под ситуацию</h2>
-          <div className="flex gap-[24px]">
+      <section id="situacii" className="mt-16 px-[120px] max-[1439px]:px-4 md:mt-[120px]">
+        <div className="mx-auto flex w-full max-w-[1200px] flex-col gap-8 min-[1440px]:gap-[52px]">
+          <h2 className="text-40 font-medium max-[1439px]:text-[32px] max-[1439px]:leading-[40px]">Подбираем помощь под ситуацию</h2>
+          <div className="flex flex-col gap-6 min-[1440px]:flex-row min-[1440px]:gap-[24px]">
             <SituationCard
               title="Детокс"
               text={
@@ -129,28 +129,35 @@ function SituationCard({
   action: string;
 }) {
   return (
-    <article className="w-[588px] overflow-hidden rounded-[20px]">
-      <div className="flex flex-col gap-[6px] bg-[#eef2f9] px-[32px] pt-[32px] pb-[10px]">
+    <article className="w-full overflow-hidden rounded-[20px] min-[1440px]:w-[588px]">
+      <div className="flex flex-col gap-[6px] bg-[#eef2f9] px-6 pt-8 pb-[10px] min-[1440px]:px-[32px]">
         <h3 className="text-32 font-medium">{title}</h3>
-        <p className="w-[457px] text-16">{text}</p>
+        <p className="w-full max-w-[457px] text-16">{text}</p>
       </div>
-      <div className="relative h-[443px] overflow-hidden">
+      <div className="relative h-[320px] overflow-hidden min-[1440px]:h-[443px]">
         <img
           alt=""
           src={image}
           width={imageWidth}
           height={imageHeight}
-          className={`absolute max-w-none ${imageClassName}`}
+          className="absolute inset-0 h-full w-full object-cover min-[1440px]:hidden"
+        />
+        <img
+          alt=""
+          src={image}
+          width={imageWidth}
+          height={imageHeight}
+          className={`absolute hidden max-w-none min-[1440px]:block ${imageClassName}`}
         />
         <div
           aria-hidden
-          className="pointer-events-none absolute top-0 left-0 h-[122px] w-[588px]"
+          className="pointer-events-none absolute top-0 left-0 h-[122px] w-full"
           style={{
             backgroundImage:
               "linear-gradient(180deg, #eef2f9 0%, rgba(238, 242, 249, 76%) 50%, rgba(238, 242, 249, 0%) 100%)",
           }}
         />
-        <div className="absolute bottom-0 left-0 flex w-[588px] px-[32px] pb-[24px]">
+        <div className="absolute bottom-0 left-0 flex w-full px-6 pb-[24px] min-[1440px]:px-[32px]">
           <CallRequestButton label={action} topic={title} />
         </div>
       </div>

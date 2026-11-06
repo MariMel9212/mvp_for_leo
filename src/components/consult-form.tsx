@@ -411,7 +411,7 @@ export function PhoneField({
         <ul
           role="listbox"
           aria-label="Код страны"
-          className="absolute top-[56px] left-[-1px] z-30 max-h-[240px] w-[375px] overflow-auto rounded-[16px] border border-solid border-[#dedede] bg-white py-[8px] shadow-[0_8px_24px_rgba(91,90,90,0.12)]"
+          className="absolute top-[56px] left-[-1px] z-30 max-h-[240px] w-full max-w-[375px] overflow-auto rounded-[16px] border border-solid border-[#dedede] bg-white py-[8px] shadow-[0_8px_24px_rgba(91,90,90,0.12)]"
         >
           {countries.map((item) => {
             const selected = item.id === country.id;
@@ -478,25 +478,25 @@ export function ConsultForm() {
   }
 
   return (
-    <section id="zayavka" className="relative mt-[120px] h-[740px] w-[1440px] overflow-hidden rounded-[29px] bg-gradient-to-b from-[rgba(229,246,255,0.45)] to-[rgba(209,239,255,0.45)]">
-      <div className="absolute top-[52px] left-[120px] flex w-[604px] flex-col gap-[24px] text-[#27292d]">
-        <h2 className="text-40 font-medium">
+    <section id="zayavka" className="relative mt-16 w-full overflow-hidden rounded-[29px] bg-gradient-to-b from-[rgba(229,246,255,0.45)] to-[rgba(209,239,255,0.45)] px-0 py-0 max-[1439px]:px-4 max-[1439px]:py-8 min-[1440px]:mt-[120px] min-[1440px]:h-[740px]">
+      <div className="flex w-full max-w-[604px] flex-col gap-[24px] text-[#27292d] min-[1440px]:absolute min-[1440px]:top-[52px] min-[1440px]:left-[120px] min-[1440px]:w-[604px]">
+        <h2 className="text-40 font-medium max-[1439px]:text-[32px] max-[1439px]:leading-[40px]">
           Расскажите о своей проблеме, и мы подберем профильное учереждение
         </h2>
         <p className="text-16">Консультация бесплатна и анонимна</p>
       </div>
 
-      <div className="pointer-events-none absolute top-[-23px] left-[1236px] flex h-[243.212px] w-[271.782px] items-center justify-center">
+      <div className="pointer-events-none absolute top-[-23px] left-[1236px] hidden h-[243.212px] w-[271.782px] items-center justify-center min-[1440px]:flex">
         <div className="-scale-y-100 rotate-[-21.54deg]">
           <img alt="" src="/consult/leaf-top.svg" width={223.858} height={173.671} />
         </div>
       </div>
-      <div className="pointer-events-none absolute top-[466px] left-[-121px] flex h-[367.399px] w-[516.307px] items-center justify-center">
+      <div className="pointer-events-none absolute top-[466px] left-[-121px] hidden h-[367.399px] w-[516.307px] items-center justify-center min-[1440px]:flex">
         <div className="rotate-[2.26deg]">
           <img alt="" src="/consult/sheets.svg" width={503} height={347.863} />
         </div>
       </div>
-      <div className="pointer-events-none absolute top-[591.53px] left-[778.24px] flex h-[214.097px] w-[223.769px] items-center justify-center">
+      <div className="pointer-events-none absolute top-[591.53px] left-[778.24px] hidden h-[214.097px] w-[223.769px] items-center justify-center min-[1440px]:flex">
         <div className="rotate-[169.57deg]">
           <img alt="" src="/consult/leaf-bottom.svg" width={194.039} height={181.987} />
         </div>
@@ -504,11 +504,11 @@ export function ConsultForm() {
 
       <form
         onSubmit={submit}
-        className="absolute top-[52px] left-[905px] flex w-[415px] flex-col gap-[30px] rounded-[23px] bg-white px-[20px] py-[24px]"
+        className="relative mt-8 flex w-full max-w-[415px] flex-col gap-[30px] rounded-[23px] bg-white px-[20px] py-[24px] min-[1440px]:absolute min-[1440px]:top-[52px] min-[1440px]:left-[905px] min-[1440px]:mt-0 min-[1440px]:w-[415px]"
         noValidate
       >
         <div className="flex w-full flex-col gap-[22px]">
-          <h3 className="mx-auto w-[367px] text-center text-24 font-medium">
+          <h3 className="mx-auto w-full max-w-[367px] text-center text-24 font-medium">
             Бесплатная консультация по&nbsp;подбору учереждения
           </h3>
 

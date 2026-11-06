@@ -226,7 +226,7 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
         aria-modal="true"
         aria-labelledby={titleId}
         tabIndex={-1}
-        className="relative flex h-[650px] w-[1100px] flex-col overflow-hidden rounded-[21px] bg-white outline-none"
+        className="relative flex max-h-[calc(100dvh-32px)] w-full max-w-[1100px] flex-col overflow-y-auto rounded-[21px] bg-white outline-none min-[1100px]:h-[650px] min-[1100px]:overflow-hidden"
       >
         <div className="flex h-[44px] items-center justify-between px-[26px] pt-[20px]">
           {step === "format" || step === "done" ? (
@@ -243,11 +243,11 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
         </div>
 
         {step === "format" ? (
-          <div className="flex flex-col items-center gap-[56px] pt-[36px]">
-            <h2 id={titleId} className="w-[406px] text-center text-28 font-medium">
+          <div className="flex flex-col items-center gap-8 px-4 pt-8 min-[1100px]:gap-[56px] min-[1100px]:px-0 min-[1100px]:pt-[36px]">
+            <h2 id={titleId} className="w-full max-w-[406px] text-center text-28 font-medium">
               Выберите удобный формат для консультации
             </h2>
-            <div className="flex items-start gap-[24px]">
+            <div className="flex w-full flex-col items-center gap-4 sm:flex-row sm:items-start sm:justify-center sm:gap-[24px]">
               <FormatCard
                 icon={<CallIcon />}
                 title="Связаться как можно скорее"
@@ -265,8 +265,8 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
         ) : null}
 
         {step === "schedule" ? (
-          <div className="flex gap-[81px] px-[34px] pt-[24px]">
-            <div className="flex w-[366px] flex-col gap-[10px]">
+          <div className="flex flex-col gap-6 px-4 pt-6 min-[1100px]:flex-row min-[1100px]:gap-[81px] min-[1100px]:px-[34px] min-[1100px]:pt-[24px]">
+            <div className="flex w-full flex-col gap-[10px] min-[1100px]:w-[366px]">
               <h2 id={titleId} className="w-[270px] text-28 font-medium">
                 Выберите удобную дату и время
               </h2>
@@ -274,9 +274,9 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
                 Запланируйте консультацию на удобное для вас время. Специалист свяжется с вами в выбранное время, чтобы обсудить ситуацию и возможные варианты помощи
               </p>
             </div>
-            <div className="flex w-[585px] items-start gap-[16px]">
-              <div className="flex w-[348px] flex-col gap-[12px]">
-                <div className="flex w-[348px] flex-col gap-[8px] rounded-[16px] bg-white pb-[20px]">
+            <div className="flex w-full flex-col items-stretch gap-4 min-[1100px]:w-[585px] min-[1100px]:flex-row min-[1100px]:items-start min-[1100px]:gap-[16px]">
+              <div className="flex w-full flex-col gap-[12px] min-[1100px]:w-[348px]">
+                <div className="flex w-full flex-col gap-[8px] rounded-[16px] bg-white pb-[20px] min-[1100px]:w-[348px]">
                   <div className="flex h-[36px] w-full items-center gap-[6px] rounded-[8px] bg-[#f6f8fa] p-[6px]">
                     <button
                       type="button"
@@ -378,7 +378,7 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
                   ) : null}
                 </div>
               </div>
-              <div className="flex h-[546px] w-[221px] flex-col">
+              <div className="flex h-auto w-full flex-col min-[1100px]:h-[546px] min-[1100px]:w-[221px]">
                 <div className="flex w-full flex-col gap-[14px]">
                   {slotGroups.map((group) => {
                     const open = openGroups.includes(group.id);
@@ -446,7 +446,7 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
         ) : null}
 
         {step === "done" ? (
-          <div className="mx-auto flex w-[420px] flex-col items-center gap-[48px] pt-[38px]">
+          <div className="mx-auto flex w-full max-w-[420px] flex-col items-center gap-8 px-4 pt-8 min-[1100px]:gap-[48px] min-[1100px]:px-0 min-[1100px]:pt-[38px]">
             <h2 id={titleId} className="w-full text-center text-28 font-medium">
               Спасибо за доверие
             </h2>
@@ -469,8 +469,8 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
         ) : null}
 
         {step === "contact" ? (
-          <form onSubmit={submit} noValidate className="mx-auto flex w-[415px] flex-col items-center gap-[21px] pt-[38px]">
-            <h2 id={titleId} className="w-[351px] text-center text-28 font-medium">
+          <form onSubmit={submit} noValidate className="mx-auto flex w-full max-w-[415px] flex-col items-center gap-[21px] px-4 pt-8 min-[1100px]:px-0 min-[1100px]:pt-[38px]">
+            <h2 id={titleId} className="w-full max-w-[351px] text-center text-28 font-medium">
               Выберите удобный формат для консультации
             </h2>
             <div className="flex w-full flex-col gap-[18px] rounded-[23px] bg-white px-[18px] py-[18px]">
@@ -733,7 +733,7 @@ function FormatCard({
     <button
       type="button"
       onClick={onClick}
-      className="flex w-[300px] flex-col items-start gap-[16px] rounded-[12px] border border-solid border-[rgba(69,114,230,0.06)] px-[20px] py-[22px] text-left hover:border-[rgba(69,114,230,0.18)]"
+      className="flex w-full max-w-[300px] flex-col items-start gap-[16px] rounded-[12px] border border-solid border-[rgba(69,114,230,0.06)] px-[20px] py-[22px] text-left hover:border-[rgba(69,114,230,0.18)]"
       style={{
         backgroundImage:
           "linear-gradient(122.62deg, rgba(223, 235, 255, 0.24) 3.1%, rgba(240, 245, 255, 0.24) 99.38%)",
@@ -742,7 +742,7 @@ function FormatCard({
       {icon}
       <span className="flex flex-col items-start gap-[8px]">
         <span className="text-18 leading-[28px] font-medium">{title}</span>
-        <span className="w-[258px] text-13 leading-[20px] opacity-70">{text}</span>
+        <span className="w-full text-13 leading-[20px] opacity-70">{text}</span>
       </span>
     </button>
   );

@@ -74,13 +74,13 @@ export function FaqSection() {
   }, []);
 
   return (
-    <section className="px-[120px] pt-[120px] pb-[80px] [overflow-anchor:none]">
-      <div className="mx-auto flex w-[1200px] flex-col items-center gap-[48px]">
+    <section className="px-[120px] pt-16 pb-16 [overflow-anchor:none] max-[1439px]:px-4 min-[1440px]:pt-[120px] min-[1440px]:pb-[80px]">
+      <div className="mx-auto flex w-full max-w-[1200px] flex-col items-center gap-8 min-[1440px]:gap-[48px]">
         <div className="flex w-full flex-col items-center gap-[10px] text-center">
-          <h2 className="text-40 font-medium">Частые вопросы</h2>
+          <h2 className="text-40 font-medium max-[1439px]:text-[32px] max-[1439px]:leading-[40px]">Частые вопросы</h2>
           <p className="text-[18px] leading-[24px] opacity-60">Отвечаем на вопросы, которые возникают чаще всего</p>
         </div>
-        <div className="flex w-[823px] flex-col gap-[12px]">
+        <div className="flex w-full max-w-[823px] flex-col gap-[12px]">
           {items.map((item, index) => {
             const expanded = open === index;
             return (
@@ -92,7 +92,7 @@ export function FaqSection() {
                     holdQuestion(event.currentTarget, spacer.current, locking);
                     setOpen(expanded ? -1 : index);
                   }}
-                  className="flex h-[76px] w-full items-center justify-between py-[24px] pr-[24px] pl-[28px] text-left"
+                  className="flex min-h-[76px] w-full items-center justify-between gap-4 py-4 pr-4 pl-5 text-left min-[1440px]:py-[24px] min-[1440px]:pr-[24px] min-[1440px]:pl-[28px]"
                 >
                   <span className="text-18 leading-[28px] font-medium">{item.q}</span>
                   <Chevron open={expanded} />

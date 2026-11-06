@@ -113,13 +113,13 @@ function matches(center: Center, filters: Filters) {
 
 function CenterCard({ center }: { center: Center }) {
   const className =
-    "relative block h-[566px] w-[384px] overflow-hidden rounded-[14px] drop-shadow-[0_0_5px_rgba(91,90,90,0.08)]";
+    "relative block h-[566px] w-full overflow-hidden rounded-[14px] drop-shadow-[0_0_5px_rgba(91,90,90,0.08)]";
   const card = (
     <>
       <div className="h-[400px] overflow-hidden rounded-t-[14px] bg-white">
         <CenterPhoto slides={center.slides} frameClassName="h-[396px]" />
       </div>
-      <div className="absolute top-[372px] left-0 z-20 w-[384px]">
+      <div className="absolute top-[372px] right-0 left-0 z-20">
         <div className="relative h-[28px] w-[320px]">
           {center.badge ? (
             <span
@@ -133,8 +133,8 @@ function CenterCard({ center }: { center: Center }) {
           <h2 className={`${center.titleLines ? "w-full" : "w-[283px]"} text-[22px] leading-[28px] font-medium text-[#0a0d14]`}>
             {center.titleLines ? (
               <>
-                <span className="block text-[19px] leading-[28px] whitespace-nowrap">{center.titleLines[0]}</span>
-                <span className="block whitespace-nowrap">{center.titleLines[1]}</span>
+                <span className="block text-[19px] leading-[28px] min-[1200px]:whitespace-nowrap">{center.titleLines[0]}</span>
+                <span className="block min-[1200px]:whitespace-nowrap">{center.titleLines[1]}</span>
               </>
             ) : (
               center.title
@@ -264,7 +264,7 @@ function CheckFilter({
       onClick={onChange}
       className="group flex h-[44px] min-w-0 flex-1 items-center justify-between rounded-[10px] bg-[rgba(36,74,127,0.04)] px-[12px] text-left"
     >
-      <span className="text-13 whitespace-nowrap text-[#27292d] opacity-60">{label}</span>
+      <span className="text-13 text-[#27292d] opacity-60 min-[1100px]:whitespace-nowrap">{label}</span>
       <FilterCheckbox checked={checked} />
     </button>
   );
@@ -272,17 +272,17 @@ function CheckFilter({
 
 function CallBanner() {
   return (
-    <section className="relative -mx-[22px] mt-[50px] w-[1244px] overflow-hidden rounded-[34px] bg-gradient-to-b from-[rgba(222,234,255,0.45)] to-[rgba(210,222,243,0.45)] px-[22px] pt-[32px] pb-[26px]">
-      <div className="mx-auto flex w-[611px] flex-col items-center gap-[15px] text-center text-[#27292d]">
-        <h2 className="text-40 font-medium">Запланируйте звонок, чтобы&nbsp;не&nbsp;ошибиться с&nbsp;выбором</h2>
+    <section className="relative mt-[50px] overflow-hidden rounded-[34px] bg-gradient-to-b from-[rgba(222,234,255,0.45)] to-[rgba(210,222,243,0.45)] px-4 pt-[32px] pb-[26px] min-[1440px]:-mx-[22px] min-[1440px]:w-[1244px] min-[1440px]:px-[22px]">
+      <div className="mx-auto flex w-full max-w-[611px] flex-col items-center gap-[15px] text-center text-[#27292d]">
+        <h2 className="text-40 font-medium max-[1439px]:text-[32px] max-[1439px]:leading-[40px]">Запланируйте звонок, чтобы&nbsp;не&nbsp;ошибиться с&nbsp;выбором</h2>
         <p className="text-16 opacity-60">
           На бесплатной и анонимной консультации погрузимся в&nbsp;Вашу проблему и&nbsp;подберем подходящее учереждение
         </p>
       </div>
-      <div className="mt-[48px] flex items-center justify-between">
+      <div className="mt-[48px] flex flex-col items-stretch gap-4 min-[1440px]:flex-row min-[1440px]:items-center min-[1440px]:justify-between">
         <Link
           href="/#zayavka"
-          className="relative h-[213px] w-[588px] overflow-hidden rounded-[20px] border border-[rgba(0,0,0,0.04)] bg-[rgba(255,255,255,0.8)]"
+          className="relative h-[213px] w-full overflow-hidden rounded-[20px] border border-[rgba(0,0,0,0.04)] bg-[rgba(255,255,255,0.8)] min-[1440px]:w-[588px]"
         >
           <span className="flex items-center justify-between px-[20px] py-[19px]">
             <span className="text-24 font-medium">Подобрать учереждение</span>
@@ -294,7 +294,7 @@ function CallBanner() {
         </Link>
         <Link
           href="/#zayavka"
-          className="relative h-[213px] w-[588px] overflow-hidden rounded-[20px] border border-[rgba(0,0,0,0.04)] bg-[rgba(255,255,255,0.8)]"
+          className="relative h-[213px] w-full overflow-hidden rounded-[20px] border border-[rgba(0,0,0,0.04)] bg-[rgba(255,255,255,0.8)] min-[1440px]:w-[588px]"
         >
           <span className="flex items-center justify-between px-[20px] py-[19px]">
             <span className="text-24 font-medium">Подбрать программу</span>
@@ -330,17 +330,17 @@ export function Institutions() {
   }, [openMenu]);
 
   return (
-    <div className="mt-[24px] px-[120px]">
-      <h1 className="text-40 font-medium">Все учереждения</h1>
+    <div className="mt-6 px-[120px] max-[1439px]:px-4 min-[1440px]:mt-[24px]">
+      <h1 className="text-40 font-medium max-[1439px]:text-[32px] max-[1439px]:leading-[40px]">Все учереждения</h1>
       <form
-        className="relative z-20 mt-[46px] flex w-[1200px] flex-col gap-[20px] rounded-[13px] bg-white px-[21px] py-[23px]"
+        className="relative z-20 mt-8 flex w-full flex-col gap-[20px] rounded-[13px] bg-white px-4 py-[23px] min-[1440px]:mt-[46px] min-[1440px]:px-[21px]"
         onSubmit={(event) => {
           event.preventDefault();
           setApplied(draft);
           setOpenMenu(null);
         }}
       >
-        <div className="flex items-center gap-[12px]">
+        <div className="flex flex-col gap-3 min-[1100px]:flex-row min-[1100px]:items-center min-[1100px]:gap-[12px]">
           <div data-filter-menu className="min-w-0 flex-1">
             <FilterMenu
               label="Тип учереждения"
@@ -405,7 +405,7 @@ export function Institutions() {
       {firstRows.length === 0 ? (
         <p className="mt-[46px] text-16 text-[#27292d] opacity-60">Нет учереждений по этим условиям</p>
       ) : (
-        <div className="mt-[46px] flex w-[1200px] flex-wrap gap-x-[24px] gap-y-[24px]">
+        <div className="mt-8 grid w-full grid-cols-3 gap-6 max-[1199px]:grid-cols-2 max-[639px]:grid-cols-1 min-[1200px]:mt-[46px]">
           {firstRows.map((center, index) => (
             <CenterCard key={`${center.title}-${index}`} center={center} />
           ))}
@@ -413,7 +413,7 @@ export function Institutions() {
       )}
       <CallBanner />
       {rest.length > 0 ? (
-        <div className="mt-[50px] flex w-[1200px] flex-wrap gap-x-[24px] gap-y-[24px]">
+        <div className="mt-[50px] grid w-full grid-cols-3 gap-6 max-[1199px]:grid-cols-2 max-[639px]:grid-cols-1">
           {rest.map((center, index) => (
             <CenterCard key={`${center.title}-rest-${index}`} center={center} />
           ))}

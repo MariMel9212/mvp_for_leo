@@ -71,11 +71,11 @@ const centers: Center[] = [
 
 function CenterCard({ title, course, slides, badge }: Center) {
   return (
-    <article className="relative h-[534px] w-[384px] overflow-hidden rounded-[14px] drop-shadow-[0_0_5px_rgba(91,90,90,0.08)]">
+    <article className="relative h-[534px] w-full overflow-hidden rounded-[14px] drop-shadow-[0_0_5px_rgba(91,90,90,0.08)]">
       <div className="h-[400px] overflow-hidden rounded-t-[14px] bg-white">
         <CenterPhoto slides={slides} frameClassName="h-[396px]" />
       </div>
-      <div className="absolute top-[372px] left-0 w-[384px]">
+      <div className="absolute top-[372px] right-0 left-0">
         <div className="relative h-[28px] w-[320px]">
           {badge ? (
             <span
@@ -86,8 +86,8 @@ function CenterCard({ title, course, slides, badge }: Center) {
           ) : null}
         </div>
         <div className="flex flex-col gap-[8px] rounded-b-[14px] bg-white px-[12px] pt-[8px] pb-[14px]">
-          <h3 className="w-[283px] text-[22px] leading-[28px] font-medium text-[#27292d]">{title}</h3>
-          <div className="w-[178px] text-16 text-[#27292d]">
+          <h3 className="text-[22px] leading-[28px] font-medium text-[#27292d]">{title}</h3>
+          <div className="text-16 text-[#27292d]">
             <p>Московская область</p>
             <p className="opacity-50">{course}</p>
           </div>
@@ -99,24 +99,17 @@ function CenterCard({ title, course, slides, badge }: Center) {
 
 export function LicensedCenters() {
   return (
-    <section id="uchrezhdeniya" className="mt-[120px] px-[120px]">
-      <div className="flex w-[1200px] flex-col gap-[52px]">
-        <h2 className="w-[1200px] text-40 font-medium">Лицензированные учереждения</h2>
-        <div className="flex w-[1200px] flex-col gap-[24px]">
-          <div className="flex gap-[24px]">
-            {centers.slice(0, 3).map((center, index) => (
-              <CenterCard key={index} {...center} />
-            ))}
-          </div>
-          <div className="flex gap-[24px]">
-            {centers.slice(3).map((center, index) => (
-              <CenterCard key={index} {...center} />
-            ))}
-          </div>
+    <section id="uchrezhdeniya" className="mt-16 px-[120px] max-[1439px]:px-4 md:mt-[120px]">
+      <div className="mx-auto flex w-full max-w-[1200px] flex-col gap-8 min-[1440px]:gap-[52px]">
+        <h2 className="text-40 font-medium max-[1439px]:text-[32px] max-[1439px]:leading-[40px]">Лицензированные учереждения</h2>
+        <div className="grid grid-cols-3 gap-6 max-[1199px]:grid-cols-2 max-[639px]:grid-cols-1">
+          {centers.map((center, index) => (
+            <CenterCard key={index} {...center} />
+          ))}
         </div>
         <Link
           href="/uchrezhdeniya"
-          className="lime-control mx-auto flex h-[56px] w-[377px] items-center justify-center gap-[4px] rounded-[12px] px-[20px] text-18 leading-[24px] font-medium"
+          className="lime-control mx-auto flex h-[56px] w-full max-w-[377px] items-center justify-center gap-[4px] rounded-[12px] px-[20px] text-18 leading-[24px] font-medium"
         >
           Смотреть все
           <img alt="" src="/icons/arrow-right.svg" width={24} height={24} />

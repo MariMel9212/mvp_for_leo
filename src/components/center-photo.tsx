@@ -36,7 +36,7 @@ export function CenterPhoto({
 
   return (
     <div
-      className={`absolute top-[4px] left-[4px] w-[376px] overflow-hidden rounded-[10px] ${frameClassName}`}
+      className={`absolute top-[4px] right-[4px] left-[4px] overflow-hidden rounded-[10px] ${frameClassName}`}
       onPointerMove={scrub}
       onPointerLeave={() => setIndex(0)}
     >
@@ -59,7 +59,7 @@ export function CenterPhoto({
           style={{ width: phase.w, height: phase.h, transform: `translate3d(${phase.x}px, ${phase.y}px, 0)` }}
         />
       )}
-      <div className="pointer-events-none absolute top-[8px] left-[185px] z-20 flex items-center gap-[4px]">
+      <div className="pointer-events-none absolute top-[8px] left-1/2 z-20 flex -translate-x-1/2 items-center gap-[4px]">
         {slides.map((_, slideIndex) => (
           <span
             key={slideIndex}
