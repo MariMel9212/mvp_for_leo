@@ -27,9 +27,8 @@ export const klyuchiCenter: CenterPageData = {
   staff: {
     kind: "people",
     summary:
-      "4 специалиста: основатель центра и психотерапевт, психиатр\u2011нарколог, руководитель программы реабилитации и клинический психолог.",
+      "Психиатр\u2011нарколог, руководитель программы реабилитации, клинический психолог, 6 консультантов по химической зависимости и 2 психолога.",
     people: [
-      { name: "Руслан Молодцов", role: "Основатель центра, психотерапевт", photo: "/centers/klyuchi/staff/molodtsov.webp" },
       { name: "Алексей Гитлевич", role: "Психиатр\u2011нарколог", photo: "/centers/klyuchi/staff/gitlevich.webp" },
       { name: "Владислав Владимиров", role: "Руководитель программы реабилитации", photo: "/centers/klyuchi/staff/vladimirov.webp" },
       { name: "Наталья Бычкова", role: "Клинический психолог", photo: "/centers/klyuchi/staff/bychkova.webp" },

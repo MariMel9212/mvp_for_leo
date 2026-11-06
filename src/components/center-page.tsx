@@ -256,9 +256,11 @@ function StaffBlock({
     );
   }
 
+  const clips = staff.people.length > 3;
+
   return (
     <div className="flex flex-col gap-[12px]">
-      <div className={`relative ${open ? "" : "h-[460px] overflow-hidden"}`}>
+      <div className={`relative ${open || !clips ? "" : "h-[460px] overflow-hidden"}`}>
         <ul className="grid grid-cols-3 gap-x-[24px] gap-y-[24px]">
           {staff.people.map((person) => (
             <li key={person.name} className="flex min-w-0 flex-col gap-[10px]">
@@ -276,13 +278,15 @@ function StaffBlock({
             </li>
           ))}
         </ul>
-        {open ? null : (
+        {open || !clips ? null : (
           <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[96px] bg-[linear-gradient(to_bottom,rgba(253,253,253,0)_0%,#fdfdfd_100%)]" />
         )}
       </div>
-      <button type="button" onClick={onToggle} className={textAction}>
-        {open ? "Свернуть" : "Смотреть"}
-      </button>
+      {clips ? (
+        <button type="button" onClick={onToggle} className={textAction}>
+          {open ? "Свернуть" : "Смотреть"}
+        </button>
+      ) : null}
       <p className="text-16">{tie(staff.summary)}</p>
     </div>
   );
