@@ -18,7 +18,6 @@ export const klyuchiCenter: CenterPageData = {
   amenities: [
     { icon: "pool", label: "Бассейн" },
     { icon: "group", label: "Зал для занятий" },
-    { icon: "dining", label: "Домашнее питание" },
     { icon: "rooms", label: "Комнаты" },
     { icon: "living", label: "Комната отдыха" },
     { icon: "territory", label: "Загородная территория" },
@@ -40,13 +39,12 @@ export const klyuchiCenter: CenterPageData = {
     "Работа с семьёй",
     "Сопровождение после курса",
     "Загородный стационар",
-    "Домашнее питание",
   ],
   gallery: {
     main: { src: "/centers/klyuchi/group.webp", alt: "Зал для занятий", frameClassName: cover },
     topMiddle: { src: "/centers/klyuchi/single.webp", alt: "Отдельная комната", frameClassName: cover },
     topRight: { src: "/centers/klyuchi/pool.webp", alt: "Бассейн", frameClassName: cover },
-    bottomMiddle: { src: "/centers/klyuchi/dining.webp", alt: "Домашнее питание", frameClassName: cover },
+    bottomMiddle: { src: "/centers/klyuchi/dining.webp", alt: "Кухня", frameClassName: cover },
     more: { src: "/centers/klyuchi/rest.webp", alt: "Комната отдыха", frameClassName: cover },
     moreLabel: "+ 3 фотографии",
     photos: [
@@ -55,7 +53,7 @@ export const klyuchiCenter: CenterPageData = {
       { src: "/centers/klyuchi/pool.webp", alt: "Бассейн" },
       { src: "/centers/klyuchi/bath.webp", alt: "Ванная" },
       { src: "/centers/klyuchi/group.webp", alt: "Зал для занятий" },
-      { src: "/centers/klyuchi/dining.webp", alt: "Домашнее питание" },
+      { src: "/centers/klyuchi/dining.webp", alt: "Кухня" },
       { src: "/centers/klyuchi/rest.webp", alt: "Комната отдыха" },
       { src: "/centers/klyuchi/single.webp", alt: "Отдельная комната" },
     ],
