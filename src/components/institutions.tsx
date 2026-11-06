@@ -330,7 +330,7 @@ export function Institutions() {
   }, [openMenu]);
 
   return (
-    <div className="mt-[58px] px-[120px]">
+    <div className="mt-[24px] px-[120px]">
       <h1 className="text-40 font-medium">Все учереждения</h1>
       <form
         className="relative z-20 mt-[46px] flex w-[1200px] flex-col gap-[20px] rounded-[13px] bg-white px-[21px] py-[23px]"
