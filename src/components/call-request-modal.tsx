@@ -11,6 +11,7 @@ import {
   telegramReady,
 } from "@/components/consult-form";
 import { ThanksFigure, thanksLeaf } from "@/components/thanks-art";
+import { tie } from "@/lib/tie";
 
 type Path = "soon" | "plan";
 type Step = "format" | "schedule" | "contact" | "done";
@@ -741,8 +742,8 @@ function FormatCard({
     >
       {icon}
       <span className="flex flex-col items-start gap-[8px]">
-        <span className="text-18 leading-[28px] font-medium">{title}</span>
-        <span className="w-full text-13 leading-[20px] opacity-70">{text}</span>
+        <span className="text-18 leading-[28px] font-medium">{tie(title)}</span>
+        <span className="w-full text-13 leading-[20px] opacity-70">{tie(text)}</span>
       </span>
     </button>
   );

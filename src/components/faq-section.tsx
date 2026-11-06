@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { tie } from "@/lib/tie";
 
 const items: { q: string; a?: string }[] = [
   {
@@ -78,7 +79,7 @@ export function FaqSection() {
       <div className="mx-auto flex w-full max-w-[1200px] flex-col items-center gap-8 min-[1440px]:gap-[48px]">
         <div className="flex w-full flex-col items-center gap-[10px] text-center">
           <h2 className="text-40 font-medium max-[1439px]:text-[32px] max-[1439px]:leading-[40px]">Частые вопросы</h2>
-          <p className="text-[18px] leading-[24px] opacity-60">Отвечаем на вопросы, которые возникают чаще всего</p>
+          <p className="text-[18px] leading-[24px] opacity-60">{tie("Отвечаем на вопросы, которые возникают чаще всего")}</p>
         </div>
         <div className="flex w-full max-w-[823px] flex-col gap-[12px]">
           {items.map((item, index) => {
@@ -94,7 +95,7 @@ export function FaqSection() {
                   }}
                   className="flex min-h-[76px] w-full items-center justify-between gap-4 py-4 pr-4 pl-5 text-left min-[1440px]:py-[24px] min-[1440px]:pr-[24px] min-[1440px]:pl-[28px]"
                 >
-                  <span className="text-18 leading-[28px] font-medium">{item.q}</span>
+                  <span className="text-18 leading-[28px] font-medium">{tie(item.q)}</span>
                   <Chevron open={expanded} />
                 </button>
                 {item.a ? (
@@ -104,7 +105,7 @@ export function FaqSection() {
                     <div className="overflow-hidden">
                       <div className="px-[28px] pb-[24px]">
                         <div className="h-px bg-[#dedede] opacity-60" />
-                        <p className="pt-[20px] text-16 text-black">{item.a}</p>
+                        <p className="pt-[20px] text-16 text-black">{item.a ? tie(item.a) : null}</p>
                       </div>
                     </div>
                   </div>

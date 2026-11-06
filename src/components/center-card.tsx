@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { CenterPhoto, type CenterSlide } from "@/components/center-photo";
+import { tie } from "@/lib/tie";
 
 export type CenterKind = "rehab" | "detox";
 export type CenterDependency = "alco" | "narco" | "game";
@@ -96,16 +97,16 @@ export function CenterCard({ center }: { center: CatalogCenter }) {
           <h2 className={`${center.titleLines ? "w-full" : "w-full max-w-[283px]"} text-[22px] leading-[28px] font-medium text-[#0a0d14]`}>
             {center.titleLines ? (
               <>
-                <span className="block text-[19px] leading-[28px] min-[1200px]:whitespace-nowrap">{center.titleLines[0]}</span>
-                <span className="block min-[1200px]:whitespace-nowrap">{center.titleLines[1]}</span>
+                <span className="block text-[19px] leading-[28px] min-[1200px]:whitespace-nowrap">{tie(center.titleLines[0])}</span>
+                <span className="block min-[1200px]:whitespace-nowrap">{tie(center.titleLines[1])}</span>
               </>
             ) : (
-              center.title
+              tie(center.title)
             )}
           </h2>
           <div className="w-full text-16 text-[#0a0d14]">
             <p>{center.place ?? "Московская область"}</p>
-            <p className="opacity-50">{center.course}</p>
+            <p className="opacity-50">{tie(center.course)}</p>
           </div>
           {center.price ? <p className="text-16 text-black">{center.price}</p> : null}
         </div>

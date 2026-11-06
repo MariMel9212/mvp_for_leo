@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { tie } from "@/lib/tie";
 
 const audiences = ["Для близкого", "Для себя", "Для подростка"] as const;
 
@@ -14,26 +15,14 @@ export function AudienceTabs() {
       <div
         role="tablist"
         aria-label="Кому нужна помощь"
-        className="flex h-[46px] w-full items-start gap-[4px] overflow-hidden rounded-[10px] bg-[#f6f8fa] p-[4px]"
+        className="grid h-[46px] w-full grid-cols-3 gap-[4px] rounded-[10px] bg-[#f6f8fa] p-[4px]"
       >
-        <Tab
-          label={audiences[0]}
-          selected={active === audiences[0]}
-          onSelect={() => setActive(audiences[0])}
-        />
-        <div className="flex h-full min-w-0 flex-1 items-center">
-          {audiences.slice(1).map((label) => (
-            <Tab
-              key={label}
-              label={label}
-              selected={active === label}
-              onSelect={() => setActive(label)}
-            />
-          ))}
-        </div>
+        {audiences.map((label) => (
+          <Tab key={label} label={label} selected={active === label} onSelect={() => setActive(label)} />
+        ))}
       </div>
       <p className="w-full text-center text-13 text-[#27292d] opacity-50">
-        Бесплатная и анонимная консультация
+        {tie("Бесплатная и анонимная консультация")}
       </p>
     </div>
   );
@@ -54,11 +43,7 @@ function Tab({
       role="tab"
       aria-selected={selected}
       onClick={onSelect}
-      className={
-        selected
-          ? "flex h-full min-w-0 items-center justify-center rounded-[8px] bg-white px-2 py-[4px] text-[13px] text-[#27292d] sm:px-[14px] sm:text-16"
-          : "flex h-full min-w-0 items-center justify-center rounded-[6px] px-2 py-[4px] text-[13px] text-[#27292d] opacity-50 sm:px-[14px] sm:text-16"
-      }
+      className={`flex h-full min-w-0 items-center justify-center rounded-[8px] px-1 text-[13px] leading-none whitespace-nowrap text-[#27292d] min-[1440px]:px-[14px] min-[1440px]:text-16 ${selected ? "bg-white" : "opacity-50"}`}
     >
       {label}
     </button>

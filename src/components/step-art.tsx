@@ -172,7 +172,7 @@ function DocumentSheet() {
 
 export function SituationSheets() {
   return (
-    <div data-part="sheets" className="situation-sheets absolute top-[203px] left-[94px] h-[133px] w-[195px]">
+    <div data-part="sheets" className="situation-sheets absolute top-[203px] left-[94px] h-[133px] w-[195px] max-[1439px]:top-auto max-[1439px]:bottom-4 max-[1439px]:left-1/2 max-[1439px]:-translate-x-1/2">
       <div data-part="table" className="situation-sheet absolute" style={{ left: 105.93, top: 1.8 }}>
         <div className="situation-sheet-motion">
           <TableSheet />
@@ -195,7 +195,7 @@ export function SituationSheets() {
 export function FormatRadar() {
   return (
     <>
-      <div data-part="radar" className="absolute top-[270px] left-1/2 h-[258px] w-[258px] -translate-x-1/2">
+      <div data-part="radar" className="absolute top-[270px] left-1/2 h-[258px] w-[258px] -translate-x-1/2 max-[1439px]:top-auto max-[1439px]:bottom-2">
         <svg
           width="291.229"
           height="292.315"
@@ -404,7 +404,7 @@ export function CoverageScan() {
     <div
       data-part="coverage"
       aria-hidden
-      className="absolute top-[197px] left-0 h-[305px] w-[383px] overflow-hidden rounded-[45px]"
+      className="absolute top-[197px] left-0 h-[305px] w-[383px] overflow-hidden rounded-[45px] max-[1439px]:top-auto max-[1439px]:bottom-0 max-[1439px]:left-1/2 max-[1439px]:w-full max-[1439px]:origin-bottom max-[1439px]:[transform:translateX(-50%)_scale(0.7)]"
     >
       <div className="scan-source">
         {rows.map((row) => (

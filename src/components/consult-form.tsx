@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, type FocusEvent, type FormEvent, type KeyboardEvent as ReactKeyboardEvent } from "react";
+import { tie } from "@/lib/tie";
 
 type Channel = "call" | "messenger";
 
@@ -277,7 +278,7 @@ export function MessengerField({
       ref={rootRef}
       onFocus={trackFocus}
       onBlur={trackBlur}
-      className={`flex w-full items-center gap-[16px] rounded-[16px] border border-solid border-[#dedede] bg-white pr-[14px] pl-[24px] ${compact ? "h-[44px]" : "h-[48px]"}`}
+      className={`flex w-full items-center gap-[16px] rounded-[16px] border border-solid border-[#dedede] bg-white pr-[14px] pl-[24px] max-[1439px]:gap-3 max-[1439px]:pl-3 ${compact ? "h-[44px]" : "h-[48px] max-[1439px]:h-[44px]"}`}
     >
       <img alt="" className="shrink-0" src={icon} width={compact ? 32 : 42} height={compact ? 32 : 42} />
       <span className="h-[24px] w-px shrink-0 bg-[#dedede]" />
@@ -291,10 +292,10 @@ export function MessengerField({
           placeholder={showPlus ? "" : placeholder}
           aria-label={label}
           aria-invalid={invalid}
-          className={`order-2 min-w-0 flex-1 bg-transparent text-[#27292d] outline-none placeholder:text-[#27292d] placeholder:opacity-40 ${compact ? "text-16" : "text-18"}`}
+          className={`order-2 min-w-0 flex-1 bg-transparent text-[#27292d] outline-none placeholder:text-[#27292d] placeholder:opacity-40 ${compact ? "text-16" : "text-18 max-[1439px]:text-16"}`}
         />
         {showPlus ? (
-          <span className={`order-1 flex shrink-0 items-center text-[#27292d] ${compact ? "text-16" : "text-18"}`}>
+          <span className={`order-1 flex shrink-0 items-center text-[#27292d] ${compact ? "text-16" : "text-18 max-[1439px]:text-16"}`}>
             <span>+</span>
             <input
               value={code}
@@ -305,7 +306,7 @@ export function MessengerField({
               maxLength={3}
               size={Math.max(code.length, 1)}
               style={{ width: code.length > 0 ? `${code.length}ch` : 0 }}
-              className={`m-0 min-w-0 border-0 bg-transparent p-0 text-[#27292d] outline-none ${compact ? "text-16" : "text-18"}`}
+              className={`m-0 min-w-0 border-0 bg-transparent p-0 text-[#27292d] outline-none ${compact ? "text-16" : "text-18 max-[1439px]:text-16"}`}
             />
           </span>
         ) : null}
@@ -362,7 +363,7 @@ export function PhoneField({
   return (
     <label
       ref={rootRef}
-      className="relative flex h-[48px] items-center gap-[16px] rounded-[16px] border border-solid border-[#dedede] bg-white pr-[14px] pl-[24px]"
+      className="relative flex h-[48px] items-center gap-[16px] rounded-[16px] border border-solid border-[#dedede] bg-white pr-[14px] pl-[24px] max-[1439px]:h-[44px] max-[1439px]:gap-3 max-[1439px]:pl-3"
     >
       <button
         type="button"
@@ -373,7 +374,7 @@ export function PhoneField({
         className="flex shrink-0 items-center gap-[8px] bg-transparent p-0 text-[#27292d]"
       >
         <Flag id={country.id} />
-        <span className={compact ? "text-16" : "text-18"}>+{country.dial}</span>
+        <span className={compact ? "text-16" : "text-18 max-[1439px]:text-16"}>+{country.dial}</span>
         <img
           alt=""
           src="/consult/chevron-down.svg"
@@ -405,7 +406,7 @@ export function PhoneField({
         placeholder={country.dial === "7" ? "(999) 123-45-67" : "Номер телефона"}
         aria-label="Телефон"
         aria-invalid={invalid}
-        className={`min-w-0 flex-1 bg-transparent text-[#27292d] outline-none placeholder:text-[#27292d] placeholder:opacity-40 ${compact ? "text-16" : "text-18"}`}
+        className={`min-w-0 flex-1 bg-transparent text-[#27292d] outline-none placeholder:text-[#27292d] placeholder:opacity-40 ${compact ? "text-16" : "text-18 max-[1439px]:text-16"}`}
       />
       {open ? (
         <ul
@@ -481,7 +482,7 @@ export function ConsultForm() {
     <section id="zayavka" className="relative mt-16 w-full overflow-hidden rounded-[29px] bg-gradient-to-b from-[rgba(229,246,255,0.45)] to-[rgba(209,239,255,0.45)] px-0 py-0 max-[1439px]:px-4 max-[1439px]:py-8 min-[1440px]:mt-[120px] min-[1440px]:h-[740px]">
       <div className="flex w-full max-w-[604px] flex-col gap-[24px] text-[#27292d] min-[1440px]:absolute min-[1440px]:top-[52px] min-[1440px]:left-[120px] min-[1440px]:w-[604px]">
         <h2 className="text-40 font-medium max-[1439px]:text-[32px] max-[1439px]:leading-[40px]">
-          Расскажите о своей проблеме, и мы подберем профильное учереждение
+          {tie("Расскажите о своей проблеме, и мы подберем профильное учереждение")}
         </h2>
         <p className="text-16">Консультация бесплатна и анонимна</p>
       </div>
@@ -504,30 +505,30 @@ export function ConsultForm() {
 
       <form
         onSubmit={submit}
-        className="relative mt-8 flex w-full max-w-[415px] flex-col gap-[30px] rounded-[23px] bg-white px-[20px] py-[24px] min-[1440px]:absolute min-[1440px]:top-[52px] min-[1440px]:left-[905px] min-[1440px]:mt-0 min-[1440px]:w-[415px]"
+        className="relative mt-8 flex w-full max-w-[415px] flex-col gap-[30px] rounded-[23px] bg-white px-[20px] py-[24px] max-[1439px]:gap-5 max-[1439px]:px-4 max-[1439px]:py-4 min-[1440px]:absolute min-[1440px]:top-[52px] min-[1440px]:left-[905px] min-[1440px]:mt-0 min-[1440px]:w-[415px]"
         noValidate
       >
-        <div className="flex w-full flex-col gap-[22px]">
-          <h3 className="mx-auto w-full max-w-[367px] text-center text-24 font-medium">
-            Бесплатная консультация по&nbsp;подбору учереждения
+        <div className="flex w-full flex-col gap-[22px] max-[1439px]:gap-4">
+          <h3 className="mx-auto w-full max-w-[367px] text-center text-24 font-medium max-[1439px]:text-[18px] max-[1439px]:leading-[24px]">
+            {tie("Бесплатная консультация по подбору учереждения")}
           </h3>
 
           <label className="flex w-full flex-col gap-[10px]">
-            <span className="text-18">Имя</span>
+            <span className="text-18 max-[1439px]:text-16">Имя</span>
             <input
               value={name}
               onChange={(event) => setName(event.target.value)}
               placeholder="Укажите как к вам можно обращаться"
               autoComplete="name"
               aria-invalid={error !== "" && !name.trim()}
-              className="h-[48px] rounded-[16px] border border-solid border-[#dedede] bg-white pr-[14px] pl-[24px] text-18 text-[#27292d] outline-none placeholder:text-[#27292d] placeholder:opacity-40"
+              className="h-[48px] rounded-[16px] border border-solid border-[#dedede] bg-white pr-[14px] pl-[24px] text-18 text-[#27292d] outline-none placeholder:text-[#27292d] placeholder:opacity-40 max-[1439px]:h-[44px] max-[1439px]:pl-3 max-[1439px]:text-16"
             />
           </label>
         </div>
 
         <div className="flex w-full flex-col gap-[16px]">
           <div className="flex w-full flex-col gap-[10px]">
-            <span className="text-18" id="contact-channel">
+            <span className="text-18 max-[1439px]:text-16" id="contact-channel">
               Способ связи
             </span>
             <div role="tablist" aria-labelledby="contact-channel" className="flex h-[40px] gap-[4px] rounded-[10px] bg-[#f6f8fa] p-[4px]">
@@ -548,7 +549,7 @@ export function ConsultForm() {
                       setChannel(value);
                       setError("");
                     }}
-                    className={`flex h-[32px] flex-1 items-center justify-center rounded-[8px] px-[14px] text-16 text-[#27292d] ${active ? "bg-white" : "opacity-50"}`}
+                    className={`flex h-[32px] flex-1 items-center justify-center rounded-[8px] px-[14px] text-16 text-[#27292d] max-[1439px]:px-2 max-[1439px]:text-[15px] ${active ? "bg-white" : "opacity-50"}`}
                   >
                     {label}
                   </button>
@@ -614,7 +615,7 @@ export function ConsultForm() {
         <button
           type="submit"
           disabled={sent}
-          className="lime-control flex h-[52px] w-full items-center justify-center rounded-[12px] px-[20px] text-18 leading-[24px] font-medium"
+          className="lime-control flex h-[52px] w-full items-center justify-center rounded-[12px] px-[20px] text-18 leading-[24px] font-medium max-[1439px]:h-[44px] max-[1439px]:text-16"
         >
           {sent ? "Заявка отправлена" : "Отправить заявку"}
         </button>

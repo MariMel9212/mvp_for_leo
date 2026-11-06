@@ -86,7 +86,7 @@ export function CenterPage({ center }: { center: CenterPageData }) {
                   {previewAmenities.map((item) => (
                     <div key={item.label} className="flex min-w-0 items-center gap-[6px]">
                       <AmenityIcon name={item.icon} />
-                      <span className="text-16 font-medium">{item.label}</span>
+                      <span className="text-16 font-medium">{tie(item.label)}</span>
                     </div>
                   ))}
                 </div>
@@ -136,7 +136,7 @@ export function CenterPage({ center }: { center: CenterPageData }) {
               <ul className="flex flex-wrap content-center gap-[8px]">
                 {center.features.map((feature) => (
                   <li key={feature} className="rounded-[8px] bg-[#ebeff8] p-[10px] text-16">
-                    {feature}
+                    {tie(feature)}
                   </li>
                 ))}
               </ul>

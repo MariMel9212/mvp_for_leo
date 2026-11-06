@@ -11,6 +11,7 @@ import { FaqSection } from "@/components/faq-section";
 import { SelectionCriteria } from "@/components/selection-criteria";
 import { SiteHeader } from "@/components/site-header";
 import { SupportStages } from "@/components/support-stages";
+import { tie } from "@/lib/tie";
 
 // Inlined so the gather animation starts before React hydrates.
 const heroFieldBoot = readFileSync(
@@ -47,7 +48,7 @@ export default function HomePage() {
 
           <div id="podbor" className="flex w-full max-w-[754px] flex-col items-center gap-8 px-4 min-[1440px]:gap-[42px] min-[1440px]:px-0">
             <h1 className="w-full text-center text-48 font-medium max-[1439px]:text-[32px] max-[1439px]:leading-[40px]">
-              Проверенные ребцентра для&nbsp;лечения и восстановления при зависимостях
+              {tie("Проверенные ребцентра для лечения и восстановления при зависимостях")}
             </h1>
             <AudienceTabs />
             <a
@@ -65,23 +66,18 @@ export default function HomePage() {
         {stats.map((item) => (
           <div key={item.value} className="flex w-full flex-col items-center gap-[2px] min-[1440px]:w-[220px]">
             <p className="text-32 font-medium">{item.value}</p>
-            <p className="w-full text-center text-16 opacity-40 min-[1440px]:w-[220px]">{item.label}</p>
+            <p className="w-full text-center text-16 opacity-40 min-[1440px]:w-[220px]">{tie(item.label)}</p>
           </div>
         ))}
       </section>
 
       <section id="situacii" className="mt-16 px-[120px] max-[1439px]:px-4 md:mt-[120px]">
         <div className="mx-auto flex w-full max-w-[1200px] flex-col gap-8 min-[1440px]:gap-[52px]">
-          <h2 className="text-40 font-medium max-[1439px]:text-[32px] max-[1439px]:leading-[40px]">Подбираем помощь под ситуацию</h2>
+          <h2 className="text-40 font-medium max-[1439px]:text-[32px] max-[1439px]:leading-[40px]">{tie("Подбираем помощь под ситуацию")}</h2>
           <div className="flex flex-col gap-6 min-[1440px]:flex-row min-[1440px]:gap-[24px]">
             <SituationCard
               title="Детокс"
-              text={
-                <>
-                  Клиники и стационары с медицинским наблюдение для&nbsp;безопасного
-                  выхода из острого состояния
-                </>
-              }
+              text={tie("Клиники и стационары с медицинским наблюдение для безопасного выхода из острого состояния")}
               image="/desktop/detox.webp"
               imageClassName="top-[-52px] left-[-213px] h-[575px] w-[966px]"
               imageWidth={966}
@@ -90,7 +86,7 @@ export default function HomePage() {
             />
             <SituationCard
               title="Реабилитация"
-              text="Программы и центры, где работают с причиной зависимости и помогают вернутся к полноценной жизни"
+              text={tie("Программы и центры, где работают с причиной зависимости и помогают вернутся к полноценной жизни")}
               image="/desktop/rehab.webp"
               imageClassName="top-0 left-[-189px] h-[527px] w-[790px] object-cover"
               imageWidth={790}

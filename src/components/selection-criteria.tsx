@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { tie } from "@/lib/tie";
 
 const criteria: { n: string; title: string; text: ReactNode }[] = [
   {
@@ -14,15 +15,7 @@ const criteria: { n: string; title: string; text: ReactNode }[] = [
   {
     n: "03",
     title: "Персонал и специалисты",
-        text: (
-      <>
-        Проверяем, есть ли в учреждении профильные врачи, психологи{" "}
-        <br />
-        и&nbsp;другие специалисты, необходимые для конкретного формата{" "}
-        <br />
-        помощи
-      </>
-    ),
+        text: tie("Проверяем, есть ли в учреждении профильные врачи, психологи и другие специалисты, необходимые для конкретного формата помощи"),
   },
   {
     n: "04",
@@ -62,20 +55,10 @@ export function SelectionCriteria() {
       <div className="relative mx-auto flex w-full max-w-[1200px] flex-col items-start px-0 max-[1439px]:px-4 min-[1440px]:flex-row">
         <div className="flex w-full shrink-0 flex-col gap-[24px] min-[1440px]:w-[483px] max-[1439px]:[&_br]:hidden">
           <h2 className="text-40 font-medium max-[1439px]:text-[32px] max-[1439px]:leading-[40px]">
-            Отбираем учреждения{" "}
-            <br />
-            по понятным критериям
+            {tie("Отбираем учреждения по понятным критериям")}
           </h2>
           <p className="text-16 opacity-60">
-            При подборе специализированного учреждения мы оцениваем{" "}
-            <br />
-            весь комплекс факторов: качество и формат оказываемых{" "}
-            <br />
-            услуг, соответствие требованиям законодательства,{" "}
-            <br />
-            квалификацию специалистов, безопасность и прозрачность{" "}
-            <br />
-            условий
+            {tie("При подборе специализированного учреждения мы оцениваем весь комплекс факторов: качество и формат оказываемых услуг, соответствие требованиям законодательства, квалификацию специалистов, безопасность и прозрачность условий")}
           </p>
         </div>
         <ol className="mt-10 flex w-full flex-col gap-[12px] max-[1439px]:[&_br]:hidden min-[1440px]:mt-[120px] min-[1440px]:ml-auto min-[1440px]:w-[588px]">
@@ -84,8 +67,8 @@ export function SelectionCriteria() {
               <div className="flex items-start gap-[16px]">
                 <span className="text-24 font-medium text-[#5a98ff] opacity-80">{item.n}</span>
                 <div className="flex min-w-0 flex-1 flex-col gap-[4px]">
-                  <h3 className="text-24 font-medium">{item.title}</h3>
-                  <p className="text-16 opacity-60">{item.text}</p>
+                  <h3 className="text-24 font-medium max-[1439px]:text-[20px] max-[1439px]:leading-[26px]">{tie(item.title)}</h3>
+                  <p className="text-16 opacity-60">{typeof item.text === "string" ? tie(item.text) : item.text}</p>
                 </div>
               </div>
               {index < criteria.length - 1 ? (
