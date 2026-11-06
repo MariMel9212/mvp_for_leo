@@ -7,8 +7,7 @@ import type { CenterPageData, CenterPhoto } from "@/content/centers/types";
 import { tie } from "@/lib/tie";
 
 const textAction =
-  "inline-flex h-[24px] cursor-pointer items-center text-[16px] leading-none font-medium whitespace-nowrap opacity-80 transition-opacity duration-150 hover:opacity-100";
-const textActionSlot = `${textAction} w-[112px] justify-end px-[2px]`;
+  "ml-auto flex h-[24px] w-[112px] shrink-0 cursor-pointer items-center justify-end text-[16px] leading-[24px] font-medium tracking-normal whitespace-nowrap text-[#525357] transition-colors duration-150 hover:text-[#27292d]";
 
 const previewAmenityCount = 6;
 
@@ -60,22 +59,24 @@ export function CenterPage({ center }: { center: CenterPageData }) {
             <div className="flex flex-col gap-[10px]">
               <h2 className="text-24 font-medium">Про центр</h2>
               {aboutOpen ? (
-                <div className="text-16">
-                  {tie(center.about.lead)}
-                  {tie(center.about.rest)}{" "}
-                  <button type="button" onClick={() => setAboutOpen(false)} className={`${textAction} px-[2px]`}>
+                <div className="flex flex-col gap-[8px]">
+                  <p className="text-16">
+                    {tie(center.about.lead)}
+                    {tie(center.about.rest)}
+                  </p>
+                  <button type="button" onClick={() => setAboutOpen(false)} className={textAction}>
                     Свернуть
                   </button>
                 </div>
               ) : (
-                <div>
-                  <p className="h-[72px] overflow-hidden text-16 text-ellipsis">{tie(center.about.lead)}</p>
-                  <div className="flex items-center gap-[2px]">
-                    <p className="min-w-0 flex-1 truncate text-16 whitespace-pre">{tie(center.about.rest)}</p>
-                    <button type="button" onClick={() => setAboutOpen(true)} className={textActionSlot}>
-                      Читать
-                    </button>
+                <div className="flex flex-col gap-[8px]">
+                  <div>
+                    <p className="h-[72px] overflow-hidden text-16 text-ellipsis">{tie(center.about.lead)}</p>
+                    <p className="truncate text-16 whitespace-pre">{tie(center.about.rest)}</p>
                   </div>
+                  <button type="button" onClick={() => setAboutOpen(true)} className={textAction}>
+                    Читать
+                  </button>
                 </div>
               )}
             </div>
@@ -95,7 +96,7 @@ export function CenterPage({ center }: { center: CenterPageData }) {
                   ))}
                 </div>
                 {hasMoreAmenities ? (
-                  <button type="button" onClick={() => setAmenitiesOpen(true)} className={`${textActionSlot} self-end`}>
+                  <button type="button" onClick={() => setAmenitiesOpen(true)} className={textAction}>
                     Смотреть все
                   </button>
                 ) : null}
@@ -120,7 +121,7 @@ export function CenterPage({ center }: { center: CenterPageData }) {
                     <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[40px] bg-[linear-gradient(to_bottom,rgba(253,253,253,0),#fdfdfd)]" />
                   )}
                 </div>
-                <button type="button" onClick={() => setScheduleOpen((open) => !open)} className={`${textActionSlot} self-end`}>
+                <button type="button" onClick={() => setScheduleOpen((open) => !open)} className={textAction}>
                   {scheduleOpen ? "Свернуть" : "Подробнее"}
                 </button>
               </div>
@@ -279,7 +280,7 @@ function StaffBlock({
           <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[96px] bg-[linear-gradient(to_bottom,rgba(253,253,253,0)_0%,#fdfdfd_100%)]" />
         )}
       </div>
-      <button type="button" onClick={onToggle} className={`${textActionSlot} self-end`}>
+      <button type="button" onClick={onToggle} className={textAction}>
         {open ? "Свернуть" : "Смотреть"}
       </button>
       <p className="text-16">{tie(staff.summary)}</p>
