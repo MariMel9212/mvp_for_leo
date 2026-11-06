@@ -70,9 +70,10 @@ const centers: Center[] = [
     href: "/uchrezhdeniya/klyuchi",
   },
   {
-    title: "Реабилитационный центр в Москве",
+    title: "Реабилитационный центр в Чехове",
     course: "Стационар и выезд на дом • 24/7",
-    place: "Москва",
+    price: "от 450 000 ₽ / месяц",
+    place: "Московская область",
     slides: [
       { src: "/centers/narkolog/house.webp", className: "cover" },
       { src: "/centers/narkolog/room.webp", className: "cover" },
