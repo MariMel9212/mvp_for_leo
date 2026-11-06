@@ -8,7 +8,7 @@ export const klyuchiCenter: CenterPageData = {
   facts: [
     { label: "Направления:", value: "алкоголизм, наркомания" },
     { label: "Формат:", value: "с проживанием" },
-    { label: "Палата:", value: "на 4 человека", extra: "+2", extraHint: "Апартаменты на 2 человека и личные апартаменты" },
+    { label: "Размещение:", value: "индивидуальное, общее" },
     { label: "Стоимость:", value: "от 120 000 ₽ / мес" },
   ],
   about: {
