@@ -23,10 +23,10 @@ const serpuhovSlides: CenterSlide[] = [
 ];
 
 const zelenogradSlides: CenterSlide[] = [
-  { src: "/centers/zelenograd.png", className: "top-[-40px] left-[-69px] h-[514px] w-[514px]" },
-  { src: "/centers/zelenograd.png", className: "top-[-8px] left-0 h-[514px] w-[514px]" },
-  { src: "/centers/zelenograd.png", className: "top-[-40px] left-[-130px] h-[514px] w-[514px]" },
-  { src: "/centers/zelenograd.png", className: "top-[-110px] left-[-40px] h-[514px] w-[514px]" },
+  { src: "/centers/zelenograd.webp", className: "top-[-40px] left-[-69px] h-[514px] w-[514px]" },
+  { src: "/centers/zelenograd.webp", className: "top-[-8px] left-0 h-[514px] w-[514px]" },
+  { src: "/centers/zelenograd.webp", className: "top-[-40px] left-[-130px] h-[514px] w-[514px]" },
+  { src: "/centers/zelenograd.webp", className: "top-[-110px] left-[-40px] h-[514px] w-[514px]" },
 ];
 
 const teenBadge = { label: "Подходит для подростков", className: "w-[188px] bg-[#e1f300] text-[#27292d]" };

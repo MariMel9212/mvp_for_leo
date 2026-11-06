@@ -56,38 +56,38 @@ export const himkiCenter: CenterPageData = {
   ],
   gallery: {
     main: {
-      src: "/centers/himki/house.png",
+      src: "/centers/himki/house.webp",
       alt: "Дом реабилитационного центра",
       frameClassName: "absolute top-[-10px] left-[-87px] h-[579px] w-[811px]",
       imageClassName: "absolute top-[0.04%] left-0 h-[103.04%] w-full max-w-none object-cover",
     },
     topMiddle: {
-      src: "/centers/himki/yoga.png",
+      src: "/centers/himki/yoga.webp",
       alt: "Спальня",
       frameClassName: "absolute top-0 left-[-13px] h-[246px] w-[329px]",
     },
     topRight: {
-      src: "/centers/himki/bedroom.png",
+      src: "/centers/himki/bedroom.webp",
       alt: "Бассейн",
       frameClassName: "absolute top-[-23px] left-[-11px] h-[268px] w-[357px]",
     },
     bottomMiddle: {
-      src: "/centers/himki/pool.png",
+      src: "/centers/himki/pool.webp",
       alt: "Зал для занятий",
       frameClassName: "absolute top-0 left-[-6px] h-[248px] w-[371px]",
     },
     more: {
-      src: "/centers/himki/dining.jpg",
+      src: "/centers/himki/dining.webp",
       alt: "",
       frameClassName: "absolute inset-0",
       imageClassName: "absolute top-[-8px] left-[-36px] h-[246px] w-[368px] max-w-none object-cover",
     },
     photos: [
-      { src: "/centers/himki/house.png", alt: "Дом реабилитационного центра" },
-      { src: "/centers/himki/yoga.png", alt: "Спальня" },
-      { src: "/centers/himki/bedroom.png", alt: "Бассейн" },
-      { src: "/centers/himki/pool.png", alt: "Зал для занятий" },
-      { src: "/centers/himki/dining.jpg", alt: "Столовая" },
+      { src: "/centers/himki/house.webp", alt: "Дом реабилитационного центра" },
+      { src: "/centers/himki/yoga.webp", alt: "Спальня" },
+      { src: "/centers/himki/bedroom.webp", alt: "Бассейн" },
+      { src: "/centers/himki/pool.webp", alt: "Зал для занятий" },
+      { src: "/centers/himki/dining.webp", alt: "Столовая" },
     ],
   },
 };

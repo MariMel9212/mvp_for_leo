@@ -82,7 +82,7 @@ export default function HomePage() {
                   выхода из острого состояния
                 </>
               }
-              image="/desktop/detox.png"
+              image="/desktop/detox.webp"
               imageClassName="top-[-52px] left-[-213px] h-[575px] w-[966px]"
               imageWidth={966}
               imageHeight={575}
@@ -91,7 +91,7 @@ export default function HomePage() {
             <SituationCard
               title="Реабилитация"
               text="Программы и центры, где работают с причиной зависимости и помогают вернутся к полноценной жизни"
-              image="/desktop/rehab.png"
+              image="/desktop/rehab.webp"
               imageClassName="top-0 left-[-189px] h-[527px] w-[790px] object-cover"
               imageWidth={790}
               imageHeight={527}
