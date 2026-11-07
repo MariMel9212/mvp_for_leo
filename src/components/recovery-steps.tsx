@@ -42,12 +42,12 @@ export function RecoverySteps() {
             <SituationSheets />
           </article>
 
-          <article className={`format-card ${cardClass} h-[402px] max-[1439px]:h-auto max-[1439px]:pb-[276px]`} style={cardStyle}>
+          <article className={`format-card ${cardClass} h-[402px] max-[1439px]:h-auto max-[1439px]:pb-[132px]`} style={cardStyle}>
             <StepCopy title="Определяем формат" text={format} />
             <FormatRadar />
           </article>
 
-          <article className={`coverage-card ${cardClass} h-[486px] max-[1439px]:h-auto max-[1439px]:pb-[230px]`} style={cardStyle}>
+          <article className={`coverage-card ${cardClass} h-[486px] max-[1439px]:h-auto max-[1439px]:pb-[324px]`} style={cardStyle}>
             <StepCopy title="Отбираем учреждения" text={format} />
             <CoverageScan />
           </article>

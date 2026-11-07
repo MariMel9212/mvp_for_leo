@@ -195,7 +195,7 @@ export function SituationSheets() {
 export function FormatRadar() {
   return (
     <>
-      <div data-part="radar" className="absolute top-[270px] left-1/2 h-[258px] w-[258px] -translate-x-1/2 max-[1439px]:top-auto max-[1439px]:bottom-2">
+      <div data-part="radar" className="absolute top-[270px] left-1/2 h-[258px] w-[258px] min-[1440px]:-translate-x-1/2 max-[1439px]:top-auto max-[1439px]:bottom-[-158px] max-[1439px]:origin-top max-[1439px]:[transform:translateX(-50%)_scale(0.72)]">
         <svg
           width="291.229"
           height="292.315"
@@ -404,7 +404,7 @@ export function CoverageScan() {
     <div
       data-part="coverage"
       aria-hidden
-      className="absolute top-[197px] left-0 h-[305px] w-[383px] overflow-hidden rounded-[45px] max-[1439px]:top-auto max-[1439px]:bottom-0 max-[1439px]:left-1/2 max-[1439px]:w-full max-[1439px]:origin-bottom max-[1439px]:[transform:translateX(-50%)_scale(0.7)]"
+      className="absolute top-[197px] left-0 h-[305px] w-[383px] overflow-hidden rounded-[45px] max-[1439px]:top-auto max-[1439px]:bottom-0 max-[1439px]:left-1/2 max-[1439px]:-translate-x-1/2"
     >
       <div className="scan-source">
         {rows.map((row) => (
