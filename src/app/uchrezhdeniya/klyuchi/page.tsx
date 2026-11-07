@@ -6,7 +6,7 @@ import { klyuchiCenter } from "@/content/centers/klyuchi";
 export const metadata: Metadata = {
   title: "Реабилитационный центр в Троицке — СвойЦентр",
   description:
-    "Лицензированный загородный стационар в Троицке. Алкоголизм и наркомания, индивидуальное и общее размещение, от 120 000 ₽ / мес.",
+    "Загородный коттедж в Новой Москве, 20 минут от МКАД. Бассейн, банный комплекс, программы АН и ВДА, от 120 000 ₽ в месяц.",
 };
 
 export default function KlyuchiCenterPage() {

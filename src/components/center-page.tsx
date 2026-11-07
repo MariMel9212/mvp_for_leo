@@ -146,20 +146,20 @@ export function CenterPage({ center }: { center: CenterPageData }) {
 
         <aside className="order-2 flex w-full shrink-0 flex-col gap-[12px] self-start rounded-[19px] border border-[rgba(0,0,0,0.04)] bg-white p-[20px] text-18 min-[1100px]:sticky min-[1100px]:top-[24px] min-[1100px]:order-none min-[1100px]:w-auto min-[1100px]:whitespace-nowrap">
           {center.facts.map((fact) => (
-            <p key={fact.label} className="flex items-center gap-[6px]">
+            <p key={fact.label} className="flex flex-wrap items-center gap-x-[6px] gap-y-[2px]">
               <span className="font-medium">{fact.label}</span>
               <span className="flex items-center gap-[4px]">
                 {tie(fact.value)}
                 {fact.extra ? (
                   <span className="group/extra relative">
-                    <button type="button" className="font-medium opacity-70 outline-none hover:opacity-100">
+                    <button type="button" className="font-medium whitespace-nowrap opacity-70 outline-none hover:opacity-100">
                       {fact.extra}
                     </button>
                     {fact.extraHint ? (
                       <span className="absolute top-full right-0 z-20 hidden pt-[4px] group-hover/extra:block group-focus-within/extra:block">
                         <span
                           role="tooltip"
-                          className="block rounded-[10px] bg-white px-[12px] py-[8px] text-16 font-normal text-[#27292d] shadow-[0_8px_24px_rgba(36,74,127,0.12)]"
+                          className="block w-[280px] rounded-[10px] bg-white px-[12px] py-[8px] text-16 font-normal whitespace-normal text-[#27292d] shadow-[0_8px_24px_rgba(36,74,127,0.12)]"
                         >
                           {fact.extraHint}
                         </span>

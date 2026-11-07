@@ -41,8 +41,9 @@ export const catalogCenters: CatalogCenter[] = [
   },
   {
     title: "Реабилитационный центр в Троицке",
-    course: "Загородный стационар • от 1 месяца",
+    course: "Загородный коттедж • 20 минут от МКАД",
     price: "от 120 000 ₽ / месяц",
+    place: "Новая Москва",
     slides: [
       { src: "/centers/klyuchi/group.webp", className: "cover" },
       { src: "/centers/klyuchi/single.webp", className: "cover" },
@@ -50,7 +51,7 @@ export const catalogCenters: CatalogCenter[] = [
       { src: "/centers/klyuchi/dining.webp", className: "cover" },
     ],
     kind: "rehab",
-    dependencies: ["alco", "narco"],
+    dependencies: ["alco", "narco", "game"],
     teen: false,
     aftercare: true,
     href: "/uchrezhdeniya/klyuchi",
