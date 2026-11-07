@@ -58,8 +58,8 @@ export const catalogCenters: CatalogCenter[] = [
   },
   {
     title: "Реабилитационный центр в Чехове",
-    course: "Стационар и выезд на дом • 24/7",
-    price: "от 450 000 ₽ / месяц",
+    course: "12-шаговая программа • поддержка после курса",
+    price: "от 65 000 ₽ / месяц",
     place: "Московская область",
     slides: [
       { src: "/centers/narkolog/house.webp", className: "cover" },
@@ -69,9 +69,8 @@ export const catalogCenters: CatalogCenter[] = [
     ],
     kind: "rehab",
     dependencies: ["alco", "narco", "game"],
-    teen: true,
-    aftercare: false,
-    badge: { label: "Подходит для подростков", className: "w-[188px] bg-[#e1f300]" },
+    teen: false,
+    aftercare: true,
     href: "/uchrezhdeniya/narkolog",
   },
 ];
