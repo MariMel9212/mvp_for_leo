@@ -172,7 +172,7 @@ function DocumentSheet() {
 
 export function SituationSheets() {
   return (
-    <div data-part="sheets" className="situation-sheets absolute top-[203px] left-[94px] h-[133px] w-[195px] max-[1439px]:top-auto max-[1439px]:bottom-3 max-[1439px]:left-1/2">
+    <div data-part="sheets" className="situation-sheets absolute top-[203px] left-[94px] h-[133px] w-[195px] max-[1439px]:top-1 max-[1439px]:bottom-auto max-[1439px]:left-1/2">
       <div data-part="table" className="situation-sheet absolute" style={{ left: 105.93, top: 1.8 }}>
         <div className="situation-sheet-motion">
           <TableSheet />
@@ -195,7 +195,7 @@ export function SituationSheets() {
 export function FormatRadar() {
   return (
     <>
-      <div data-part="radar" className="absolute top-[270px] left-1/2 h-[258px] w-[258px] min-[1440px]:-translate-x-1/2 max-[1439px]:top-auto max-[1439px]:bottom-[-158px] max-[1439px]:origin-top max-[1439px]:[transform:translateX(-50%)_scale(0.72)]">
+      <div data-part="radar" className="absolute top-[270px] left-1/2 h-[258px] w-[258px] min-[1440px]:-translate-x-1/2 max-[1439px]:top-1 max-[1439px]:origin-top max-[1439px]:[transform:translateX(-50%)_scale(0.78)]">
         <svg
           width="291.229"
           height="292.315"
@@ -249,7 +249,7 @@ export function FormatRadar() {
           </defs>
         </svg>
       </div>
-      <div data-part="dots" className="absolute top-[316px] left-[68px] h-[82px] w-[243px]">
+      <div data-part="dots" className="absolute top-[316px] left-[68px] h-[82px] w-[243px] max-[1439px]:hidden">
         {radarDots.map((dot) => (
           <span
             key={`${dot.x}-${dot.y}`}
@@ -401,7 +401,7 @@ export function CoverageScan() {
     <div
       data-part="coverage"
       aria-hidden
-      className="absolute top-[197px] left-0 h-[305px] w-[383px] overflow-hidden rounded-[45px] max-[1439px]:top-auto max-[1439px]:bottom-0 max-[1439px]:left-1/2 max-[1439px]:-translate-x-1/2"
+      className="absolute top-[197px] left-0 h-[305px] w-[383px] overflow-hidden rounded-[45px] max-[1439px]:top-1 max-[1439px]:left-1/2 max-[1439px]:-translate-x-1/2"
     >
       <style>{`.scan-grain{background-image:${hiddenGrain.image};background-repeat:repeat-x;background-size:${hiddenGrain.width}px 35.1px}`}</style>
       <div className="scan-source">

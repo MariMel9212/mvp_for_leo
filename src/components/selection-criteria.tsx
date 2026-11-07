@@ -112,7 +112,7 @@ export function SelectionCriteria() {
               {index < criteria.length - 1 ? (
                 <>
                   <div data-snap-gap style={{ height: MIN_GAP }} />
-                  <div className="h-px bg-[rgba(39,41,45,0.16)]" />
+                  <div className="h-px bg-[rgba(39,41,45,0.08)]" />
                   <div className="h-4" />
                 </>
               ) : null}

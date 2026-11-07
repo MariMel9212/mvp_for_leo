@@ -31,7 +31,7 @@ const stats = [
 export default function HomePage() {
   return (
     <main className="mx-auto w-full max-w-[1440px] bg-[#fdfdfd] text-[#27292d]">
-      <section className="relative h-auto pb-16 min-[1440px]:h-[772px] min-[1440px]:pb-0">
+      <section className="relative max-[1439px]:min-h-[100dvh] min-[1440px]:h-[772px]">
         <div className="pointer-events-none absolute top-0 left-1/2 h-full w-screen -translate-x-1/2 overflow-hidden">
           <div
             aria-hidden
@@ -83,6 +83,7 @@ export default function HomePage() {
               imageClassName="top-[-52px] left-[-213px] h-[575px] w-[966px]"
               imageWidth={966}
               imageHeight={575}
+              focus="center 42%"
               action="Подобрать детокс"
             />
             <SituationCard
@@ -92,6 +93,7 @@ export default function HomePage() {
               imageClassName="top-0 left-[-189px] h-[527px] w-[790px] object-cover"
               imageWidth={790}
               imageHeight={527}
+              focus="62% 58%"
               action="Подобрать реабилитацию"
             />
           </div>
@@ -115,6 +117,7 @@ function SituationCard({
   imageClassName,
   imageWidth,
   imageHeight,
+  focus,
   action,
 }: {
   title: string;
@@ -123,6 +126,7 @@ function SituationCard({
   imageClassName: string;
   imageWidth: number;
   imageHeight: number;
+  focus: string;
   action: string;
 }) {
   return (
@@ -138,6 +142,7 @@ function SituationCard({
           width={imageWidth}
           height={imageHeight}
           className="absolute inset-0 h-full w-full object-cover min-[1440px]:hidden"
+          style={{ objectPosition: focus }}
         />
         <img
           alt=""

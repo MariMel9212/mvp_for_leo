@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { CoverageScan, FormatRadar, SituationSheets } from "@/components/step-art";
 import { tie } from "@/lib/tie";
 
@@ -13,9 +14,17 @@ const cardStyle = {
 
 function StepCopy({ title, text }: { title: string; text: string }) {
   return (
-    <div className="flex flex-col items-center gap-[6px] px-[26px] pt-[36px] text-center">
+    <div className="flex flex-col items-center gap-[6px] px-[26px] pt-[36px] text-center max-[1439px]:min-h-[148px] max-[1439px]:px-5 max-[1439px]:pt-7">
       <h3 className="w-full max-w-[331px] text-24 font-medium max-[1439px]:text-[20px] max-[1439px]:leading-[26px]">{tie(title)}</h3>
       <p className="w-full max-w-[331px] text-18 max-[1439px]:text-16 max-[1439px]:leading-[22px]">{tie(text)}</p>
+    </div>
+  );
+}
+
+function ArtWell({ children }: { children: ReactNode }) {
+  return (
+    <div className="relative mt-6 h-[168px] overflow-hidden min-[1440px]:absolute min-[1440px]:inset-0 min-[1440px]:mt-0 min-[1440px]:h-auto min-[1440px]:overflow-visible">
+      {children}
     </div>
   );
 }
@@ -33,23 +42,29 @@ export function RecoverySteps() {
       />
       <div className="relative mx-auto flex w-full max-w-[1440px] flex-col gap-8 px-[120px] pt-8 pb-8 max-[1439px]:px-4 min-[1440px]:gap-[52px] min-[1440px]:py-[34px]">
         <h2 className="text-40 font-medium max-[1439px]:text-[32px] max-[1439px]:leading-[40px]">{tie("3 шага до выздоровления")}</h2>
-        <div className="flex w-full flex-col items-stretch gap-6 min-[1440px]:h-[486px] min-[1440px]:flex-row min-[1440px]:items-end min-[1440px]:gap-[24px]">
-          <article className={`situation-card ${cardClass} h-[318px] max-[1439px]:h-auto max-[1439px]:pb-[128px]`} style={cardStyle}>
+        <div className="grid w-full grid-cols-1 items-stretch gap-6 min-[1440px]:flex min-[1440px]:h-[486px] min-[1440px]:flex-row min-[1440px]:items-end min-[1440px]:gap-[24px]">
+          <article className={`situation-card ${cardClass} max-[1439px]:flex max-[1439px]:h-full max-[1439px]:flex-col min-[1440px]:h-[318px]`} style={cardStyle}>
             <StepCopy
               title="Разбираемся в ситуации"
               text="Тип зависимости, состояние человека, прошлый опыт лечения, возраст и другие важные обстоятельства"
             />
-            <SituationSheets />
+            <ArtWell>
+              <SituationSheets />
+            </ArtWell>
           </article>
 
-          <article className={`format-card ${cardClass} h-[402px] max-[1439px]:h-auto max-[1439px]:pb-[132px]`} style={cardStyle}>
+          <article className={`format-card ${cardClass} max-[1439px]:flex max-[1439px]:h-full max-[1439px]:flex-col min-[1440px]:h-[402px]`} style={cardStyle}>
             <StepCopy title="Определяем формат" text={format} />
-            <FormatRadar />
+            <ArtWell>
+              <FormatRadar />
+            </ArtWell>
           </article>
 
-          <article className={`coverage-card ${cardClass} h-[486px] max-[1439px]:h-auto max-[1439px]:pb-[324px]`} style={cardStyle}>
+          <article className={`coverage-card ${cardClass} max-[1439px]:flex max-[1439px]:h-full max-[1439px]:flex-col min-[1440px]:h-[486px]`} style={cardStyle}>
             <StepCopy title="Отбираем учреждения" text={format} />
-            <CoverageScan />
+            <ArtWell>
+              <CoverageScan />
+            </ArtWell>
           </article>
         </div>
       </div>

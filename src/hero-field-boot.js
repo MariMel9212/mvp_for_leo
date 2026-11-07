@@ -9,6 +9,7 @@
   }
 
   function band() {
+    if (window.matchMedia("(max-width: 767px)").matches) return { inner: 180, outer: 320 };
     var compact = window.matchMedia("(max-width: 1599px)").matches;
     return compact ? { inner: 480, outer: 700 } : { inner: 350, outer: 610 };
   }

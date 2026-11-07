@@ -246,14 +246,22 @@ function GalleryCollage({ center, onOpen }: { center: CenterPageData; onOpen: ()
 }
 
 function CroppedPhoto({ photo, hover = false }: { photo: CenterPhoto; hover?: boolean }) {
+  const motion = hover ? " transition-transform duration-300 group-hover:scale-[1.04]" : "";
   return (
-    <div className={photo.frameClassName}>
+    <>
       <img
         alt={photo.alt}
         src={asset(photo.src)}
-        className={`${photo.imageClassName ?? "absolute inset-0 size-full max-w-none object-cover"}${hover ? " transition-transform duration-300 group-hover:scale-[1.04]" : ""}`}
+        className={`absolute inset-0 size-full object-cover object-center min-[1100px]:hidden${motion}`}
       />
-    </div>
+      <div className={`hidden min-[1100px]:block ${photo.frameClassName}`}>
+        <img
+          alt={photo.alt}
+          src={asset(photo.src)}
+          className={`${photo.imageClassName ?? "absolute inset-0 size-full max-w-none object-cover"}${motion}`}
+        />
+      </div>
+    </>
   );
 }
 

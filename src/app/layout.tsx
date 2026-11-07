@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Google_Sans, Inter } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
@@ -23,11 +23,18 @@ export const metadata: Metadata = {
     "Подбор проверенных реабилитационных центров для лечения и восстановления при зависимостях.",
 };
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: "#d2def3",
+};
+
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="ru"
-      className={`${googleSans.variable} ${inter.variable} h-full antialiased`}
+      className={`${googleSans.variable} ${inter.variable} h-full bg-[#d2def3] antialiased`}
     >
       <body className="min-h-full overflow-x-clip bg-[#fdfdfd] text-[#111]">
         <Script id="keep-top-on-reload" strategy="beforeInteractive">

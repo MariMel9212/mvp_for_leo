@@ -506,7 +506,7 @@ export function ConsultForm() {
 
       <form
         onSubmit={submit}
-        className="relative mt-8 flex w-full max-w-[415px] flex-col gap-[30px] rounded-[23px] bg-white px-[20px] py-[24px] max-[1439px]:gap-5 max-[1439px]:px-4 max-[1439px]:py-4 min-[1440px]:absolute min-[1440px]:top-[52px] min-[1440px]:left-[905px] min-[1440px]:mt-0 min-[1440px]:w-[415px]"
+        className="relative mt-8 flex w-full max-w-[415px] flex-col gap-[30px] rounded-[23px] bg-white px-[20px] py-[24px] max-[1439px]:gap-8 max-[1439px]:px-5 max-[1439px]:py-8 min-[1440px]:absolute min-[1440px]:top-[52px] min-[1440px]:left-[905px] min-[1440px]:mt-0 min-[1440px]:w-[415px]"
         noValidate
       >
         <div className="flex w-full flex-col gap-[22px] max-[1439px]:gap-4">
