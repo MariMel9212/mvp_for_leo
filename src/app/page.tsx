@@ -11,6 +11,7 @@ import { FaqSection } from "@/components/faq-section";
 import { SelectionCriteria } from "@/components/selection-criteria";
 import { SiteHeader } from "@/components/site-header";
 import { SupportStages } from "@/components/support-stages";
+import { asset } from "@/lib/base-path";
 import { tie } from "@/lib/tie";
 
 // Inlined so the gather animation starts before React hydrates.
@@ -133,14 +134,14 @@ function SituationCard({
       <div className="relative h-[320px] overflow-hidden min-[1440px]:h-[443px]">
         <img
           alt=""
-          src={image}
+          src={asset(image)}
           width={imageWidth}
           height={imageHeight}
           className="absolute inset-0 h-full w-full object-cover min-[1440px]:hidden"
         />
         <img
           alt=""
-          src={image}
+          src={asset(image)}
           width={imageWidth}
           height={imageHeight}
           className={`absolute hidden max-w-none min-[1440px]:block ${imageClassName}`}

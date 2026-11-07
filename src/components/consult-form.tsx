@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, type FocusEvent, type FormEvent, type KeyboardEvent as ReactKeyboardEvent } from "react";
+import { asset } from "@/lib/base-path";
 import { tie } from "@/lib/tie";
 
 type Channel = "call" | "messenger";
@@ -280,7 +281,7 @@ export function MessengerField({
       onBlur={trackBlur}
       className={`flex w-full items-center gap-[16px] rounded-[16px] border border-solid border-[#dedede] bg-white pr-[14px] pl-[24px] max-[1439px]:gap-3 max-[1439px]:pl-3 ${compact ? "h-[44px]" : "h-[48px] max-[1439px]:h-[44px]"}`}
     >
-      <img alt="" className="shrink-0" src={icon} width={compact ? 32 : 42} height={compact ? 32 : 42} />
+      <img alt="" className="shrink-0" src={asset(icon)} width={compact ? 32 : 42} height={compact ? 32 : 42} />
       <span className="h-[24px] w-px shrink-0 bg-[#dedede]" />
       <span className="flex min-w-0 flex-1 items-center gap-[4px]">
         <input
@@ -377,7 +378,7 @@ export function PhoneField({
         <span className={compact ? "text-16" : "text-18 max-[1439px]:text-16"}>+{country.dial}</span>
         <img
           alt=""
-          src="/consult/chevron-down.svg"
+          src={asset("/consult/chevron-down.svg")}
           width={24}
           height={24}
           className={`transition-transform duration-150 ${open ? "rotate-180" : ""}`}
@@ -489,17 +490,17 @@ export function ConsultForm() {
 
       <div className="pointer-events-none absolute top-[-23px] left-[1236px] hidden h-[243.212px] w-[271.782px] items-center justify-center min-[1440px]:flex">
         <div className="-scale-y-100 rotate-[-21.54deg]">
-          <img alt="" src="/consult/leaf-top.svg" width={223.858} height={173.671} />
+          <img alt="" src={asset("/consult/leaf-top.svg")} width={223.858} height={173.671} />
         </div>
       </div>
       <div className="pointer-events-none absolute top-[466px] left-[-121px] hidden h-[367.399px] w-[516.307px] items-center justify-center min-[1440px]:flex">
         <div className="rotate-[2.26deg]">
-          <img alt="" src="/consult/sheets.svg" width={503} height={347.863} />
+          <img alt="" src={asset("/consult/sheets.svg")} width={503} height={347.863} />
         </div>
       </div>
       <div className="pointer-events-none absolute top-[591.53px] left-[778.24px] hidden h-[214.097px] w-[223.769px] items-center justify-center min-[1440px]:flex">
         <div className="rotate-[169.57deg]">
-          <img alt="" src="/consult/leaf-bottom.svg" width={194.039} height={181.987} />
+          <img alt="" src={asset("/consult/leaf-bottom.svg")} width={194.039} height={181.987} />
         </div>
       </div>
 

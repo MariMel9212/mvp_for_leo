@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { AmenityIcon } from "@/components/amenity-icons";
 import { CallRequestButton } from "@/components/call-request-modal";
 import type { CenterPageData, CenterPhoto } from "@/content/centers/types";
+import { asset } from "@/lib/base-path";
 import { tie } from "@/lib/tie";
 
 const textAction =
@@ -249,7 +250,7 @@ function CroppedPhoto({ photo, hover = false }: { photo: CenterPhoto; hover?: bo
     <div className={photo.frameClassName}>
       <img
         alt={photo.alt}
-        src={photo.src}
+        src={asset(photo.src)}
         className={`${photo.imageClassName ?? "absolute inset-0 size-full max-w-none object-cover"}${hover ? " transition-transform duration-300 group-hover:scale-[1.04]" : ""}`}
       />
     </div>
@@ -291,7 +292,7 @@ function StaffBlock({
               <div className="relative h-[180px] overflow-hidden rounded-[12px] bg-[#c4c4c4]">
                 <img
                   alt=""
-                  src={person.photo}
+                  src={asset(person.photo)}
                   className="absolute inset-0 h-full w-full object-cover object-[center_18%]"
                 />
               </div>
@@ -367,7 +368,7 @@ function PhotoGallery({ photos, onClose }: { photos: { src: string; alt: string 
             <img
               key={photo.src}
               alt={photo.alt}
-              src={photo.src}
+              src={asset(photo.src)}
               loading="lazy"
               decoding="async"
               className="h-[220px] w-full rounded-[12px] object-cover"

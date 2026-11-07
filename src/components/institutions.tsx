@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useId, useState } from "react";
 import { InstitutionArt, ProgramArt } from "@/components/banner-art";
 import { CenterCard, catalogCenters, type CatalogCenter, type CenterDependency, type CenterKind } from "@/components/center-card";
+import { asset } from "@/lib/base-path";
 
 type Kind = CenterKind;
 type Dependency = CenterDependency;
@@ -71,7 +72,7 @@ function FilterMenu({
         <span className={`min-w-0 truncate text-13 text-[#27292d] ${value ? "" : "opacity-60"}`}>{value || label}</span>
         <img
           alt=""
-          src="/icons/chevron-filter.svg"
+          src={asset("/icons/chevron-filter.svg")}
           width={16}
           height={16}
           className={`shrink-0 ${open ? "rotate-180" : ""}`}
@@ -172,7 +173,7 @@ function CallBanner() {
           <span className="flex items-center justify-between px-[20px] py-[19px]">
             <span className="text-24 font-medium">Подобрать учереждение</span>
             <span className="flex size-[24px] items-center justify-center">
-              <img alt="" src="/icons/angle-right.svg" width={7.286} height={13.414} />
+              <img alt="" src={asset("/icons/angle-right.svg")} width={7.286} height={13.414} />
             </span>
           </span>
           <InstitutionArt />
@@ -184,7 +185,7 @@ function CallBanner() {
           <span className="flex items-center justify-between px-[20px] py-[19px]">
             <span className="text-24 font-medium">Подбрать программу</span>
             <span className="flex size-[24px] items-center justify-center">
-              <img alt="" src="/icons/angle-right.svg" width={7.286} height={13.414} />
+              <img alt="" src={asset("/icons/angle-right.svg")} width={7.286} height={13.414} />
             </span>
           </span>
           <ProgramArt />
@@ -274,7 +275,7 @@ export function Institutions() {
             }}
             className="flex items-center gap-[4px] rounded-[12px] px-[12px] py-[9px] text-16 text-[#27292d] disabled:opacity-40"
           >
-            <img alt="" src="/icons/filter.svg" width={20} height={20} />
+            <img alt="" src={asset("/icons/filter.svg")} width={20} height={20} />
             Очистить фильтр
           </button>
           <button

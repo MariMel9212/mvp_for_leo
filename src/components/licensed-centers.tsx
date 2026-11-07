@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { CenterCard, catalogCenters } from "@/components/center-card";
+import { asset } from "@/lib/base-path";
 
 export function LicensedCenters() {
   return (
@@ -16,7 +17,7 @@ export function LicensedCenters() {
           className="lime-control mx-auto flex h-[56px] w-full max-w-[377px] items-center justify-center gap-[4px] rounded-[12px] px-[20px] text-18 leading-[24px] font-medium"
         >
           Смотреть все
-          <img alt="" src="/icons/arrow-right.svg" width={24} height={24} />
+          <img alt="" src={asset("/icons/arrow-right.svg")} width={24} height={24} />
         </Link>
       </div>
     </section>

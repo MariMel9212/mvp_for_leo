@@ -330,13 +330,10 @@ function CriterionPill({ label, clear, grain }: { label: string; clear: boolean;
   return (
     <div
       data-part={clear ? "pill" : "hidden-pill"}
-      className="flex h-[35.1px] shrink-0 items-center gap-[8px] overflow-hidden rounded-[18px] border-[0.82px] border-solid pr-[8px] pl-[12px]"
+      className={`flex h-[35.1px] shrink-0 items-center gap-[8px] overflow-hidden rounded-[18px] border-[0.82px] border-solid pr-[8px] pl-[12px]${clear ? "" : " scan-grain"}`}
       style={{
         backgroundColor: clear ? "rgba(255,255,255,0.86)" : "#ecedeb",
         borderColor: clear ? "#c8c9c7" : "transparent",
-        backgroundImage: clear ? "none" : hiddenGrain.image,
-        backgroundRepeat: "repeat-x",
-        backgroundSize: clear ? undefined : `${hiddenGrain.width}px 35.1px`,
         backgroundPosition: clear ? undefined : `${grain}px 0`,
       }}
     >
@@ -406,6 +403,7 @@ export function CoverageScan() {
       aria-hidden
       className="absolute top-[197px] left-0 h-[305px] w-[383px] overflow-hidden rounded-[45px] max-[1439px]:top-auto max-[1439px]:bottom-0 max-[1439px]:left-1/2 max-[1439px]:-translate-x-1/2"
     >
+      <style>{`.scan-grain{background-image:${hiddenGrain.image};background-repeat:repeat-x;background-size:${hiddenGrain.width}px 35.1px}`}</style>
       <div className="scan-source">
         {rows.map((row) => (
           <CriterionRow key={row.top} top={row.top} delay={row.delay} grain={row.grain} items={row.items} clear={false} />

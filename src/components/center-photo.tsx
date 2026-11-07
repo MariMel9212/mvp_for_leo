@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { asset } from "@/lib/base-path";
 
 export type CenterSlide = {
   src: string;
@@ -45,7 +46,7 @@ export function CenterPhoto({
           <img
             key={slide.src}
             alt=""
-            src={slide.src}
+            src={asset(slide.src)}
             className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ease-out ${
               slideIndex === index ? "z-10 opacity-100" : "opacity-0"
             }`}
@@ -54,7 +55,7 @@ export function CenterPhoto({
       ) : (
         <img
           alt=""
-          src={slides[index].src}
+          src={asset(slides[index].src)}
           className="absolute top-0 left-0 max-w-none transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
           style={{ width: phase.w, height: phase.h, transform: `translate3d(${phase.x}px, ${phase.y}px, 0)` }}
         />
