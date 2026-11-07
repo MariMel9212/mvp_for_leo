@@ -219,7 +219,7 @@ export function Institutions() {
     <div className="mt-6 px-[120px] max-[1439px]:px-4 min-[1440px]:mt-[24px]">
       <h1 className="text-40 font-medium max-[1439px]:text-[32px] max-[1439px]:leading-[40px]">Все учереждения</h1>
       <form
-        className="relative z-20 mt-8 flex w-full flex-col gap-[20px] rounded-[13px] bg-white px-4 py-[23px] min-[1440px]:mt-[46px] min-[1440px]:px-[21px]"
+        className="relative z-20 mt-8 hidden w-full flex-col gap-[20px] rounded-[13px] bg-white px-4 py-[23px] min-[1440px]:mt-[46px] min-[1440px]:px-[21px]"
         onSubmit={(event) => {
           event.preventDefault();
           setApplied(draft);

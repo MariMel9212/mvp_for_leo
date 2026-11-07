@@ -100,10 +100,10 @@ export function CenterPage({ center }: { center: CenterPageData }) {
             ) : null}
 
             {center.schedule.length ? (
-              <div className="flex flex-col gap-[8px]">
-                <div className={`relative ${scheduleOpen ? "" : "h-[152px] overflow-hidden"}`}>
+              <div className="flex flex-col gap-[10px]">
+                <h3 className="text-[22px] leading-[28px] font-medium">Расписание дня</h3>
+                <div className={`relative ${scheduleOpen ? "" : "h-[132px] overflow-hidden"}`}>
                   <div className="flex flex-col gap-[10px]">
-                    <h3 className="text-18 font-medium">Расписание дня</h3>
                     <ul className="grid grid-cols-1 gap-x-[28px] gap-y-[8px] sm:grid-cols-2">
                       {center.schedule.map((item) => (
                         <li key={item.time} className="flex min-w-0 flex-col">

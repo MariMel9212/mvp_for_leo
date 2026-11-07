@@ -212,9 +212,13 @@
 }
 
 @media (max-width: 1439px) {
+  body {
+    background-color: #d2def3;
+  }
+
   .situation-sheets {
-    transform: translateX(-50%) scale(1.8);
-    transform-origin: center top;
+    transform: translateX(-50%) scale(1);
+    transform-origin: center bottom;
   }
 }
 

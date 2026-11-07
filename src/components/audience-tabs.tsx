@@ -43,7 +43,7 @@ function Tab({
       role="tab"
       aria-selected={selected}
       onClick={onSelect}
-      className={`flex h-full min-w-0 items-center justify-center rounded-[8px] px-1.5 text-[15px] leading-none whitespace-nowrap text-[#27292d] min-[1440px]:px-[14px] min-[1440px]:text-16 ${selected ? "bg-white" : "opacity-50"}`}
+      className={`flex h-full min-w-0 items-center justify-center rounded-[8px] px-1.5 text-[15px] leading-none font-medium whitespace-nowrap text-[#27292d] min-[1440px]:px-[14px] min-[1440px]:text-16 min-[1440px]:font-normal ${selected ? "bg-white" : "opacity-50"}`}
     >
       {label}
     </button>

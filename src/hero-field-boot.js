@@ -1,5 +1,5 @@
 (function () {
-  var COUNT = 3500;
+  var COUNT = window.matchMedia("(max-width: 767px)").matches ? 1400 : 3500;
   var CAMERA_Z = 900;
   var TAN_HALF = Math.tan((75 * Math.PI) / 180 / 2);
   var DOT = 2.8;
@@ -63,6 +63,11 @@
     var state = { alive: true, frame: 0 };
     var started = performance.now();
     var last = started;
+    var originX = 0;
+    var originY = 0;
+    var visible = true;
+    var running = false;
+    var ticks = 0;
     var pointer = { x: 0, y: 0, time: last, speed: 0 };
     canvas.__hero = state;
 
@@ -82,17 +87,43 @@
         outer = next.outer;
         particles = createParticles(inner, outer, reduce || performance.now() - started > 2800);
       }
+      placeOrigin();
+    }
+
+    function placeOrigin() {
+      originX = canvas.width / 2;
+      originY = canvas.height / 2;
+      if (window.matchMedia("(min-width: 1440px)").matches) return;
+      var node = document.getElementById("podbor");
+      if (!node) return;
+      var canvasRect = canvas.getBoundingClientRect();
+      var rect = node.getBoundingClientRect();
+      if (canvasRect.width < 2 || canvasRect.height < 2) return;
+      originX = ((rect.left + rect.width / 2 - canvasRect.left) / canvasRect.width) * canvas.width;
+      originY = ((rect.top + rect.height / 2 - canvasRect.top) / canvasRect.height) * canvas.height;
     }
 
     var resizeObserver = new ResizeObserver(resize);
     resizeObserver.observe(canvas);
+    var podborNode = document.getElementById("podbor");
+    if (podborNode) resizeObserver.observe(podborNode);
     resize();
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(placeOrigin);
+
+    function start() {
+      if (running || !state.alive) return;
+      running = true;
+      last = performance.now();
+      state.frame = requestAnimationFrame(draw);
+    }
 
     var visibility = new IntersectionObserver(
       function (entries) {
-        flyOut = !entries[0].isIntersecting;
+        visible = entries[0].isIntersecting;
+        flyOut = !visible;
+        if (visible) start();
       },
-      { threshold: 0.45 },
+      { threshold: 0.05 },
     );
     visibility.observe(canvas);
 
@@ -142,6 +173,10 @@
 
     function draw(now) {
       if (!state.alive) return;
+      if (ticks < 180) {
+        ticks += 1;
+        placeOrigin();
+      }
       var dt = Math.min(48, now - last);
       last = now;
       var frames = dt / 16.67;
@@ -201,8 +236,8 @@
         var depth = CAMERA_Z - z;
         if (depth <= 1) continue;
         var scale = height / 2 / (depth * TAN_HALF);
-        var sx = width / 2 + x * scale;
-        var sy = height / 2 - y * scale;
+        var sx = originX + x * scale;
+        var sy = originY - y * scale;
         var dot = (DOT * scale) / 2;
         if (dot < 0.45) dot = 0.45;
         if (sx < -dot || sy < -dot || sx > width + dot || sy > height + dot) continue;
@@ -211,10 +246,24 @@
       }
 
       context.fill();
+      var settled = true;
+      if (!visible) {
+        for (var k = 0; k < particles.length; k++) {
+          if (particles[k].flyProgress < 1) {
+            settled = false;
+            break;
+          }
+        }
+      }
+      if (!visible && settled) {
+        running = false;
+        state.frame = 0;
+        return;
+      }
       state.frame = requestAnimationFrame(draw);
     }
 
-    draw(performance.now());
+    start();
 
     return function stop() {
       state.alive = false;

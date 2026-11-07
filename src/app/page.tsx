@@ -31,7 +31,7 @@ const stats = [
 export default function HomePage() {
   return (
     <main className="mx-auto w-full max-w-[1440px] bg-[#fdfdfd] text-[#27292d]">
-      <section className="relative max-[1439px]:min-h-[100dvh] min-[1440px]:h-[772px]">
+      <section className="relative flex flex-col bg-[#d2def3] max-[1439px]:-mt-[env(safe-area-inset-top,0px)] max-[1439px]:min-h-[100dvh] max-[1439px]:pt-[env(safe-area-inset-top,0px)] min-[1440px]:block min-[1440px]:h-[772px] min-[1440px]:bg-transparent">
         <div className="pointer-events-none absolute top-0 left-1/2 h-full w-screen -translate-x-1/2 overflow-hidden">
           <div
             aria-hidden
@@ -44,10 +44,10 @@ export default function HomePage() {
           <HeroField />
         </div>
 
-        <div className="relative z-10 flex flex-col items-center gap-[122px] max-[1439px]:gap-12">
+        <div className="relative z-10 flex w-full flex-col items-center max-[1439px]:min-h-0 max-[1439px]:flex-1 min-[1440px]:gap-[122px]">
           <SiteHeader />
 
-          <div id="podbor" className="flex w-full max-w-[754px] flex-col items-center gap-8 px-4 min-[1440px]:gap-[42px] min-[1440px]:px-0">
+          <div id="podbor" className="flex w-full max-w-[754px] flex-col items-center gap-8 px-4 max-[1439px]:flex-1 max-[1439px]:justify-center max-[1439px]:py-8 min-[1440px]:gap-[42px] min-[1440px]:px-0">
             <h1 className="w-full text-center text-48 font-medium max-[1439px]:text-[32px] max-[1439px]:leading-[40px]">
               {tie("Проверенные ребцентра для лечения и восстановления при зависимостях")}
             </h1>
@@ -83,7 +83,7 @@ export default function HomePage() {
               imageClassName="top-[-52px] left-[-213px] h-[575px] w-[966px]"
               imageWidth={966}
               imageHeight={575}
-              focus="center 42%"
+              focus="52% 64%"
               action="Подобрать детокс"
             />
             <SituationCard
@@ -93,7 +93,7 @@ export default function HomePage() {
               imageClassName="top-0 left-[-189px] h-[527px] w-[790px] object-cover"
               imageWidth={790}
               imageHeight={527}
-              focus="62% 58%"
+              focus="56% 36%"
               action="Подобрать реабилитацию"
             />
           </div>
@@ -141,8 +141,8 @@ function SituationCard({
           src={asset(image)}
           width={imageWidth}
           height={imageHeight}
-          className="absolute inset-0 h-full w-full object-cover min-[1440px]:hidden"
-          style={{ objectPosition: focus }}
+          className="absolute inset-0 h-full w-full origin-center scale-[1.18] object-cover min-[1440px]:hidden"
+          style={{ objectPosition: focus, transformOrigin: focus }}
         />
         <img
           alt=""

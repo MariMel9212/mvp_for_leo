@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { tie } from "@/lib/tie";
 
 const items: { q: string; a?: string }[] = [
@@ -65,14 +65,6 @@ export function FaqSection() {
   const [open, setOpen] = useState(0);
   const spacer = useRef<HTMLDivElement>(null);
   const locking = useRef(false);
-
-  useEffect(() => {
-    const onScroll = () => {
-      if (!locking.current) trimSpacer(spacer.current);
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   return (
     <section className="px-[120px] pt-16 pb-16 [overflow-anchor:none] max-[1439px]:px-4 min-[1440px]:pt-[120px] min-[1440px]:pb-[80px]">

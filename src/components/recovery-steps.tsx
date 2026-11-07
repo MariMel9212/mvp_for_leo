@@ -23,7 +23,7 @@ function StepCopy({ title, text }: { title: string; text: string }) {
 
 function ArtWell({ children }: { children: ReactNode }) {
   return (
-    <div className="relative mt-6 h-[168px] overflow-hidden min-[1440px]:absolute min-[1440px]:inset-0 min-[1440px]:mt-0 min-[1440px]:h-auto min-[1440px]:overflow-visible">
+    <div className="relative mt-5 h-[196px] overflow-hidden min-[1440px]:absolute min-[1440px]:inset-0 min-[1440px]:mt-0 min-[1440px]:h-auto min-[1440px]:overflow-visible">
       {children}
     </div>
   );
