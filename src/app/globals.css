@@ -211,11 +211,20 @@
   transition: transform 500ms ease-in-out;
 }
 
-@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+@media (max-width: 1439px) {
+  .situation-sheets {
+    transform: translateX(-50%) scale(0.68);
+    transform-origin: center bottom;
+  }
+}
+
+@media (min-width: 1440px) and (hover: hover) and (prefers-reduced-motion: no-preference) {
   .situation-card:hover .situation-sheets {
     transform: translateY(-12px) scale(1.12);
   }
+}
 
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
   .situation-card:hover .situation-sheet[data-part="checklist"] .situation-sheet-motion {
     transform: translateX(-12px) translateY(0px);
   }

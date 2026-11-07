@@ -172,7 +172,7 @@ function DocumentSheet() {
 
 export function SituationSheets() {
   return (
-    <div data-part="sheets" className="situation-sheets absolute top-[203px] left-[94px] h-[133px] w-[195px] max-[1439px]:top-auto max-[1439px]:bottom-4 max-[1439px]:left-1/2 max-[1439px]:-translate-x-1/2">
+    <div data-part="sheets" className="situation-sheets absolute top-[203px] left-[94px] h-[133px] w-[195px] max-[1439px]:top-auto max-[1439px]:bottom-3 max-[1439px]:left-1/2">
       <div data-part="table" className="situation-sheet absolute" style={{ left: 105.93, top: 1.8 }}>
         <div className="situation-sheet-motion">
           <TableSheet />

@@ -1,5 +1,24 @@
-import type { ReactNode } from "react";
+"use client";
+
+import { useEffect, useRef, type ReactNode } from "react";
 import { tie } from "@/lib/tie";
+
+const GRID = 56;
+const GRID_OFFSET = 2;
+const MIN_GAP = 16;
+
+function snapToGrid(section: HTMLElement) {
+  const sectionTop = section.getBoundingClientRect().top;
+  section.querySelectorAll<HTMLElement>("[data-snap-gap]").forEach((gap) => {
+    const line = gap.nextElementSibling;
+    if (!(line instanceof HTMLElement)) return;
+    const y = line.getBoundingClientRect().top - sectionTop;
+    const next = GRID_OFFSET + Math.ceil((y - GRID_OFFSET) / GRID - 1e-3) * GRID;
+    const delta = next - y;
+    if (Math.abs(delta) < 0.75) return;
+    gap.style.height = `${gap.getBoundingClientRect().height + delta}px`;
+  });
+}
 
 const criteria: { n: string; title: string; text: ReactNode }[] = [
   {
@@ -15,7 +34,7 @@ const criteria: { n: string; title: string; text: ReactNode }[] = [
   {
     n: "03",
     title: "Персонал и специалисты",
-        text: tie("Проверяем, есть ли в учреждении профильные врачи, психологи и другие специалисты, необходимые для конкретного формата помощи"),
+    text: tie("Проверяем, есть ли в учреждении профильные врачи, психологи и другие специалисты, необходимые для конкретного формата помощи"),
   },
   {
     n: "04",
@@ -30,8 +49,27 @@ const criteria: { n: string; title: string; text: ReactNode }[] = [
 ];
 
 export function SelectionCriteria() {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+    const snap = () => {
+      observer.disconnect();
+      section.querySelectorAll<HTMLElement>("[data-snap-gap]").forEach((gap) => {
+        gap.style.height = `${MIN_GAP}px`;
+      });
+      snapToGrid(section);
+      observer.observe(section);
+    };
+    const observer = new ResizeObserver(snap);
+    snap();
+    document.fonts?.ready.then(snap);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section id="pro-podbor" className="relative w-full pt-16 pb-16 min-[1440px]:pt-[120px] min-[1440px]:pb-[92px]">
+    <section ref={sectionRef} id="pro-podbor" className="relative w-full pt-16 pb-16 min-[1440px]:pt-[120px] min-[1440px]:pb-[92px]">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0"
@@ -61,9 +99,9 @@ export function SelectionCriteria() {
             {tie("При подборе специализированного учреждения мы оцениваем весь комплекс факторов: качество и формат оказываемых услуг, соответствие требованиям законодательства, квалификацию специалистов, безопасность и прозрачность условий")}
           </p>
         </div>
-        <ol className="mt-10 flex w-full flex-col gap-[12px] max-[1439px]:[&_br]:hidden min-[1440px]:mt-[120px] min-[1440px]:ml-auto min-[1440px]:w-[588px]">
+        <ol className="mt-10 flex w-full flex-col max-[1439px]:[&_br]:hidden min-[1440px]:mt-[120px] min-[1440px]:ml-auto min-[1440px]:w-[588px]">
           {criteria.map((item, index) => (
-            <li key={item.n} className={index < criteria.length - 1 ? "flex flex-col gap-[12px]" : undefined}>
+            <li key={item.n} className="flex flex-col">
               <div className="flex items-start gap-[16px]">
                 <span className="text-24 font-medium text-[#5a98ff] opacity-80">{item.n}</span>
                 <div className="flex min-w-0 flex-1 flex-col gap-[4px]">
@@ -72,15 +110,11 @@ export function SelectionCriteria() {
                 </div>
               </div>
               {index < criteria.length - 1 ? (
-                <div className="relative h-0">
-                  <div
-                    className="absolute inset-x-0 top-0 h-px"
-                    style={{
-                      backgroundImage:
-                        "repeating-linear-gradient(to right, rgba(39,41,45,0.1) 0 9px, transparent 9px 18px)",
-                    }}
-                  />
-                </div>
+                <>
+                  <div data-snap-gap style={{ height: MIN_GAP }} />
+                  <div className="h-px bg-[rgba(39,41,45,0.16)]" />
+                  <div className="h-4" />
+                </>
               ) : null}
             </li>
           ))}
