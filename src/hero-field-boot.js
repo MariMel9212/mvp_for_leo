@@ -2,7 +2,7 @@
   var COUNT = 3500;
   var CAMERA_Z = 900;
   var TAN_HALF = Math.tan((75 * Math.PI) / 180 / 2);
-  var DOT = 4.5;
+  var DOT = 2.8;
 
   function ease(t) {
     return 1 - (1 - t) ** 3;
@@ -11,7 +11,7 @@
   function band(canvas) {
     if (!canvas || window.matchMedia("(min-width: 1440px)").matches) {
       var compact = window.matchMedia("(max-width: 1599px)").matches;
-      return compact ? { inner: 550, outer: 800 } : { inner: 410, outer: 700 };
+      return compact ? { inner: 480, outer: 700 } : { inner: 350, outer: 610 };
     }
     var rect = canvas.getBoundingClientRect();
     if (rect.height < 2) return { inner: 550, outer: 800 };
@@ -99,6 +99,7 @@
         outer = next.outer;
         particles = createParticles(inner, outer, reduce || performance.now() - started > 2800);
       }
+      DOT = window.matchMedia("(min-width: 1440px)").matches ? 2.8 : 4.5;
       placeOrigin();
     }
 
