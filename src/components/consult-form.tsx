@@ -336,6 +336,7 @@ export function PhoneField({
   const [menuBox, setMenuBox] = useState<{ top: number; left: number; width: number; maxHeight: number } | null>(null);
   const rootRef = useRef<HTMLLabelElement>(null);
   const menuRef = useRef<HTMLUListElement>(null);
+  const pickedRef = useRef(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const caretRef = useRef<number | null>(null);
   const country = countries.find((item) => item.id === countryId) ?? countries[0];
@@ -398,6 +399,11 @@ export function PhoneField({
         aria-haspopup="listbox"
         aria-expanded={open}
         onClick={() => {
+          if (pickedRef.current) {
+            pickedRef.current = false;
+            setOpen(false);
+            return;
+          }
           if (!open) placeMenu();
           setOpen((current) => !current);
         }}
@@ -455,9 +461,19 @@ export function PhoneField({
                       type="button"
                       role="option"
                       aria-selected={selected}
-                      onClick={() => {
+                      onPointerDown={(event) => {
+                        event.preventDefault();
+                        event.stopPropagation();
+                        pickedRef.current = true;
                         onCountry(item.id);
                         setOpen(false);
+                        window.setTimeout(() => {
+                          pickedRef.current = false;
+                        }, 0);
+                      }}
+                      onClick={(event) => {
+                        event.preventDefault();
+                        event.stopPropagation();
                       }}
                       className={`flex h-[40px] w-full items-center gap-[12px] px-[16px] text-left text-16 text-[#27292d] ${selected ? "bg-[#f6f8fa]" : "hover:bg-[#f6f8fa]"}`}
                     >
