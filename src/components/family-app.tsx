@@ -41,8 +41,8 @@ export function FamilyAppSection() {
         <img
           alt=""
           src={asset("/app/phone.webp")}
-          width={1028}
-          height={1889}
+          width={1371}
+          height={2519}
           className="absolute top-0 left-[13.87%] w-[63.35%] max-w-none"
         />
         <img
