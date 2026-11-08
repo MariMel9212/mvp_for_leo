@@ -219,7 +219,7 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
   const zoneLabel = zones.find((item) => item.id === zone)?.label ?? zones[1].label;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-[rgba(39,41,45,0.45)] p-[24px]">
+    <div className="fixed inset-0 z-50 flex items-end justify-center bg-[rgba(39,41,45,0.45)] md:items-center md:p-[24px]">
       <button type="button" aria-label="Закрыть" className="absolute inset-0 cursor-default" onClick={onClose} />
       <div
         ref={dialogRef}
@@ -227,7 +227,7 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
         aria-modal="true"
         aria-labelledby={titleId}
         tabIndex={-1}
-        className="relative flex max-h-[calc(100dvh-32px)] w-full max-w-[1100px] flex-col overflow-y-auto rounded-[21px] bg-white outline-none min-[1100px]:h-[650px] min-[1100px]:overflow-hidden"
+        className="mobile-sheet relative flex max-h-[calc(100dvh-12px)] w-full max-w-[1100px] flex-col overflow-y-auto rounded-t-[21px] bg-white pb-[max(16px,env(safe-area-inset-bottom))] outline-none md:max-h-[calc(100dvh-32px)] md:rounded-[21px] md:pb-0 min-[1100px]:h-[650px] min-[1100px]:overflow-hidden"
       >
         <div className="flex h-[44px] items-center justify-between px-[26px] pt-[20px]">
           {step === "format" || step === "done" ? (

@@ -327,6 +327,21 @@
   }
 }
 
+@keyframes sheet-up {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 767px) and (prefers-reduced-motion: no-preference) {
+  .mobile-sheet {
+    animation: sheet-up 240ms ease-out;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .criterion-track {
     animation: none;
