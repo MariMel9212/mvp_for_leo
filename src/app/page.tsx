@@ -14,13 +14,6 @@ import { SupportStages } from "@/components/support-stages";
 import { asset } from "@/lib/base-path";
 import { tie } from "@/lib/tie";
 
-// Inlined so the gather animation starts before React hydrates.
-const heroFieldBoot = readFileSync(
-  path.join(process.cwd(), "src/hero-field-boot.js"),
-  "utf8",
-);
-
-
 const stats = [
   { value: "3 000 +", label: "семей получили профильную помощь" },
   { value: "6 000 +", label: "зависимых прошедших лечение" },
@@ -29,6 +22,9 @@ const stats = [
 ];
 
 export default function HomePage() {
+  // Read on each render so the dev server picks up edits to the boot script.
+  const heroFieldBoot = readFileSync(path.join(process.cwd(), "src/hero-field-boot.js"), "utf8");
+
   return (
     <main className="mx-auto w-full max-w-[1440px] bg-[#fdfdfd] text-[#27292d]">
       <section className="relative flex flex-col bg-[#d2def3] max-[1439px]:-mt-[env(safe-area-inset-top,0px)] max-[1439px]:pt-[env(safe-area-inset-top,0px)] min-[1440px]:block min-[1440px]:h-[772px] min-[1440px]:bg-transparent">
