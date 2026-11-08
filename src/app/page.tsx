@@ -8,7 +8,9 @@ import { LicensedCenters } from "@/components/licensed-centers";
 import { RecoverySteps } from "@/components/recovery-steps";
 import { CallRequestButton } from "@/components/call-request-modal";
 import { FaqSection } from "@/components/faq-section";
+import { FamilyAppSection } from "@/components/family-app";
 import { SelectionCriteria } from "@/components/selection-criteria";
+import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { SupportStages } from "@/components/support-stages";
 import { asset } from "@/lib/base-path";
@@ -108,7 +110,9 @@ export default function HomePage() {
       <ConsultForm />
       <SelectionCriteria />
       <SupportStages />
+      <FamilyAppSection />
       <FaqSection />
+      <SiteFooter />
     </main>
   );
 }
