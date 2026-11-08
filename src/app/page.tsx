@@ -32,7 +32,7 @@ export default function HomePage() {
     <main className="mx-auto w-full max-w-[1440px] bg-[#fdfdfd] text-[#27292d]">
       <section className="relative flex flex-col bg-[#d2def3] max-[1439px]:-mt-[env(safe-area-inset-top,0px)] max-[1439px]:pt-[env(safe-area-inset-top,0px)] min-[1440px]:block min-[1440px]:h-[772px] min-[1440px]:bg-transparent">
         <div className="relative z-20 min-[1440px]:absolute min-[1440px]:inset-x-0 min-[1440px]:top-0">
-          <SiteHeader />
+          <SiteHeader revealCta />
         </div>
 
         <div className="relative w-full max-[1439px]:h-[max(700px,calc(100dvh-8.5rem))] min-[1440px]:absolute min-[1440px]:inset-0">
@@ -56,6 +56,7 @@ export default function HomePage() {
               </h1>
               <AudienceTabs />
               <a
+                id="hero-cta"
                 href="#situacii"
                 className="lime-control flex h-[56px] w-full max-w-[377px] items-center justify-center rounded-[12px] px-[20px] text-18 leading-[24px] font-medium"
               >
