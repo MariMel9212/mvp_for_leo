@@ -1,24 +1,5 @@
-"use client";
-
-import { useEffect, useRef, type ReactNode } from "react";
+import { type ReactNode } from "react";
 import { tie } from "@/lib/tie";
-
-const GRID = 56;
-const GRID_OFFSET = 2;
-const MIN_GAP = 16;
-
-function snapToGrid(section: HTMLElement) {
-  const sectionTop = section.getBoundingClientRect().top;
-  section.querySelectorAll<HTMLElement>("[data-snap-gap]").forEach((gap) => {
-    const line = gap.nextElementSibling;
-    if (!(line instanceof HTMLElement)) return;
-    const y = line.getBoundingClientRect().top - sectionTop;
-    const next = GRID_OFFSET + Math.ceil((y - GRID_OFFSET) / GRID - 1e-3) * GRID;
-    const delta = next - y;
-    if (Math.abs(delta) < 0.75) return;
-    gap.style.height = `${gap.getBoundingClientRect().height + delta}px`;
-  });
-}
 
 const criteria: { n: string; title: string; text: ReactNode }[] = [
   {
@@ -49,25 +30,8 @@ const criteria: { n: string; title: string; text: ReactNode }[] = [
 ];
 
 export function SelectionCriteria() {
-  const sectionRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
-    const snap = () => {
-      section.querySelectorAll<HTMLElement>("[data-snap-gap]").forEach((gap) => {
-        gap.style.height = `${MIN_GAP}px`;
-      });
-      snapToGrid(section);
-    };
-    snap();
-    document.fonts?.ready.then(snap);
-    window.addEventListener("resize", snap);
-    return () => window.removeEventListener("resize", snap);
-  }, []);
-
   return (
-    <section ref={sectionRef} id="pro-podbor" className="relative w-full pt-16 pb-16 min-[1440px]:pt-[120px] min-[1440px]:pb-[92px]">
+    <section id="pro-podbor" className="relative w-full pt-16 pb-16 min-[1440px]:pt-[120px] min-[1440px]:pb-[92px]">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0"
@@ -109,9 +73,9 @@ export function SelectionCriteria() {
               </div>
               {index < criteria.length - 1 ? (
                 <>
-                  <div data-snap-gap style={{ height: MIN_GAP }} />
+                  <div className="h-3" />
                   <div className="h-px bg-[rgba(39,41,45,0.035)]" />
-                  <div className="h-4" />
+                  <div className="h-3" />
                 </>
               ) : null}
             </li>
