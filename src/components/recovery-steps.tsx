@@ -21,9 +21,9 @@ function StepCopy({ title, text }: { title: string; text: string }) {
   );
 }
 
-function ArtWell({ children }: { children: ReactNode }) {
+function ArtWell({ children, className = "" }: { children: ReactNode; className?: string }) {
   return (
-    <div className="relative mt-5 h-[196px] overflow-hidden min-[1440px]:absolute min-[1440px]:inset-0 min-[1440px]:mt-0 min-[1440px]:h-auto min-[1440px]:overflow-visible">
+    <div className={`relative mt-5 h-[196px] overflow-hidden min-[1440px]:absolute min-[1440px]:inset-0 min-[1440px]:mt-0 min-[1440px]:h-auto min-[1440px]:overflow-visible${className ? ` ${className}` : ""}`}>
       {children}
     </div>
   );
@@ -60,9 +60,9 @@ export function RecoverySteps() {
             </ArtWell>
           </article>
 
-          <article className={`coverage-card ${cardClass} max-[1439px]:flex max-[1439px]:h-full max-[1439px]:flex-col min-[1440px]:h-[486px]`} style={cardStyle}>
+          <article className={`coverage-card ${cardClass} max-[1439px]:flex max-[1439px]:h-full max-[1439px]:flex-col max-[1439px]:[container-type:inline-size] min-[1440px]:h-[486px]`} style={cardStyle}>
             <StepCopy title="Отбираем учреждения" text={format} />
-            <ArtWell>
+            <ArtWell className="max-[1439px]:h-[calc(100cqw*305/383)]">
               <CoverageScan />
             </ArtWell>
           </article>

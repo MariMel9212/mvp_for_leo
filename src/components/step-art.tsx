@@ -401,7 +401,7 @@ export function CoverageScan() {
     <div
       data-part="coverage"
       aria-hidden
-      className="absolute top-[197px] left-0 h-[305px] w-[383px] overflow-hidden rounded-[45px] max-[1439px]:top-auto max-[1439px]:bottom-[-8px] max-[1439px]:left-1/2 max-[1439px]:origin-bottom max-[1439px]:[transform:translateX(-50%)_scale(0.66)]"
+      className="absolute top-[197px] left-0 h-[305px] w-[383px] overflow-hidden rounded-[45px] max-[1439px]:top-auto max-[1439px]:bottom-0 max-[1439px]:origin-bottom-left max-[1439px]:[transform:scale(calc(100cqw/383px))]"
     >
       <style>{`.scan-grain{background-image:${hiddenGrain.image};background-repeat:repeat-x;background-size:${hiddenGrain.width}px 35.1px}`}</style>
       <div className="scan-source">
