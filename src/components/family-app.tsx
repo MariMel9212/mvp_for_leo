@@ -74,7 +74,7 @@ export function FamilyAppSection() {
         className="relative mx-auto mt-8 w-full max-w-[420px] [container-type:inline-size] min-[1440px]:absolute min-[1440px]:top-[25px] min-[1440px]:left-[767px] min-[1440px]:mx-0 min-[1440px]:mt-0 min-[1440px]:w-[482.7px] min-[1440px]:max-w-none"
       >
         <div className="w-full" style={{ paddingBottom: `${(598 / 482.695) * 100}%` }} />
-        <div className="absolute top-0 left-0 h-[598px] w-[482.695px] origin-top-left overflow-hidden [transform:scale(calc(100cqw/482.695px))]">
+        <div className="absolute top-0 left-0 h-[598px] w-[482.695px] origin-top-left overflow-hidden [transform:scale(calc(100cqw/482.695px))] max-[1439px]:[transform:translateX(calc(50cqw-220.36px*100cqw/482.695px))_scale(calc(100cqw/482.695px))]">
           <div className="absolute top-0 left-[67.36px] h-[665.284px] w-[306px]">
             <div
               className="absolute overflow-hidden rounded-[24px] bg-white"
