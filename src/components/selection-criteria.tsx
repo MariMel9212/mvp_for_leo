@@ -90,7 +90,7 @@ export function SelectionCriteria() {
       />
       <div className="relative mx-auto flex w-full max-w-[1200px] flex-col items-start px-0 max-[1439px]:px-4 min-[1440px]:flex-row">
         <div className="flex w-full shrink-0 flex-col gap-[24px] min-[1440px]:w-[483px] max-[1439px]:[&_br]:hidden">
-          <h2 className="text-40 font-medium max-[1439px]:text-[32px] max-[1439px]:leading-[40px]">
+          <h2 className="text-40 font-medium max-[1439px]:text-[32px] max-[1439px]:leading-[40px] min-[1440px]:w-[518px]">
             {tie("Проверяем каждый центр перед рекомендацией")}
           </h2>
           <p className="text-16 opacity-60">
