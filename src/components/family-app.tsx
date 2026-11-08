@@ -49,7 +49,7 @@ const stores = [
 
 export function FamilyAppSection() {
   return (
-    <section className="relative mt-16 overflow-hidden bg-[#fdfdfd] px-4 pt-2 pb-2 min-[1440px]:mt-[106px] min-[1440px]:h-[637px] min-[1440px]:px-0 min-[1440px]:pt-0">
+    <section className="relative mt-16 overflow-hidden bg-[#fdfdfd] px-4 pt-2 pb-10 min-[1440px]:mt-[106px] min-[1440px]:h-[637px] min-[1440px]:px-0 min-[1440px]:pt-0 min-[1440px]:pb-2">
       <div className="min-[1440px]:absolute min-[1440px]:top-[14px] min-[1440px]:left-[120px] min-[1440px]:w-[496px]">
         <h2 className="text-40 font-medium max-[1439px]:text-[32px] max-[1439px]:leading-[40px]">
           {tie("Помогаем тем, кто рядом")}
@@ -59,21 +59,6 @@ export function FamilyAppSection() {
             "Приложение Leo помогает близким с зависимостью лучше понимать свои чувства, справляться с переживаниями и находить опору каждый день",
           )}
         </p>
-      </div>
-
-      <div className="mt-8 flex flex-wrap gap-[14px] min-[1440px]:absolute min-[1440px]:top-[515px] min-[1440px]:left-[120px] min-[1440px]:mt-0">
-        {stores.map((store) => (
-          <a
-            key={store.src}
-            href={store.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={store.alt}
-            className="block h-12 w-auto rounded-[10px] transition duration-200 ease-out hover:-translate-y-px hover:shadow-[0_4px_14px_rgba(39,41,45,0.14)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#27292d] active:translate-y-0 active:shadow-none"
-          >
-            <img alt="" src={asset(store.src)} width={store.width} height={store.height} className="h-12 w-auto" />
-          </a>
-        ))}
       </div>
 
       <div
@@ -125,6 +110,21 @@ export function FamilyAppSection() {
             leafStyle={{ transform: "rotate(20.55deg) skewX(-2.64deg)" }}
           />
         </div>
+      </div>
+
+      <div className="relative z-10 mt-2 flex flex-wrap justify-center gap-3 min-[1440px]:absolute min-[1440px]:top-[515px] min-[1440px]:left-[120px] min-[1440px]:mt-0 min-[1440px]:justify-start min-[1440px]:gap-[14px]">
+        {stores.map((store) => (
+          <a
+            key={store.src}
+            href={store.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={store.alt}
+            className="block h-10 w-auto rounded-[10px] transition duration-200 ease-out hover:-translate-y-px hover:shadow-[0_4px_14px_rgba(39,41,45,0.14)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#27292d] active:translate-y-0 active:shadow-none min-[1440px]:h-12"
+          >
+            <img alt="" src={asset(store.src)} width={store.width} height={store.height} className="h-10 w-auto min-[1440px]:h-12" />
+          </a>
+        ))}
       </div>
     </section>
   );
