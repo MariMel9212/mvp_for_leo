@@ -164,10 +164,7 @@ export function SiteHeader({
             >
               <div className="flex items-center justify-between px-4 pt-[max(12px,env(safe-area-inset-top))] pb-3">
                 {logo}
-                <div className="relative flex items-center gap-2">
-                  {cta()}
-                  {burger(pinned)}
-                </div>
+                <div className="relative flex items-center gap-2">{cta()}</div>
               </div>
             </div>,
             document.body,
