@@ -85,7 +85,7 @@ export default function HomePage() {
               imageWidth={966}
               imageHeight={575}
               focus="52% 64%"
-              frameScale="scale-[1.32]"
+              frameScale="scale-[1.26]"
               action="Подобрать детокс"
             />
             <SituationCard
