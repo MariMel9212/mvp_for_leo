@@ -38,7 +38,7 @@ export function SiteFooter() {
 
       <div aria-hidden className="mt-10 h-px w-full bg-black/4 min-[1440px]:absolute min-[1440px]:top-[242px] min-[1440px]:mt-0" />
 
-      <div className="px-4 pt-8 pb-8 min-[1440px]:hidden">
+      <div className="px-4 pt-8 pb-12 min-[1440px]:hidden">
         <div className="flex max-w-[314px] flex-col gap-2">
           <Brand />
           <p className="text-13 leading-5 opacity-60">

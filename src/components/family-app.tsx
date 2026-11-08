@@ -11,6 +11,7 @@ function GlassCard({
   rotate,
   leafClassName,
   leafStyle,
+  clipLeaf = false,
 }: {
   title: string;
   text: ReturnType<typeof tie>;
@@ -18,11 +19,12 @@ function GlassCard({
   rotate: number;
   leafClassName: string;
   leafStyle: CSSProperties;
+  clipLeaf?: boolean;
 }) {
   return (
     <div className={`absolute flex items-center justify-center ${className}`}>
       <div
-        className="relative h-[89.299px] w-[262px] overflow-visible rounded-[20.219px] shadow-[0_0_28px_rgba(107,107,107,0.11)]"
+        className={`relative h-[89.299px] w-[262px] rounded-[20.219px] shadow-[0_0_28px_rgba(107,107,107,0.11)] ${clipLeaf ? "overflow-hidden" : "overflow-visible"}`}
         style={{
           transform: `rotate(${rotate}deg)`,
           backgroundColor: "rgba(255, 255, 255, 0.58)",
@@ -69,20 +71,32 @@ export function FamilyAppSection() {
         <div className="w-full" style={{ paddingBottom: `${(598 / 482.695) * 100}%` }} />
         <div className="absolute top-0 left-0 h-[598px] w-[482.695px] origin-top-left overflow-hidden [transform:scale(calc(100cqw/482.695px))]">
           <div className="absolute top-0 left-[67.36px] h-[665.284px] w-[306px]">
-            <img
-              alt=""
-              src={asset("/app/screen.webp")}
-              width={1290}
-              height={2796}
-              className="absolute rounded-[22px] object-cover object-top"
+            <div
+              className="absolute overflow-hidden rounded-[24px] bg-white"
               style={{ left: "4.043%", top: "1.588%", width: "91.914%", height: "96.787%" }}
-            />
+            >
+              <img
+                alt=""
+                src={asset("/app/screen.webp")}
+                width={1290}
+                height={2796}
+                className="absolute inset-0 h-full w-full max-w-none object-cover"
+              />
+              <img
+                alt=""
+                src={asset("/app/screen-wave.svg")}
+                width={306}
+                height={32}
+                className="absolute top-0 left-0 w-full max-w-none"
+                style={{ height: `${(32 / 662) * 100}%` }}
+              />
+            </div>
             <img
               alt=""
               src={asset("/app/frame.png")}
               width={1311}
               height={2708}
-              className="absolute top-0 left-0 h-[665.284px] w-[306px] max-w-none"
+              className="pointer-events-none absolute top-0 left-0 h-full w-full max-w-none"
             />
           </div>
           <div
@@ -106,6 +120,7 @@ export function FamilyAppSection() {
             text={tie("Записывайте свои переживания и улучшайте анализ чувств")}
             className="top-[334.91px] left-[198.02px] h-[97.485px] w-[264.676px]"
             rotate={1.8}
+            clipLeaf
             leafClassName="top-[49.39px] left-[196.48px] h-[57.751px] w-[61.099px]"
             leafStyle={{ transform: "rotate(20.55deg) skewX(-2.64deg)" }}
           />

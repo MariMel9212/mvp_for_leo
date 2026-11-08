@@ -6,6 +6,7 @@ const basePath = (process.env.NEXT_PUBLIC_BASE_PATH ?? "").replace(/\/$/, "");
 if (pages) process.env.NEXT_PUBLIC_BASE_PATH = basePath;
 
 const nextConfig: NextConfig = {
+  devIndicators: false,
   ...(pages
     ? {
         output: "export",
