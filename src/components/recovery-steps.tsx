@@ -41,7 +41,7 @@ export function RecoverySteps() {
         }}
       />
       <div className="relative mx-auto flex w-full max-w-[1440px] flex-col gap-8 px-[120px] pt-8 pb-8 max-[1439px]:px-4 min-[1440px]:gap-[52px] min-[1440px]:py-[34px]">
-        <h2 className="text-40 font-medium max-[1439px]:text-[32px] max-[1439px]:leading-[40px]">{tie("3 шага до выздоровления")}</h2>
+        <h2 className="text-40 font-medium max-md:text-28 md:max-[1439px]:text-[32px] md:max-[1439px]:leading-[40px]">{tie("3 шага до выздоровления")}</h2>
         <div className="grid w-full grid-cols-1 items-stretch gap-6 min-[1440px]:flex min-[1440px]:h-[486px] min-[1440px]:flex-row min-[1440px]:items-end min-[1440px]:gap-[24px]">
           <article className={`situation-card ${cardClass} max-[1439px]:flex max-[1439px]:h-full max-[1439px]:flex-col min-[1440px]:h-[318px]`} style={cardStyle}>
             <StepCopy

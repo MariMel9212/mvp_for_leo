@@ -160,7 +160,7 @@ function CallBanner() {
   return (
     <section className="relative mt-[50px] overflow-hidden rounded-[34px] bg-gradient-to-b from-[rgba(222,234,255,0.45)] to-[rgba(210,222,243,0.45)] px-4 pt-[32px] pb-[26px] min-[1440px]:-mx-[22px] min-[1440px]:w-[1244px] min-[1440px]:px-[22px]">
       <div className="mx-auto flex w-full max-w-[611px] flex-col items-center gap-[15px] text-center text-[#27292d]">
-        <h2 className="text-40 font-medium max-[1439px]:text-[32px] max-[1439px]:leading-[40px]">Запланируйте звонок, чтобы&nbsp;не&nbsp;ошибиться с&nbsp;выбором</h2>
+        <h2 className="text-40 font-medium max-md:text-28 md:max-[1439px]:text-[32px] md:max-[1439px]:leading-[40px]">Запланируйте звонок, чтобы&nbsp;не&nbsp;ошибиться с&nbsp;выбором</h2>
         <p className="text-16 opacity-60">
           На бесплатной и анонимной консультации погрузимся в&nbsp;Вашу проблему и&nbsp;подберем подходящее учереждение
         </p>
@@ -217,7 +217,7 @@ export function Institutions() {
 
   return (
     <div className="mt-6 px-[120px] max-[1439px]:px-4 min-[1440px]:mt-[24px]">
-      <h1 className="text-40 font-medium max-[1439px]:text-[32px] max-[1439px]:leading-[40px]">Все учереждения</h1>
+      <h1 className="text-40 font-medium max-md:text-28 md:max-[1439px]:text-[32px] md:max-[1439px]:leading-[40px]">Все учереждения</h1>
       <form
         className="relative z-20 mt-8 hidden w-full flex-col gap-[20px] rounded-[13px] bg-white px-4 py-[23px] min-[1440px]:mt-[46px] min-[1440px]:px-[21px]"
         onSubmit={(event) => {
