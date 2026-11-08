@@ -11,15 +11,15 @@
   function band(canvas) {
     if (!canvas || window.matchMedia("(min-width: 1440px)").matches) {
       var compact = window.matchMedia("(max-width: 1599px)").matches;
-      return compact ? { inner: 480, outer: 700 } : { inner: 350, outer: 610 };
+      return compact ? { inner: 550, outer: 800 } : { inner: 410, outer: 700 };
     }
     var rect = canvas.getBoundingClientRect();
     if (rect.height < 2) return { inner: 550, outer: 800 };
     var pxToWorld = (2 * CAMERA_Z * TAN_HALF) / rect.height;
     var node = document.getElementById("podbor");
     var box = node ? node.getBoundingClientRect() : null;
-    var hole = box && box.width > 2 ? Math.hypot(box.width, box.height) / 2 + 36 : Math.min(rect.width, rect.height) * 0.62;
-    var innerPx = Math.min(hole, rect.height * 0.46);
+    var hole = box && box.width > 2 ? Math.hypot(box.width, box.height) / 2 + 72 : Math.min(rect.width, rect.height) * 0.72;
+    var innerPx = Math.min(hole, rect.height * 0.54);
     return {
       inner: Math.round(innerPx * pxToWorld),
       outer: Math.round(innerPx * 1.48 * pxToWorld),
