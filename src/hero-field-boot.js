@@ -9,10 +9,7 @@
   }
 
   function band(canvas) {
-    if (!canvas || window.matchMedia("(min-width: 1440px)").matches) {
-      var compact = window.matchMedia("(max-width: 1599px)").matches;
-      return compact ? { inner: 560, outer: 800 } : { inner: 640, outer: 920 };
-    }
+    if (!window.matchMedia("(max-width: 767px)").matches) return { inner: 980, outer: 1360 };
     var rect = canvas.getBoundingClientRect();
     if (rect.height < 2) return { inner: 550, outer: 800 };
     var pxToWorld = (2 * CAMERA_Z * TAN_HALF) / rect.height;
