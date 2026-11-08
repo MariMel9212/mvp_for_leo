@@ -509,7 +509,7 @@ export function ConsultForm() {
         className="relative mt-8 flex w-full max-w-[415px] flex-col gap-[30px] rounded-[23px] bg-white px-[20px] py-[24px] max-[1439px]:mt-14 max-[1439px]:gap-8 max-[1439px]:px-5 max-[1439px]:py-8 min-[1440px]:absolute min-[1440px]:top-[52px] min-[1440px]:left-[905px] min-[1440px]:mt-0 min-[1440px]:w-[415px]"
         noValidate
       >
-        <div className="flex w-full flex-col gap-[22px] max-[1439px]:gap-4">
+        <div className="flex w-full flex-col gap-[22px] max-[1439px]:gap-7">
           <h3 className="mx-auto w-full max-w-[367px] text-center text-24 font-medium max-[1439px]:text-[22px] max-[1439px]:leading-[28px]">
             {tie("Бесплатная консультация по подбору учереждения")}
           </h3>
