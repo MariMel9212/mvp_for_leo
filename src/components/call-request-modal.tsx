@@ -248,7 +248,7 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
             <h2 id={titleId} className="w-full max-w-[406px] text-center text-28 font-medium">
               Выберите удобный формат для консультации
             </h2>
-            <div className="flex w-full flex-col items-center gap-4 sm:flex-row sm:items-start sm:justify-center sm:gap-[24px]">
+            <div className="flex w-full flex-row items-stretch justify-center gap-3 min-[1100px]:gap-[24px]">
               <FormatCard
                 icon={<CallIcon />}
                 title="Связаться как можно скорее"
@@ -734,7 +734,7 @@ function FormatCard({
     <button
       type="button"
       onClick={onClick}
-      className="flex w-full max-w-[300px] flex-col items-start gap-[16px] rounded-[12px] border border-solid border-[rgba(69,114,230,0.06)] px-[20px] py-[22px] text-left hover:border-[rgba(69,114,230,0.18)]"
+      className="flex min-w-0 flex-1 flex-col items-start gap-3 rounded-[12px] border border-solid border-[rgba(69,114,230,0.06)] px-3 py-4 text-left hover:border-[rgba(69,114,230,0.18)] min-[1100px]:max-w-[300px] min-[1100px]:gap-[16px] min-[1100px]:px-[20px] min-[1100px]:py-[22px]"
       style={{
         backgroundImage:
           "linear-gradient(122.62deg, rgba(223, 235, 255, 0.24) 3.1%, rgba(240, 245, 255, 0.24) 99.38%)",
