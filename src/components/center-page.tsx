@@ -83,7 +83,7 @@ export function CenterPage({ center }: { center: CenterPageData }) {
 
             {center.amenities.length ? (
               <div className="flex flex-col gap-[8px]">
-                <div className="grid grid-cols-3 gap-x-6 gap-y-4 max-[1099px]:grid-cols-2 max-[419px]:grid-cols-1">
+                <div className="grid grid-cols-3 gap-x-6 gap-y-4 max-[1099px]:grid-cols-2">
                   {previewAmenities.map((item) => (
                     <div key={item.label} className="flex min-w-0 items-center gap-[6px]">
                       <AmenityIcon name={item.icon} />
