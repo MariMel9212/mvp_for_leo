@@ -36,7 +36,7 @@ export function SiteHeader({
     <header className="mx-auto flex w-full max-w-[1440px] justify-center px-[120px] pt-5 max-[1439px]:px-4 min-[1440px]:pt-[32px]">
       <div className="flex w-full max-w-[1200px] items-center justify-between md:h-[44px]">
         <Link href="/" aria-label="Leo" className="shrink-0">
-          <img alt="" src={asset("/brand/leo.svg")} width={65.7871} height={28} className="block h-[28px] w-auto" />
+          <img alt="" src={asset("/brand/leo.svg")} width={56.389} height={24} className="block h-6 w-auto" />
         </Link>
         <nav aria-label="Разделы" className="hidden items-center gap-[42px] md:flex">
           {links.map((link) => (
