@@ -50,22 +50,22 @@ function GlassCard({
 }
 
 const storeButtonClass =
-  "inline-flex h-11 items-center gap-2 rounded-[10px] bg-[#161616] px-3 text-white shadow-[0_6px_16px_rgba(39,41,45,0.16)] transition duration-150 ease-out hover:-translate-y-0.5 hover:bg-black hover:shadow-[0_10px_20px_rgba(39,41,45,0.2)] active:translate-y-0 active:bg-[#27292d] active:shadow-[0_3px_8px_rgba(39,41,45,0.16)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#27292d] min-[1440px]:h-12 min-[1440px]:gap-2.5 min-[1440px]:px-3.5";
+  "inline-flex h-[52px] items-center gap-2.5 rounded-[12px] border border-[#e6e7ea] bg-white px-3 text-[#27292d] shadow-[0_4px_12px_rgba(39,41,45,0.08)] transition duration-150 ease-out hover:-translate-y-0.5 hover:border-[#d5d7dc] hover:shadow-[0_8px_18px_rgba(39,41,45,0.12)] active:translate-y-0 active:shadow-[0_2px_6px_rgba(39,41,45,0.08)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#27292d] min-[1440px]:h-14 min-[1440px]:gap-3 min-[1440px]:px-5";
 
 function StoreLabel({ kicker, name }: { kicker: string; name: string }) {
   return (
     <span className="flex flex-col items-start">
-      <span className="text-[8px] leading-[10px] tracking-[0.06em] uppercase opacity-75 min-[1440px]:text-[9px] min-[1440px]:leading-[11px]">
+      <span className="text-[9px] leading-[11px] tracking-[0.06em] uppercase opacity-55 min-[1440px]:text-[10px] min-[1440px]:leading-[12px]">
         {kicker}
       </span>
-      <span className="text-[14px] leading-[16px] font-medium min-[1440px]:text-[16px] min-[1440px]:leading-[18px]">{name}</span>
+      <span className="text-[16px] leading-[18px] font-medium min-[1440px]:text-[18px] min-[1440px]:leading-[20px]">{name}</span>
     </span>
   );
 }
 
 function GooglePlayIcon() {
   return (
-    <svg width="18" height="20" viewBox="11.5 8.4 29.2 31.2" aria-hidden className="h-5 w-[18px] shrink-0 min-[1440px]:h-[22px] min-[1440px]:w-5">
+    <svg width="18" height="20" viewBox="11.5 8.4 29.2 31.2" aria-hidden className="h-6 w-[22px] shrink-0 min-[1440px]:h-7 min-[1440px]:w-[26px]">
       <defs>
         <linearGradient id="play-blue" x1="26.1597" y1="10.4519" x2="6.02366" y2="30.5879" gradientUnits="userSpaceOnUse">
           <stop stopColor="#00A0FF" />
@@ -101,7 +101,7 @@ function GooglePlayIcon() {
 
 function AppStoreIcon() {
   return (
-    <svg width="16" height="20" viewBox="12 9 22 28" aria-hidden className="h-5 w-4 shrink-0 fill-white min-[1440px]:h-[22px] min-[1440px]:w-[18px]">
+    <svg width="16" height="20" viewBox="12 9 22 28" aria-hidden className="h-6 w-5 shrink-0 fill-current min-[1440px]:h-7 min-[1440px]:w-6">
       <path d="M30.08 23.8668C30.0935 22.8253 30.3709 21.8041 30.8865 20.8982C31.4021 19.9923 32.1391 19.2311 33.029 18.6856C32.4637 17.8805 31.7179 17.218 30.8509 16.7506C29.9839 16.2832 29.0196 16.0238 28.0345 15.9931C25.9331 15.7731 23.896 17.247 22.8251 17.247C21.7336 17.247 20.0849 16.0149 18.3095 16.0513C17.1612 16.0883 16.042 16.4213 15.0611 17.0179C14.0802 17.6145 13.2709 18.4542 12.7122 19.4554C10.2921 23.6338 12.0973 29.7746 14.4156 33.1522C15.5755 34.8061 16.9311 36.6535 18.7049 36.588C20.4406 36.5162 21.0889 35.4842 23.184 35.4842C25.2598 35.4842 25.868 36.588 27.6777 36.5463C29.5403 36.5162 30.7137 34.8851 31.833 33.2156C32.6664 32.0371 33.3077 30.7347 33.7331 29.3565C32.651 28.9001 31.7276 28.1362 31.078 27.16C30.4284 26.1837 30.0813 25.0384 30.08 23.8668Z" />
       <path d="M26.6618 13.7719C27.6773 12.5562 28.1776 10.9936 28.0565 9.41602C26.505 9.57851 25.0718 10.318 24.0426 11.487C23.5394 12.0581 23.1539 12.7225 22.9084 13.4423C22.6628 14.162 22.5619 14.9229 22.6114 15.6816C23.3874 15.6896 24.1551 15.5218 24.8567 15.191C25.5583 14.8602 26.1755 14.375 26.6618 13.7719Z" />
     </svg>
@@ -187,7 +187,7 @@ export function FamilyAppSection() {
         </div>
       </div>
 
-      <div className="relative z-10 mt-2 flex flex-wrap justify-center gap-3 min-[1440px]:absolute min-[1440px]:top-[515px] min-[1440px]:left-[120px] min-[1440px]:mt-0 min-[1440px]:justify-start min-[1440px]:gap-[14px]">
+      <div className="relative z-10 mt-2 flex flex-wrap justify-center gap-2 min-[1440px]:absolute min-[1440px]:top-[515px] min-[1440px]:left-[120px] min-[1440px]:mt-0 min-[1440px]:justify-start min-[1440px]:gap-[14px]">
         <a href={appStore} target="_blank" rel="noopener noreferrer" aria-label="Скачать в Google Play" className={storeButtonClass}>
           <GooglePlayIcon />
           <StoreLabel kicker="Скачать из" name="Google Play" />
