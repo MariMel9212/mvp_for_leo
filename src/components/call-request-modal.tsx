@@ -266,7 +266,7 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
         ) : null}
 
         {step === "schedule" ? (
-          <div className="flex flex-col gap-6 px-4 pt-6 min-[1100px]:flex-row min-[1100px]:gap-[81px] min-[1100px]:px-[34px] min-[1100px]:pt-[24px]">
+          <div className="flex flex-col gap-6 px-4 pt-6 pb-6 min-[1100px]:flex-row min-[1100px]:gap-[81px] min-[1100px]:px-[34px] min-[1100px]:pt-[24px] min-[1100px]:pb-0">
             <div className="flex w-full flex-col gap-[10px] min-[1100px]:w-[366px]">
               <h2 id={titleId} className="w-[270px] text-28 font-medium">
                 Выберите удобную дату и время
@@ -437,7 +437,7 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
                   type="button"
                   disabled={!date || (!time && !period)}
                   onClick={() => setStep("contact")}
-                  className="lime-control mt-auto h-[38px] self-end rounded-[8px] px-[20px] text-16"
+                  className="lime-control mt-4 h-[38px] self-end rounded-[8px] px-[20px] text-16 min-[1100px]:mt-auto"
                 >
                   Продолжить
                 </button>
