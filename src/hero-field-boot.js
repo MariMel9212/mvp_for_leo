@@ -4,15 +4,27 @@
   var TAN_HALF = Math.tan((75 * Math.PI) / 180 / 2);
   var DOT = 2.8;
 
+  function dotSize() {
+    return window.matchMedia("(max-width: 767px)").matches ? 1.8 : 2.8;
+  }
+
   function ease(t) {
     return 1 - (1 - t) ** 3;
   }
 
-  function band() {
-    // Same proportions as the Ramp Intelligence hero: a ring about the headline
-    // on desktop, and a smaller ring that runs off the sides on a phone.
-    if (window.matchMedia("(max-width: 767px)").matches) return { inner: 200, outer: 660 };
-    return { inner: 450, outer: 900 };
+  function band(canvas) {
+    if (!window.matchMedia("(max-width: 767px)").matches) return { inner: 450, outer: 900 };
+    var rect = canvas.getBoundingClientRect();
+    if (rect.height < 2) return { inner: 550, outer: 800 };
+    var pxToWorld = (2 * CAMERA_Z * TAN_HALF) / rect.height;
+    var node = document.getElementById("podbor");
+    var box = node ? node.getBoundingClientRect() : null;
+    var hole = box && box.width > 2 ? Math.hypot(box.width, box.height) / 2 - 48 : Math.min(rect.width, rect.height) * 0.42;
+    var innerPx = Math.min(hole, rect.height * 0.32);
+    return {
+      inner: Math.round(innerPx * pxToWorld),
+      outer: Math.round(innerPx * 1.48 * pxToWorld),
+    };
   }
 
   function createParticles(inner, outer, settled) {
@@ -88,7 +100,7 @@
         outer = next.outer;
         particles = createParticles(inner, outer, reduce || performance.now() - started > 2800);
       }
-      DOT = 2.8;
+      DOT = dotSize();
       placeOrigin();
     }
 
