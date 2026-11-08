@@ -89,7 +89,8 @@ export function FamilyAppSection() {
               src={asset("/app/screen.webp")}
               width={1290}
               height={2796}
-              className="absolute top-0 left-0 h-[662px] w-[306px] rounded-[29px] object-cover object-top"
+              className="absolute rounded-[22px] object-cover object-top"
+              style={{ left: "4.043%", top: "1.588%", width: "91.914%", height: "96.787%" }}
             />
             <img
               alt=""
