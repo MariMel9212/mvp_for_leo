@@ -182,7 +182,7 @@ export function FamilyAppSection() {
             rotate={1.8}
             clipLeaf
             leafClassName="top-[49.39px] left-[196.48px] h-[57.751px] w-[61.099px]"
-            leafStyle={{ transform: "rotate(20.55deg) skewX(-2.64deg)" }}
+            leafStyle={{ transform: "rotate(20.55deg) skewX(-2.64deg)", filter: "brightness(0) invert(1)" }}
           />
         </div>
       </div>
