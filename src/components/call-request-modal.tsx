@@ -32,6 +32,21 @@ const months = [
   "Декабрь",
 ];
 
+const monthsGenitive = [
+  "января",
+  "февраля",
+  "марта",
+  "апреля",
+  "мая",
+  "июня",
+  "июля",
+  "августа",
+  "сентября",
+  "октября",
+  "ноября",
+  "декабря",
+];
+
 const weekdays = ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"];
 
 const slotGroups: { id: string; label: string; range: string; slots: string[] }[] = [
@@ -54,6 +69,29 @@ const zones = [
 
 function sameDay(a: Date, b: Date) {
   return a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate();
+}
+
+function startOfWeek(date: Date) {
+  const copy = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+  copy.setDate(copy.getDate() - ((copy.getDay() + 6) % 7));
+  return copy;
+}
+
+function shiftWeek(start: Date, weeks: number) {
+  const copy = new Date(start);
+  copy.setDate(copy.getDate() + weeks * 7);
+  return copy;
+}
+
+function weekTitle(start: Date) {
+  const end = new Date(start);
+  end.setDate(start.getDate() + 6);
+  const sameMonth = start.getMonth() === end.getMonth() && start.getFullYear() === end.getFullYear();
+  if (sameMonth) return `${start.getDate()}–${end.getDate()} ${monthsGenitive[start.getMonth()]} ${start.getFullYear()}`;
+  if (start.getFullYear() === end.getFullYear()) {
+    return `${start.getDate()} ${monthsGenitive[start.getMonth()]} – ${end.getDate()} ${monthsGenitive[end.getMonth()]} ${end.getFullYear()}`;
+  }
+  return `${start.getDate()} ${monthsGenitive[start.getMonth()]} ${start.getFullYear()} – ${end.getDate()} ${monthsGenitive[end.getMonth()]} ${end.getFullYear()}`;
 }
 
 function monthCells(year: number, month: number) {
@@ -91,6 +129,37 @@ function Chevron({ direction }: { direction: "left" | "right" | "down" | "up" })
   );
 }
 
+function DayButton({
+  date,
+  outside = false,
+  selected,
+  current,
+  onSelect,
+}: {
+  date: Date;
+  outside?: boolean;
+  selected: boolean;
+  current: boolean;
+  onSelect: (date: Date) => void;
+}) {
+  return (
+    <button
+      type="button"
+      disabled={outside}
+      aria-current={current ? "date" : undefined}
+      aria-pressed={selected}
+      onClick={() => onSelect(date)}
+      className={`flex h-[40px] items-center justify-center rounded-[8px] text-[14px] leading-[20px] tracking-[-0.084px] ${
+        selected
+          ? "bg-[#e1f300] font-medium"
+          : `${current ? "bg-[#f6f8fa]" : "hover:bg-[#f6f8fa]"} ${outside ? "text-[#cdd0d5]" : ""}`
+      }`}
+    >
+      {date.getDate()}
+    </button>
+  );
+}
+
 function Steps({ count, current }: { count: number; current: number }) {
   return (
     <div className="flex items-center gap-[6px]" aria-hidden>
@@ -115,6 +184,7 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
     const today = new Date();
     return { year: today.getFullYear(), month: today.getMonth() };
   });
+  const [weekStart, setWeekStart] = useState(() => startOfWeek(new Date()));
   const [date, setDate] = useState<Date | null>(null);
   const [time, setTime] = useState<string | null>(null);
   const [openGroups, setOpenGroups] = useState<string[]>(["morning"]);
@@ -215,6 +285,11 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
   }
 
   const cells = monthCells(cursor.year, cursor.month);
+  const weekDays = Array.from({ length: 7 }, (_, index) => {
+    const day = new Date(weekStart);
+    day.setDate(weekStart.getDate() + index);
+    return day;
+  });
   const today = new Date();
   const zoneLabel = zones.find((item) => item.id === zone)?.label ?? zones[1].label;
 
@@ -278,7 +353,44 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
             <div className="flex w-full flex-col items-stretch gap-4 min-[1100px]:w-[585px] min-[1100px]:flex-row min-[1100px]:items-start min-[1100px]:gap-[16px]">
               <div className="flex w-full flex-col gap-[12px] min-[1100px]:w-[348px]">
                 <div className="flex w-full flex-col gap-[8px] rounded-[16px] bg-white pb-[20px] min-[1100px]:w-[348px]">
-                  <div className="flex h-[36px] w-full items-center gap-[6px] rounded-[8px] bg-[#f6f8fa] p-[6px]">
+                  <div className="flex h-[36px] w-full items-center gap-[6px] rounded-[8px] bg-[#f6f8fa] p-[6px] min-[1100px]:hidden">
+                    <button
+                      type="button"
+                      aria-label="Предыдущая неделя"
+                      onClick={() => setWeekStart((current) => shiftWeek(current, -1))}
+                      className="flex items-center justify-center rounded-[6px] bg-white p-[2px] shadow-[0_2px_4px_rgba(27,28,29,0.04)]"
+                    >
+                      <Chevron direction="left" />
+                    </button>
+                    <span className="flex-1 truncate text-center text-[14px] leading-[20px] font-medium tracking-[-0.084px]">
+                      {weekTitle(weekStart)}
+                    </span>
+                    <button
+                      type="button"
+                      aria-label="Следующая неделя"
+                      onClick={() => setWeekStart((current) => shiftWeek(current, 1))}
+                      className="flex items-center justify-center rounded-[6px] bg-white p-[2px] shadow-[0_2px_4px_rgba(27,28,29,0.04)]"
+                    >
+                      <Chevron direction="right" />
+                    </button>
+                  </div>
+                  <div className="grid grid-cols-7 gap-x-[8px] gap-y-[8px] min-[1100px]:hidden">
+                    {weekdays.map((label) => (
+                      <span key={label} className="flex h-[40px] items-center justify-center text-[14px] leading-[20px] font-medium tracking-[-0.084px] text-[#868c98]">
+                        {label}
+                      </span>
+                    ))}
+                    {weekDays.map((day) => (
+                      <DayButton
+                        key={day.toISOString()}
+                        date={day}
+                        selected={date ? sameDay(date, day) : false}
+                        current={sameDay(today, day)}
+                        onSelect={setDate}
+                      />
+                    ))}
+                  </div>
+                  <div className="hidden h-[36px] w-full items-center gap-[6px] rounded-[8px] bg-[#f6f8fa] p-[6px] min-[1100px]:flex">
                     <button
                       type="button"
                       aria-label="Предыдущий месяц"
@@ -311,32 +423,22 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
                       <Chevron direction="right" />
                     </button>
                   </div>
-                  <div className="grid grid-cols-7 gap-x-[8px] gap-y-[8px]">
+                  <div className="hidden grid-cols-7 gap-x-[8px] gap-y-[8px] min-[1100px]:grid">
                     {weekdays.map((label) => (
-                      <span key={label} className="flex h-[40px] items-center justify-center text-[14px] leading-[20px] font-medium tracking-[-0.084px] text-[#868c98]">
+                      <span key={`month-${label}`} className="flex h-[40px] items-center justify-center text-[14px] leading-[20px] font-medium tracking-[-0.084px] text-[#868c98]">
                         {label}
                       </span>
                     ))}
-                    {cells.map((cell) => {
-                      const selected = date ? sameDay(date, cell.date) : false;
-                      const current = sameDay(today, cell.date);
-                      return (
-                        <button
-                          key={cell.date.toISOString()}
-                          type="button"
-                          disabled={cell.outside}
-                          aria-current={current ? "date" : undefined}
-                          onClick={() => setDate(cell.date)}
-                          className={`flex h-[40px] items-center justify-center rounded-[8px] text-[14px] leading-[20px] tracking-[-0.084px] ${
-                            selected
-                              ? "bg-[#e1f300] font-medium"
-                              : `${current ? "bg-[#f6f8fa]" : "hover:bg-[#f6f8fa]"} ${cell.outside ? "text-[#cdd0d5]" : ""}`
-                          }`}
-                        >
-                          {cell.date.getDate()}
-                        </button>
-                      );
-                    })}
+                    {cells.map((cell) => (
+                      <DayButton
+                        key={cell.date.toISOString()}
+                        date={cell.date}
+                        outside={cell.outside}
+                        selected={date ? sameDay(date, cell.date) : false}
+                        current={sameDay(today, cell.date)}
+                        onSelect={setDate}
+                      />
+                    ))}
                   </div>
                 </div>
                 <div className="relative">
