@@ -14,7 +14,7 @@ const cardStyle = {
 
 function StepCopy({ title, text }: { title: string; text: string }) {
   return (
-    <div className="flex flex-col items-center gap-[6px] px-[26px] pt-[36px] text-center max-[1439px]:min-h-[148px] max-[1439px]:px-5 max-[1439px]:pt-7">
+    <div className="flex flex-col items-center gap-[6px] px-[26px] pt-[36px] text-center max-[1439px]:min-h-[124px] max-[1439px]:px-5 max-[1439px]:pt-7">
       <h3 className="w-full max-w-[331px] text-24 font-medium max-[1439px]:text-[20px] max-[1439px]:leading-[26px]">{tie(title)}</h3>
       <p className="w-full max-w-[331px] text-18 max-[1439px]:text-16 max-[1439px]:leading-[22px]">{tie(text)}</p>
     </div>
@@ -23,7 +23,7 @@ function StepCopy({ title, text }: { title: string; text: string }) {
 
 function ArtWell({ children, className = "" }: { children: ReactNode; className?: string }) {
   return (
-    <div className={`relative mt-5 h-[196px] overflow-hidden min-[1440px]:absolute min-[1440px]:inset-0 min-[1440px]:mt-0 min-[1440px]:h-auto min-[1440px]:overflow-visible${className ? ` ${className}` : ""}`}>
+    <div className={`relative mt-2 h-[176px] overflow-hidden min-[1440px]:absolute min-[1440px]:inset-0 min-[1440px]:mt-0 min-[1440px]:h-auto min-[1440px]:overflow-visible${className ? ` ${className}` : ""}`}>
       {children}
     </div>
   );
@@ -62,7 +62,7 @@ export function RecoverySteps() {
 
           <article className={`coverage-card ${cardClass} max-[1439px]:flex max-[1439px]:h-full max-[1439px]:flex-col max-[1439px]:[container-type:inline-size] min-[1440px]:h-[486px]`} style={cardStyle}>
             <StepCopy title="Отбираем учреждения" text={format} />
-            <ArtWell className="max-[1439px]:h-[calc(100cqw*305/383)]">
+            <ArtWell className="max-[1439px]:h-[calc(100cqw*305/383-20px)]">
               <CoverageScan />
             </ArtWell>
           </article>
