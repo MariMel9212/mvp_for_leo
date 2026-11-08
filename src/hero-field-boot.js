@@ -1,8 +1,8 @@
 (function () {
-  var COUNT = window.matchMedia("(max-width: 767px)").matches ? 1400 : 3500;
+  var COUNT = 3500;
   var CAMERA_Z = 900;
   var TAN_HALF = Math.tan((75 * Math.PI) / 180 / 2);
-  var DOT = 2.8;
+  var DOT = 4.5;
 
   function ease(t) {
     return 1 - (1 - t) ** 3;
@@ -13,16 +13,17 @@
       var compact = window.matchMedia("(max-width: 1599px)").matches;
       return compact ? { inner: 480, outer: 700 } : { inner: 350, outer: 610 };
     }
-    var canvasRect = canvas.getBoundingClientRect();
+    var rect = canvas.getBoundingClientRect();
+    if (rect.height < 2) return { inner: 550, outer: 800 };
+    var pxToWorld = (2 * CAMERA_Z * TAN_HALF) / rect.height;
     var node = document.getElementById("podbor");
-    var rect = node ? node.getBoundingClientRect() : null;
-    if (canvasRect.height < 2 || !rect || rect.width < 2 || rect.height < 2) {
-      return { inner: 480, outer: 720 };
-    }
-    var pxToWorld = (2 * CAMERA_Z * TAN_HALF) / canvasRect.height;
-    var innerPx = Math.hypot(rect.width, rect.height) / 2 + 40;
-    var outerPx = innerPx * 1.5;
-    return { inner: Math.round(innerPx * pxToWorld), outer: Math.round(outerPx * pxToWorld) };
+    var box = node ? node.getBoundingClientRect() : null;
+    var hole = box && box.width > 2 ? Math.hypot(box.width, box.height) / 2 + 36 : Math.min(rect.width, rect.height) * 0.62;
+    var innerPx = Math.min(hole, rect.height * 0.46);
+    return {
+      inner: Math.round(innerPx * pxToWorld),
+      outer: Math.round(innerPx * 1.48 * pxToWorld),
+    };
   }
 
   function createParticles(inner, outer, settled) {
@@ -104,14 +105,6 @@
     function placeOrigin() {
       originX = canvas.width / 2;
       originY = canvas.height / 2;
-      if (window.matchMedia("(min-width: 1440px)").matches) return;
-      var node = document.getElementById("podbor");
-      if (!node) return;
-      var canvasRect = canvas.getBoundingClientRect();
-      var rect = node.getBoundingClientRect();
-      if (canvasRect.width < 2 || canvasRect.height < 2) return;
-      originX = ((rect.left + rect.width / 2 - canvasRect.left) / canvasRect.width) * canvas.width;
-      originY = ((rect.top + rect.height / 2 - canvasRect.top) / canvasRect.height) * canvas.height;
     }
 
     var resizeObserver = new ResizeObserver(resize);

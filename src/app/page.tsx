@@ -31,26 +31,28 @@ const stats = [
 export default function HomePage() {
   return (
     <main className="mx-auto w-full max-w-[1440px] bg-[#fdfdfd] text-[#27292d]">
-      <section className="relative flex flex-col bg-[#d2def3] max-[1439px]:-mt-[env(safe-area-inset-top,0px)] max-[1439px]:h-[max(62.5dvh,calc(100dvh-96px))] max-[1439px]:min-h-[620px] max-[1439px]:pt-[env(safe-area-inset-top,0px)] min-[1440px]:block min-[1440px]:h-[772px] min-[1440px]:bg-transparent">
-        <div className="pointer-events-none absolute top-0 left-1/2 h-full w-screen -translate-x-1/2 overflow-hidden">
-          <div
-            aria-hidden
-            className="absolute inset-0"
-            style={{
-              backgroundImage:
-                "linear-gradient(180deg, #d2def3 0%, #d5e0f4 7.7%, #d9e3f5 15.4%, #dce5f5 23.1%, #dfe8f6 30.8%, #e2eaf7 38.5%, #e6ecf8 46.1%, #e9eff9 53.9%, #ecf1f9 61.5%, #f0f3fa 69.2%, #f3f6fb 76.9%, #f6f8fa 84.6%, #fdfdfd 92.3%, #fdfdfd 100%)",
-            }}
-          />
-          <HeroField />
-          <div aria-hidden className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-b from-transparent to-[#fdfdfd] min-[1440px]:hidden" />
+      <section className="relative flex flex-col bg-[#d2def3] max-[1439px]:-mt-[env(safe-area-inset-top,0px)] max-[1439px]:pt-[env(safe-area-inset-top,0px)] min-[1440px]:block min-[1440px]:h-[772px] min-[1440px]:bg-transparent">
+        <div className="relative z-20 min-[1440px]:absolute min-[1440px]:inset-x-0 min-[1440px]:top-0">
+          <SiteHeader />
         </div>
 
-        <div className="relative z-10 flex w-full flex-col items-center max-[1439px]:min-h-0 max-[1439px]:flex-1 min-[1440px]:gap-[122px]">
-          <SiteHeader />
+        <div className="relative w-full max-[1439px]:h-[max(700px,calc(100dvh-8.5rem))] min-[1440px]:absolute min-[1440px]:inset-0">
+          <div className="pointer-events-none absolute inset-0 left-1/2 w-screen -translate-x-1/2 overflow-hidden">
+            <div
+              aria-hidden
+              className="absolute inset-0"
+              style={{
+                backgroundImage:
+                  "linear-gradient(180deg, #d2def3 0%, #d5e0f4 7.7%, #d9e3f5 15.4%, #dce5f5 23.1%, #dfe8f6 30.8%, #e2eaf7 38.5%, #e6ecf8 46.1%, #e9eff9 53.9%, #ecf1f9 61.5%, #f0f3fa 69.2%, #f3f6fb 76.9%, #f6f8fa 84.6%, #fdfdfd 92.3%, #fdfdfd 100%)",
+              }}
+            />
+            <HeroField />
+            <div aria-hidden className="absolute inset-x-0 bottom-0 h-12 bg-gradient-to-b from-transparent to-[#fdfdfd] min-[1440px]:hidden" />
+          </div>
 
-          <div className="flex w-full items-center justify-center max-[1439px]:min-h-0 max-[1439px]:flex-1 max-[1439px]:px-4 max-[1439px]:py-6">
-            <div id="podbor" className="flex w-full max-w-[34rem] flex-col items-center gap-6 min-[1440px]:max-w-[754px] min-[1440px]:gap-[42px]">
-              <h1 className="w-full text-center text-48 font-medium max-[1439px]:text-[32px] max-[1439px]:leading-[40px]">
+          <div className="relative z-10 flex h-full w-full items-center justify-center px-4 max-[1439px]:py-8 min-[1440px]:items-start min-[1440px]:px-0 min-[1440px]:pt-[198px]">
+            <div id="podbor" className="flex w-full max-w-[34rem] flex-col items-center gap-5 min-[1440px]:max-w-[754px] min-[1440px]:gap-[42px]">
+              <h1 className="w-full text-center text-48 font-medium max-[1439px]:text-[32px] max-[1439px]:leading-[38px]">
                 {tie("Проверенные ребцентра для лечения и восстановления при зависимостях")}
               </h1>
               <AudienceTabs />
