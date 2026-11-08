@@ -229,7 +229,7 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
         tabIndex={-1}
         className="mobile-sheet relative flex max-h-[calc(100dvh-12px)] w-full max-w-[1100px] flex-col overflow-y-auto rounded-t-[21px] bg-white pb-[max(16px,env(safe-area-inset-bottom))] outline-none md:max-h-[calc(100dvh-32px)] md:rounded-[21px] md:pb-0 min-[1100px]:h-[650px] min-[1100px]:overflow-hidden"
       >
-        <div className="flex h-[44px] items-center justify-between px-[26px] pt-[20px]">
+        <div className="flex h-[44px] items-center justify-between px-4 pt-[20px] min-[1100px]:px-[26px]">
           {step === "format" || step === "done" ? (
             <span className="size-[24px]" />
           ) : (
@@ -474,7 +474,7 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
             <h2 id={titleId} className="w-full max-w-[351px] text-center text-28 font-medium">
               Выберите удобный формат для консультации
             </h2>
-            <div className="flex w-full flex-col gap-[18px] rounded-[23px] bg-white px-[18px] py-[18px]">
+            <div className="flex w-full flex-col gap-[18px] rounded-[23px] bg-white py-[18px] min-[1100px]:px-[18px]">
               <label className="flex flex-col gap-[8px]">
                 <span className="text-16">Имя</span>
                 <input
