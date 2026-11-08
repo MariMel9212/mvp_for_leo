@@ -141,9 +141,9 @@ export function FamilyAppSection() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label={store.alt}
-            className="block h-10 w-auto rounded-[10px] transition duration-200 ease-out hover:-translate-y-px hover:shadow-[0_4px_14px_rgba(39,41,45,0.14)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#27292d] active:translate-y-0 active:shadow-none min-[1440px]:h-12"
+            className="block h-11 w-auto rounded-[10px] transition duration-200 ease-out hover:-translate-y-px hover:shadow-[0_4px_14px_rgba(39,41,45,0.14)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#27292d] active:translate-y-0 active:shadow-none min-[1440px]:h-12"
           >
-            <img alt="" src={asset(store.src)} width={store.width} height={store.height} className="h-10 w-auto min-[1440px]:h-12" />
+            <img alt="" src={asset(store.src)} width={store.width} height={store.height} className="h-11 w-auto min-[1440px]:h-12" />
           </a>
         ))}
       </div>
