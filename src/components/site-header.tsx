@@ -160,7 +160,7 @@ export function SiteHeader({
             <div
               inert={pinned ? undefined : true}
               aria-hidden={pinned ? undefined : true}
-              className={`fixed inset-x-0 top-0 z-40 bg-[#fdfdfd] shadow-[0_8px_24px_rgba(39,41,45,0.08)] transition-transform duration-300 ease-out motion-reduce:transition-none md:hidden ${pinned ? "translate-y-0" : "pointer-events-none -translate-y-full"}`}
+              className={`fixed inset-x-0 top-0 z-40 bg-[#fdfdfd] transition-transform duration-300 ease-out motion-reduce:transition-none md:hidden ${pinned ? "translate-y-0 shadow-[0_8px_24px_rgba(39,41,45,0.08)]" : "pointer-events-none -translate-y-[calc(100%+72px)] shadow-none"}`}
             >
               <div className="flex items-center justify-between px-4 pt-[max(12px,env(safe-area-inset-top))] pb-3">
                 {logo}
