@@ -1,9 +1,11 @@
 import { asset } from "@/lib/base-path";
 import { tie } from "@/lib/tie";
 
+const appStore = "https://apps.apple.com/ru/app/leo-recovery/id6752736987";
+
 const stores = [
-  { src: "/app/google-play.svg", alt: "Скачать в Google Play", width: 162, height: 48 },
-  { src: "/app/app-store.svg", alt: "Загрузить в App Store", width: 144, height: 48 },
+  { src: "/app/google-play.svg", alt: "Скачать в Google Play", href: appStore, width: 162, height: 48 },
+  { src: "/app/app-store.svg", alt: "Загрузить в App Store", href: appStore, width: 144, height: 48 },
 ];
 
 export function FamilyAppSection() {
@@ -22,14 +24,16 @@ export function FamilyAppSection() {
 
       <div className="mt-8 flex flex-wrap gap-[14px] min-[1440px]:absolute min-[1440px]:top-[515px] min-[1440px]:left-[120px] min-[1440px]:mt-0">
         {stores.map((store) => (
-          <img
+          <a
             key={store.src}
-            alt={store.alt}
-            src={asset(store.src)}
-            width={store.width}
-            height={store.height}
-            className="h-12 w-auto"
-          />
+            href={store.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={store.alt}
+            className="block h-12 w-auto rounded-[10px] transition duration-200 ease-out hover:-translate-y-px hover:shadow-[0_4px_14px_rgba(39,41,45,0.14)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#27292d] active:translate-y-0 active:shadow-none"
+          >
+            <img alt="" src={asset(store.src)} width={store.width} height={store.height} className="h-12 w-auto" />
+          </a>
         ))}
       </div>
 
