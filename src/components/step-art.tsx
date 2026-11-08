@@ -195,7 +195,7 @@ export function SituationSheets() {
 export function FormatRadar() {
   return (
     <>
-      <div data-part="radar" className="absolute top-[270px] left-1/2 h-[258px] w-[258px] -translate-x-1/2 max-[1439px]:top-auto max-[1439px]:bottom-[-129px] max-[1439px]:origin-top max-[1439px]:scale-90">
+      <div data-part="radar" className="absolute top-[270px] left-1/2 h-[258px] w-[258px] -translate-x-1/2 max-[1439px]:top-auto max-[1439px]:bottom-[-129px] max-[1439px]:origin-top max-[1439px]:scale-[0.8]">
         <svg
           width="291.229"
           height="292.315"
@@ -401,7 +401,7 @@ export function CoverageScan() {
     <div
       data-part="coverage"
       aria-hidden
-      className="absolute top-[197px] left-0 h-[305px] w-[383px] overflow-hidden rounded-[45px] max-[1439px]:top-auto max-[1439px]:bottom-0 max-[1439px]:left-[calc((100%-383px*176/305)/2)] max-[1439px]:origin-bottom-left max-[1439px]:[transform:scale(calc(176/305))]"
+      className="absolute top-[197px] left-0 h-[305px] w-[383px] overflow-hidden rounded-[45px] max-[1439px]:top-[calc(13.43px-23.27px*100cqw/383px)] max-[1439px]:bottom-auto max-[1439px]:left-0 max-[1439px]:origin-top-left max-[1439px]:[transform:scale(calc(100cqw/383px))]"
     >
       <style>{`.scan-grain{background-image:${hiddenGrain.image};background-repeat:repeat-x;background-size:${hiddenGrain.width}px 35.1px}`}</style>
       <div className="scan-source">
