@@ -55,7 +55,7 @@ export function SupportStages() {
               </div>
               <span
                 aria-hidden
-                className={`pointer-events-none absolute text-[104px] leading-none font-medium max-[1439px]:right-[-6px] max-[1439px]:bottom-[-34px] min-[1440px]:text-[134px] min-[1440px]:leading-[168px] ${card.numberClass}`}
+                className={`pointer-events-none absolute text-[104px] leading-none font-medium max-[1439px]:right-[-6px] max-[1439px]:bottom-[-18px] min-[1440px]:text-[134px] min-[1440px]:leading-[168px] ${card.numberClass}`}
               >
                 {card.n}
               </span>
