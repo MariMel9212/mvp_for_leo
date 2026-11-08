@@ -480,7 +480,7 @@ export function ConsultForm() {
   }
 
   return (
-    <section id="zayavka" className="relative mt-16 w-full overflow-hidden rounded-[29px] bg-gradient-to-b from-[rgba(229,246,255,0.45)] to-[rgba(209,239,255,0.45)] px-0 py-0 max-[1439px]:px-4 max-[1439px]:py-8 min-[1440px]:mt-[120px] min-[1440px]:h-[740px]">
+    <section id="zayavka" className="relative mt-16 w-full overflow-hidden rounded-[29px] bg-gradient-to-b from-[rgba(229,246,255,0.45)] to-[rgba(209,239,255,0.45)] px-0 py-0 max-[1439px]:px-4 max-[1439px]:py-8 min-[1440px]:mt-[120px] min-[1440px]:h-[678px]">
       <div className="flex w-full max-w-[604px] flex-col gap-[24px] text-[#27292d] min-[1440px]:absolute min-[1440px]:top-[52px] min-[1440px]:left-[120px] min-[1440px]:w-[604px]">
         <h2 className="text-40 font-medium max-[1439px]:text-[32px] max-[1439px]:leading-[40px]">
           {tie("Найдём подходящий вариант вместе")}
@@ -493,12 +493,12 @@ export function ConsultForm() {
           <img alt="" src={asset("/consult/leaf-top.svg")} width={223.858} height={173.671} />
         </div>
       </div>
-      <div className="pointer-events-none absolute top-[466px] left-[-121px] hidden h-[367.399px] w-[516.307px] items-center justify-center min-[1440px]:flex">
+      <div className="pointer-events-none absolute top-[404px] left-[-121px] hidden h-[367.399px] w-[516.307px] items-center justify-center min-[1440px]:flex">
         <div className="rotate-[2.26deg]">
           <img alt="" src={asset("/consult/sheets.svg")} width={503} height={347.863} />
         </div>
       </div>
-      <div className="pointer-events-none absolute top-[591.53px] left-[778.24px] hidden h-[214.097px] w-[223.769px] items-center justify-center min-[1440px]:flex">
+      <div className="pointer-events-none absolute top-[529.53px] left-[778.24px] hidden h-[214.097px] w-[223.769px] items-center justify-center min-[1440px]:flex">
         <div className="rotate-[169.57deg]">
           <img alt="" src={asset("/consult/leaf-bottom.svg")} width={194.039} height={181.987} />
         </div>
