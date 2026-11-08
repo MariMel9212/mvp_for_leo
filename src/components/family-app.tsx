@@ -141,14 +141,6 @@ export function FamilyAppSection() {
                 height={2796}
                 className="absolute inset-0 h-full w-full max-w-none object-cover"
               />
-              <img
-                alt=""
-                src={asset("/app/screen-wave.svg")}
-                width={306}
-                height={32}
-                className="absolute top-0 left-0 w-full max-w-none"
-                style={{ height: `${(32 / 662) * 100}%` }}
-              />
             </div>
             <img
               alt=""
