@@ -217,7 +217,7 @@
   }
 
   .situation-sheets {
-    transform: translateX(-50%) scale(1);
+    transform: translateX(-50%) scale(1.28);
     transform-origin: center bottom;
   }
 }
