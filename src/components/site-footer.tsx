@@ -5,7 +5,7 @@ import { tie } from "@/lib/tie";
 
 export function SiteFooter() {
   return (
-    <footer className="w-full bg-[linear-gradient(180deg,#fdfdfd_27.44%,#d2def3_100%)] text-[#27292d]">
+    <footer className="w-full bg-[linear-gradient(180deg,#fdfdfd_27.44%,#d2def3_100%)] text-[#27292d] min-[1440px]:mt-[65px]">
       <div className="mx-auto w-full max-w-[1440px]">
         <div className="px-4 pt-10 min-[1440px]:px-[120px] min-[1440px]:pt-[38px]">
           <div className="flex max-w-[538px] flex-col items-start gap-5">
