@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, type FocusEvent, type FormEvent, type KeyboardEvent as ReactKeyboardEvent } from "react";
+import { createPortal } from "react-dom";
 import { asset } from "@/lib/base-path";
 import { tie } from "@/lib/tie";
 
@@ -332,10 +333,28 @@ export function PhoneField({
   compact?: boolean;
 }) {
   const [open, setOpen] = useState(false);
+  const [menuBox, setMenuBox] = useState<{ top: number; left: number; width: number; maxHeight: number } | null>(null);
   const rootRef = useRef<HTMLLabelElement>(null);
+  const menuRef = useRef<HTMLUListElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const caretRef = useRef<number | null>(null);
   const country = countries.find((item) => item.id === countryId) ?? countries[0];
+
+  function placeMenu() {
+    const field = rootRef.current?.getBoundingClientRect();
+    if (!field) return;
+    const gap = 8;
+    const spaceBelow = window.innerHeight - field.bottom - gap;
+    const spaceAbove = field.top - gap;
+    const upward = spaceBelow < 200 && spaceAbove > spaceBelow;
+    const maxHeight = Math.max(80, Math.min(240, upward ? spaceAbove : spaceBelow));
+    setMenuBox({
+      top: upward ? Math.max(gap, field.top - gap - maxHeight) : field.bottom + gap,
+      left: field.left,
+      width: field.width,
+      maxHeight,
+    });
+  }
 
   useEffect(() => {
     const input = inputRef.current;
@@ -347,17 +366,24 @@ export function PhoneField({
 
   useEffect(() => {
     if (!open) return;
+    placeMenu();
     function onPointer(event: PointerEvent) {
-      if (!rootRef.current?.contains(event.target as Node)) setOpen(false);
+      const target = event.target as Node;
+      if (rootRef.current?.contains(target) || menuRef.current?.contains(target)) return;
+      setOpen(false);
     }
     function onKey(event: KeyboardEvent) {
       if (event.key === "Escape") setOpen(false);
     }
     document.addEventListener("pointerdown", onPointer);
     document.addEventListener("keydown", onKey);
+    window.addEventListener("resize", placeMenu);
+    window.addEventListener("scroll", placeMenu, true);
     return () => {
       document.removeEventListener("pointerdown", onPointer);
       document.removeEventListener("keydown", onKey);
+      window.removeEventListener("resize", placeMenu);
+      window.removeEventListener("scroll", placeMenu, true);
     };
   }, [open]);
 
@@ -371,7 +397,10 @@ export function PhoneField({
         aria-label="Код страны"
         aria-haspopup="listbox"
         aria-expanded={open}
-        onClick={() => setOpen((current) => !current)}
+        onClick={() => {
+          if (!open) placeMenu();
+          setOpen((current) => !current);
+        }}
         className="flex shrink-0 items-center gap-[8px] bg-transparent p-0 text-[#27292d]"
       >
         <Flag id={country.id} />
@@ -409,35 +438,40 @@ export function PhoneField({
         aria-invalid={invalid}
         className={`min-w-0 flex-1 bg-transparent text-[#27292d] outline-none placeholder:text-[#27292d] placeholder:opacity-40 ${compact ? "text-16" : "text-18 max-[1439px]:text-16"}`}
       />
-      {open ? (
-        <ul
-          role="listbox"
-          aria-label="Код страны"
-          className="absolute top-[56px] left-[-1px] z-30 max-h-[240px] w-full max-w-[375px] overflow-auto rounded-[16px] border border-solid border-[#dedede] bg-white py-[8px] shadow-[0_8px_24px_rgba(91,90,90,0.12)]"
-        >
-          {countries.map((item) => {
-            const selected = item.id === country.id;
-            return (
-              <li key={item.id}>
-                <button
-                  type="button"
-                  role="option"
-                  aria-selected={selected}
-                  onClick={() => {
-                    onCountry(item.id);
-                    setOpen(false);
-                  }}
-                  className={`flex h-[40px] w-full items-center gap-[12px] px-[16px] text-left text-16 text-[#27292d] ${selected ? "bg-[#f6f8fa]" : "hover:bg-[#f6f8fa]"}`}
-                >
-                  <Flag id={item.id} />
-                  <span className="min-w-0 flex-1">{item.name}</span>
-                  <span className="opacity-50">+{item.dial}</span>
-                </button>
-              </li>
-            );
-          })}
-        </ul>
-      ) : null}
+      {open && menuBox
+        ? createPortal(
+            <ul
+              ref={menuRef}
+              role="listbox"
+              aria-label="Код страны"
+              style={{ top: menuBox.top, left: menuBox.left, width: menuBox.width, maxHeight: menuBox.maxHeight }}
+              className="fixed z-[60] overflow-auto rounded-[16px] border border-solid border-[#dedede] bg-white py-[8px] shadow-[0_8px_24px_rgba(91,90,90,0.12)]"
+            >
+              {countries.map((item) => {
+                const selected = item.id === country.id;
+                return (
+                  <li key={item.id}>
+                    <button
+                      type="button"
+                      role="option"
+                      aria-selected={selected}
+                      onClick={() => {
+                        onCountry(item.id);
+                        setOpen(false);
+                      }}
+                      className={`flex h-[40px] w-full items-center gap-[12px] px-[16px] text-left text-16 text-[#27292d] ${selected ? "bg-[#f6f8fa]" : "hover:bg-[#f6f8fa]"}`}
+                    >
+                      <Flag id={item.id} />
+                      <span className="min-w-0 flex-1">{item.name}</span>
+                      <span className="opacity-50">+{item.dial}</span>
+                    </button>
+                  </li>
+                );
+              })}
+            </ul>,
+            document.body,
+          )
+        : null}
     </label>
   );
 }
