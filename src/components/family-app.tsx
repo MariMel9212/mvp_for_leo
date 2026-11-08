@@ -24,8 +24,11 @@ function GlassCard({
   return (
     <div className={`absolute flex items-center justify-center ${className}`}>
       <div className="relative h-[89.299px] w-[262px]" style={{ transform: `rotate(${rotate}deg)` }}>
+        <div className="absolute inset-0" style={{ filter: "drop-shadow(0 0 14px rgba(107,107,107,0.22))" }}>
+          <div className="absolute inset-0 rounded-[20.219px] bg-white/70" />
+        </div>
         <div
-          className="absolute inset-0 rounded-[20.219px] shadow-[0_0_28px_rgba(107,107,107,0.11)]"
+          className="absolute inset-0 rounded-[20.219px]"
           style={{
             backgroundColor: "rgba(255, 255, 255, 0.58)",
             backdropFilter: "blur(18px) saturate(1.35)",
@@ -128,7 +131,8 @@ export function FamilyAppSection() {
         className="relative mx-auto mt-8 w-full max-w-[420px] [container-type:inline-size] min-[1440px]:absolute min-[1440px]:top-[25px] min-[1440px]:left-[767px] min-[1440px]:mx-0 min-[1440px]:mt-0 min-[1440px]:w-[482.7px] min-[1440px]:max-w-none"
       >
         <div className="w-full" style={{ paddingBottom: `${(598 / 482.695) * 100}%` }} />
-        <div className="absolute top-0 left-0 h-[598px] w-[482.695px] origin-top-left overflow-hidden [transform:scale(calc(100cqw/482.695px))] max-[1439px]:[transform:translateX(calc(50cqw-220.36px*100cqw/482.695px))_scale(calc(100cqw/482.695px))]">
+        <div className="absolute top-0 left-0 h-[598px] w-[482.695px] origin-top-left [transform:scale(calc(100cqw/482.695px))] max-[1439px]:[transform:translateX(calc(50cqw-220.36px*100cqw/482.695px))_scale(calc(100cqw/482.695px))]">
+          <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-0 left-[67.36px] h-[665.284px] w-[306px]">
             <div
               className="absolute overflow-hidden rounded-[24px] bg-white"
@@ -158,6 +162,7 @@ export function FamilyAppSection() {
                 "linear-gradient(180deg, rgba(253, 253, 253, 0) 18.59%, #fdfdfd 43.013%), linear-gradient(180deg, rgba(253, 253, 253, 0) 5.033%, #fdfdfd 36.877%)",
             }}
           />
+          </div>
           <GlassCard
             title="Практики самопомощи"
             text={tie("Осваивайте способы справляться со стрессом и тревогой")}
