@@ -95,7 +95,8 @@ export default function HomePage() {
               imageClassName="top-0 left-[-189px] h-[527px] w-[790px] object-cover"
               imageWidth={790}
               imageHeight={527}
-              focus="56% 36%"
+              focus="68% 36%"
+              frameScale="scale-[1.24]"
               action="Подобрать реабилитацию"
             />
           </div>
