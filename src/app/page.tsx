@@ -31,7 +31,7 @@ const stats = [
 export default function HomePage() {
   return (
     <main className="mx-auto w-full max-w-[1440px] bg-[#fdfdfd] text-[#27292d]">
-      <section className="relative flex flex-col bg-[#d2def3] max-[1439px]:-mt-[env(safe-area-inset-top,0px)] max-[1439px]:min-h-[100dvh] max-[1439px]:pt-[env(safe-area-inset-top,0px)] min-[1440px]:block min-[1440px]:h-[772px] min-[1440px]:bg-transparent">
+      <section className="relative flex flex-col bg-[#d2def3] max-[1439px]:-mt-[env(safe-area-inset-top,0px)] max-[1439px]:h-[max(62.5dvh,calc(100dvh-96px))] max-[1439px]:min-h-[620px] max-[1439px]:pt-[env(safe-area-inset-top,0px)] min-[1440px]:block min-[1440px]:h-[772px] min-[1440px]:bg-transparent">
         <div className="pointer-events-none absolute top-0 left-1/2 h-full w-screen -translate-x-1/2 overflow-hidden">
           <div
             aria-hidden
@@ -42,22 +42,25 @@ export default function HomePage() {
             }}
           />
           <HeroField />
+          <div aria-hidden className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-b from-transparent to-[#fdfdfd] min-[1440px]:hidden" />
         </div>
 
         <div className="relative z-10 flex w-full flex-col items-center max-[1439px]:min-h-0 max-[1439px]:flex-1 min-[1440px]:gap-[122px]">
           <SiteHeader />
 
-          <div id="podbor" className="flex w-full max-w-[754px] flex-col items-center gap-8 px-4 max-[1439px]:flex-1 max-[1439px]:justify-center max-[1439px]:py-8 min-[1440px]:gap-[42px] min-[1440px]:px-0">
-            <h1 className="w-full text-center text-48 font-medium max-[1439px]:text-[32px] max-[1439px]:leading-[40px]">
-              {tie("Проверенные ребцентра для лечения и восстановления при зависимостях")}
-            </h1>
-            <AudienceTabs />
-            <a
-              href="#situacii"
-              className="lime-control flex h-[56px] w-full max-w-[377px] items-center justify-center rounded-[12px] px-[20px] text-18 leading-[24px] font-medium"
-            >
-              Подобрать центр
-            </a>
+          <div className="flex w-full items-center justify-center max-[1439px]:min-h-0 max-[1439px]:flex-1 max-[1439px]:px-4 max-[1439px]:py-6">
+            <div id="podbor" className="flex w-full max-w-[34rem] flex-col items-center gap-6 min-[1440px]:max-w-[754px] min-[1440px]:gap-[42px]">
+              <h1 className="w-full text-center text-48 font-medium max-[1439px]:text-[32px] max-[1439px]:leading-[40px]">
+                {tie("Проверенные ребцентра для лечения и восстановления при зависимостях")}
+              </h1>
+              <AudienceTabs />
+              <a
+                href="#situacii"
+                className="lime-control flex h-[56px] w-full max-w-[377px] items-center justify-center rounded-[12px] px-[20px] text-18 leading-[24px] font-medium"
+              >
+                Подобрать центр
+              </a>
+            </div>
           </div>
         </div>
       </section>

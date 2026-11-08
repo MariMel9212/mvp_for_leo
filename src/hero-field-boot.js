@@ -8,10 +8,21 @@
     return 1 - (1 - t) ** 3;
   }
 
-  function band() {
-    if (window.matchMedia("(max-width: 767px)").matches) return { inner: 180, outer: 320 };
-    var compact = window.matchMedia("(max-width: 1599px)").matches;
-    return compact ? { inner: 480, outer: 700 } : { inner: 350, outer: 610 };
+  function band(canvas) {
+    if (!canvas || window.matchMedia("(min-width: 1440px)").matches) {
+      var compact = window.matchMedia("(max-width: 1599px)").matches;
+      return compact ? { inner: 480, outer: 700 } : { inner: 350, outer: 610 };
+    }
+    var canvasRect = canvas.getBoundingClientRect();
+    var node = document.getElementById("podbor");
+    var rect = node ? node.getBoundingClientRect() : null;
+    if (canvasRect.height < 2 || !rect || rect.width < 2 || rect.height < 2) {
+      return { inner: 480, outer: 720 };
+    }
+    var pxToWorld = (2 * CAMERA_Z * TAN_HALF) / canvasRect.height;
+    var innerPx = Math.hypot(rect.width, rect.height) / 2 + 40;
+    var outerPx = innerPx * 1.5;
+    return { inner: Math.round(innerPx * pxToWorld), outer: Math.round(outerPx * pxToWorld) };
   }
 
   function createParticles(inner, outer, settled) {
@@ -54,7 +65,7 @@
 
     var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     var finePointer = window.matchMedia("(min-width: 769px)").matches;
-    var limits = band();
+    var limits = band(canvas);
     var inner = limits.inner;
     var outer = limits.outer;
     var particles = createParticles(inner, outer, reduce);
@@ -81,8 +92,8 @@
         canvas.width = nextWidth;
         canvas.height = nextHeight;
       }
-      var next = band();
-      if (next.inner !== inner || next.outer !== outer) {
+      var next = band(canvas);
+      if (Math.abs(next.inner - inner) > Math.max(16, inner * 0.06) || Math.abs(next.outer - outer) > Math.max(16, outer * 0.06)) {
         inner = next.inner;
         outer = next.outer;
         particles = createParticles(inner, outer, reduce || performance.now() - started > 2800);
@@ -108,7 +119,7 @@
     var podborNode = document.getElementById("podbor");
     if (podborNode) resizeObserver.observe(podborNode);
     resize();
-    if (document.fonts && document.fonts.ready) document.fonts.ready.then(placeOrigin);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(resize);
 
     function start() {
       if (running || !state.alive) return;
