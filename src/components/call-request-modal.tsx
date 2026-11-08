@@ -549,7 +549,7 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
         ) : null}
 
         {step === "done" ? (
-          <div className="mx-auto flex w-full max-w-[420px] flex-col items-center gap-8 px-4 pt-8 min-[1100px]:gap-[48px] min-[1100px]:px-0 min-[1100px]:pt-[38px]">
+          <div className="mx-auto flex w-full max-w-[420px] flex-col items-center gap-5 px-4 pt-3 min-[1100px]:gap-[48px] min-[1100px]:px-0 min-[1100px]:pt-[38px]">
             <h2 id={titleId} className="w-full text-center text-28 font-medium">
               Спасибо за доверие
             </h2>
@@ -701,7 +701,8 @@ function scheduledDate(date: Date) {
 
 function ThanksPicture() {
   return (
-    <div className="relative size-[184px] shrink-0" aria-hidden>
+    <div className="relative size-[136px] shrink-0 min-[1100px]:size-[184px]" aria-hidden>
+      <div className="absolute top-0 left-0 size-[184px] origin-top-left scale-[0.74] min-[1100px]:scale-100">
       <div className="absolute top-[62.67px] left-[calc(50%+11.78px)] flex h-[114.752px] w-[151.699px] -translate-x-1/2 items-center justify-center">
         <div className="relative h-[114.439px] w-[151.463px] rotate-[0.12deg] overflow-hidden">
           <div
@@ -725,6 +726,7 @@ function ThanksPicture() {
         </div>
       </div>
       <ThanksFigure className="absolute top-[7.85px] left-[4.49px]" />
+      </div>
     </div>
   );
 }
