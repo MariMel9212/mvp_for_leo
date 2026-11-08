@@ -83,7 +83,7 @@ export default function HomePage() {
               title="Детокс"
               text={tie("Клиники и стационары с медицинским наблюдение для безопасного выхода из острого состояния")}
               image="/desktop/detox.webp"
-              imageClassName="top-[-52px] left-[-213px] h-[575px] w-[966px]"
+              imageClassName="top-[-42px] left-[-254px] h-[621px] w-[1043px]"
               imageWidth={966}
               imageHeight={575}
               focus="52% 64%"
