@@ -55,17 +55,15 @@ export function SelectionCriteria() {
     const section = sectionRef.current;
     if (!section) return;
     const snap = () => {
-      observer.disconnect();
       section.querySelectorAll<HTMLElement>("[data-snap-gap]").forEach((gap) => {
         gap.style.height = `${MIN_GAP}px`;
       });
       snapToGrid(section);
-      observer.observe(section);
     };
-    const observer = new ResizeObserver(snap);
     snap();
     document.fonts?.ready.then(snap);
-    return () => observer.disconnect();
+    window.addEventListener("resize", snap);
+    return () => window.removeEventListener("resize", snap);
   }, []);
 
   return (
