@@ -248,7 +248,7 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
             <h2 id={titleId} className="w-full max-w-[406px] text-center text-28 font-medium">
               Выберите удобный формат для консультации
             </h2>
-            <div className="flex w-full flex-row items-stretch justify-center gap-3 min-[1100px]:gap-[24px]">
+            <div className="flex w-full flex-col items-stretch gap-3 min-[1100px]:flex-row min-[1100px]:justify-center min-[1100px]:gap-[24px]">
               <FormatCard
                 icon={<CallIcon />}
                 title="Связаться как можно скорее"
@@ -734,14 +734,14 @@ function FormatCard({
     <button
       type="button"
       onClick={onClick}
-      className="flex min-w-0 flex-1 flex-col items-start gap-3 rounded-[12px] border border-solid border-[rgba(69,114,230,0.06)] px-3 py-4 text-left hover:border-[rgba(69,114,230,0.18)] min-[1100px]:max-w-[300px] min-[1100px]:gap-[16px] min-[1100px]:px-[20px] min-[1100px]:py-[22px]"
+      className="flex w-full min-w-0 flex-row items-center gap-4 rounded-[12px] border border-solid border-[rgba(69,114,230,0.06)] px-4 py-4 text-left hover:border-[rgba(69,114,230,0.18)] min-[1100px]:max-w-[300px] min-[1100px]:flex-1 min-[1100px]:flex-col min-[1100px]:items-start min-[1100px]:gap-[16px] min-[1100px]:px-[20px] min-[1100px]:py-[22px]"
       style={{
         backgroundImage:
           "linear-gradient(122.62deg, rgba(223, 235, 255, 0.24) 3.1%, rgba(240, 245, 255, 0.24) 99.38%)",
       }}
     >
-      {icon}
-      <span className="flex flex-col items-start gap-[8px]">
+      <span className="flex shrink-0 items-center">{icon}</span>
+      <span className="flex min-w-0 flex-1 flex-col items-start gap-[8px]">
         <span className="text-18 leading-[28px] font-medium">{tie(title)}</span>
         <span className="w-full text-13 leading-[20px] opacity-70">{tie(text)}</span>
       </span>
