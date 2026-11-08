@@ -2,14 +2,14 @@
   var COUNT = 3500;
   var CAMERA_Z = 900;
   var TAN_HALF = Math.tan((75 * Math.PI) / 180 / 2);
-  var DOT = 2.8;
+  var DOT = 4.5;
 
   function ease(t) {
     return 1 - (1 - t) ** 3;
   }
 
   function band(canvas) {
-    if (!window.matchMedia("(max-width: 767px)").matches) return { inner: 580, outer: 800 };
+    if (!window.matchMedia("(max-width: 767px)").matches) return { inner: 500, outer: 700 };
     var rect = canvas.getBoundingClientRect();
     if (rect.height < 2) return { inner: 550, outer: 800 };
     var pxToWorld = (2 * CAMERA_Z * TAN_HALF) / rect.height;
@@ -96,7 +96,7 @@
         outer = next.outer;
         particles = createParticles(inner, outer, reduce || performance.now() - started > 2800);
       }
-      DOT = window.matchMedia("(min-width: 1440px)").matches ? 2.8 : 4.5;
+      DOT = 4.5;
       placeOrigin();
     }
 
@@ -185,7 +185,7 @@
       var width = canvas.width;
       var height = canvas.height;
       context.clearRect(0, 0, width, height);
-      context.fillStyle = window.matchMedia("(min-width: 1440px)").matches ? "#b2c7eb" : "rgba(178, 199, 235, 0.78)";
+      context.fillStyle = window.matchMedia("(max-width: 767px)").matches ? "rgba(178, 199, 235, 0.78)" : "#b2c7eb";
       canvas.style.opacity = reduce ? "1" : String(Math.min(1, (now - started) / 1000));
       context.beginPath();
 
