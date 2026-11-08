@@ -85,6 +85,7 @@ export default function HomePage() {
               imageWidth={966}
               imageHeight={575}
               focus="52% 64%"
+              frameScale="scale-[1.32]"
               action="Подобрать детокс"
             />
             <SituationCard
@@ -119,6 +120,7 @@ function SituationCard({
   imageWidth,
   imageHeight,
   focus,
+  frameScale = "scale-[1.18]",
   action,
 }: {
   title: string;
@@ -128,6 +130,7 @@ function SituationCard({
   imageWidth: number;
   imageHeight: number;
   focus: string;
+  frameScale?: string;
   action: string;
 }) {
   return (
@@ -142,7 +145,7 @@ function SituationCard({
           src={asset(image)}
           width={imageWidth}
           height={imageHeight}
-          className="absolute inset-0 h-full w-full origin-center scale-[1.18] object-cover min-[1440px]:hidden"
+          className={`absolute inset-0 h-full w-full origin-center object-cover min-[1440px]:hidden ${frameScale}`}
           style={{ objectPosition: focus, transformOrigin: focus }}
         />
         <img
