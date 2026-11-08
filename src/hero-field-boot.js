@@ -11,7 +11,7 @@
   function band(canvas) {
     if (!canvas || window.matchMedia("(min-width: 1440px)").matches) {
       var compact = window.matchMedia("(max-width: 1599px)").matches;
-      return compact ? { inner: 480, outer: 700 } : { inner: 350, outer: 610 };
+      return compact ? { inner: 560, outer: 800 } : { inner: 640, outer: 920 };
     }
     var rect = canvas.getBoundingClientRect();
     if (rect.height < 2) return { inner: 550, outer: 800 };
