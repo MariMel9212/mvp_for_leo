@@ -62,7 +62,7 @@ export function RecoverySteps() {
 
           <article className={`coverage-card ${cardClass} max-[1439px]:flex max-[1439px]:h-full max-[1439px]:flex-col max-[1439px]:[container-type:inline-size] min-[1440px]:h-[486px]`} style={cardStyle}>
             <StepCopy title="Отбираем учреждения" text={format} />
-            <ArtWell className="max-[1439px]:h-[calc(100cqw*305/383-20px)]">
+            <ArtWell className="max-[1439px]:h-[calc(100cqw*305/383+16px)]">
               <CoverageScan />
             </ArtWell>
           </article>
