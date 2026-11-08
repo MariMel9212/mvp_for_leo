@@ -49,10 +49,64 @@ function GlassCard({
   );
 }
 
-const stores = [
-  { src: "/app/google-play.svg", alt: "Скачать в Google Play", href: appStore, width: 162, height: 48 },
-  { src: "/app/app-store.svg", alt: "Загрузить в App Store", href: appStore, width: 144, height: 48 },
-];
+const storeButtonClass =
+  "inline-flex h-11 items-center gap-2 rounded-[10px] bg-[#161616] px-3 text-white shadow-[0_6px_16px_rgba(39,41,45,0.16)] transition duration-150 ease-out hover:-translate-y-0.5 hover:bg-black hover:shadow-[0_10px_20px_rgba(39,41,45,0.2)] active:translate-y-0 active:bg-[#27292d] active:shadow-[0_3px_8px_rgba(39,41,45,0.16)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#27292d] min-[1440px]:h-12 min-[1440px]:gap-2.5 min-[1440px]:px-3.5";
+
+function StoreLabel({ kicker, name }: { kicker: string; name: string }) {
+  return (
+    <span className="flex flex-col items-start">
+      <span className="text-[8px] leading-[10px] tracking-[0.06em] uppercase opacity-75 min-[1440px]:text-[9px] min-[1440px]:leading-[11px]">
+        {kicker}
+      </span>
+      <span className="text-[14px] leading-[16px] font-medium min-[1440px]:text-[16px] min-[1440px]:leading-[18px]">{name}</span>
+    </span>
+  );
+}
+
+function GooglePlayIcon() {
+  return (
+    <svg width="18" height="20" viewBox="11.5 8.4 29.2 31.2" aria-hidden className="h-5 w-[18px] shrink-0 min-[1440px]:h-[22px] min-[1440px]:w-5">
+      <defs>
+        <linearGradient id="play-blue" x1="26.1597" y1="10.4519" x2="6.02366" y2="30.5879" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#00A0FF" />
+          <stop offset="0.01" stopColor="#00A1FF" />
+          <stop offset="0.26" stopColor="#00BEFF" />
+          <stop offset="0.51" stopColor="#00D2FF" />
+          <stop offset="0.76" stopColor="#00DFFF" />
+          <stop offset="1" stopColor="#00E3FF" />
+        </linearGradient>
+        <linearGradient id="play-yellow" x1="40.6" y1="24" x2="11.57" y2="24" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#FFE000" />
+          <stop offset="0.41" stopColor="#FFBD00" />
+          <stop offset="0.78" stopColor="#FFA500" />
+          <stop offset="1" stopColor="#FF9C00" />
+        </linearGradient>
+        <linearGradient id="play-red" x1="29.8" y1="26.76" x2="2.48" y2="54.06" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#FF3A44" />
+          <stop offset="1" stopColor="#C31162" />
+        </linearGradient>
+        <linearGradient id="play-green" x1="8.76" y1="0.22" x2="20.95" y2="12.41" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#32A071" />
+          <stop offset="0.48" stopColor="#15CF74" />
+          <stop offset="1" stopColor="#00F076" />
+        </linearGradient>
+      </defs>
+      <path d="M12.5277 9.04787C12.1322 9.51541 11.9305 10.1164 11.9637 10.7279V37.2719C11.9228 37.8843 12.1255 38.4881 12.5277 38.9519L12.6117 39.0479L27.4797 24.1799V23.8199L12.6117 8.96387L12.5277 9.04787Z" fill="url(#play-blue)" />
+      <path d="M32.4 29.1353L27.48 24.1793V23.8193L32.4 18.8633L32.508 18.9353L38.4 22.2713C40.08 23.2193 40.08 24.7793 38.4 25.7393L32.532 29.0753L32.4 29.1353Z" fill="url(#play-yellow)" />
+      <path d="M32.5438 29.064L27.4798 24L12.5278 38.952C12.8669 39.2538 13.3009 39.4275 13.7547 39.4428C14.2084 39.4582 14.6531 39.3142 15.0118 39.036L32.5438 29.064Z" fill="url(#play-red)" />
+      <path d="M32.5438 18.9358L15.0118 8.97577C14.6555 8.69366 14.211 8.54624 13.7567 8.55941C13.3024 8.57257 12.8673 8.7455 12.5278 9.04777L27.4798 23.9998L32.5438 18.9358Z" fill="url(#play-green)" />
+    </svg>
+  );
+}
+
+function AppStoreIcon() {
+  return (
+    <svg width="16" height="20" viewBox="12 9 22 28" aria-hidden className="h-5 w-4 shrink-0 fill-white min-[1440px]:h-[22px] min-[1440px]:w-[18px]">
+      <path d="M30.08 23.8668C30.0935 22.8253 30.3709 21.8041 30.8865 20.8982C31.4021 19.9923 32.1391 19.2311 33.029 18.6856C32.4637 17.8805 31.7179 17.218 30.8509 16.7506C29.9839 16.2832 29.0196 16.0238 28.0345 15.9931C25.9331 15.7731 23.896 17.247 22.8251 17.247C21.7336 17.247 20.0849 16.0149 18.3095 16.0513C17.1612 16.0883 16.042 16.4213 15.0611 17.0179C14.0802 17.6145 13.2709 18.4542 12.7122 19.4554C10.2921 23.6338 12.0973 29.7746 14.4156 33.1522C15.5755 34.8061 16.9311 36.6535 18.7049 36.588C20.4406 36.5162 21.0889 35.4842 23.184 35.4842C25.2598 35.4842 25.868 36.588 27.6777 36.5463C29.5403 36.5162 30.7137 34.8851 31.833 33.2156C32.6664 32.0371 33.3077 30.7347 33.7331 29.3565C32.651 28.9001 31.7276 28.1362 31.078 27.16C30.4284 26.1837 30.0813 25.0384 30.08 23.8668Z" />
+      <path d="M26.6618 13.7719C27.6773 12.5562 28.1776 10.9936 28.0565 9.41602C26.505 9.57851 25.0718 10.318 24.0426 11.487C23.5394 12.0581 23.1539 12.7225 22.9084 13.4423C22.6628 14.162 22.5619 14.9229 22.6114 15.6816C23.3874 15.6896 24.1551 15.5218 24.8567 15.191C25.5583 14.8602 26.1755 14.375 26.6618 13.7719Z" />
+    </svg>
+  );
+}
 
 export function FamilyAppSection() {
   return (
@@ -134,18 +188,14 @@ export function FamilyAppSection() {
       </div>
 
       <div className="relative z-10 mt-2 flex flex-wrap justify-center gap-3 min-[1440px]:absolute min-[1440px]:top-[515px] min-[1440px]:left-[120px] min-[1440px]:mt-0 min-[1440px]:justify-start min-[1440px]:gap-[14px]">
-        {stores.map((store) => (
-          <a
-            key={store.src}
-            href={store.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={store.alt}
-            className="block h-11 w-auto rounded-[10px] transition duration-200 ease-out hover:-translate-y-px hover:shadow-[0_4px_14px_rgba(39,41,45,0.14)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#27292d] active:translate-y-0 active:shadow-none min-[1440px]:h-12"
-          >
-            <img alt="" src={asset(store.src)} width={store.width} height={store.height} className="h-11 w-auto min-[1440px]:h-12" />
-          </a>
-        ))}
+        <a href={appStore} target="_blank" rel="noopener noreferrer" aria-label="Скачать в Google Play" className={storeButtonClass}>
+          <GooglePlayIcon />
+          <StoreLabel kicker="Скачать из" name="Google Play" />
+        </a>
+        <a href={appStore} target="_blank" rel="noopener noreferrer" aria-label="Загрузить в App Store" className={storeButtonClass}>
+          <AppStoreIcon />
+          <StoreLabel kicker="Загрузите в" name="App Store" />
+        </a>
       </div>
     </section>
   );
