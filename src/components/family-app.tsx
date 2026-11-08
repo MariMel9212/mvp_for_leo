@@ -2,8 +2,8 @@ import { asset } from "@/lib/base-path";
 import { tie } from "@/lib/tie";
 
 const stores = [
-  { src: "/app/google-play.png", alt: "Скачать в Google Play", width: 162, height: 48 },
-  { src: "/app/app-store.png", alt: "Загрузить в App Store", width: 144, height: 48 },
+  { src: "/app/google-play.svg", alt: "Скачать в Google Play", width: 162, height: 48 },
+  { src: "/app/app-store.svg", alt: "Загрузить в App Store", width: 144, height: 48 },
 ];
 
 export function FamilyAppSection() {
@@ -33,13 +33,33 @@ export function FamilyAppSection() {
         ))}
       </div>
 
-      <img
-        alt="Экран приложения Leo: практики самопомощи и дневник эмоций"
-        src={asset("/app/phone.png")}
-        width={538}
-        height={630}
-        className="mx-auto mt-8 block w-full max-w-[420px] min-[1440px]:absolute min-[1440px]:top-[19px] min-[1440px]:left-[752px] min-[1440px]:mx-0 min-[1440px]:mt-0 min-[1440px]:w-[538px] min-[1440px]:max-w-none"
-      />
+      <div
+        role="img"
+        aria-label="Экран приложения Leo: практики самопомощи и дневник эмоций"
+        className="relative mx-auto mt-8 aspect-[483/598] w-full max-w-[420px] min-[1440px]:absolute min-[1440px]:top-[25px] min-[1440px]:left-[767px] min-[1440px]:mx-0 min-[1440px]:mt-0 min-[1440px]:h-[598px] min-[1440px]:w-[483px] min-[1440px]:max-w-none"
+      >
+        <img
+          alt=""
+          src={asset("/app/phone.webp")}
+          width={1028}
+          height={1889}
+          className="absolute top-0 left-[13.87%] w-[63.35%] max-w-none"
+        />
+        <img
+          alt=""
+          src={asset("/app/card-practices.svg")}
+          width={321}
+          height={153}
+          className="absolute top-[4.35%] -left-[5.6%] w-[66.46%] max-w-none"
+        />
+        <img
+          alt=""
+          src={asset("/app/card-diary.svg")}
+          width={320}
+          height={153}
+          className="absolute top-[56.67%] left-[40.12%] w-[66.25%] max-w-none"
+        />
+      </div>
     </section>
   );
 }
