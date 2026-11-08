@@ -4,7 +4,7 @@ import { CenterPage } from "@/components/center-page";
 import { himkiCenter } from "@/content/centers/himki";
 
 export const metadata: Metadata = {
-  title: "Реабилитационный центр в Химках — СвойЦентр",
+  title: "Реабилитационный центр в Химках — Leo",
   description: "Реабилитационный центр в Химках: программа с проживанием, курс от 3 до 12 месяцев.",
 };
 

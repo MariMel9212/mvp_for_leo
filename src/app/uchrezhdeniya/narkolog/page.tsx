@@ -4,7 +4,7 @@ import { CenterPage } from "@/components/center-page";
 import { narkologCenter } from "@/content/centers/narkolog";
 
 export const metadata: Metadata = {
-  title: "Реабилитационный центр в Чехове — СвойЦентр",
+  title: "Реабилитационный центр в Чехове — Leo",
   description:
     "Реабилитационный центр в тихом городе Чехов. Химические и нехимические зависимости, 12 шагов, от 65 000 ₽ в месяц.",
 };

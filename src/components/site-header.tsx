@@ -35,7 +35,7 @@ export function SiteHeader({
     <header className="mx-auto flex w-full max-w-[1440px] justify-center px-[120px] pt-5 max-[1439px]:px-4 min-[1440px]:pt-[32px]">
       <div className="flex w-full max-w-[1200px] items-center justify-between md:h-[44px]">
         <Link href="/" className="text-[20px] leading-[25px] font-bold text-[#161616]">
-          Принятие
+          Leo
         </Link>
         <nav aria-label="Разделы" className="hidden items-center gap-[42px] md:flex">
           {links.map((link) => (
