@@ -18,8 +18,8 @@
     var pxToWorld = (2 * CAMERA_Z * TAN_HALF) / rect.height;
     var node = document.getElementById("podbor");
     var box = node ? node.getBoundingClientRect() : null;
-    var hole = box && box.width > 2 ? Math.hypot(box.width, box.height) / 2 + 36 : Math.min(rect.width, rect.height) * 0.62;
-    var innerPx = Math.min(hole, rect.height * 0.46);
+    var hole = box && box.width > 2 ? Math.hypot(box.width, box.height) / 2 + 8 : Math.min(rect.width, rect.height) * 0.54;
+    var innerPx = Math.min(hole, rect.height * 0.4);
     return {
       inner: Math.round(innerPx * pxToWorld),
       outer: Math.round(innerPx * 1.48 * pxToWorld),
