@@ -18,8 +18,8 @@
     var pxToWorld = (2 * CAMERA_Z * TAN_HALF) / rect.height;
     var node = document.getElementById("podbor");
     var box = node ? node.getBoundingClientRect() : null;
-    var hole = box && box.width > 2 ? Math.hypot(box.width, box.height) / 2 - 20 : Math.min(rect.width, rect.height) * 0.48;
-    var innerPx = Math.min(hole, rect.height * 0.36);
+    var hole = box && box.width > 2 ? Math.hypot(box.width, box.height) / 2 - 48 : Math.min(rect.width, rect.height) * 0.42;
+    var innerPx = Math.min(hole, rect.height * 0.32);
     return {
       inner: Math.round(innerPx * pxToWorld),
       outer: Math.round(innerPx * 1.48 * pxToWorld),
@@ -188,7 +188,7 @@
       var width = canvas.width;
       var height = canvas.height;
       context.clearRect(0, 0, width, height);
-      context.fillStyle = "#b2c7eb";
+      context.fillStyle = window.matchMedia("(min-width: 1440px)").matches ? "#b2c7eb" : "rgba(178, 199, 235, 0.78)";
       canvas.style.opacity = reduce ? "1" : String(Math.min(1, (now - started) / 1000));
       context.beginPath();
 
