@@ -23,21 +23,26 @@ function GlassCard({
 }) {
   return (
     <div className={`absolute flex items-center justify-center ${className}`}>
-      <div
-        className={`relative h-[89.299px] w-[262px] rounded-[20.219px] shadow-[0_0_28px_rgba(107,107,107,0.11)] ${clipLeaf ? "overflow-hidden" : "overflow-visible"}`}
-        style={{
-          transform: `rotate(${rotate}deg)`,
-          backgroundColor: "rgba(255, 255, 255, 0.58)",
-          backdropFilter: "blur(18px) saturate(1.35)",
-          WebkitBackdropFilter: "blur(18px) saturate(1.35)",
-        }}
-      >
-        <span className={`pointer-events-none absolute flex items-center justify-center ${leafClassName}`}>
-          <img alt="" src={asset("/app/leaf.svg")} width={46} height={45} className="h-[45.163px] w-[46.261px] max-w-none" style={leafStyle} />
-        </span>
-        <div className="absolute top-[13.48px] left-[11.79px] flex w-[186.18px] flex-col gap-[5.055px]">
-          <p className="text-[13.479px] leading-[20.219px] font-medium text-black">{title}</p>
-          <p className="text-[10.952px] leading-[16.849px] text-[#27292d]">{text}</p>
+      <div className="relative h-[89.299px] w-[262px]" style={{ transform: `rotate(${rotate}deg)` }}>
+        <div
+          className="absolute inset-0 rounded-[20.219px] shadow-[0_0_28px_rgba(107,107,107,0.11)]"
+          style={{
+            backgroundColor: "rgba(255, 255, 255, 0.58)",
+            backdropFilter: "blur(18px) saturate(1.35)",
+            WebkitBackdropFilter: "blur(18px) saturate(1.35)",
+          }}
+        />
+        <div
+          className="absolute inset-0 rounded-[20.219px]"
+          style={clipLeaf ? { clipPath: "inset(0 round 20.219px)" } : undefined}
+        >
+          <span className={`pointer-events-none absolute flex items-center justify-center ${leafClassName}`}>
+            <img alt="" src={asset("/app/leaf.svg")} width={46} height={45} className="h-[45.163px] w-[46.261px] max-w-none" style={leafStyle} />
+          </span>
+          <div className="absolute top-[13.48px] left-[11.79px] flex w-[186.18px] flex-col gap-[5.055px]">
+            <p className="text-[13.479px] leading-[20.219px] font-medium text-black">{title}</p>
+            <p className="text-[10.952px] leading-[16.849px] text-[#27292d]">{text}</p>
+          </div>
         </div>
       </div>
     </div>
@@ -112,6 +117,7 @@ export function FamilyAppSection() {
             text={tie("Осваивайте способы справляться со стрессом и тревогой")}
             className="top-[53.84px] left-0 h-[97.61px] w-[264.715px]"
             rotate={-1.83}
+            clipLeaf
             leafClassName="top-[46.67px] left-[200.49px] h-[59.241px] w-[62.566px]"
             leafStyle={{ transform: "scaleY(-1) rotate(155.85deg) skewX(2.64deg)" }}
           />
