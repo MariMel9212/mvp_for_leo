@@ -335,7 +335,7 @@ function AmenitiesModal({
   return (
     <div className="fixed inset-0 z-50 flex items-end justify-center bg-[rgba(39,41,45,0.45)] md:items-center md:p-[24px]">
       <button type="button" aria-label="Закрыть" className="absolute inset-0 cursor-default" onClick={onClose} />
-      <div role="dialog" aria-modal="true" aria-labelledby="center-amenities-title" className="mobile-sheet relative max-h-[calc(100dvh-12px)] w-full max-w-[720px] overflow-y-auto rounded-t-[21px] bg-white pb-[max(16px,env(safe-area-inset-bottom))] md:rounded-[21px] md:pb-0">
+      <div role="dialog" aria-modal="true" aria-labelledby="center-amenities-title" className="mobile-sheet relative max-h-[calc(100dvh-12px)] w-full max-w-[720px] overflow-y-auto rounded-t-[21px] bg-white pb-[max(16px,env(safe-area-inset-bottom))] max-md:h-[calc(100dvh-12px)] md:rounded-[21px] md:pb-0">
         <div className="flex items-center justify-between px-[26px] pt-[20px] pb-[20px]">
           <h2 id="center-amenities-title" className="text-24 font-medium">
             Условия
@@ -363,7 +363,7 @@ function PhotoGallery({ photos, onClose }: { photos: { src: string; alt: string 
         role="dialog"
         aria-modal="true"
         aria-labelledby="center-photos-title"
-        className="mobile-sheet relative flex max-h-[calc(100dvh-12px)] w-full max-w-[1100px] flex-col overflow-hidden rounded-t-[21px] bg-white pb-[max(16px,env(safe-area-inset-bottom))] md:max-h-[calc(100dvh-32px)] md:rounded-[21px] md:pb-0"
+        className="mobile-sheet relative flex max-h-[calc(100dvh-12px)] w-full max-w-[1100px] flex-col overflow-hidden rounded-t-[21px] bg-white pb-[max(16px,env(safe-area-inset-bottom))] max-md:h-[calc(100dvh-12px)] md:max-h-[calc(100dvh-32px)] md:rounded-[21px] md:pb-0"
       >
         <div className="flex items-center justify-between px-[26px] pt-[20px] pb-[16px]">
           <h2 id="center-photos-title" className="text-24 font-medium">
@@ -371,7 +371,7 @@ function PhotoGallery({ photos, onClose }: { photos: { src: string; alt: string 
           </h2>
           <CloseButton onClick={onClose} />
         </div>
-        <div className="grid grid-cols-3 gap-[8px] overflow-y-auto px-[26px] pb-[26px] max-[1099px]:grid-cols-2 max-[639px]:grid-cols-1 max-[639px]:px-4">
+        <div className="grid grid-cols-3 gap-[8px] overflow-y-auto px-[26px] pb-[26px] max-md:min-h-0 max-md:flex-1 max-[1099px]:grid-cols-2 max-[639px]:grid-cols-1 max-[639px]:px-4">
           {photos.map((photo) => (
             <img
               key={photo.src}

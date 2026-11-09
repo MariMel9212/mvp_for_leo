@@ -302,7 +302,7 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
         aria-modal="true"
         aria-labelledby={titleId}
         tabIndex={-1}
-        className="mobile-sheet relative flex max-h-[calc(100dvh-12px)] w-full max-w-[1100px] flex-col overflow-y-auto rounded-t-[21px] bg-white pb-[max(16px,env(safe-area-inset-bottom))] outline-none md:max-h-[calc(100dvh-32px)] md:rounded-[21px] md:pb-0 min-[1100px]:h-[650px] min-[1100px]:overflow-hidden"
+        className="mobile-sheet relative flex max-h-[calc(100dvh-12px)] w-full max-w-[1100px] flex-col overflow-y-auto rounded-t-[21px] bg-white pb-[max(16px,env(safe-area-inset-bottom))] outline-none max-md:h-[calc(100dvh-12px)] md:max-h-[calc(100dvh-32px)] md:rounded-[21px] md:pb-0 min-[1100px]:h-[650px] min-[1100px]:overflow-hidden"
       >
         <div className="flex h-[44px] items-center justify-between px-4 pt-[20px] min-[1100px]:px-[26px]">
           {step === "format" || step === "done" ? (
