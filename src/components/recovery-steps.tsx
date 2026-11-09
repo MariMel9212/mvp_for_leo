@@ -6,7 +6,7 @@ import { tie } from "@/lib/tie";
 const format = tie("Детокс, стационарная реабилитация или последовательное прохождение нескольких этапов");
 
 const cardClass =
-  "relative w-full shrink-0 snap-start overflow-hidden rounded-[26px] border-t border-r border-l border-[#3a7cee]/7 bg-[#f2f8fe] max-md:w-[calc(100vw-56px)] md:shrink md:snap-none min-[1440px]:w-[383px]";
+  "relative w-full shrink-0 snap-start overflow-hidden rounded-[26px] border-t border-r border-l border-[#3a7cee]/7 bg-[#f2f8fe] shadow-[0_8px_22px_rgba(36,74,127,0.07)] max-md:w-[calc(100vw-56px)] md:shrink md:snap-none min-[1440px]:w-[383px]";
 
 const cardStyle = {
   backgroundImage:
