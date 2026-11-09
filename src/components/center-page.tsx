@@ -43,7 +43,7 @@ export function CenterPage({ center }: { center: CenterPageData }) {
 
       <div className="mt-8 flex flex-col gap-8 min-[1100px]:flex-row min-[1100px]:items-start min-[1100px]:justify-between">
         <div className="contents min-[1100px]:flex min-[1100px]:w-[612px] min-[1100px]:shrink-0 min-[1100px]:flex-col min-[1100px]:gap-[30px]">
-          <header className="order-1 flex flex-col gap-[16px] border-b border-[rgba(0,0,0,0.04)] pb-[32px] min-[1100px]:order-none">
+          <header className="order-1 flex flex-col gap-[16px] pb-[32px] min-[1100px]:border-b min-[1100px]:border-[rgba(0,0,0,0.04)] min-[1100px]:order-none">
             <div className="flex flex-col gap-[6px]">
               <h1 className="text-28 font-medium">{tie(center.title)}</h1>
               <p className="text-18">{center.region}</p>
