@@ -162,7 +162,7 @@ function CallBanner() {
       <div className="mx-auto flex w-full max-w-[611px] flex-col items-center gap-[15px] text-center text-[#27292d]">
         <h2 className="text-40 font-medium max-md:text-28 md:max-[1439px]:text-[32px] md:max-[1439px]:leading-[40px]">Запланируйте звонок, чтобы&nbsp;не&nbsp;ошибиться с&nbsp;выбором</h2>
         <p className="text-16 opacity-60">
-          На бесплатной и анонимной консультации погрузимся в&nbsp;Вашу проблему и&nbsp;подберем подходящее учереждение
+          На бесплатной и анонимной консультации погрузимся в&nbsp;Вашу проблему и&nbsp;подберем подходящее учреждение
         </p>
       </div>
       <div className="mt-[48px] flex flex-col items-stretch gap-4 min-[1440px]:flex-row min-[1440px]:items-center min-[1440px]:justify-between">
@@ -171,7 +171,7 @@ function CallBanner() {
           className="relative h-[213px] w-full overflow-hidden rounded-[20px] border border-[rgba(0,0,0,0.04)] bg-[rgba(255,255,255,0.8)] min-[1440px]:w-[588px]"
         >
           <span className="flex items-center justify-between px-[20px] py-[19px]">
-            <span className="text-24 font-medium">Подобрать учереждение</span>
+            <span className="text-24 font-medium">Подобрать учреждение</span>
             <span className="flex size-[24px] items-center justify-center">
               <img alt="" src={asset("/icons/angle-right.svg")} width={7.286} height={13.414} />
             </span>
@@ -217,7 +217,7 @@ export function Institutions() {
 
   return (
     <div className="mt-6 px-[120px] max-[1439px]:px-4 min-[1440px]:mt-[24px]">
-      <h1 className="text-40 font-medium max-md:text-28 md:max-[1439px]:text-[32px] md:max-[1439px]:leading-[40px]">Все учереждения</h1>
+      <h1 className="text-40 font-medium max-md:text-28 md:max-[1439px]:text-[32px] md:max-[1439px]:leading-[40px]">Все учреждения</h1>
       <form
         className="relative z-20 mt-8 hidden w-full flex-col gap-[20px] rounded-[13px] bg-white px-4 py-[23px] min-[1440px]:mt-[46px] min-[1440px]:px-[21px]"
         onSubmit={(event) => {
@@ -229,7 +229,7 @@ export function Institutions() {
         <div className="flex flex-col gap-3 min-[1100px]:flex-row min-[1100px]:items-center min-[1100px]:gap-[12px]">
           <div data-filter-menu className="min-w-0 flex-1">
             <FilterMenu
-              label="Тип учереждения"
+              label="Тип учреждения"
               value={kindOptions.find((option) => option.value === draft.kind)?.label ?? ""}
               options={kindOptions}
               open={openMenu === "kind"}
@@ -289,7 +289,7 @@ export function Institutions() {
       </form>
 
       {firstRows.length === 0 ? (
-        <p className="mt-[46px] text-16 text-[#27292d] opacity-60">Нет учереждений по этим условиям</p>
+        <p className="mt-[46px] text-16 text-[#27292d] opacity-60">Нет учреждений по этим условиям</p>
       ) : (
         <div className="mt-8 grid w-full grid-cols-3 gap-6 max-[1199px]:grid-cols-2 max-[639px]:grid-cols-1 min-[1200px]:mt-[46px]">
           {firstRows.map((center, index) => (

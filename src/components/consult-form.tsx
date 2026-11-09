@@ -294,7 +294,7 @@ export function MessengerField({
           placeholder={showPlus ? "" : placeholder}
           aria-label={label}
           aria-invalid={invalid}
-          className={`order-2 min-w-0 flex-1 bg-transparent text-[#27292d] outline-none placeholder:text-[#27292d] placeholder:opacity-40 ${compact ? "text-16" : "text-18 max-[1439px]:text-16"}`}
+          className={`order-2 min-w-0 flex-1 bg-transparent text-[#27292d] placeholder:text-[#27292d] placeholder:opacity-40 ${compact ? "text-16" : "text-18 max-[1439px]:text-16"}`}
         />
         {showPlus ? (
           <span className={`order-1 flex shrink-0 items-center text-[#27292d] ${compact ? "text-16" : "text-18 max-[1439px]:text-16"}`}>
@@ -308,7 +308,7 @@ export function MessengerField({
               maxLength={3}
               size={Math.max(code.length, 1)}
               style={{ width: code.length > 0 ? `${code.length}ch` : 0 }}
-              className={`m-0 min-w-0 border-0 bg-transparent p-0 text-[#27292d] outline-none ${compact ? "text-16" : "text-18 max-[1439px]:text-16"}`}
+              className={`m-0 min-w-0 border-0 bg-transparent p-0 text-[#27292d] ${compact ? "text-16" : "text-18 max-[1439px]:text-16"}`}
             />
           </span>
         ) : null}
@@ -442,7 +442,7 @@ export function PhoneField({
         placeholder={country.dial === "7" ? "(999) 123-45-67" : "Номер телефона"}
         aria-label="Телефон"
         aria-invalid={invalid}
-        className={`min-w-0 flex-1 bg-transparent text-[#27292d] outline-none placeholder:text-[#27292d] placeholder:opacity-40 ${compact ? "text-16" : "text-18 max-[1439px]:text-16"}`}
+        className={`min-w-0 flex-1 bg-transparent text-[#27292d] placeholder:text-[#27292d] placeholder:opacity-40 ${compact ? "text-16" : "text-18 max-[1439px]:text-16"}`}
       />
       {open && menuBox
         ? createPortal(
@@ -533,9 +533,9 @@ export function ConsultForm() {
     <section id="zayavka" className="relative mt-16 w-full overflow-hidden rounded-[29px] bg-gradient-to-b from-[rgba(229,246,255,0.45)] to-[rgba(209,239,255,0.45)] px-0 py-0 max-[1439px]:px-4 max-[1439px]:py-8 min-[1440px]:mt-[120px] min-[1440px]:h-[678px]">
       <div className="flex w-full max-w-[604px] flex-col gap-3 text-[#27292d] min-[1440px]:absolute min-[1440px]:top-[52px] min-[1440px]:left-[120px] min-[1440px]:w-[604px] min-[1440px]:gap-[24px]">
         <h2 className="text-40 font-medium max-md:text-28 md:max-[1439px]:text-[32px] md:max-[1439px]:leading-[40px]">
-          {tie("Расскажите о своей проблеме, и мы подберем профильное учереждение")}
+          {tie("Расскажите о своей проблеме, и мы подберем профильное учреждение")}
         </h2>
-        <p className="text-16 opacity-60">{tie("Консультация бесплатна и анонимна")}</p>
+        <p className="text-16 text-[#737577]">{tie("Консультация бесплатна и анонимна")}</p>
       </div>
 
       <div className="pointer-events-none absolute top-[-23px] left-[1236px] hidden h-[243.212px] w-[271.782px] items-center justify-center min-[1440px]:flex">
@@ -561,7 +561,7 @@ export function ConsultForm() {
       >
         <div className="flex w-full flex-col gap-[22px] max-[1439px]:gap-7">
           <h3 className="mx-auto w-full max-w-[367px] text-center text-24 font-medium max-[1439px]:text-[22px] max-[1439px]:leading-[28px]">
-            {tie("Бесплатная консультация по подбору учереждения")}
+            {tie("Бесплатная консультация по подбору учреждения")}
           </h3>
 
           <label className="flex w-full flex-col gap-[10px]">
@@ -572,7 +572,7 @@ export function ConsultForm() {
               placeholder="Укажите как к вам можно обращаться"
               autoComplete="name"
               aria-invalid={error !== "" && !name.trim()}
-              className="h-[48px] rounded-[16px] border border-solid border-[#dedede] bg-white pr-[14px] pl-[24px] text-18 text-[#27292d] outline-none placeholder:text-[#27292d] placeholder:opacity-40 max-[1439px]:h-[44px] max-[1439px]:pl-3 max-[1439px]:text-16"
+              className="h-[48px] rounded-[16px] border border-solid border-[#dedede] bg-white pr-[14px] pl-[24px] text-18 text-[#27292d] placeholder:text-[#27292d] placeholder:opacity-40 max-[1439px]:h-[44px] max-[1439px]:pl-3 max-[1439px]:text-16"
             />
           </label>
         </div>
@@ -600,7 +600,7 @@ export function ConsultForm() {
                       setChannel(value);
                       setError("");
                     }}
-                    className={`flex h-[32px] flex-1 items-center justify-center rounded-[8px] px-[14px] text-16 text-[#27292d] max-[1439px]:px-2 max-[1439px]:text-[15px] ${active ? "bg-white" : "opacity-50"}`}
+                    className={`flex h-[32px] flex-1 items-center justify-center rounded-[8px] px-[14px] text-16 max-[1439px]:px-2 max-[1439px]:text-[15px] ${active ? "bg-white text-[#27292d]" : "text-[#6e7072]"}`}
                   >
                     {label}
                   </button>
@@ -640,7 +640,7 @@ export function ConsultForm() {
               />
               <div className="flex h-[28px] w-full items-center gap-[8px]">
                 <span aria-hidden className="h-px min-w-0 flex-1 bg-black/10" />
-                <span className="text-18 text-[#27292d] opacity-40">Или</span>
+                <span className="text-18 text-[#737577]">Или</span>
                 <span aria-hidden className="h-px min-w-0 flex-1 bg-black/10" />
               </div>
               <MessengerField
@@ -670,7 +670,7 @@ export function ConsultForm() {
         >
           {sent ? "Заявка отправлена" : "Отправить заявку"}
         </button>
-        {error ? <p className="-mt-[28px] w-full text-center text-16 text-[#27292d] opacity-60">{error}</p> : null}
+        {error ? <p className="-mt-[28px] w-full text-center text-16 text-[#27292d]">{error}</p> : null}
       </form>
     </section>
   );

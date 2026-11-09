@@ -3,8 +3,8 @@ import { Institutions } from "@/components/institutions";
 import { SiteHeader } from "@/components/site-header";
 
 export const metadata: Metadata = {
-  title: "Все учереждения — Leo",
-  description: "Лицензированные учереждения: фильтр по типу, зависимости, программе и возрасту.",
+  title: "Все учреждения — Leo",
+  description: "Лицензированные учреждения: фильтр по типу, зависимости, программе и возрасту.",
 };
 
 export default function InstitutionsPage() {

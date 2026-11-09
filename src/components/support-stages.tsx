@@ -51,7 +51,7 @@ export function SupportStages() {
             >
               <div className={`flex flex-col px-[14px] pt-[36px] max-md:pb-[48px] max-[1439px]:pt-5 md:max-[1439px]:pb-[78px] ${card.copyClass}`}>
                 <h3 className="text-24 font-medium max-[1439px]:text-[20px] max-[1439px]:leading-[26px]">{tie(card.title)}</h3>
-                <p className="text-[18px] leading-[24px] opacity-60 max-[1439px]:text-16 max-[1439px]:leading-[22px]">{tie(card.text)}</p>
+                <p className="text-[18px] leading-[24px] text-[#737577] max-[1439px]:text-16 max-[1439px]:leading-[22px]">{tie(card.text)}</p>
               </div>
               <span
                 aria-hidden

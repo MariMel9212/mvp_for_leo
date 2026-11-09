@@ -3,7 +3,7 @@ import { CallRequestButton } from "@/components/call-request-modal";
 import { asset } from "@/lib/base-path";
 import { tie } from "@/lib/tie";
 
-const topic = "Индивидуальный подбор реабилитационного учереждения";
+const topic = "Индивидуальный подбор реабилитационного учреждения";
 
 const sections = [
   { label: "Помощь по ситуации", href: "/#situacii" },
@@ -30,7 +30,7 @@ export function SiteFooter() {
         <div className="flex flex-col items-start gap-5 min-[800px]:flex-row min-[800px]:items-end min-[800px]:justify-between">
           <div className="flex max-w-[538px] flex-col gap-3">
             <h2 className="text-[28px] leading-8 font-medium">{tie(topic)}</h2>
-            <p className="text-16 opacity-60">{tie("Подберем лицензированное учереждение для работы с зависимостью")}</p>
+            <p className="text-16 text-[#5e6062]">{tie("Подберем лицензированное учреждение для работы с зависимостью")}</p>
           </div>
           <ConsultButton />
         </div>
@@ -42,12 +42,12 @@ export function SiteFooter() {
             <Link href="/" aria-label="Leo" className="block h-6 w-fit">
               <img alt="" src={asset("/brand/leo.svg")} width={59} height={24} className="block h-6 w-auto" />
             </Link>
-            <p className="text-13 leading-5 opacity-60">
+            <p className="text-13 leading-5 text-[#5e6062]">
               {tie("Сервис подбора проверенных реабилитационных центров для взрослых и подростков")}
             </p>
           </div>
           <nav aria-label="Навигация" className="flex flex-col gap-3">
-            <p className="text-13 font-medium opacity-50">Навигация</p>
+            <p className="text-13 font-medium text-[#5e6062]">Навигация</p>
             <ul className="flex flex-col gap-2">
               {sections.map((item) => (
                 <li key={item.href}>
@@ -64,10 +64,10 @@ export function SiteFooter() {
 
         <div className="mt-6 flex flex-col gap-4 text-11 leading-4">
           <div className="flex flex-col gap-4 min-[800px]:flex-row min-[800px]:items-start min-[800px]:justify-between min-[800px]:gap-8">
-            <p className="max-w-[520px] opacity-60">
+            <p className="max-w-[520px] text-[#5e6062]">
               {tie("Сервис помогает выбрать учреждение и самостоятельно не оказывает медицинскую помощь")}
             </p>
-            <div className="flex flex-col gap-2 opacity-60 min-[800px]:items-end min-[800px]:text-right">
+            <div className="flex flex-col gap-2 text-[#5e6062] min-[800px]:items-end min-[800px]:text-right">
               <p>{tie("Оператор персональных данных: ИП Мельничук Л. И.")}</p>
               <Link href="/politika" className="w-fit underline-offset-2 hover:underline">
                 Политика обработки персональных данных

@@ -57,7 +57,7 @@ export function SelectionCriteria() {
           <h2 className="text-40 font-medium max-md:text-28 md:max-[1439px]:text-[32px] md:max-[1439px]:leading-[40px] min-[1440px]:w-[518px]">
             {tie("Проверяем каждый центр перед рекомендацией")}
           </h2>
-          <p className="text-16 opacity-60">
+          <p className="text-16 text-[#737577]">
             {tie("При подборе специализированного учреждения мы оцениваем весь комплекс факторов: качество и формат оказываемых услуг, соответствие требованиям законодательства, квалификацию специалистов, безопасность и прозрачность условий")}
           </p>
         </div>
@@ -68,7 +68,7 @@ export function SelectionCriteria() {
                 <span className="text-24 font-medium text-[#5a98ff] opacity-80">{item.n}</span>
                 <div className="flex min-w-0 flex-1 flex-col gap-[4px]">
                   <h3 className="text-24 font-medium max-[1439px]:text-[20px] max-[1439px]:leading-[26px]">{tie(item.title)}</h3>
-                  <p className="text-16 opacity-60">{typeof item.text === "string" ? tie(item.text) : item.text}</p>
+                  <p className="text-16 text-[#737577]">{typeof item.text === "string" ? tie(item.text) : item.text}</p>
                 </div>
               </div>
               {index < criteria.length - 1 ? (

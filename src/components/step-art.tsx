@@ -476,7 +476,7 @@ export function CoverageScan() {
         className="absolute font-medium text-[#3a9ff8]"
         style={{ left: 124.9, top: 31.6, width: 136, fontSize: 11.49, lineHeight: "15.92px", opacity: 0.8 }}
       >
-        Скрининг учереждений
+        Скрининг учреждений
       </span>
     </div>
   );

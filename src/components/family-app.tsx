@@ -130,7 +130,7 @@ export function FamilyAppSection() {
         <h2 className="text-40 font-medium max-md:text-28 md:max-[1439px]:text-[32px] md:max-[1439px]:leading-[40px]">
           {tie("Помогаем тем, кто рядом")}
         </h2>
-        <p className="mt-6 max-w-[496px] text-16 opacity-60 max-md:mt-3">
+        <p className="mt-6 max-w-[496px] text-16 text-[#737577] max-md:mt-3">
           {tie(
             "Приложение Leo помогает близким с зависимостью лучше понимать свои чувства, справляться с переживаниями и находить опору каждый день",
           )}

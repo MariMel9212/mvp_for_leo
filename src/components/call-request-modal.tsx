@@ -210,12 +210,23 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
     channel === "call"
       ? phoneReady(country.dial, phone)
       : telegramReady(telegram) || phoneReady(phoneCode, phone);
-  const canSend = contactReady && !sent;
-
   useEffect(() => {
     const previous = document.activeElement as HTMLElement | null;
     const { overflow } = document.body.style;
     document.body.style.overflow = "hidden";
+    const inerted: Element[] = [];
+    let node: HTMLElement | null = dialogRef.current?.parentElement ?? null;
+    while (node) {
+      const parent = node.parentElement;
+      if (!parent) break;
+      for (const sibling of parent.children) {
+        if (sibling === node || sibling.hasAttribute("inert")) continue;
+        sibling.setAttribute("inert", "");
+        inerted.push(sibling);
+      }
+      if (parent === document.body) break;
+      node = parent;
+    }
     dialogRef.current?.focus();
     function onKey(event: KeyboardEvent) {
       if (event.key !== "Escape") return;
@@ -228,6 +239,7 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
     }
     document.addEventListener("keydown", onKey);
     return () => {
+      for (const element of inerted) element.removeAttribute("inert");
       document.body.style.overflow = overflow;
       document.removeEventListener("keydown", onKey);
       previous?.focus();
@@ -346,7 +358,7 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
               <h2 id={titleId} className="w-[270px] text-28 font-medium">
                 Выберите удобную дату и время
               </h2>
-              <p className="text-13 leading-[20px] opacity-50">
+              <p className="text-13 leading-[20px] text-[#737577]">
                 Запланируйте консультацию на удобное для вас время. Специалист свяжется с вами в выбранное время, чтобы обсудить ситуацию и возможные варианты помощи
               </p>
             </div>
@@ -585,7 +597,7 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
                   placeholder="Укажите как к вам можно обращаться"
                   autoComplete="name"
                   aria-invalid={error !== "" && !name.trim()}
-                  className="h-[44px] rounded-[12px] border border-solid border-[#dedede] bg-white px-[24px] text-16 text-[#27292d] outline-none placeholder:text-[#27292d] placeholder:opacity-40"
+                  className="h-[44px] rounded-[12px] border border-solid border-[#dedede] bg-white px-[24px] text-16 text-[#27292d] placeholder:text-[#27292d] placeholder:opacity-40"
                 />
               </label>
               <div className="flex flex-col gap-[12px]">
@@ -611,7 +623,7 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
                           setChannel(value);
                           setError("");
                         }}
-                        className={`flex h-[32px] flex-1 items-center justify-center rounded-[8px] px-[14px] text-16 ${active ? "bg-white" : "opacity-50"}`}
+                        className={`flex h-[32px] flex-1 items-center justify-center rounded-[8px] px-[14px] text-16 ${active ? "bg-white text-[#27292d]" : "text-[#6e7072]"}`}
                       >
                         {label}
                       </button>
@@ -638,7 +650,7 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
                     />
                     <div className="flex h-[24px] items-center gap-[8px]">
                       <span aria-hidden className="h-px min-w-0 flex-1 bg-black/10" />
-                      <span className="text-16 opacity-40">Или</span>
+                      <span className="text-16 text-[#737577]">Или</span>
                       <span aria-hidden className="h-px min-w-0 flex-1 bg-black/10" />
                     </div>
                     <MessengerField
@@ -675,12 +687,12 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
                 )}
                 </div>
               </div>
-              <button type="submit" disabled={!canSend} className="lime-control h-[46px] rounded-[12px] text-16 font-medium">
+              <button type="submit" disabled={sent} className="lime-control h-[46px] rounded-[12px] text-16 font-medium">
                 {sent ? "Заявка отправлена" : "Отправить заявку"}
               </button>
-              {error ? <p className="text-center text-16 opacity-60">{error}</p> : null}
+              {error ? <p className="text-center text-16 text-[#27292d]">{error}</p> : null}
               {sent ? (
-                <p className="text-center text-16 opacity-60">
+                <p className="text-center text-16 text-[#737577]">
                   Мы свяжемся с вами по заявке «{topic}»
                 </p>
               ) : null}
