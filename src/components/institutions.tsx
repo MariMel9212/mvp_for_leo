@@ -216,10 +216,10 @@ export function Institutions() {
   }, [openMenu]);
 
   return (
-    <div className="mt-6 px-[120px] max-[1439px]:px-4 min-[1440px]:mt-[24px]">
+    <div className="mt-6 px-[120px] max-[1439px]:px-4">
       <h1 className="text-40 font-medium max-md:text-28 md:max-[1439px]:text-[32px] md:max-[1439px]:leading-[40px]">Все учреждения</h1>
       <form
-        className="relative z-20 mt-8 hidden w-full flex-col gap-[20px] rounded-[13px] bg-white px-4 py-[23px] min-[1440px]:mt-[46px] min-[1440px]:px-[21px]"
+        className="relative z-20 mt-8 hidden w-full flex-col gap-[20px] rounded-[13px] bg-white px-4 py-[23px] min-[1440px]:px-[21px]"
         onSubmit={(event) => {
           event.preventDefault();
           setApplied(draft);
@@ -289,9 +289,9 @@ export function Institutions() {
       </form>
 
       {firstRows.length === 0 ? (
-        <p className="mt-[46px] text-16 text-[#27292d] opacity-60">Нет учреждений по этим условиям</p>
+        <p className="mt-8 text-16 text-[#27292d] opacity-60">Нет учреждений по этим условиям</p>
       ) : (
-        <div className="mt-8 grid w-full grid-cols-3 gap-6 max-[1199px]:grid-cols-2 max-[639px]:grid-cols-1 min-[1200px]:mt-[46px]">
+        <div className="mt-8 grid w-full grid-cols-3 gap-6 max-[1199px]:grid-cols-2 max-[639px]:grid-cols-1">
           {firstRows.map((center, index) => (
             <CenterCard key={`${center.title}-${index}`} center={center} />
           ))}
