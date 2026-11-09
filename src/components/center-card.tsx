@@ -23,7 +23,7 @@ export type CatalogCenter = {
 export const catalogCenters: CatalogCenter[] = [
   {
     title: "Реабилитационно-образовательный центр в Троицке",
-    course: "Подростки от 14 до 17 лет",
+    course: "Программа «Пифагор»",
     price: "200 000 ₽ / мес",
     slides: [
       { src: "/centers/troitsk/house.webp", className: "cover" },
@@ -41,7 +41,7 @@ export const catalogCenters: CatalogCenter[] = [
   },
   {
     title: "Реабилитационный центр в Троицке",
-    course: "Загородный коттедж • 20 минут от МКАД",
+    course: "Программы АН и ВДА",
     price: "от 120 000 ₽ / месяц",
     place: "Новая Москва",
     slides: [
@@ -58,7 +58,7 @@ export const catalogCenters: CatalogCenter[] = [
   },
   {
     title: "Реабилитационный центр в Чехове",
-    course: "12-шаговая программа • поддержка после курса",
+    course: "Программа 12 шагов",
     price: "от 65 000 ₽ / месяц",
     place: "Московская область",
     slides: [
@@ -106,7 +106,7 @@ export function CenterCard({ center }: { center: CatalogCenter }) {
           </h2>
           <div className="w-full text-16 text-[#0a0d14]">
             <p>{center.place ?? "Московская область"}</p>
-            <p className="opacity-50">{tie(center.course)}</p>
+            <p className="whitespace-nowrap opacity-50">{tie(center.course)}</p>
           </div>
           {center.price ? <p className="text-16 text-black">{center.price}</p> : null}
         </div>
