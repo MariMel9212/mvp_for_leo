@@ -621,7 +621,6 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
                   onChange={(event) => setName(event.target.value)}
                   placeholder="Укажите как к вам можно обращаться"
                   autoComplete="name"
-                  aria-invalid={error !== "" && !name.trim()}
                   className="h-[44px] rounded-[12px] border border-solid border-[#dedede] bg-white px-[24px] text-16 text-[#27292d] outline-none placeholder:text-[#27292d] placeholder:opacity-40"
                 />
               </label>
@@ -710,12 +709,12 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
                     invalid={error !== "" && !phoneReady(country.dial, phone)}
                   />
                 )}
+                {error ? <p className="text-16 text-[#27292d]">{error}</p> : null}
                 </div>
               </div>
               <button type="submit" disabled={sent} className="lime-control h-[46px] rounded-[12px] text-16 font-medium">
                 {sent ? "Заявка отправлена" : "Отправить заявку"}
               </button>
-              {error ? <p className="text-center text-16 text-[#27292d]">{error}</p> : null}
               {sent ? (
                 <p className="text-center text-16 text-[#737577]">
                   Мы свяжемся с вами по заявке «{topic}»
