@@ -178,7 +178,7 @@ export function FamilyAppSection() {
           <GlassCard
             title="Практики самопомощи"
             text={tie("Осваивайте способы справляться со стрессом и тревогой")}
-            className="top-[53.84px] left-0 h-[97.61px] w-[264.715px]"
+            className="top-[53.84px] left-0 h-[97.61px] w-[264.715px] max-md:top-[112px]"
             rotate={-1.83}
             clipLeaf
             leafClassName="top-[46.67px] left-[200.49px] h-[59.241px] w-[62.566px]"
