@@ -22,7 +22,7 @@ function GlassCard({
   clipLeaf?: boolean;
 }) {
   return (
-    <div className={`absolute flex items-center justify-center ${className}`}>
+    <div className={`absolute flex items-center justify-center max-[1439px]:origin-center max-[1439px]:scale-110 ${className}`}>
       <div className="relative h-[89.299px] w-[262px]" style={{ transform: `rotate(${rotate}deg)` }}>
         <div className="absolute inset-0" style={{ filter: "drop-shadow(0 0 14px rgba(107,107,107,0.22))" }}>
           <div className="absolute inset-0 rounded-[20.219px] bg-white/70" />
