@@ -27,8 +27,8 @@ export function SiteFooter() {
   return (
     <footer className="bg-[linear-gradient(180deg,#fdfdfd_0%,#d2def3_100%)] text-[#27292d] min-[1440px]:mt-[80px]">
       <div className="mx-auto flex w-full max-w-[1440px] flex-col px-4 pt-12 pb-8 min-[1440px]:px-[120px] min-[1440px]:pt-16 min-[1440px]:pb-10">
-        <div className="flex flex-col items-start gap-5 min-[800px]:flex-row min-[800px]:items-end min-[800px]:justify-between">
-          <div className="flex max-w-[538px] flex-col gap-3">
+        <div className="flex max-w-[538px] flex-col items-start gap-5">
+          <div className="flex flex-col gap-3">
             <h2 className="text-[28px] leading-8 font-medium">{tie(topic)}</h2>
             <p className="text-16 text-[#5e6062]">{tie("Подберем лицензированное учреждение для работы с зависимостью")}</p>
           </div>
