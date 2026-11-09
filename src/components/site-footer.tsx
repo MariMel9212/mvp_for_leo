@@ -26,7 +26,7 @@ function ConsultButton() {
 export function SiteFooter() {
   return (
     <footer className="bg-[linear-gradient(180deg,#fdfdfd_0%,#d2def3_100%)] text-[#27292d] min-[1440px]:mt-[80px]">
-      <div className="mx-auto flex w-full max-w-[1440px] flex-col px-4 pt-12 pb-8 min-[1440px]:px-[120px] min-[1440px]:pt-16 min-[1440px]:pb-10">
+      <div className="mx-auto w-full max-w-[1440px] px-4 pt-12 min-[1440px]:px-[120px] min-[1440px]:pt-16">
         <div className="flex max-w-[538px] flex-col items-start gap-5">
           <div className="flex flex-col gap-3">
             <h2 className="text-[28px] leading-8 font-medium">{tie(topic)}</h2>
@@ -34,10 +34,12 @@ export function SiteFooter() {
           </div>
           <ConsultButton />
         </div>
+      </div>
 
-        <div className="mt-10 h-px w-full bg-black/8" />
+      <div className="mt-10 h-px w-full bg-black/8" />
 
-        <div className="mt-8 flex flex-col gap-8 min-[800px]:flex-row min-[800px]:items-start min-[800px]:justify-between">
+      <div className="mx-auto mt-8 w-full max-w-[1440px] px-4 min-[1440px]:px-[120px]">
+        <div className="flex flex-col gap-8 min-[800px]:flex-row min-[800px]:items-start min-[800px]:justify-between">
           <div className="flex max-w-[360px] flex-col gap-3">
             <Link href="/" aria-label="Leo" className="block h-6 w-fit">
               <img alt="" src={asset("/brand/leo.svg")} width={59} height={24} className="block h-6 w-auto" />
@@ -59,10 +61,12 @@ export function SiteFooter() {
             </ul>
           </nav>
         </div>
+      </div>
 
-        <div className="mt-10 h-px w-full bg-black/8" />
+      <div className="mt-10 h-px w-full bg-black/8" />
 
-        <div className="mt-6 flex flex-col gap-4 text-11 leading-4 text-[#5e6062]">
+      <div className="mx-auto mt-6 w-full max-w-[1440px] px-4 pb-8 min-[1440px]:px-[120px] min-[1440px]:pb-10">
+        <div className="flex flex-col gap-4 text-11 leading-4 text-[#5e6062]">
           <div className="flex flex-col gap-3 min-[800px]:flex-row min-[800px]:items-center min-[800px]:justify-between min-[800px]:gap-8">
             <p className="text-[#27292d]">© 2026 Leo. Все права защищены</p>
             <div className="flex flex-col gap-2 min-[800px]:flex-row min-[800px]:items-center min-[800px]:gap-6">
