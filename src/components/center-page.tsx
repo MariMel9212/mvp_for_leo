@@ -38,7 +38,7 @@ export function CenterPage({ center }: { center: CenterPageData }) {
   }, [galleryOpen, amenitiesOpen]);
 
   return (
-    <div className="mx-auto mt-6 w-full max-w-[1200px] px-0 pb-24 max-[1439px]:px-4 min-[1440px]:pb-[160px]">
+    <div className="mx-auto mt-6 w-full max-w-[1200px] px-0 pb-16 max-[1439px]:px-4 min-[1440px]:pb-[80px]">
       <GalleryCollage center={center} onOpen={() => setGalleryOpen(true)} />
 
       <div className="mt-8 flex flex-col gap-8 min-[1100px]:flex-row min-[1100px]:items-start min-[1100px]:justify-between">

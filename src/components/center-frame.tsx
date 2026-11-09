@@ -1,8 +1,10 @@
 import type { ReactNode } from "react";
+import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 
 export function CenterFrame({ children, ctaTopic }: { children: ReactNode; ctaTopic: string }) {
   return (
+    <>
     <main className="relative mx-auto w-full max-w-[1440px] bg-[#fdfdfd] text-[#27292d]">
       <div
         aria-hidden
@@ -13,5 +15,7 @@ export function CenterFrame({ children, ctaTopic }: { children: ReactNode; ctaTo
         {children}
       </div>
     </main>
+    <SiteFooter />
+    </>
   );
 }
