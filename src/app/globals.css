@@ -211,14 +211,23 @@
   transition: transform 500ms ease-in-out;
 }
 
-@media (max-width: 1439px) {
-  body {
-    background-color: #d2def3;
+@media (max-width: 767px) {
+  .situation-sheets {
+    transform: translateX(-50%) scale(0.68);
+    transform-origin: center bottom;
   }
+}
 
+@media (min-width: 768px) and (max-width: 1439px) {
   .situation-sheets {
     transform: translateX(-50%) scale(1.28);
     transform-origin: center bottom;
+  }
+}
+
+@media (max-width: 1439px) {
+  body {
+    background-color: #d2def3;
   }
 }
 
