@@ -3,12 +3,17 @@
 import { useState } from "react";
 import { tie } from "@/lib/tie";
 
-const audiences = ["Для близкого", "Для себя", "Для подростка"] as const;
+const audiences = [
+  { label: "Для близкого", note: "Поможем разобраться, как помочь близкому" },
+  { label: "Для себя", note: "Бесплатная и анонимная консультация" },
+  { label: "Для подростка", note: "Поможем подобрать программу для подростка" },
+] as const;
 
-type Audience = (typeof audiences)[number];
+type Audience = (typeof audiences)[number]["label"];
 
 export function AudienceTabs() {
   const [active, setActive] = useState<Audience>("Для близкого");
+  const note = audiences.find((item) => item.label === active)?.note ?? audiences[0].note;
 
   return (
     <div className="@container w-full max-w-[377px]">
@@ -18,13 +23,11 @@ export function AudienceTabs() {
           aria-label="Кому нужна помощь"
           className="flex h-[46px] max-w-full items-stretch gap-[4px] rounded-[10px] bg-[#f6f8fa] p-[4px]"
         >
-          {audiences.map((label) => (
-            <Tab key={label} label={label} selected={active === label} onSelect={() => setActive(label)} />
+          {audiences.map((item) => (
+            <Tab key={item.label} label={item.label} selected={active === item.label} onSelect={() => setActive(item.label)} />
           ))}
         </div>
-        <p className="w-full text-center text-13 text-[#27292d] opacity-50">
-          {tie("Бесплатная и анонимная консультация")}
-        </p>
+        <p className="w-full text-center text-13 text-[#27292d] opacity-50">{tie(note)}</p>
       </div>
     </div>
   );
