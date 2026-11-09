@@ -49,13 +49,13 @@ export function SupportStages() {
               className={`relative overflow-hidden rounded-[17px] ${card.className}`}
               style={"style" in card ? card.style : undefined}
             >
-              <div className={`flex flex-col px-[14px] pt-[36px] max-[1439px]:pt-5 max-[1439px]:pb-[78px] ${card.copyClass}`}>
+              <div className={`flex flex-col px-[14px] pt-[36px] max-md:pb-[48px] max-[1439px]:pt-5 md:max-[1439px]:pb-[78px] ${card.copyClass}`}>
                 <h3 className="text-24 font-medium max-[1439px]:text-[20px] max-[1439px]:leading-[26px]">{tie(card.title)}</h3>
                 <p className="text-[18px] leading-[24px] opacity-60 max-[1439px]:text-16 max-[1439px]:leading-[22px]">{tie(card.text)}</p>
               </div>
               <span
                 aria-hidden
-                className={`pointer-events-none absolute text-[104px] leading-none font-medium max-[1439px]:right-[-16px] max-[1439px]:bottom-[-18px] min-[1440px]:text-[134px] min-[1440px]:leading-[168px] ${card.numberClass}`}
+                className={`pointer-events-none absolute text-[104px] leading-none font-medium max-md:right-[-8px] max-md:bottom-[-10px] max-md:text-[72px] max-[1439px]:right-[-16px] max-[1439px]:bottom-[-18px] min-[1440px]:text-[134px] min-[1440px]:leading-[168px] ${card.numberClass}`}
               >
                 {card.n}
               </span>
