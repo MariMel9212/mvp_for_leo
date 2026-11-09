@@ -574,7 +574,7 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
         {step === "contact" ? (
           <form onSubmit={submit} noValidate className="mx-auto flex w-full max-w-[415px] flex-col items-center gap-[21px] px-4 pt-8 min-[1100px]:px-0 min-[1100px]:pt-[38px]">
             <h2 id={titleId} className="w-full max-w-[351px] text-center text-28 font-medium">
-              Выберите удобный формат для консультации
+              {tie("Как с вами связаться")}
             </h2>
             <div className="flex w-full flex-col gap-[18px] rounded-[23px] bg-white py-[18px] min-[1100px]:px-[18px]">
               <label className="flex flex-col gap-[8px]">
