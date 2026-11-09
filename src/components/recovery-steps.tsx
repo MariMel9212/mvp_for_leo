@@ -12,18 +12,19 @@ const cardStyle = {
     "linear-gradient(180deg, rgba(138, 158, 255, 0.06) 0%, rgba(235, 235, 235, 0.06) 100%)",
 };
 
-function StepCopy({ title, text }: { title: string; text: string }) {
+function StepCopy({ title, text, mobileText }: { title: string; text: string; mobileText?: string }) {
   return (
-    <div className="flex flex-col items-center gap-[6px] px-[26px] pt-[36px] text-center max-[1439px]:min-h-[124px] max-[1439px]:px-5 max-[1439px]:pt-7 @max-[220px]:min-h-0 @max-[220px]:gap-1 @max-[220px]:px-3 @max-[220px]:pt-4">
-      <h3 className="w-full max-w-[331px] text-24 font-medium max-[1439px]:text-[20px] max-[1439px]:leading-[26px] @max-[220px]:text-[15px] @max-[220px]:leading-[19px]">{tie(title)}</h3>
-      <p className="w-full max-w-[331px] text-18 max-[1439px]:text-16 max-[1439px]:leading-[22px] @max-[220px]:text-[12px] @max-[220px]:leading-[16px]">{tie(text)}</p>
+    <div className="flex flex-col items-center gap-[6px] px-[26px] pt-[36px] text-center max-[1439px]:min-h-[124px] max-[1439px]:px-5 max-[1439px]:pt-7 @max-[220px]:min-h-0 @max-[220px]:gap-1.5 @max-[220px]:px-3 @max-[220px]:pt-4 @max-[220px]:pb-2">
+      <h3 className="w-full max-w-[331px] text-24 font-medium max-[1439px]:text-[20px] max-[1439px]:leading-[26px] @max-[220px]:text-[16px] @max-[220px]:leading-[20px]">{tie(title)}</h3>
+      <p className={`w-full max-w-[331px] text-18 max-[1439px]:text-16 max-[1439px]:leading-[22px] @max-[220px]:text-13 @max-[220px]:leading-[18px]${mobileText ? " max-md:hidden" : ""}`}>{tie(text)}</p>
+      {mobileText ? <p className="w-full text-16 leading-[22px] md:hidden">{tie(mobileText)}</p> : null}
     </div>
   );
 }
 
 function ArtWell({ children, className = "" }: { children: ReactNode; className?: string }) {
   return (
-    <div className={`relative mt-2 h-[176px] overflow-hidden @max-[220px]:mt-auto @max-[220px]:h-[112px] min-[1440px]:absolute min-[1440px]:inset-0 min-[1440px]:mt-0 min-[1440px]:h-auto min-[1440px]:overflow-visible${className ? ` ${className}` : ""}`}>
+    <div className={`relative mt-2 h-[176px] overflow-hidden @max-[220px]:mt-auto @max-[220px]:h-[136px] min-[1440px]:absolute min-[1440px]:inset-0 min-[1440px]:mt-0 min-[1440px]:h-auto min-[1440px]:overflow-visible${className ? ` ${className}` : ""}`}>
       {children}
     </div>
   );
@@ -61,8 +62,12 @@ export function RecoverySteps() {
           </article>
 
           <article className={`coverage-card ${cardClass} max-md:col-span-2 max-[1439px]:flex max-[1439px]:h-full max-[1439px]:flex-col max-[1439px]:[container-type:inline-size] min-[1440px]:h-[486px]`} style={cardStyle}>
-            <StepCopy title="Отбираем учреждения" text={format} />
-            <ArtWell className="max-[1439px]:h-[252px]">
+            <StepCopy
+              title="Отбираем учреждения"
+              text={format}
+              mobileText="Программа, лицензии, персонал и другие важные критерии"
+            />
+            <ArtWell className="max-md:h-[268px] md:max-[1439px]:h-[252px]">
               <CoverageScan />
             </ArtWell>
           </article>

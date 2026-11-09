@@ -213,7 +213,7 @@
 
 @media (max-width: 767px) {
   .situation-sheets {
-    transform: translateX(-50%) scale(0.68);
+    transform: translateX(-50%) scale(0.5);
     transform-origin: center bottom;
   }
 }
