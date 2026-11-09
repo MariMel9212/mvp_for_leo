@@ -48,7 +48,7 @@ export function ProgramDetails({ className }: { className?: string }) {
 
 export function InstitutionArt() {
   return (
-    <div className="pointer-events-none absolute top-[-1px] left-[331px] size-[237px] overflow-hidden">
+    <div className="pointer-events-none absolute top-[-1px] left-[331px] size-[237px] overflow-hidden max-md:top-auto max-md:bottom-[-22px] max-md:left-auto max-md:right-[8px] max-md:origin-bottom-right max-md:scale-[0.52] md:max-[1439px]:left-auto md:max-[1439px]:right-[20px]">
       <img
         alt=""
         src={houseWash}
@@ -63,7 +63,7 @@ export function InstitutionArt() {
 
 export function ProgramArt() {
   return (
-    <div className="pointer-events-none absolute top-[-1px] left-[331px] size-[237px] overflow-hidden">
+    <div className="pointer-events-none absolute top-[-1px] left-[331px] size-[237px] overflow-hidden max-md:top-auto max-md:bottom-[-22px] max-md:left-auto max-md:right-[8px] max-md:origin-bottom-right max-md:scale-[0.52] md:max-[1439px]:left-auto md:max-[1439px]:right-[20px]">
       <div className="absolute top-[calc(50%-0.63px)] left-[0.83px] h-[183.725px] w-[236.168px] -translate-y-1/2 overflow-hidden">
         <img
           alt=""

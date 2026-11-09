@@ -168,10 +168,10 @@ function CallBanner() {
       <div className="mt-[48px] flex flex-col items-stretch gap-4 min-[1440px]:flex-row min-[1440px]:items-center min-[1440px]:justify-between">
         <Link
           href="/#zayavka"
-          className="relative h-[213px] w-full overflow-hidden rounded-[20px] border border-[rgba(0,0,0,0.04)] bg-[rgba(255,255,255,0.8)] min-[1440px]:w-[588px]"
+          className="relative h-[136px] w-full overflow-hidden rounded-[20px] border border-[rgba(0,0,0,0.04)] bg-[rgba(255,255,255,0.8)] md:h-[213px] min-[1440px]:w-[588px]"
         >
-          <span className="flex items-center justify-between px-[20px] py-[19px]">
-            <span className="text-24 font-medium">Подобрать учреждение</span>
+          <span className="relative z-10 flex items-center justify-between px-[20px] py-[19px]">
+            <span className="max-w-[146px] text-24 font-medium md:max-w-none">Подобрать учреждение</span>
             <span className="flex size-[24px] items-center justify-center">
               <img alt="" src={asset("/icons/angle-right.svg")} width={7.286} height={13.414} />
             </span>
@@ -180,10 +180,10 @@ function CallBanner() {
         </Link>
         <Link
           href="/#zayavka"
-          className="relative h-[213px] w-full overflow-hidden rounded-[20px] border border-[rgba(0,0,0,0.04)] bg-[rgba(255,255,255,0.8)] min-[1440px]:w-[588px]"
+          className="relative h-[136px] w-full overflow-hidden rounded-[20px] border border-[rgba(0,0,0,0.04)] bg-[rgba(255,255,255,0.8)] md:h-[213px] min-[1440px]:w-[588px]"
         >
-          <span className="flex items-center justify-between px-[20px] py-[19px]">
-            <span className="text-24 font-medium">Подбрать программу</span>
+          <span className="relative z-10 flex items-center justify-between px-[20px] py-[19px]">
+            <span className="max-w-[146px] text-24 font-medium md:max-w-none">Подбрать программу</span>
             <span className="flex size-[24px] items-center justify-center">
               <img alt="" src={asset("/icons/angle-right.svg")} width={7.286} height={13.414} />
             </span>
