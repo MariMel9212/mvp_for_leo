@@ -1,0 +1,15 @@
+# Byte-compiled / optimized files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# OS metadata
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE / Editor / Agent state
+.idea/
+.vscode/
+.agents/
+*.swp
