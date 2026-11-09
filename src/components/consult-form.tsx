@@ -294,7 +294,7 @@ export function MessengerField({
           placeholder={showPlus ? "" : placeholder}
           aria-label={label}
           aria-invalid={invalid}
-          className={`order-2 min-w-0 flex-1 bg-transparent text-[#27292d] placeholder:text-[#27292d] placeholder:opacity-40 ${compact ? "text-16" : "text-18 max-[1439px]:text-16"}`}
+          className={`order-2 min-w-0 flex-1 bg-transparent text-[#27292d] outline-none placeholder:text-[#27292d] placeholder:opacity-40 ${compact ? "text-16" : "text-18 max-[1439px]:text-16"}`}
         />
         {showPlus ? (
           <span className={`order-1 flex shrink-0 items-center text-[#27292d] ${compact ? "text-16" : "text-18 max-[1439px]:text-16"}`}>
@@ -308,7 +308,7 @@ export function MessengerField({
               maxLength={3}
               size={Math.max(code.length, 1)}
               style={{ width: code.length > 0 ? `${code.length}ch` : 0 }}
-              className={`m-0 min-w-0 border-0 bg-transparent p-0 text-[#27292d] ${compact ? "text-16" : "text-18 max-[1439px]:text-16"}`}
+              className={`m-0 min-w-0 border-0 bg-transparent p-0 text-[#27292d] outline-none ${compact ? "text-16" : "text-18 max-[1439px]:text-16"}`}
             />
           </span>
         ) : null}
@@ -442,7 +442,7 @@ export function PhoneField({
         placeholder={country.dial === "7" ? "(999) 123-45-67" : "Номер телефона"}
         aria-label="Телефон"
         aria-invalid={invalid}
-        className={`min-w-0 flex-1 bg-transparent text-[#27292d] placeholder:text-[#27292d] placeholder:opacity-40 ${compact ? "text-16" : "text-18 max-[1439px]:text-16"}`}
+        className={`min-w-0 flex-1 bg-transparent text-[#27292d] outline-none placeholder:text-[#27292d] placeholder:opacity-40 ${compact ? "text-16" : "text-18 max-[1439px]:text-16"}`}
       />
       {open && menuBox
         ? createPortal(
@@ -572,7 +572,7 @@ export function ConsultForm() {
               placeholder="Укажите как к вам можно обращаться"
               autoComplete="name"
               aria-invalid={error !== "" && !name.trim()}
-              className="h-[48px] rounded-[16px] border border-solid border-[#dedede] bg-white pr-[14px] pl-[24px] text-18 text-[#27292d] placeholder:text-[#27292d] placeholder:opacity-40 max-[1439px]:h-[44px] max-[1439px]:pl-3 max-[1439px]:text-16"
+              className="h-[48px] rounded-[16px] border border-solid border-[#dedede] bg-white pr-[14px] pl-[24px] text-18 text-[#27292d] outline-none placeholder:text-[#27292d] placeholder:opacity-40 max-[1439px]:h-[44px] max-[1439px]:pl-3 max-[1439px]:text-16"
             />
           </label>
         </div>

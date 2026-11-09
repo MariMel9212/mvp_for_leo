@@ -175,6 +175,7 @@ function Steps({ count, current }: { count: number; current: number }) {
 
 function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => void }) {
   const titleId = useId();
+  const overlayRef = useRef<HTMLDivElement>(null);
   const dialogRef = useRef<HTMLDivElement>(null);
   const zoneButtonRef = useRef<HTMLButtonElement>(null);
   const zoneOpenRef = useRef(false);
@@ -238,10 +239,34 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
       onClose();
     }
     document.addEventListener("keydown", onKey);
+    const overlay = overlayRef.current;
+    const viewport = window.visualViewport;
+    const phone = window.matchMedia("(max-width: 767px)");
+    const pin = () => {
+      if (!overlay || !viewport) return;
+      if (!phone.matches) {
+        overlay.style.top = "";
+        overlay.style.height = "";
+        return;
+      }
+      overlay.style.top = `calc(${viewport.offsetTop}px - env(safe-area-inset-top, 0px))`;
+      overlay.style.height = `calc(${viewport.height}px + env(safe-area-inset-top, 0px))`;
+    };
+    pin();
+    viewport?.addEventListener("resize", pin);
+    viewport?.addEventListener("scroll", pin);
+    phone.addEventListener("change", pin);
     return () => {
       for (const element of inerted) element.removeAttribute("inert");
       document.body.style.overflow = overflow;
       document.removeEventListener("keydown", onKey);
+      viewport?.removeEventListener("resize", pin);
+      viewport?.removeEventListener("scroll", pin);
+      phone.removeEventListener("change", pin);
+      if (overlay) {
+        overlay.style.top = "";
+        overlay.style.height = "";
+      }
       previous?.focus();
     };
   }, [onClose]);
@@ -306,7 +331,7 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
   const zoneLabel = zones.find((item) => item.id === zone)?.label ?? zones[1].label;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end justify-center bg-[rgba(39,41,45,0.45)] max-md:top-[calc(env(safe-area-inset-top)*-1)] md:items-center md:p-[24px]">
+    <div ref={overlayRef} className="fixed inset-0 z-50 flex items-end justify-center bg-[rgba(39,41,45,0.45)] max-md:top-[calc(env(safe-area-inset-top)*-1)] md:items-center md:p-[24px]">
       <button type="button" aria-label="Закрыть" className="absolute inset-0 cursor-default" onClick={onClose} />
       <div
         ref={dialogRef}
@@ -314,7 +339,7 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
         aria-modal="true"
         aria-labelledby={titleId}
         tabIndex={-1}
-        className="mobile-sheet relative flex max-h-[calc(100dvh-12px)] w-full max-w-[1100px] flex-col overflow-y-auto rounded-t-[21px] bg-white pb-[max(16px,env(safe-area-inset-bottom))] outline-none max-md:h-[calc(100dvh-12px)] md:max-h-[calc(100dvh-32px)] md:rounded-[21px] md:pb-0 min-[1100px]:h-[650px] min-[1100px]:overflow-hidden"
+        className="mobile-sheet relative flex w-full max-w-[1100px] flex-col overflow-y-auto rounded-t-[21px] bg-white pb-[max(16px,env(safe-area-inset-bottom))] outline-none max-md:h-[calc(100%-12px)] max-md:max-h-[calc(100%-12px)] md:max-h-[calc(100dvh-32px)] md:rounded-[21px] md:pb-0 min-[1100px]:h-[650px] min-[1100px]:overflow-hidden"
       >
         <div className="flex h-[44px] items-center justify-between px-4 pt-[20px] min-[1100px]:px-[26px]">
           {step === "format" || step === "done" ? (
@@ -597,7 +622,7 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
                   placeholder="Укажите как к вам можно обращаться"
                   autoComplete="name"
                   aria-invalid={error !== "" && !name.trim()}
-                  className="h-[44px] rounded-[12px] border border-solid border-[#dedede] bg-white px-[24px] text-16 text-[#27292d] placeholder:text-[#27292d] placeholder:opacity-40"
+                  className="h-[44px] rounded-[12px] border border-solid border-[#dedede] bg-white px-[24px] text-16 text-[#27292d] outline-none placeholder:text-[#27292d] placeholder:opacity-40"
                 />
               </label>
               <div className="flex flex-col gap-[12px]">
