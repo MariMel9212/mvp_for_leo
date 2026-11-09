@@ -182,9 +182,9 @@ export function CenterPage({ center }: { center: CenterPageData }) {
 
 function GalleryCollage({ center, onOpen }: { center: CenterPageData; onOpen: () => void }) {
   const { gallery } = center;
-  const more = (
+  const more = (layout: "fill" | "frame") => (
     <>
-      <CroppedPhoto photo={gallery.more} hover />
+      <CroppedPhoto photo={gallery.more} hover layout={layout} />
       {gallery.moreLabel ? (
         <>
           <div className="absolute inset-0 bg-[rgba(74,74,74,0.37)] transition-colors duration-200 group-hover:bg-[rgba(39,41,45,0.52)]" />
@@ -199,16 +199,16 @@ function GalleryCollage({ center, onOpen }: { center: CenterPageData; onOpen: ()
     <>
       <div className="grid grid-cols-2 gap-1 overflow-hidden rounded-[22px] min-[1100px]:hidden">
         <div className="relative col-span-2 aspect-[16/10] overflow-hidden bg-[#ebebeb]">
-          <CroppedPhoto photo={gallery.main} />
+          <CroppedPhoto photo={gallery.main} layout="fill" priority />
         </div>
         <div className="relative aspect-[4/3] overflow-hidden bg-[#ebebeb]">
-          <CroppedPhoto photo={gallery.topMiddle} />
+          <CroppedPhoto photo={gallery.topMiddle} layout="fill" />
         </div>
         <div className="relative aspect-[4/3] overflow-hidden bg-[#ebebeb]">
-          <CroppedPhoto photo={gallery.topRight} />
+          <CroppedPhoto photo={gallery.topRight} layout="fill" />
         </div>
         <div className="relative aspect-[4/3] overflow-hidden bg-[#ebebeb]">
-          <CroppedPhoto photo={gallery.bottomMiddle} />
+          <CroppedPhoto photo={gallery.bottomMiddle} layout="fill" />
         </div>
         <button
           type="button"
@@ -216,21 +216,21 @@ function GalleryCollage({ center, onOpen }: { center: CenterPageData; onOpen: ()
           onClick={onOpen}
           className="group relative aspect-[4/3] cursor-pointer overflow-hidden bg-[#cfcece] p-0"
         >
-          {more}
+          {more("fill")}
         </button>
       </div>
       <div className="hidden h-[480px] grid-cols-[598fr_297fr_297fr] grid-rows-2 gap-1 overflow-hidden rounded-[22px] min-[1100px]:grid">
         <div className="relative row-span-2 overflow-hidden bg-[#ebebeb]">
-          <CroppedPhoto photo={gallery.main} />
+          <CroppedPhoto photo={gallery.main} layout="frame" priority />
         </div>
         <div className="relative overflow-hidden bg-[#ebebeb]">
-          <CroppedPhoto photo={gallery.topMiddle} />
+          <CroppedPhoto photo={gallery.topMiddle} layout="frame" />
         </div>
         <div className="relative overflow-hidden bg-[#ebebeb]">
-          <CroppedPhoto photo={gallery.topRight} />
+          <CroppedPhoto photo={gallery.topRight} layout="frame" />
         </div>
         <div className="relative overflow-hidden bg-[#ebebeb]">
-          <CroppedPhoto photo={gallery.bottomMiddle} />
+          <CroppedPhoto photo={gallery.bottomMiddle} layout="frame" />
         </div>
         <button
           type="button"
@@ -238,30 +238,54 @@ function GalleryCollage({ center, onOpen }: { center: CenterPageData; onOpen: ()
           onClick={onOpen}
           className="group relative cursor-pointer overflow-hidden bg-[#cfcece] p-0"
         >
-          {more}
+          {more("frame")}
         </button>
       </div>
     </>
   );
 }
 
-function CroppedPhoto({ photo, hover = false }: { photo: CenterPhoto; hover?: boolean }) {
+function mobilePhoto(src: string) {
+  return src.replace(/\.(webp|jpe?g|png)$/i, "-m.webp");
+}
+
+function CroppedPhoto({
+  photo,
+  hover = false,
+  layout,
+  priority = false,
+}: {
+  photo: CenterPhoto;
+  hover?: boolean;
+  layout: "fill" | "frame";
+  priority?: boolean;
+}) {
   const motion = hover ? " transition-transform duration-300 group-hover:scale-[1.04]" : "";
-  return (
-    <>
+  if (layout === "fill") {
+    return (
       <img
         alt={photo.alt}
-        src={asset(photo.src)}
-        className={`absolute inset-0 size-full object-cover object-center min-[1100px]:hidden${motion}`}
+        src={asset(mobilePhoto(photo.src))}
+        decoding="async"
+        loading={priority ? "eager" : "lazy"}
+        fetchPriority={priority ? "high" : "auto"}
+        className={`absolute inset-0 size-full object-cover object-center${motion}`}
       />
-      <div className={`hidden min-[1100px]:block ${photo.frameClassName}`}>
+    );
+  }
+  return (
+    <div className={photo.frameClassName}>
+      <picture>
+        <source media="(min-width: 1100px)" srcSet={asset(photo.src)} />
         <img
           alt={photo.alt}
-          src={asset(photo.src)}
+          src={asset(mobilePhoto(photo.src))}
+          decoding="async"
+          fetchPriority={priority ? "high" : "auto"}
           className={`${photo.imageClassName ?? "absolute inset-0 size-full max-w-none object-cover"}${motion}`}
         />
-      </div>
-    </>
+      </picture>
+    </div>
   );
 }
 
@@ -298,11 +322,16 @@ function StaffBlock({
           {staff.people.map((person) => (
             <li key={person.name} className="flex min-w-0 flex-col gap-[10px]">
               <div className="relative h-[180px] overflow-hidden rounded-[12px] bg-[#c4c4c4]">
-                <img
-                  alt=""
-                  src={asset(person.photo)}
-                  className="absolute inset-0 h-full w-full object-cover object-[center_18%]"
-                />
+                <picture>
+                  <source media="(min-width: 1100px)" srcSet={asset(person.photo)} />
+                  <img
+                    alt=""
+                    src={asset(mobilePhoto(person.photo))}
+                    loading="lazy"
+                    decoding="async"
+                    className="absolute inset-0 h-full w-full object-cover object-[center_18%]"
+                  />
+                </picture>
               </div>
               <div className="flex flex-col gap-[2px]">
                 <p className="text-16 leading-[24px] font-medium text-black">{person.name}</p>
@@ -373,14 +402,16 @@ function PhotoGallery({ photos, onClose }: { photos: { src: string; alt: string 
         </div>
         <div className="grid grid-cols-3 gap-[8px] overflow-y-auto px-[26px] pb-[26px] max-md:min-h-0 max-md:flex-1 max-[1099px]:grid-cols-2 max-[639px]:grid-cols-1 max-[639px]:px-4">
           {photos.map((photo) => (
-            <img
-              key={photo.src}
-              alt={photo.alt}
-              src={asset(photo.src)}
-              loading="lazy"
-              decoding="async"
-              className="h-[220px] w-full rounded-[12px] object-cover"
-            />
+            <picture key={photo.src}>
+              <source media="(min-width: 1100px)" srcSet={asset(photo.src)} />
+              <img
+                alt={photo.alt}
+                src={asset(mobilePhoto(photo.src))}
+                loading="lazy"
+                decoding="async"
+                className="h-[220px] w-full rounded-[12px] object-cover"
+              />
+            </picture>
           ))}
         </div>
       </div>

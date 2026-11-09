@@ -8,6 +8,10 @@ export type CenterSlide = {
   className: string;
 };
 
+function mobilePhoto(src: string) {
+  return src.replace(/\.(webp|jpe?g|png)$/i, "-m.webp");
+}
+
 function phaseOf(className: string) {
   const num = (name: string) => {
     const hit = className.match(new RegExp(`(?:^|\\s)${name}-\\[(-?\\d+(?:\\.\\d+)?)px\\]`));
@@ -43,28 +47,37 @@ export function CenterPhoto({
     >
       {cover ? (
         slides.map((slide, slideIndex) => (
-          <img
-            key={slide.src}
-            alt=""
-            src={asset(slide.src)}
-            className={`absolute inset-0 h-full w-full object-cover object-center transition-opacity duration-500 ease-out ${
-              slideIndex === index ? "z-10 opacity-100" : "opacity-0"
-            }`}
-          />
+          <picture key={slide.src} className="contents">
+            <source media="(min-width: 1100px)" srcSet={asset(slide.src)} />
+            <img
+              alt=""
+              src={asset(mobilePhoto(slide.src))}
+              decoding="async"
+              fetchPriority={slideIndex === 0 ? "high" : "low"}
+              className={`absolute inset-0 h-full w-full object-cover object-center transition-opacity duration-500 ease-out ${
+                slideIndex === index ? "z-10 opacity-100" : "opacity-0"
+              }`}
+            />
+          </picture>
         ))
       ) : (
         <>
           <img
             alt=""
-            src={asset(slides[index].src)}
+            src={asset(mobilePhoto(slides[index].src))}
+            decoding="async"
             className="absolute inset-0 h-full w-full object-cover object-center min-[1100px]:hidden"
           />
-          <img
-            alt=""
-            src={asset(slides[index].src)}
-            className="absolute top-0 left-0 hidden max-w-none transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] min-[1100px]:block"
-            style={{ width: phase.w, height: phase.h, transform: `translate3d(${phase.x}px, ${phase.y}px, 0)` }}
-          />
+          <picture>
+            <source media="(min-width: 1100px)" srcSet={asset(slides[index].src)} />
+            <img
+              alt=""
+              src={asset(mobilePhoto(slides[index].src))}
+              decoding="async"
+              className="absolute top-0 left-0 hidden max-w-none transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] min-[1100px]:block"
+              style={{ width: phase.w, height: phase.h, transform: `translate3d(${phase.x}px, ${phase.y}px, 0)` }}
+            />
+          </picture>
         </>
       )}
       <div className="pointer-events-none absolute top-[8px] left-1/2 z-20 flex -translate-x-1/2 items-center gap-[4px]">
