@@ -129,7 +129,7 @@ export function FamilyAppSection() {
         <h2 className="text-40 font-medium max-md:text-28 md:max-[1439px]:text-[32px] md:max-[1439px]:leading-[40px]">
           {tie("Помогаем тем, кто рядом")}
         </h2>
-        <p className="mt-6 max-w-[496px] text-16 opacity-60">
+        <p className="mt-6 max-w-[496px] text-16 opacity-60 max-md:mt-3">
           {tie(
             "Приложение Leo помогает близким с зависимостью лучше понимать свои чувства, справляться с переживаниями и находить опору каждый день",
           )}
@@ -139,7 +139,7 @@ export function FamilyAppSection() {
       <div
         role="img"
         aria-label="Экран приложения Leo: практики самопомощи и дневник эмоций"
-        className="relative mx-auto mt-8 w-full max-w-[420px] [container-type:inline-size] min-[1440px]:absolute min-[1440px]:top-[25px] min-[1440px]:left-[767px] min-[1440px]:mx-0 min-[1440px]:mt-0 min-[1440px]:w-[482.7px] min-[1440px]:max-w-none"
+        className="relative mx-auto mt-8 w-full max-w-[420px] [container-type:inline-size] max-md:mt-4 min-[1440px]:absolute min-[1440px]:top-[25px] min-[1440px]:left-[767px] min-[1440px]:mx-0 min-[1440px]:mt-0 min-[1440px]:w-[482.7px] min-[1440px]:max-w-none"
       >
         <div className="w-full" style={{ paddingBottom: `${(598 / 482.695) * 100}%` }} />
         <div className="absolute top-0 left-0 h-[598px] w-[482.695px] origin-top-left [transform:scale(calc(100cqw/482.695px))] max-[1439px]:[transform:translateX(calc(50cqw-220.36px*100cqw/482.695px))_scale(calc(100cqw/482.695px))]">
