@@ -306,7 +306,7 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
   const zoneLabel = zones.find((item) => item.id === zone)?.label ?? zones[1].label;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end justify-center bg-[rgba(39,41,45,0.45)] md:items-center md:p-[24px]">
+    <div className="fixed inset-0 z-50 flex items-end justify-center bg-[rgba(39,41,45,0.45)] max-md:top-[calc(env(safe-area-inset-top)*-1)] md:items-center md:p-[24px]">
       <button type="button" aria-label="Закрыть" className="absolute inset-0 cursor-default" onClick={onClose} />
       <div
         ref={dialogRef}

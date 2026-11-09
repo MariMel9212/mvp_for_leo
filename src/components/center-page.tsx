@@ -333,7 +333,7 @@ function AmenitiesModal({
   onClose: () => void;
 }) {
   return (
-    <div className="fixed inset-0 z-50 flex items-end justify-center bg-[rgba(39,41,45,0.45)] md:items-center md:p-[24px]">
+    <div className="fixed inset-0 z-50 flex items-end justify-center bg-[rgba(39,41,45,0.45)] max-md:top-[calc(env(safe-area-inset-top)*-1)] md:items-center md:p-[24px]">
       <button type="button" aria-label="Закрыть" className="absolute inset-0 cursor-default" onClick={onClose} />
       <div role="dialog" aria-modal="true" aria-labelledby="center-amenities-title" className="mobile-sheet relative max-h-[calc(100dvh-12px)] w-full max-w-[720px] overflow-y-auto rounded-t-[21px] bg-white pb-[max(16px,env(safe-area-inset-bottom))] max-md:h-[calc(100dvh-12px)] md:rounded-[21px] md:pb-0">
         <div className="flex items-center justify-between px-[26px] pt-[20px] pb-[20px]">
@@ -357,7 +357,7 @@ function AmenitiesModal({
 
 function PhotoGallery({ photos, onClose }: { photos: { src: string; alt: string }[]; onClose: () => void }) {
   return (
-    <div className="fixed inset-0 z-50 flex items-end justify-center bg-[rgba(39,41,45,0.45)] md:items-center md:p-[24px]">
+    <div className="fixed inset-0 z-50 flex items-end justify-center bg-[rgba(39,41,45,0.45)] max-md:top-[calc(env(safe-area-inset-top)*-1)] md:items-center md:p-[24px]">
       <button type="button" aria-label="Закрыть" className="absolute inset-0 cursor-default" onClick={onClose} />
       <div
         role="dialog"
