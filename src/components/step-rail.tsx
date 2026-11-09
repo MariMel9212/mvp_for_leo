@@ -51,7 +51,7 @@ export function StepRail({ children }: { children: ReactNode }) {
       >
         {children}
       </div>
-      <div className="mt-4 flex items-center justify-center gap-2 md:hidden">
+      <div className="mt-8 flex items-center justify-center gap-2 md:hidden">
         {steps.map((label, i) => (
           <button
             key={label}
