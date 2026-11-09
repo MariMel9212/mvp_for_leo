@@ -16,10 +16,10 @@ import { SupportStages } from "@/components/support-stages";
 import { asset } from "@/lib/base-path";
 import { tie } from "@/lib/tie";
 
-const stats = [
+const stats: { value: string; label: string; desktopLines?: [string, string] }[] = [
   { value: "3 000 +", label: "семей получили профильную помощь" },
   { value: "6 000 +", label: "зависимых прошедших лечение" },
-  { value: "24/7", label: "на связи в сложной ситуации" },
+  { value: "24/7", label: "на связи в сложной ситуации", desktopLines: ["на связи", "в сложной ситуации"] },
   { value: "86%", label: "удачно подобранных учреждений" },
 ];
 
@@ -72,7 +72,18 @@ export default function HomePage() {
         {stats.map((item) => (
           <div key={item.value} className="flex w-full flex-col items-center gap-[2px] min-[1440px]:w-[220px]">
             <p className="text-32 font-medium">{item.value}</p>
-            <p className="w-full text-center text-16 text-[#737577] min-[1440px]:w-[220px]">{tie(item.label)}</p>
+            <p className="w-full text-center text-16 text-[#737577] min-[1440px]:w-[220px]">
+              {item.desktopLines ? (
+                <>
+                  {tie(item.desktopLines[0])}
+                  <br className="hidden min-[1440px]:inline" />
+                  <span className="min-[1440px]:hidden"> </span>
+                  {tie(item.desktopLines[1])}
+                </>
+              ) : (
+                tie(item.label)
+              )}
+            </p>
           </div>
         ))}
       </section>
