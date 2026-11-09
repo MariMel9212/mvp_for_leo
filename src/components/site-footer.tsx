@@ -5,6 +5,14 @@ import { tie } from "@/lib/tie";
 
 const topic = "Индивидуальный подбор реабилитационного учереждения";
 
+const sections = [
+  { label: "Помощь по ситуации", href: "/#situacii" },
+  { label: "Шаги выздоровления", href: "/#shagi" },
+  { label: "Центры", href: "/uchrezhdeniya" },
+  { label: "Про подбор", href: "/#pro-podbor" },
+  { label: "Контакты", href: "/#zayavka" },
+];
+
 function ConsultButton() {
   return (
     <CallRequestButton
@@ -15,77 +23,57 @@ function ConsultButton() {
   );
 }
 
-function Brand() {
-  return (
-    <Link href="/" aria-label="Leo" className="block h-6 w-[59px]">
-      <img alt="" src={asset("/brand/leo.svg")} width={59} height={24} className="block h-6 w-auto" />
-    </Link>
-  );
-}
-
 export function SiteFooter() {
   return (
-    <footer className="relative w-full bg-[linear-gradient(180deg,#fdfdfd_27.44%,#d2def3_100%)] text-[#27292d] min-[1440px]:mt-[65px]">
-      <div className="px-4 pt-10 min-[1440px]:hidden">
-        <div className="flex max-w-[538px] flex-col items-start gap-5">
-          <div className="flex flex-col gap-3">
+    <footer className="mt-16 bg-[linear-gradient(180deg,#fdfdfd_0%,#d2def3_100%)] text-[#27292d] min-[1440px]:mt-[80px]">
+      <div className="mx-auto flex w-full max-w-[1440px] flex-col px-4 pt-12 pb-8 min-[1440px]:px-[120px] min-[1440px]:pt-16 min-[1440px]:pb-10">
+        <div className="flex flex-col items-start gap-5 min-[800px]:flex-row min-[800px]:items-end min-[800px]:justify-between">
+          <div className="flex max-w-[538px] flex-col gap-3">
             <h2 className="text-[28px] leading-8 font-medium">{tie(topic)}</h2>
             <p className="text-16 opacity-60">{tie("Подберем лицензированное учереждение для работы с зависимостью")}</p>
           </div>
           <ConsultButton />
         </div>
-      </div>
 
-      <div aria-hidden className="mt-10 h-px w-full bg-black/4 min-[1440px]:absolute min-[1440px]:top-[242px] min-[1440px]:mt-0" />
+        <div className="mt-10 h-px w-full bg-black/8" />
 
-      <div className="px-4 pt-8 pb-12 min-[1440px]:hidden">
-        <div className="flex max-w-[314px] flex-col gap-2">
-          <Brand />
-          <p className="text-13 leading-5 opacity-60">
-            {tie("Сервис подбора проверенных реабилитационных центров для взрослых и подростков")}
-          </p>
-        </div>
-        <p className="mt-10 max-w-[520px] text-11 opacity-60">
-          {tie("Сервис помогает выбрать учреждение и самостоятельно не оказывает медицинскую помощь")}
-        </p>
-        <div className="mt-6 flex flex-col gap-3 text-11 opacity-60">
-          <p>{tie("Оператор персональных данных: ИП Мельничук Л. И.")}</p>
-          <Link href="/politika" className="w-fit underline-offset-2 hover:underline">
-            Политика обработки персональных данных
-          </Link>
-        </div>
-        <p className="mt-6 text-11">© 2026 Leo. Все права защищены</p>
-      </div>
-
-      <div className="relative mx-auto hidden h-[625px] w-full max-w-[1440px] min-[1440px]:block">
-        <div className="absolute top-[38px] left-[120px] flex w-[538px] flex-col items-start gap-[20px]">
-          <div className="flex w-full flex-col gap-[12px]">
-            <h2 className="text-[28px] leading-[32px] font-medium">{tie(topic)}</h2>
-            <p className="text-16 opacity-60">{tie("Подберем лицензированное учереждение для работы с зависимостью")}</p>
+        <div className="mt-8 flex flex-col gap-8 min-[800px]:flex-row min-[800px]:items-start min-[800px]:justify-between">
+          <div className="flex max-w-[360px] flex-col gap-3">
+            <Link href="/" aria-label="Leo" className="block h-6 w-fit">
+              <img alt="" src={asset("/brand/leo.svg")} width={59} height={24} className="block h-6 w-auto" />
+            </Link>
+            <p className="text-13 leading-5 opacity-60">
+              {tie("Сервис подбора проверенных реабилитационных центров для взрослых и подростков")}
+            </p>
           </div>
-          <ConsultButton />
+          <nav aria-label="Разделы" className="flex flex-col gap-3">
+            <p className="text-13 font-medium opacity-50">Разделы</p>
+            <ul className="flex flex-col gap-2">
+              {sections.map((item) => (
+                <li key={item.href}>
+                  <Link href={item.href} className="text-16 opacity-80 transition-opacity hover:opacity-100">
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
         </div>
 
-        <div className="absolute top-[313px] left-[120px] flex w-[314px] flex-col gap-[8px]">
-          <Brand />
-          <p className="text-13 leading-5 opacity-60">
-            {tie("Сервис подбора проверенных реабилитационных центров для взрослых и подростков")}
-          </p>
-        </div>
+        <div className="mt-10 h-px w-full bg-black/8" />
 
-        <p className="absolute top-[484px] left-[120px] text-11 whitespace-nowrap opacity-60">
-          {tie("Сервис помогает выбрать учреждение и самостоятельно не оказывает медицинскую помощь")}
-        </p>
-        <p className="absolute top-[540px] left-[120px] text-11 whitespace-nowrap opacity-60">
-          {tie("Оператор персональных данных: ИП Мельничук Л. И.")}
-        </p>
-        <Link
-          href="/politika"
-          className="absolute top-[540px] left-[925px] text-11 whitespace-nowrap opacity-60 underline-offset-2 hover:underline"
-        >
-          Политика обработки персональных данных
-        </Link>
-        <p className="absolute top-[596px] left-[120px] text-11 whitespace-nowrap">© 2026 Leo. Все права защищены</p>
+        <div className="mt-6 flex flex-col gap-4 text-11 leading-4 min-[800px]:flex-row min-[800px]:items-start min-[800px]:justify-between min-[800px]:gap-8">
+          <div className="flex max-w-[520px] flex-col gap-3">
+            <p className="opacity-60">{tie("Сервис помогает выбрать учреждение и самостоятельно не оказывает медицинскую помощь")}</p>
+            <p>© 2026 Leo. Все права защищены</p>
+          </div>
+          <div className="flex flex-col gap-2 opacity-60 min-[800px]:items-end min-[800px]:text-right">
+            <p>{tie("Оператор персональных данных: ИП Мельничук Л. И.")}</p>
+            <Link href="/politika" className="w-fit underline-offset-2 hover:underline">
+              Политика обработки персональных данных
+            </Link>
+          </div>
+        </div>
       </div>
     </footer>
   );
