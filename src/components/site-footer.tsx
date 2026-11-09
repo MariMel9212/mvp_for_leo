@@ -62,17 +62,19 @@ export function SiteFooter() {
 
         <div className="mt-10 h-px w-full bg-black/8" />
 
-        <div className="mt-6 flex flex-col gap-4 text-11 leading-4 min-[800px]:flex-row min-[800px]:items-start min-[800px]:justify-between min-[800px]:gap-8">
-          <div className="flex max-w-[520px] flex-col gap-3">
-            <p className="opacity-60">{tie("Сервис помогает выбрать учреждение и самостоятельно не оказывает медицинскую помощь")}</p>
-            <p>© 2026 Leo. Все права защищены</p>
+        <div className="mt-6 flex flex-col gap-4 text-11 leading-4">
+          <div className="flex flex-col gap-4 min-[800px]:flex-row min-[800px]:items-start min-[800px]:justify-between min-[800px]:gap-8">
+            <p className="max-w-[520px] opacity-60">
+              {tie("Сервис помогает выбрать учреждение и самостоятельно не оказывает медицинскую помощь")}
+            </p>
+            <div className="flex flex-col gap-2 opacity-60 min-[800px]:items-end min-[800px]:text-right">
+              <p>{tie("Оператор персональных данных: ИП Мельничук Л. И.")}</p>
+              <Link href="/politika" className="w-fit underline-offset-2 hover:underline">
+                Политика обработки персональных данных
+              </Link>
+            </div>
           </div>
-          <div className="flex flex-col gap-2 opacity-60 min-[800px]:items-end min-[800px]:text-right">
-            <p>{tie("Оператор персональных данных: ИП Мельничук Л. И.")}</p>
-            <Link href="/politika" className="w-fit underline-offset-2 hover:underline">
-              Политика обработки персональных данных
-            </Link>
-          </div>
+          <p>© 2026 Leo. Все права защищены</p>
         </div>
       </div>
     </footer>
