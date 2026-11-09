@@ -16,11 +16,11 @@ export const troitskCenter: CenterPageData = {
   amenities: [
     { icon: "gym", label: "Спортзал" },
     { icon: "group", label: "Групповая" },
-    { icon: "field", label: "Спортивная площадка" },
+    { icon: "territory", label: "Частная территория" },
     { icon: "dining", label: "Столовая" },
     { icon: "rooms", label: "Общие комнаты" },
     { icon: "classroom", label: "Учебный класс" },
-    { icon: "territory", label: "Частная территория" },
+    { icon: "field", label: "Спортивная площадка" },
     { icon: "living", label: "Большая гостиная" },
   ],
   schedule: [
