@@ -74,7 +74,7 @@ export function FaqSection() {
   const locking = useRef(false);
 
   return (
-    <section className="px-[120px] pt-16 pb-16 [overflow-anchor:none] max-[1439px]:px-4 min-[1440px]:pt-[120px] min-[1440px]:pb-[80px]">
+    <section className="px-[120px] pt-16 pb-16 [overflow-anchor:none] max-[1439px]:px-4 max-md:pt-12 max-md:pb-0 min-[1440px]:pt-[120px] min-[1440px]:pb-[80px]">
       <div className="mx-auto flex w-full max-w-[1200px] flex-col items-center gap-8 min-[1440px]:gap-[48px]">
         <div className="flex w-full flex-col items-center gap-[10px] text-center">
           <h2 className="text-40 font-medium max-md:text-28 md:max-[1439px]:text-[32px] md:max-[1439px]:leading-[40px]">Частые вопросы</h2>

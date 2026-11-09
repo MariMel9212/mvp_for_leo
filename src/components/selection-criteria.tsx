@@ -58,7 +58,7 @@ export function SelectionCriteria() {
   }, []);
 
   return (
-    <section ref={sectionRef} id="pro-podbor" className="relative w-full pt-16 pb-16 min-[1440px]:pt-[120px] min-[1440px]:pb-[92px]">
+    <section ref={sectionRef} id="pro-podbor" className="relative w-full pt-16 pb-16 max-md:pt-12 min-[1440px]:pt-[120px] min-[1440px]:pb-[92px]">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0"
