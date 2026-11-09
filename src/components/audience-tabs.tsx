@@ -17,7 +17,7 @@ export function AudienceTabs() {
 
   return (
     <div className="@container w-full max-w-[377px]">
-      <div className="flex flex-col items-center gap-[4px]">
+      <div className="flex flex-col items-center gap-[4px] min-[1440px]:gap-[10px]">
         <div
           role="tablist"
           aria-label="Кому нужна помощь"
@@ -27,7 +27,7 @@ export function AudienceTabs() {
             <Tab key={item.label} label={item.label} selected={active === item.label} onSelect={() => setActive(item.label)} />
           ))}
         </div>
-        <p className="w-full text-center text-13 text-[#27292d] opacity-50">{tie(note)}</p>
+        <p className="w-full text-center text-13 text-[#27292d] opacity-50 min-[1440px]:text-[15px] min-[1440px]:leading-[22px]">{tie(note)}</p>
       </div>
     </div>
   );
