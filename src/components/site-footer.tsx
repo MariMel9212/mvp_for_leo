@@ -25,7 +25,7 @@ function ConsultButton() {
 
 export function SiteFooter() {
   return (
-    <footer className="mt-16 bg-[linear-gradient(180deg,#fdfdfd_0%,#d2def3_100%)] text-[#27292d] min-[1440px]:mt-[80px]">
+    <footer className="bg-[linear-gradient(180deg,#fdfdfd_0%,#d2def3_100%)] text-[#27292d] min-[1440px]:mt-[80px]">
       <div className="mx-auto flex w-full max-w-[1440px] flex-col px-4 pt-12 pb-8 min-[1440px]:px-[120px] min-[1440px]:pt-16 min-[1440px]:pb-10">
         <div className="flex flex-col items-start gap-5 min-[800px]:flex-row min-[800px]:items-end min-[800px]:justify-between">
           <div className="flex max-w-[538px] flex-col gap-3">
