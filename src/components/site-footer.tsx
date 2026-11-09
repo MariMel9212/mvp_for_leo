@@ -46,8 +46,8 @@ export function SiteFooter() {
               {tie("Сервис подбора проверенных реабилитационных центров для взрослых и подростков")}
             </p>
           </div>
-          <nav aria-label="Разделы" className="flex flex-col gap-3">
-            <p className="text-13 font-medium opacity-50">Разделы</p>
+          <nav aria-label="Навигация" className="flex flex-col gap-3">
+            <p className="text-13 font-medium opacity-50">Навигация</p>
             <ul className="flex flex-col gap-2">
               {sections.map((item) => (
                 <li key={item.href}>
