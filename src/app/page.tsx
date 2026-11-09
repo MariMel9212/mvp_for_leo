@@ -143,7 +143,7 @@ function SituationCard({
 }) {
   return (
     <article className="w-full overflow-hidden rounded-[20px] min-[1440px]:w-[588px]">
-      <div className="flex flex-col gap-[6px] bg-[#eef2f9] px-6 pt-8 pb-[10px] min-[1440px]:px-[32px]">
+      <div className="flex flex-col gap-[6px] bg-[#eef2f9] px-6 pt-5 pb-[10px] md:pt-8 min-[1440px]:px-[32px]">
         <h3 className="text-32 font-medium max-md:text-24">{title}</h3>
         <p className="w-full max-w-[457px] text-16">{text}</p>
       </div>
