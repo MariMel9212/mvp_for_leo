@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, type FocusEvent, type FormEvent, type KeyboardEvent as ReactKeyboardEvent } from "react";
+import { useEffect, useId, useRef, useState, type FocusEvent, type FormEvent, type KeyboardEvent as ReactKeyboardEvent, type ReactNode } from "react";
 import { createPortal } from "react-dom";
 import { asset } from "@/lib/base-path";
 import { tie } from "@/lib/tie";
@@ -189,6 +189,67 @@ function Flag({ id }: { id: string }) {
   );
 }
 
+export function TelegramMark() {
+  const id = `tg-${useId().replace(/:/g, "")}`;
+  return (
+    <svg viewBox="0 0 32 32" aria-hidden className="h-full w-full">
+      <path d="M16 28C22.6274 28 28 22.6274 28 16C28 9.37258 22.6274 4 16 4C9.37258 4 4 9.37258 4 16C4 22.6274 9.37258 28 16 28Z" fill={`url(#${id})`} />
+      <path d="M12.1223 16.8773L13.546 20.8179C13.546 20.8179 13.724 21.1866 13.9146 21.1866C14.1052 21.1866 16.9401 18.2374 16.9401 18.2374L20.0926 12.1484L12.1731 15.8601L12.1223 16.8773Z" fill="#C8DAEA" />
+      <path d="M14.0109 17.8879L13.7376 20.7925C13.7376 20.7925 13.6232 21.6825 14.513 20.7925C15.4028 19.9025 16.2545 19.2162 16.2545 19.2162" fill="#A9C6D8" />
+      <path d="M12.1492 17.0179L9.2206 16.0637C9.2206 16.0637 8.8706 15.9217 8.9833 15.5997C9.0065 15.5333 9.0533 15.4768 9.1933 15.3797C9.8422 14.9274 21.2039 10.8437 21.2039 10.8437C21.2039 10.8437 21.5247 10.7356 21.7139 10.8075C21.7607 10.822 21.8028 10.8486 21.8359 10.8847C21.8691 10.9209 21.892 10.9651 21.9024 11.013C21.9228 11.0976 21.9314 11.1846 21.9278 11.2715C21.9269 11.3467 21.9178 11.4164 21.9109 11.5257C21.8417 12.6422 19.7709 20.975 19.7709 20.975C19.7709 20.975 19.647 21.4626 19.2031 21.4793C19.094 21.4828 18.9853 21.4643 18.8835 21.425C18.7817 21.3856 18.6889 21.3261 18.6106 21.2501C17.7395 20.5008 14.7287 18.4774 14.0634 18.0324C14.0484 18.0222 14.0358 18.0088 14.0263 17.9933C14.0169 17.9778 14.0109 17.9604 14.0088 17.9424C13.9995 17.8955 14.0505 17.8374 14.0505 17.8374C14.0505 17.8374 19.2931 13.1774 19.4326 12.6882C19.4434 12.6503 19.4026 12.6316 19.3478 12.6482C18.9996 12.7763 12.9634 16.5882 12.2972 17.0089C12.2492 17.0234 12.1986 17.0265 12.1492 17.0179V17.0179Z" fill="white" />
+      <defs>
+        <linearGradient id={id} x1="16" y1="28" x2="16" y2="4" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#1D93D2" />
+          <stop offset="1" stopColor="#38B0E3" />
+        </linearGradient>
+      </defs>
+    </svg>
+  );
+}
+
+export function WhatsAppMark() {
+  const raw = useId().replace(/:/g, "");
+  const shadow = `wa-shadow-${raw}`;
+  const inset = `wa-inset-${raw}`;
+  const fill = `wa-fill-${raw}`;
+  return (
+    <svg viewBox="0 0 32 32" aria-hidden className="h-full w-full">
+      <g filter={`url(#${shadow})`}>
+        <path d="M24.5029 7.48948C22.2454 5.24037 19.2428 4.00119 16.0477 4C9.46004 4 4.09832 9.33664 4.09533 15.897C4.09473 17.9019 4.60304 19.8777 5.56702 21.6266L4.02118 27.2473C3.96496 27.4528 4.02237 27.6719 4.17307 27.8231C4.28669 27.9375 4.44038 28 4.59825 28C4.64908 28 4.69991 27.9934 4.75014 27.9803L10.543 26.4678C12.2342 27.342 14.1299 27.8035 16.0429 27.8041C22.6353 27.8041 27.997 22.4669 28 15.9065C28.0012 12.7273 26.7591 9.73799 24.5029 7.48948Z" fill="white" />
+      </g>
+      <g filter={`url(#${inset})`}>
+        <path d="M22.7217 9.25847C20.9396 7.48277 18.5709 6.50441 16.0497 6.50381C10.8447 6.50381 6.61139 10.7174 6.60899 15.8968C6.6084 17.6719 7.10713 19.4 8.05198 20.8964L8.27683 21.2519L7.32301 24.7182L10.8949 23.7857L11.2399 23.9893C12.6883 24.8456 14.3496 25.2982 16.0431 25.2988H16.0467C21.2482 25.2988 25.4814 21.0846 25.4832 15.9046C25.4838 13.3946 24.5037 11.0342 22.7217 9.25847Z" fill={`url(#${fill})`} />
+      </g>
+      <path d="M13.2537 11.0452C13.0414 10.5747 12.8177 10.5652 12.615 10.5569C12.4493 10.5497 12.2604 10.5503 12.0714 10.5503C11.8824 10.5503 11.5751 10.6212 11.3149 10.904C11.0548 11.1869 10.3216 11.8699 10.3216 13.2597C10.3216 14.6496 11.3383 15.993 11.48 16.1811C11.6217 16.3693 13.4426 19.3127 16.3262 20.4453C18.7224 21.3862 19.2104 21.1992 19.7307 21.1521C20.2509 21.1051 21.4093 20.4691 21.6455 19.8093C21.8817 19.1496 21.8817 18.5845 21.8111 18.4666C21.74 18.3486 21.551 18.2784 21.2675 18.1367C20.9841 17.9949 19.5889 17.3119 19.3288 17.2178C19.0687 17.1238 18.8797 17.0767 18.6901 17.3596C18.5012 17.6418 17.9576 18.2784 17.7919 18.4666C17.6263 18.6553 17.4606 18.6791 17.1772 18.5374C16.8937 18.3957 15.98 18.098 14.8958 17.1357C14.0526 16.3872 13.4833 15.4624 13.3177 15.1795C13.152 14.8973 13.2997 14.7442 13.442 14.6031C13.5694 14.4763 13.7255 14.2732 13.8678 14.1083C14.0095 13.9433 14.0568 13.8254 14.1513 13.6373C14.2458 13.4485 14.1985 13.2835 14.1274 13.1424C14.0574 13.0007 13.506 11.6037 13.2537 11.0452Z" fill="white" fillRule="evenodd" clipRule="evenodd" />
+      <defs>
+        <filter id={shadow} x="2.13" y="3.47" width="27.74" height="27.74" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
+          <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+          <feOffset dy="1.33" />
+          <feGaussianBlur stdDeviation="0.93" />
+          <feColorMatrix type="matrix" values="0 0 0 0 0.562353 0 0 0 0 0.609412 0 0 0 0 0.717647 0 0 0 0.24 0" />
+          <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
+          <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
+        </filter>
+        <filter id={inset} x="6.61" y="6.5" width="18.88" height="19.07" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
+          <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+          <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+          <feOffset dy="0.27" />
+          <feGaussianBlur stdDeviation="0.13" />
+          <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1" />
+          <feColorMatrix type="matrix" values="0 0 0 0 0.263875 0 0 0 0 0.604167 0 0 0 0 0.206424 0 0 0 0.3 0" />
+          <feBlend mode="normal" in2="shape" result="effect1_innerShadow" />
+        </filter>
+        <linearGradient id={fill} x1="16.05" y1="6.5" x2="16.05" y2="25.3" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#7FCE76" />
+          <stop offset="1" stopColor="#58B04E" />
+        </linearGradient>
+      </defs>
+    </svg>
+  );
+}
+
 export function MessengerField({
   icon,
   value,
@@ -203,7 +264,7 @@ export function MessengerField({
   codeLabel,
   compact,
 }: {
-  icon: string;
+  icon: ReactNode;
   value: string;
   onChange: (value: string) => void;
   placeholder: string;
@@ -282,7 +343,7 @@ export function MessengerField({
       onBlur={trackBlur}
       className={`flex w-full items-center gap-[16px] rounded-[16px] border border-solid border-[#dedede] bg-white pr-[14px] pl-[24px] max-[1439px]:gap-3 max-[1439px]:pl-3 ${compact ? "h-[44px]" : "h-[48px] max-[1439px]:h-[44px]"}`}
     >
-      <img alt="" className="shrink-0" src={asset(icon)} width={compact ? 32 : 42} height={compact ? 32 : 42} />
+      <span className={`flex shrink-0 items-center justify-center ${compact ? "size-8" : "size-[42px]"}`}>{icon}</span>
       <span className="h-[24px] w-px shrink-0 bg-[#dedede]" />
       <span className="flex min-w-0 flex-1 items-center gap-[4px]">
         <input
@@ -522,7 +583,7 @@ export function ConsultForm() {
       const missingCode = (telegramPhone && telegramCode === "") || (whatsappPhone && phoneCode === "");
       if (missingCode) setError("Укажите код");
       else if (telegramPhone || whatsappPhone || telegramCode !== "" || phoneCode !== "") setError("Укажите номер");
-      else setError("Укажите ник или номер");
+      else setError("Укажите хотя бы один вариант");
       return;
     }
     setError("");
@@ -624,7 +685,7 @@ export function ConsultForm() {
           ) : (
             <div className="flex w-full flex-col gap-[8px]">
               <MessengerField
-                icon="/consult/telegram.svg"
+                icon={<TelegramMark />}
                 value={telegram}
                 onChange={(value) => setTelegram(isNickname(value) ? value : formatNational(value, telegramCode))}
                 placeholder="Укажите ник или номер"
@@ -644,7 +705,7 @@ export function ConsultForm() {
                 <span aria-hidden className="h-px min-w-0 flex-1 bg-black/10" />
               </div>
               <MessengerField
-                icon="/consult/whatsapp.svg"
+                icon={<WhatsAppMark />}
                 value={phone}
                 onChange={(value) => setPhone(formatNational(value, phoneCode))}
                 placeholder="Укажите номер"

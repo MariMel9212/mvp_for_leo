@@ -3,6 +3,8 @@
 import { useEffect, useId, useRef, useState, type FormEvent, type ReactNode } from "react";
 import {
   MessengerField,
+  TelegramMark,
+  WhatsAppMark,
   PhoneField,
   countries,
   formatNational,
@@ -313,7 +315,7 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
   function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (!contactReady) {
-      setError(channel === "call" ? "Укажите телефон" : "Укажите ник или номер");
+      setError(channel === "call" ? "Укажите телефон" : "Укажите хотя бы один вариант");
       return;
     }
     setError("");
@@ -658,7 +660,7 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
                   <div className="flex flex-col gap-[6px]">
                     <MessengerField
                       compact
-                      icon="/modal/telegram.svg"
+                      icon={<TelegramMark />}
                       value={telegram}
                       onChange={(value) => setTelegram(isNickname(value) ? value : formatNational(value, telegramCode))}
                       placeholder="Укажите ник или номер"
@@ -679,7 +681,7 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
                     </div>
                     <MessengerField
                       compact
-                      icon="/modal/whatsapp.svg"
+                      icon={<WhatsAppMark />}
                       value={phone}
                       onChange={(value) => setPhone(formatNational(value, phoneCode))}
                       placeholder="Укажите номер"
