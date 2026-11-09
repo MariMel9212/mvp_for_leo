@@ -51,8 +51,8 @@ export default function HomePage() {
 
           <div className="relative z-10 flex h-full w-full items-center justify-center px-4 max-[1439px]:py-8 min-[1440px]:items-start min-[1440px]:px-0 min-[1440px]:pt-[198px]">
             <div id="podbor" className="flex w-full max-w-[34rem] flex-col items-center gap-8 min-[1440px]:max-w-[754px] min-[1440px]:gap-[42px]">
-              <h1 className="w-full text-center text-48 font-medium max-[1439px]:text-[32px] max-[1439px]:leading-[38px]">
-                {tie("Проверенные ребцентра для лечения и восстановления при зависимостях")}
+              <h1 className="w-full text-center text-48 font-medium max-[1439px]:text-[32px] max-[1439px]:leading-[38px] max-md:text-[28px] max-md:leading-[34px]">
+                {tie("Проверенные ребцентра для лечения при зависимостях")}
               </h1>
               <AudienceTabs />
               <a
