@@ -1,4 +1,6 @@
-import { type ReactNode } from "react";
+"use client";
+
+import { useEffect, useRef, type ReactNode } from "react";
 import { tie } from "@/lib/tie";
 
 const criteria: { n: string; title: string; text: ReactNode }[] = [
@@ -29,9 +31,34 @@ const criteria: { n: string; title: string; text: ReactNode }[] = [
   },
 ];
 
+const cell =
+  "relative h-[224px] min-[360px]:max-md:h-[168px] md:max-[1439px]:h-[112px] min-[1440px]:h-[112px]";
+
 export function SelectionCriteria() {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+    const align = () => {
+      const line = section.querySelector<HTMLElement>("[data-divider]");
+      if (!line) return;
+      const top = line.getBoundingClientRect().top - section.getBoundingClientRect().top;
+      const y = ((top % 56) + 56) % 56;
+      section.style.setProperty("--criteria-grid-y", `${y}px`);
+    };
+    align();
+    const observer = new ResizeObserver(align);
+    observer.observe(section);
+    window.addEventListener("resize", align);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", align);
+    };
+  }, []);
+
   return (
-    <section id="pro-podbor" className="relative w-full pt-16 pb-16 min-[1440px]:pt-[120px] min-[1440px]:pb-[92px]">
+    <section ref={sectionRef} id="pro-podbor" className="relative w-full pt-16 pb-16 min-[1440px]:pt-[120px] min-[1440px]:pb-[92px]">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0"
@@ -39,7 +66,7 @@ export function SelectionCriteria() {
           backgroundImage:
             "linear-gradient(to right, rgba(136,136,136,0.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(136,136,136,0.06) 1px, transparent 1px)",
           backgroundSize: "56px 56px",
-          backgroundPosition: "0 2px",
+          backgroundPosition: "0 var(--criteria-grid-y, 2px)",
         }}
       />
       <div
@@ -62,24 +89,21 @@ export function SelectionCriteria() {
           </p>
         </div>
         <ol className="mt-10 flex w-full flex-col max-[1439px]:[&_br]:hidden min-[1440px]:mt-[120px] min-[1440px]:ml-auto min-[1440px]:w-[588px]">
-          {criteria.map((item, index) => (
-            <li key={item.n} className="flex flex-col">
-              <div className="flex items-start gap-[16px]">
-                <span className="text-24 font-medium text-[#5a98ff] opacity-80">{item.n}</span>
-                <div className="flex min-w-0 flex-1 flex-col gap-[4px]">
-                  <h3 className="text-24 font-medium max-[1439px]:text-[20px] max-[1439px]:leading-[26px]">{tie(item.title)}</h3>
-                  <p className="text-16 text-[#737577]">{typeof item.text === "string" ? tie(item.text) : item.text}</p>
+          {criteria.map((item, index) => {
+            const divided = index < criteria.length - 1;
+            return (
+              <li key={item.n} className={divided ? cell : "relative flex flex-col"}>
+                <div className={`flex items-start gap-[16px] ${index > 0 ? "pt-3" : ""}`}>
+                  <span className="text-24 font-medium text-[#5a98ff] opacity-80">{item.n}</span>
+                  <div className="flex min-w-0 flex-1 flex-col gap-[4px]">
+                    <h3 className="text-24 font-medium max-[1439px]:text-[20px] max-[1439px]:leading-[26px]">{tie(item.title)}</h3>
+                    <p className="text-16 text-[#737577]">{typeof item.text === "string" ? tie(item.text) : item.text}</p>
+                  </div>
                 </div>
-              </div>
-              {index < criteria.length - 1 ? (
-                <>
-                  <div className="h-3" />
-                  <div className="h-px bg-[rgba(39,41,45,0.035)]" />
-                  <div className="h-3" />
-                </>
-              ) : null}
-            </li>
-          ))}
+                {divided ? <div data-divider className="absolute inset-x-0 bottom-0 h-px bg-[rgba(39,41,45,0.035)]" /> : null}
+              </li>
+            );
+          })}
         </ol>
       </div>
     </section>
