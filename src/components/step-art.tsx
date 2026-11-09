@@ -172,7 +172,7 @@ function DocumentSheet() {
 
 export function SituationSheets() {
   return (
-    <div data-part="sheets" className="situation-sheets absolute top-[203px] left-[94px] h-[133px] w-[195px] max-[1439px]:top-auto max-[1439px]:left-1/2 max-md:bottom-[-8px] md:max-[1439px]:bottom-[-36px]">
+    <div data-part="sheets" className="situation-sheets absolute top-[203px] left-[94px] h-[133px] w-[195px] max-[1439px]:top-auto max-[1439px]:left-1/2 max-md:bottom-4 md:max-[1439px]:bottom-[-36px]">
       <div data-part="table" className="situation-sheet absolute" style={{ left: 105.93, top: 1.8 }}>
         <div className="situation-sheet-motion">
           <TableSheet />
@@ -195,7 +195,7 @@ export function SituationSheets() {
 export function FormatRadar() {
   return (
     <>
-      <div data-part="radar" className="absolute top-[270px] left-1/2 h-[258px] w-[258px] -translate-x-1/2 max-[1439px]:top-auto max-[1439px]:origin-bottom max-md:bottom-[-28px] max-md:scale-[0.78] md:max-[1439px]:bottom-[-124px] md:max-[1439px]:scale-[0.92]">
+      <div data-part="radar" className="absolute top-[270px] left-1/2 h-[258px] w-[258px] -translate-x-1/2 max-[1439px]:top-auto max-[1439px]:origin-bottom max-md:bottom-4 max-md:scale-[0.82] md:max-[1439px]:bottom-[-124px] md:max-[1439px]:scale-[0.92]">
         <svg
           width="291.229"
           height="292.315"
@@ -401,7 +401,7 @@ export function CoverageScan() {
     <div
       data-part="coverage"
       aria-hidden
-      className="absolute top-[197px] left-0 h-[305px] w-[383px] overflow-hidden rounded-[45px] max-md:top-2 max-md:left-1/2 max-md:origin-top max-md:-translate-x-1/2 max-md:scale-[0.5] md:max-[1439px]:top-[calc(16px-23.27px*0.92*100cqw/383px)] md:max-[1439px]:bottom-auto md:max-[1439px]:left-[calc((100%-0.92*100cqw)/2)] md:max-[1439px]:origin-top-left md:max-[1439px]:translate-x-0 md:max-[1439px]:scale-100 md:max-[1439px]:[transform:scale(calc(0.92*100cqw/383px))] max-md:[mask-image:linear-gradient(90deg,transparent,#000_12%,#000_88%,transparent)]"
+      className="absolute top-[197px] left-0 h-[305px] w-[383px] overflow-hidden rounded-[45px] max-md:top-4 max-md:left-1/2 max-md:origin-top max-md:-translate-x-1/2 max-md:scale-[0.64] md:max-[1439px]:top-[calc(16px-23.27px*0.92*100cqw/383px)] md:max-[1439px]:bottom-auto md:max-[1439px]:left-[calc((100%-0.92*100cqw)/2)] md:max-[1439px]:origin-top-left md:max-[1439px]:translate-x-0 md:max-[1439px]:scale-100 md:max-[1439px]:[transform:scale(calc(0.92*100cqw/383px))] max-md:[mask-image:linear-gradient(90deg,transparent,#000_14%,#000_86%,transparent)]"
     >
       <style>{`.scan-grain{background-image:${hiddenGrain.image};background-repeat:repeat-x;background-size:${hiddenGrain.width}px 35.1px}`}</style>
       <div className="scan-source">
