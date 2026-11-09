@@ -18,7 +18,7 @@ function ConsultButton() {
     <CallRequestButton
       label="Консультация"
       topic={topic}
-      className="lime-control flex h-[38px] items-center justify-center rounded-[8px] px-[20px] text-16 shadow-[0_4px_2px_rgba(173,173,173,0.2)]"
+      className="lime-control flex h-[38px] items-center justify-center rounded-[8px] px-[20px] text-16"
     />
   );
 }
