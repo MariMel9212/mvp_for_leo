@@ -4,6 +4,17 @@ import { tie } from "@/lib/tie";
 
 const appStore = "https://apps.apple.com/ru/app/leo-recovery/id6752736987";
 
+function LeafMark({ style }: { style: CSSProperties }) {
+  return (
+    <svg viewBox="0 0 46.2608 45.1626" aria-hidden className="h-[45.163px] w-[46.261px] overflow-visible" style={style}>
+      <path
+        d="M40.9089 0.0598084C42.6209 -0.0188573 44.5517 -0.00989035 46.2608 0.0294018C40.9347 2.47693 39.0268 5.82825 36.8283 10.4694C32.091 20.4713 30.856 35.6206 16.5658 39.2233C13.2728 40.0536 10.0707 40.0217 6.68309 39.8428C9.90245 30.3397 15.9493 22.2494 24.0321 15.1927C25.5338 13.8812 27.1473 12.6876 28.7503 11.4666C27.1693 11.9061 25.1122 12.8542 23.6784 13.5526C23.1011 13.8443 22.5343 14.1518 21.9789 14.4745C11.4825 20.5987 4.93194 30.9026 1.97544 41.2718C1.61125 42.5467 1.34361 43.8715 1.05877 45.1626C-1.55964 33.7843 0.44605 19.7422 9.69407 10.8141C17.8534 2.93735 29.1288 0.730954 40.9089 0.0598084Z"
+        fill="#3B7BF6"
+      />
+    </svg>
+  );
+}
+
 function GlassCard({
   title,
   text,
@@ -40,7 +51,7 @@ function GlassCard({
           style={clipLeaf ? { clipPath: "inset(0 round 20.219px)" } : undefined}
         >
           <span className={`pointer-events-none absolute flex items-center justify-center ${leafClassName}`}>
-            <img alt="" src={asset("/app/leaf.svg")} width={46} height={45} className="h-[45.163px] w-[46.261px] max-w-none" style={leafStyle} />
+            <LeafMark style={leafStyle} />
           </span>
           <div className="absolute top-[13.48px] left-[11.79px] flex w-[186.18px] flex-col gap-[5.055px]">
             <p className="text-[13.479px] leading-[20.219px] font-medium text-black">{title}</p>
