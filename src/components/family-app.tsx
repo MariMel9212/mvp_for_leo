@@ -24,6 +24,7 @@ function GlassCard({
   leafClassName,
   leafStyle,
   clipLeaf = false,
+  scale = 1,
 }: {
   title: string;
   text: ReturnType<typeof tie>;
@@ -32,10 +33,11 @@ function GlassCard({
   leafClassName: string;
   leafStyle: CSSProperties;
   clipLeaf?: boolean;
+  scale?: number;
 }) {
   return (
     <div className={`absolute flex items-center justify-center max-[1439px]:origin-center max-[1439px]:scale-110 ${className}`}>
-      <div className="relative h-[89.299px] w-[262px]" style={{ transform: `rotate(${rotate}deg)` }}>
+      <div className="relative h-[89.299px] w-[262px]" style={{ transform: `rotate(${rotate}deg) scale(${scale})` }}>
         <div className="absolute inset-0" style={{ filter: "drop-shadow(0 0 14px rgba(107,107,107,0.22))" }}>
           <div className="absolute inset-0 rounded-[20.219px] bg-white/70" />
         </div>
@@ -183,6 +185,7 @@ export function FamilyAppSection() {
             clipLeaf
             leafClassName="top-[46.67px] left-[200.49px] h-[59.241px] w-[62.566px]"
             leafStyle={{ transform: "scaleY(-1) rotate(155.85deg) skewX(2.64deg)" }}
+            scale={1.18}
           />
           <GlassCard
             title="Дневник эмоций"
