@@ -59,7 +59,7 @@ export function StepRail({ children }: { children: ReactNode }) {
             aria-label={label}
             aria-current={i === index ? "true" : undefined}
             onClick={() => go(i)}
-            className={`h-1.5 rounded-full transition-[width] ${i === index ? "w-6 bg-[#e1f300]" : "w-1.5 bg-[#8aa8e6]"}`}
+            className={`h-1.5 rounded-full transition-[width] ${i === index ? "w-6 bg-[#7ea0e0]" : "w-1.5 bg-[#d2def3]"}`}
           />
         ))}
       </div>
