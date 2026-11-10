@@ -99,8 +99,8 @@ export default function HomePage() {
               imageClassName="top-[-42px] left-[-254px] h-[621px] w-[1043px]"
               imageWidth={966}
               imageHeight={575}
-              focus="52% 64%"
-              frameScale="scale-[1.26]"
+              focus="52% 76%"
+              frameScale="scale-[1.4]"
               action="Подобрать детокс"
             />
             <SituationCard
