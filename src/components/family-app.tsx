@@ -185,7 +185,6 @@ export function FamilyAppSection() {
             clipLeaf
             leafClassName="top-[46.67px] left-[200.49px] h-[59.241px] w-[62.566px]"
             leafStyle={{ transform: "scaleY(-1) rotate(155.85deg) skewX(2.64deg)" }}
-            scale={1.18}
           />
           <GlassCard
             title="Дневник эмоций"
