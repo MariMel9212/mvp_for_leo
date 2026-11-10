@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Google_Sans, Inter } from "next/font/google";
 import Script from "next/script";
 import { asset } from "@/lib/base-path";
+import { tabIcon32 } from "@/lib/tab-icon";
 import "./globals.css";
 
 const googleSans = Google_Sans({
@@ -24,10 +25,12 @@ export const metadata: Metadata = {
     "Подбор проверенных реабилитационных центров для лечения и восстановления при зависимостях.",
   icons: {
     icon: [
-      { url: asset("/brand/leo-tab.png"), type: "image/png", sizes: "32x32" },
-      { url: asset("/brand/leo-tab-192.png"), type: "image/png", sizes: "192x192" },
+      { url: tabIcon32, type: "image/png", sizes: "32x32" },
+      { url: `${asset("/brand/mark-v6-32.png")}?v=6`, type: "image/png", sizes: "32x32" },
+      { url: `${asset("/brand/mark-v6-192.png")}?v=6`, type: "image/png", sizes: "192x192" },
     ],
-    apple: [{ url: asset("/brand/leo-apple.png"), sizes: "180x180", type: "image/png" }],
+    apple: [{ url: `${asset("/brand/mark-v6-180.png")}?v=6`, sizes: "180x180", type: "image/png" }],
+    shortcut: [{ url: tabIcon32, type: "image/png" }],
   },
 };
 
