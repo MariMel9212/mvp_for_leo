@@ -67,16 +67,16 @@ export function SiteFooter() {
 
       <div className="mx-auto mt-6 w-full max-w-[1440px] px-4 pb-8 min-[1440px]:px-[120px] min-[1440px]:pb-10">
         <div className="flex flex-col gap-4 text-11 leading-4 text-[#5e6062]">
-          <div className="flex flex-col gap-3 min-[800px]:flex-row min-[800px]:items-center min-[800px]:justify-between min-[800px]:gap-8">
-            <p className="text-[#27292d]">© 2026 Leo. Все права защищены</p>
-            <div className="flex flex-col gap-2 min-[800px]:flex-row min-[800px]:items-center min-[800px]:gap-6">
+          <div className="flex flex-col gap-3 min-[800px]:flex-row min-[800px]:items-start min-[800px]:justify-between min-[800px]:gap-8">
+            <p className="max-w-[720px]">{tie("Сервис помогает выбрать учреждение и самостоятельно не оказывает медицинскую помощь")}</p>
+            <div className="flex flex-col gap-2 min-[800px]:items-end min-[800px]:text-right">
               <p>{tie("Оператор персональных данных: ИП Мельничук Л. И.")}</p>
               <Link href="/politika" className="w-fit underline-offset-2 hover:underline">
                 Политика обработки персональных данных
               </Link>
             </div>
           </div>
-          <p className="max-w-[720px]">{tie("Сервис помогает выбрать учреждение и самостоятельно не оказывает медицинскую помощь")}</p>
+          <p className="text-[#27292d]">© 2026 Leo. Все права защищены</p>
         </div>
       </div>
     </footer>
