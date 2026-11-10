@@ -26,10 +26,10 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       { url: tabIcon32, type: "image/png", sizes: "32x32" },
-      { url: `${asset("/brand/mark-v6-32.png")}?v=6`, type: "image/png", sizes: "32x32" },
-      { url: `${asset("/brand/mark-v6-192.png")}?v=6`, type: "image/png", sizes: "192x192" },
+      { url: `${asset("/brand/mark-v7-32.png")}?v=7`, type: "image/png", sizes: "32x32" },
+      { url: `${asset("/brand/mark-v7-192.png")}?v=7`, type: "image/png", sizes: "192x192" },
     ],
-    apple: [{ url: `${asset("/brand/mark-v6-180.png")}?v=6`, sizes: "180x180", type: "image/png" }],
+    apple: [{ url: `${asset("/brand/mark-v7-180.png")}?v=7`, sizes: "180x180", type: "image/png" }],
     shortcut: [{ url: tabIcon32, type: "image/png" }],
   },
 };
