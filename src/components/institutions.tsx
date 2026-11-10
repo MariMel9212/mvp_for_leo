@@ -291,7 +291,7 @@ export function Institutions() {
       {firstRows.length === 0 ? (
         <p className="mt-8 text-16 text-[#27292d] opacity-60">Нет учреждений по этим условиям</p>
       ) : (
-        <div className="mt-8 grid w-full grid-cols-1 gap-6 min-[640px]:grid-cols-2">
+        <div className="mt-8 grid w-full grid-cols-3 gap-6 max-[1199px]:grid-cols-2 max-[639px]:grid-cols-1">
           {firstRows.map((center, index) => (
             <CenterCard key={`${center.title}-${index}`} center={center} />
           ))}
@@ -299,7 +299,7 @@ export function Institutions() {
       )}
       <CallBanner />
       {rest.length > 0 ? (
-        <div className="mt-[50px] grid w-full grid-cols-1 gap-6 min-[640px]:grid-cols-2">
+        <div className="mt-[50px] grid w-full grid-cols-3 gap-6 max-[1199px]:grid-cols-2 max-[639px]:grid-cols-1">
           {rest.map((center, index) => (
             <CenterCard key={`${center.title}-rest-${index}`} center={center} />
           ))}
