@@ -127,7 +127,7 @@ function AppStoreIcon() {
 
 export function FamilyAppSection() {
   return (
-    <section className="relative mt-16 overflow-hidden bg-[#fdfdfd] px-4 pt-2 pb-10 max-md:mt-12 max-md:pt-0 max-md:pb-5 min-[1440px]:mt-[106px] min-[1440px]:h-[637px] min-[1440px]:px-0 min-[1440px]:pt-0 min-[1440px]:pb-2">
+    <section className="relative mt-12 overflow-hidden bg-[#fdfdfd] px-4 md:max-[1439px]:mt-20 min-[1440px]:mt-[106px] min-[1440px]:h-[637px] min-[1440px]:px-0 min-[1440px]:pb-2">
       <div className="min-[1440px]:absolute min-[1440px]:top-[14px] min-[1440px]:left-[120px] min-[1440px]:w-[496px]">
         <h2 className="text-40 font-medium max-md:text-28 md:max-[1439px]:text-[32px] md:max-[1439px]:leading-[40px]">
           {tie("Помогаем тем, кто рядом")}

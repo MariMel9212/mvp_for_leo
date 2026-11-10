@@ -28,12 +28,12 @@ function ArtWell({ children, className = "" }: { children: ReactNode; className?
 
 export function RecoverySteps() {
   return (
-    <section id="shagi" className="relative mt-16 w-full max-md:mt-8 min-[1440px]:mt-[120px]">
+    <section id="shagi" className="relative mt-12 w-full md:max-[1439px]:mt-20 min-[1440px]:mt-[120px]">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-y-0 left-1/2 w-screen -translate-x-1/2 bg-[#f6f8fa]"
       />
-      <div className="relative mx-auto flex w-full max-w-[1440px] flex-col gap-8 px-[120px] py-8 max-md:gap-[38px] max-md:pt-[33px] max-md:pb-6 max-[1439px]:px-4 min-[1440px]:gap-[52px] min-[1440px]:py-[42px]">
+      <div className="relative mx-auto flex w-full max-w-[1440px] flex-col gap-8 px-[120px] py-8 max-md:gap-[38px] max-md:pt-[33px] max-md:pb-6 max-[1439px]:px-4 min-[1440px]:gap-[52px] min-[1440px]:py-[36px]">
         <h2 className="text-40 font-medium max-md:text-28 md:max-[1439px]:text-[32px] md:max-[1439px]:leading-[40px]">
           <span className="md:hidden">
             {tie("3 шага")}

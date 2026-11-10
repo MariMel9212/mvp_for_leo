@@ -591,7 +591,7 @@ export function ConsultForm() {
   }
 
   return (
-    <section id="zayavka" className="relative mt-16 w-full overflow-hidden rounded-[29px] bg-gradient-to-b from-[rgba(229,246,255,0.45)] to-[rgba(209,239,255,0.45)] px-0 py-0 max-[1439px]:px-5 max-[1439px]:py-8 max-md:mt-12 min-[1440px]:mt-[120px] min-[1440px]:h-[678px]">
+    <section id="zayavka" className="relative mt-12 w-full overflow-hidden rounded-[29px] bg-gradient-to-b from-[rgba(229,246,255,0.45)] to-[rgba(209,239,255,0.45)] px-0 py-0 max-[1439px]:px-5 max-[1439px]:py-8 md:max-[1439px]:mt-20 min-[1440px]:mt-[120px] min-[1440px]:h-[740px]">
       <div className="flex w-full max-w-[604px] flex-col gap-3 text-[#27292d] min-[1440px]:absolute min-[1440px]:top-[52px] min-[1440px]:left-[120px] min-[1440px]:w-[604px] min-[1440px]:gap-[24px]">
         <h2 className="text-40 font-medium max-md:text-28 md:max-[1439px]:text-[32px] md:max-[1439px]:leading-[40px]">
           {tie("Расскажите о своей проблеме, и мы подберем профильное учреждение")}

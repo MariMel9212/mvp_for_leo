@@ -88,7 +88,7 @@ export default function HomePage() {
         ))}
       </section>
 
-      <section id="situacii" className="mt-24 px-[120px] max-[1439px]:px-4 min-[1440px]:mt-[160px]">
+      <section id="situacii" className="mt-12 px-[120px] max-[1439px]:px-4 md:max-[1439px]:mt-20 min-[1440px]:mt-[120px]">
         <div className="mx-auto flex w-full max-w-[1200px] flex-col gap-8 min-[1440px]:gap-[52px]">
           <h2 className="text-40 font-medium max-md:text-28 md:max-[1439px]:text-[32px] md:max-[1439px]:leading-[40px]">{tie("Помощь с учётом вашей ситуации")}</h2>
           <div className="flex flex-col gap-6 min-[1440px]:flex-row min-[1440px]:gap-[24px]">
