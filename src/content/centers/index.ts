@@ -1,14 +1,14 @@
-import { himkiCenter } from "@/content/centers/himki";
 import { klyuchiCenter } from "@/content/centers/klyuchi";
-import { narkologCenter } from "@/content/centers/narkolog";
-import { troitskCenter } from "@/content/centers/troitsk";
+import { obrazMysliCenter } from "@/content/centers/obraz-mysli";
+import { profmedCenter } from "@/content/centers/profmed";
+import { vyhodEstCenter } from "@/content/centers/vyhod-est";
 import type { CenterPageData } from "@/content/centers/types";
 
 export const centers = {
-  troitsk: troitskCenter,
-  himki: himkiCenter,
   klyuchi: klyuchiCenter,
-  narkolog: narkologCenter,
+  "obraz-mysli": obrazMysliCenter,
+  "vyhod-est": vyhodEstCenter,
+  profmed: profmedCenter,
 } satisfies Record<string, CenterPageData>;
 
 export type CenterSlug = keyof typeof centers;

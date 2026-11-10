@@ -1,0 +1,96 @@
+import type { CenterPageData } from "@/content/centers/types";
+
+export const obrazMysliCenter: CenterPageData = {
+  title: "Реабилитационно-образовательный центр «Образ Мысли»",
+  region: "Москва",
+  facts: [
+    { label: "Для кого:", value: "подростки" },
+    { label: "Формат:", value: "с проживанием" },
+    { label: "Программа:", value: "после диагностики" },
+    { label: "Консультация:", value: "бесплатно" },
+  ],
+  about: {
+    lead: "«Образ Мысли» помогает подросткам вернуться к учёбе, отношениям и обычному распорядку. Приём по записи в Москве, на улице Нижней, 14. ",
+    rest: "Обращаются не только из-за веществ. Поводом бывают отказ от школы, агрессия, уходы из дома, изоляция и потеря контакта с родителями. На бесплатной консультации разбирают историю и прямо говорят, подходит ли формат центра. Если подходит, собирают индивидуальный план: цели, занятия, учёба с куратором и критерии, по которым семья видит прогресс. Параллельно работают с родителями: обратная связь, разговоры дома и правила на возвращение. Срок не назначают заранее — его определяют после диагностики. Программа не заменяет экстренную медицинскую помощь.",
+  },
+  amenities: [
+    { icon: "group", label: "Групповые занятия" },
+    { icon: "classroom", label: "Учёба с куратором" },
+    { icon: "territory", label: "Своя территория" },
+    { icon: "rooms", label: "Общие комнаты" },
+    { icon: "living", label: "Гостиная" },
+    { icon: "gym", label: "Спорт и творчество" },
+  ],
+  schedule: [],
+  staff: {
+    kind: "people",
+    summary:
+      "12 специалистов: основатель, руководитель центра, руководитель психологической службы, клинический психолог, педагог\u2011психолог, врач-психиатр, 2 учебных куратора и 4 консультанта по коррекции поведения.",
+    people: [
+      { name: "Руслан Молодцов", role: "Основатель Института психологии", photo: "/centers/troitsk/staff/molodtsov.webp" },
+      { name: "Михаил Анисимов", role: "Руководитель центра", photo: "/centers/troitsk/staff/anisimov.webp" },
+      { name: "Ева Артамонова", role: "Руководитель психологической службы", photo: "/centers/troitsk/staff/artamonova.webp" },
+      { name: "Мария Падурец", role: "Клинический психолог", photo: "/centers/troitsk/staff/padurets.jpg" },
+      { name: "Владимир Земелькин", role: "Педагог\u2011психолог", photo: "/centers/troitsk/staff/zemelkin.webp" },
+      { name: "Аревик Саркисян", role: "Учебный куратор", photo: "/centers/troitsk/staff/sarkisyan.webp" },
+      { name: "Алина Ефремова", role: "Врач-психиатр", photo: "/centers/troitsk/staff/efremova.webp" },
+      { name: "Виктория Медовая", role: "Учебный куратор", photo: "/centers/troitsk/staff/medovaya.webp" },
+      { name: "Илья Куприянов", role: "Консультант по коррекции поведения", photo: "/centers/troitsk/staff/kupriyanov.jpg" },
+      { name: "Данила Куколкин", role: "Консультант по коррекции поведения", photo: "/centers/troitsk/staff/kukolkin.webp" },
+      { name: "Ильдар Зарипов", role: "Консультант по коррекции поведения", photo: "/centers/troitsk/staff/zaripov.webp" },
+      { name: "Денис Поляков", role: "Консультант по коррекции поведения", photo: "/centers/troitsk/staff/polyakov.webp" },
+    ],
+  },
+  features: [
+    "Работа с родителями",
+    "Учёба с куратором",
+    "Индивидуальный план",
+    "Бесплатная консультация",
+    "Без зависимости тоже принимают",
+    "Возвращение в привычную среду",
+  ],
+  gallery: {
+    main: {
+      src: "/centers/troitsk/house.webp",
+      alt: "Дом центра",
+      frameClassName: "absolute top-0 left-[-92px] h-[507px] w-[760px]",
+    },
+    topMiddle: {
+      src: "/centers/troitsk/attic.webp",
+      alt: "Мансарда",
+      frameClassName: "absolute top-0 left-[-52px] h-[249px] w-[444px]",
+    },
+    topRight: {
+      src: "/centers/troitsk/room.webp",
+      alt: "Комната для занятий",
+      frameClassName: "absolute top-0 left-[-9px] h-[247px] w-[330px]",
+    },
+    bottomMiddle: {
+      src: "/centers/troitsk/living.webp",
+      alt: "Гостиная",
+      frameClassName: "absolute top-0 left-[-10px] h-[245px] w-[327px]",
+    },
+    more: {
+      src: "/centers/troitsk/bunk.webp",
+      alt: "Спальня",
+      frameClassName: "absolute inset-0",
+      imageClassName: "absolute top-[-91px] left-0 h-[414px] w-[311px] max-w-none object-cover",
+    },
+    moreLabel: "+ 8 фотографий",
+    photos: [
+      { src: "/centers/troitsk/modal/01.jpg", alt: "Дом центра" },
+      { src: "/centers/troitsk/modal/02.jpg", alt: "Мансарда" },
+      { src: "/centers/troitsk/modal/03.jpg", alt: "Комната для занятий" },
+      { src: "/centers/troitsk/modal/04.jpg", alt: "Гостиная" },
+      { src: "/centers/troitsk/modal/05.jpg", alt: "Спальня с двухъярусными кроватями" },
+      { src: "/centers/troitsk/modal/06.jpg", alt: "Комната с флипчартом" },
+      { src: "/centers/troitsk/modal/07.jpg", alt: "Свободная комната" },
+      { src: "/centers/troitsk/modal/08.jpg", alt: "Территория" },
+      { src: "/centers/troitsk/modal/09.jpg", alt: "Комната с телевизором" },
+      { src: "/centers/troitsk/modal/10.jpg", alt: "Спальня" },
+      { src: "/centers/troitsk/modal/11.jpg", alt: "Общая комната" },
+      { src: "/centers/troitsk/modal/12.jpg", alt: "Зал" },
+      { src: "/centers/troitsk/modal/13.jpg", alt: "Кабинет" },
+    ],
+  },
+};
