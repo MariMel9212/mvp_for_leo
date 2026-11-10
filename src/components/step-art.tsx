@@ -195,7 +195,7 @@ export function SituationSheets() {
 export function FormatRadar() {
   return (
     <>
-      <div data-part="radar" className="absolute top-[270px] left-1/2 h-[258px] w-[258px] -translate-x-1/2 max-[1439px]:top-auto max-[1439px]:origin-bottom max-md:bottom-4 max-md:scale-[0.92] md:max-[1439px]:bottom-[-124px] md:max-[1439px]:scale-[0.92]">
+      <div data-part="radar" className="absolute top-[270px] left-1/2 h-[258px] w-[258px] -translate-x-1/2 max-[1439px]:top-auto max-[1439px]:origin-bottom max-md:bottom-[-124px] max-md:scale-[0.92] md:max-[1439px]:bottom-[-124px] md:max-[1439px]:scale-[0.92]">
         <svg
           width="291.229"
           height="292.315"
