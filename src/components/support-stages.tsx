@@ -38,7 +38,7 @@ const cards = [
 
 export function SupportStages() {
   return (
-    <section className="relative mt-[20px] max-md:mt-12">
+    <section className="relative mt-[20px] max-md:mt-0">
       <div aria-hidden className="pointer-events-none absolute inset-y-0 left-1/2 w-screen -translate-x-1/2 bg-[#f6f8fa]" />
       <div className="relative mx-auto flex w-full max-w-[1440px] flex-col gap-8 px-[120px] py-8 max-[1439px]:px-4 min-[1440px]:gap-[52px] min-[1440px]:py-[42px]">
         <h2 className="text-40 font-medium max-md:text-28 md:max-[1439px]:text-[32px] md:max-[1439px]:leading-[40px]">
