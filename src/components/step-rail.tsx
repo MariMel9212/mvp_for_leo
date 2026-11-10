@@ -51,7 +51,7 @@ export function StepRail({ children }: { children: ReactNode }) {
       >
         {children}
       </div>
-      <div className="mt-2 flex items-center justify-center gap-2 md:mt-8 md:hidden">
+      <div className="mt-6 flex items-center justify-center gap-2 md:hidden">
         {steps.map((label, i) => (
           <button
             key={label}
@@ -59,7 +59,7 @@ export function StepRail({ children }: { children: ReactNode }) {
             aria-label={label}
             aria-current={i === index ? "true" : undefined}
             onClick={() => go(i)}
-            className={`h-1.5 rounded-full bg-[#27292d] transition-[width,opacity] ${i === index ? "w-6 opacity-100" : "w-1.5 opacity-25"}`}
+            className={`h-1.5 rounded-full transition-[width] ${i === index ? "w-6 bg-[#e1f300]" : "w-1.5 bg-[#8aa8e6]"}`}
           />
         ))}
       </div>
