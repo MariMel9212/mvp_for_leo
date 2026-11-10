@@ -21,6 +21,13 @@ export const metadata: Metadata = {
   title: "Leo — проверенные реабилитационные центры",
   description:
     "Подбор проверенных реабилитационных центров для лечения и восстановления при зависимостях.",
+  icons: {
+    icon: [
+      { url: "/tab-icon.png", type: "image/png", sizes: "32x32" },
+      { url: "/tab-icon-192.png", type: "image/png", sizes: "192x192" },
+    ],
+    apple: [{ url: "/apple-icon.png", sizes: "180x180", type: "image/png" }],
+  },
 };
 
 export const viewport: Viewport = {
