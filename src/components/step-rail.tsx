@@ -47,7 +47,7 @@ export function StepRail({ children }: { children: ReactNode }) {
     <div>
       <div
         ref={scroller}
-        className="step-rail relative w-full max-md:flex max-md:snap-x max-md:snap-mandatory max-md:scroll-pl-4 max-md:items-stretch max-md:gap-3 max-md:overflow-x-auto max-md:pt-8 max-md:pb-4 max-md:pr-12 max-md:pl-4 max-md:-mx-4 max-md:w-[calc(100%+2rem)] md:max-[1439px]:grid md:max-[1439px]:w-full md:max-[1439px]:grid-cols-1 md:max-[1439px]:gap-6 md:max-[1439px]:p-0 min-[1440px]:flex min-[1440px]:h-[486px] min-[1440px]:flex-row min-[1440px]:items-end min-[1440px]:gap-[24px] min-[1440px]:p-0"
+        className="step-rail relative w-full max-md:flex max-md:snap-x max-md:snap-mandatory max-md:scroll-pl-4 max-md:items-stretch max-md:gap-3 max-md:overflow-x-auto max-md:pb-4 max-md:pr-12 max-md:pl-4 max-md:-mx-4 max-md:w-[calc(100%+2rem)] md:max-[1439px]:grid md:max-[1439px]:w-full md:max-[1439px]:grid-cols-1 md:max-[1439px]:gap-6 md:max-[1439px]:p-0 min-[1440px]:flex min-[1440px]:h-[486px] min-[1440px]:flex-row min-[1440px]:items-end min-[1440px]:gap-[24px] min-[1440px]:p-0"
       >
         {children}
       </div>

@@ -35,10 +35,10 @@ export function RecoverySteps() {
     <section id="shagi" className="relative mt-16 w-full max-md:mt-8 min-[1440px]:mt-[120px]">
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-y-0 left-1/2 w-screen -translate-x-1/2 bg-[#d2def3] min-[1440px]:bg-[#fdfdfd] min-[1440px]:[background-image:linear-gradient(180deg,rgba(210,222,243,0.25)_0%,rgba(222,234,255,0.25)_100%)]"
+        className="pointer-events-none absolute inset-y-0 left-1/2 w-screen -translate-x-1/2 bg-[#f6f8fa]"
       />
-      <div className="relative mx-auto flex w-full max-w-[1440px] flex-col gap-8 px-[120px] pt-8 pb-8 max-md:gap-0 max-md:pt-0 max-md:pb-4 max-[1439px]:px-4 min-[1440px]:gap-[52px] min-[1440px]:py-[34px]">
-        <h2 className="text-40 font-medium max-md:w-[calc(100vw-56px)] max-md:text-28 md:max-[1439px]:text-[32px] md:max-[1439px]:leading-[40px]">
+      <div className="relative mx-auto flex w-full max-w-[1440px] flex-col gap-8 px-[120px] py-8 max-[1439px]:px-4 min-[1440px]:gap-[52px] min-[1440px]:py-[42px]">
+        <h2 className="text-40 font-medium max-md:text-28 md:max-[1439px]:text-[32px] md:max-[1439px]:leading-[40px]">
           <span className="md:hidden">
             {tie("3 шага до")}
             <br />
