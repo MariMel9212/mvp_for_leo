@@ -24,12 +24,10 @@ export const metadata: Metadata = {
     "Подбор проверенных реабилитационных центров для лечения и восстановления при зависимостях.",
   icons: {
     icon: [
-      { url: `${asset("/favicon.ico")}?v=5`, type: "image/x-icon" },
-      { url: `${asset("/tab-icon.png")}?v=5`, type: "image/png", sizes: "32x32" },
-      { url: `${asset("/tab-icon-192.png")}?v=5`, type: "image/png", sizes: "192x192" },
+      { url: asset("/brand/leo-tab.png"), type: "image/png", sizes: "32x32" },
+      { url: asset("/brand/leo-tab-192.png"), type: "image/png", sizes: "192x192" },
     ],
-    apple: [{ url: `${asset("/apple-icon.png")}?v=5`, sizes: "180x180", type: "image/png" }],
-    shortcut: `${asset("/favicon.ico")}?v=5`,
+    apple: [{ url: asset("/brand/leo-apple.png"), sizes: "180x180", type: "image/png" }],
   },
 };
 
