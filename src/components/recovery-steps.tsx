@@ -6,7 +6,7 @@ import { tie } from "@/lib/tie";
 const format = tie("Детокс, стационарная реабилитация или последовательное прохождение нескольких этапов");
 
 const cardClass =
-  "relative w-full shrink-0 snap-start overflow-hidden rounded-[26px] bg-[#e4eefc] shadow-[0_8px_20px_rgba(36,74,127,0.08)] max-md:w-[calc(100vw-72px)] md:shrink md:snap-none min-[1440px]:w-[383px]";
+  "relative w-full shrink-0 snap-start overflow-hidden rounded-[26px] bg-[#e4eefc] shadow-[0_8px_16px_-10px_rgba(36,74,127,0.22)] max-md:w-[calc(100vw-72px)] md:shrink md:snap-none min-[1440px]:w-[383px]";
 
 function StepCopy({ title, text }: { title: string; text: string }) {
   return (
