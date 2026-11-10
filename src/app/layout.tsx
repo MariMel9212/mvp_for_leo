@@ -24,12 +24,12 @@ export const metadata: Metadata = {
     "Подбор проверенных реабилитационных центров для лечения и восстановления при зависимостях.",
   icons: {
     icon: [
-      { url: asset("/favicon.ico"), type: "image/x-icon" },
-      { url: asset("/tab-icon.png"), type: "image/png", sizes: "32x32" },
-      { url: asset("/tab-icon-192.png"), type: "image/png", sizes: "192x192" },
+      { url: `${asset("/favicon.ico")}?v=4`, type: "image/x-icon" },
+      { url: `${asset("/tab-icon.png")}?v=4`, type: "image/png", sizes: "32x32" },
+      { url: `${asset("/tab-icon-192.png")}?v=4`, type: "image/png", sizes: "192x192" },
     ],
-    apple: [{ url: asset("/apple-icon.png"), sizes: "180x180", type: "image/png" }],
-    shortcut: asset("/favicon.ico"),
+    apple: [{ url: `${asset("/apple-icon.png")}?v=4`, sizes: "180x180", type: "image/png" }],
+    shortcut: `${asset("/favicon.ico")}?v=4`,
   },
 };
 
