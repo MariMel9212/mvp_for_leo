@@ -195,7 +195,7 @@ export function SituationSheets() {
 export function FormatRadar() {
   return (
     <>
-      <div data-part="radar" className="absolute top-[270px] left-1/2 h-[258px] w-[258px] -translate-x-1/2 max-[1439px]:top-auto max-[1439px]:origin-bottom max-md:bottom-4 max-md:scale-[0.82] md:max-[1439px]:bottom-[-124px] md:max-[1439px]:scale-[0.92]">
+      <div data-part="radar" className="absolute top-[270px] left-1/2 h-[258px] w-[258px] -translate-x-1/2 max-[1439px]:top-auto max-[1439px]:origin-bottom max-md:bottom-4 max-md:scale-[0.92] md:max-[1439px]:bottom-[-124px] md:max-[1439px]:scale-[0.92]">
         <svg
           width="291.229"
           height="292.315"
@@ -401,7 +401,7 @@ export function CoverageScan() {
     <div
       data-part="coverage"
       aria-hidden
-      className="absolute top-[197px] left-0 h-[305px] w-[383px] overflow-hidden rounded-[45px] max-md:top-4 max-md:left-1/2 max-md:origin-top max-md:-translate-x-1/2 max-md:scale-[0.64] md:max-[1439px]:top-[calc(16px-23.27px*0.92*100cqw/383px)] md:max-[1439px]:bottom-auto md:max-[1439px]:left-[calc((100%-0.92*100cqw)/2)] md:max-[1439px]:origin-top-left md:max-[1439px]:translate-x-0 md:max-[1439px]:scale-100 md:max-[1439px]:[transform:scale(calc(0.92*100cqw/383px))] max-md:[mask-image:linear-gradient(90deg,transparent,#000_14%,#000_86%,transparent)]"
+      className="absolute top-[197px] left-0 h-[305px] w-[383px] overflow-hidden rounded-[45px] max-md:top-auto max-md:bottom-[-24px] max-md:left-1/2 max-md:origin-bottom max-md:-translate-x-1/2 max-md:scale-[0.86] md:max-[1439px]:top-[calc(16px-23.27px*0.92*100cqw/383px)] md:max-[1439px]:bottom-auto md:max-[1439px]:left-[calc((100%-0.92*100cqw)/2)] md:max-[1439px]:origin-top-left md:max-[1439px]:translate-x-0 md:max-[1439px]:scale-100 md:max-[1439px]:[transform:scale(calc(0.92*100cqw/383px))] max-md:[mask-image:linear-gradient(90deg,transparent,#000_4%,#000_96%,transparent)]"
     >
       <style>{`.scan-grain{background-image:${hiddenGrain.image};background-repeat:repeat-x;background-size:${hiddenGrain.width}px 35.1px}`}</style>
       <div className="scan-source">
