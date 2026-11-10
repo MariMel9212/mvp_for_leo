@@ -4,9 +4,9 @@ import { CenterPage } from "@/components/center-page";
 import { klyuchiCenter } from "@/content/centers/klyuchi";
 
 export const metadata: Metadata = {
-  title: "Реабилитационный центр «Ключи» — Leo",
+  title: "Реабилитационный центр в Подмосковье — Leo",
   description:
-    "Загородный центр «Ключи» в Подмосковье. Алкогольная, наркотическая и игровая зависимость, авторская программа, от 120 000 ₽ в месяц.",
+    "Загородный реабилитационный центр в Подмосковье. Алкогольная, наркотическая и игровая зависимость, авторская программа, от 120 000 ₽ в месяц.",
 };
 
 export default function KlyuchiCenterPage() {

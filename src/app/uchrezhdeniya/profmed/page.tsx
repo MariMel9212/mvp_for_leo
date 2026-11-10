@@ -4,9 +4,9 @@ import { CenterPage } from "@/components/center-page";
 import { profmedCenter } from "@/content/centers/profmed";
 
 export const metadata: Metadata = {
-  title: "Клиника «Профмед» в Химках — Leo",
+  title: "Клиника в Химках — Leo",
   description:
-    "Детоксикация в клинике «Профмед», Химки: вывод из запоя и снятие ломки, стационар и выезд врача примерно за 30 минут. От 5 500 ₽.",
+    "Детоксикация в клинике в Химках: вывод из запоя и снятие ломки, стационар и выезд врача примерно за 30 минут. От 5 500 ₽.",
 };
 
 export default function ProfmedPage() {

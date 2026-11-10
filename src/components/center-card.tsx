@@ -22,7 +22,7 @@ export type CatalogCenter = {
 
 export const catalogCenters: CatalogCenter[] = [
   {
-    title: "Реабилитационный центр «Ключи»",
+    title: "Реабилитационный центр",
     course: "Авторская методика",
     price: "от 120 000 ₽ / мес",
     place: "Подмосковье",
@@ -39,7 +39,7 @@ export const catalogCenters: CatalogCenter[] = [
     href: "/uchrezhdeniya/klyuchi",
   },
   {
-    title: "Реабилитационно-образовательный центр «Образ Мысли»",
+    title: "Реабилитационно-образовательный центр",
     course: "Индивидуальная программа",
     place: "Москва",
     slides: [
@@ -52,12 +52,11 @@ export const catalogCenters: CatalogCenter[] = [
     dependencies: [],
     teen: true,
     aftercare: true,
-    titleLines: ["Реабилитационно-образовательный", "центр «Образ Мысли»"],
     badge: { label: "Подходит для подростков", className: "w-[188px] bg-[#e1f300]" },
     href: "/uchrezhdeniya/obraz-mysli",
   },
   {
-    title: "Реабилитационный центр «Выход Есть»",
+    title: "Реабилитационный центр",
     course: "Детоксикация и реабилитация",
     place: "Чехов",
     slides: [
@@ -73,7 +72,7 @@ export const catalogCenters: CatalogCenter[] = [
     href: "/uchrezhdeniya/vyhod-est",
   },
   {
-    title: "Клиника «Профмед»",
+    title: "Клиника",
     course: "Детоксикация и вывод из запоя",
     price: "от 5 500 ₽",
     place: "Химки",

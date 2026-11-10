@@ -4,9 +4,9 @@ import { CenterPage } from "@/components/center-page";
 import { obrazMysliCenter } from "@/content/centers/obraz-mysli";
 
 export const metadata: Metadata = {
-  title: "Центр «Образ Мысли» — Leo",
+  title: "Реабилитационно-образовательный центр — Leo",
   description:
-    "Реабилитационно-образовательный центр «Образ Мысли» для подростков. Индивидуальная программа, учёба с куратором, работа с родителями. Консультация бесплатная.",
+    "Реабилитационно-образовательный центр для подростков. Индивидуальная программа, учёба с куратором, работа с родителями. Консультация бесплатная.",
 };
 
 export default function ObrazMysliPage() {
