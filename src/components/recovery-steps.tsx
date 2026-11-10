@@ -32,7 +32,7 @@ function ArtWell({ children, className = "" }: { children: ReactNode; className?
 
 export function RecoverySteps() {
   return (
-    <section id="shagi" className="relative mt-16 w-full max-md:mt-12 min-[1440px]:mt-[120px]">
+    <section id="shagi" className="relative mt-16 w-full max-md:mt-8 min-[1440px]:mt-[120px]">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-y-0 left-1/2 w-screen -translate-x-1/2"
@@ -41,8 +41,15 @@ export function RecoverySteps() {
           backgroundImage: "linear-gradient(180deg, rgba(210,222,243,0.25) 0%, rgba(222,234,255,0.25) 100%)",
         }}
       />
-      <div className="relative mx-auto flex w-full max-w-[1440px] flex-col gap-8 px-[120px] pt-8 pb-8 max-md:gap-2 max-md:pb-4 max-[1439px]:px-4 min-[1440px]:gap-[52px] min-[1440px]:py-[34px]">
-        <h2 className="text-40 font-medium max-md:text-28 md:max-[1439px]:text-[32px] md:max-[1439px]:leading-[40px]">{tie("3 шага до выздоровления")}</h2>
+      <div className="relative mx-auto flex w-full max-w-[1440px] flex-col gap-8 px-[120px] pt-8 pb-8 max-md:gap-0 max-md:pt-0 max-md:pb-4 max-[1439px]:px-4 min-[1440px]:gap-[52px] min-[1440px]:py-[34px]">
+        <h2 className="text-40 font-medium max-md:w-[calc(100vw-56px)] max-md:text-28 md:max-[1439px]:text-[32px] md:max-[1439px]:leading-[40px]">
+          <span className="md:hidden">
+            {tie("3 шага до")}
+            <br />
+            {tie("выздоровления")}
+          </span>
+          <span className="hidden md:inline">{tie("3 шага до выздоровления")}</span>
+        </h2>
         <StepRail>
           <article className={`situation-card @container ${cardClass} max-[1439px]:flex max-[1439px]:flex-col md:max-[1439px]:h-full min-[1440px]:h-[318px]`} style={cardStyle}>
             <StepCopy
