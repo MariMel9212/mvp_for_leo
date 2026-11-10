@@ -172,7 +172,7 @@ function DocumentSheet() {
 
 export function SituationSheets() {
   return (
-    <div data-part="sheets" className="situation-sheets absolute top-[203px] left-[94px] h-[133px] w-[195px] max-[1439px]:top-auto max-[1439px]:left-1/2 max-md:-bottom-10 md:max-[1439px]:bottom-[-36px]">
+    <div data-part="sheets" className="situation-sheets absolute top-[203px] left-[94px] h-[133px] w-[195px] max-[1439px]:top-auto max-[1439px]:left-1/2 max-md:-bottom-3 md:max-[1439px]:bottom-[-36px]">
       <div data-part="table" className="situation-sheet absolute" style={{ left: 105.93, top: 1.8 }}>
         <div className="situation-sheet-motion">
           <TableSheet />
@@ -195,7 +195,7 @@ export function SituationSheets() {
 export function FormatRadar() {
   return (
     <>
-      <div data-part="radar" className="absolute top-[270px] left-1/2 h-[258px] w-[258px] -translate-x-1/2 max-[1439px]:top-auto max-[1439px]:origin-bottom max-md:bottom-[-124px] max-md:scale-[1.34] md:max-[1439px]:bottom-[-124px] md:max-[1439px]:scale-[0.92]">
+      <div data-part="radar" className="absolute top-[270px] left-1/2 h-[258px] w-[258px] -translate-x-1/2 max-[1439px]:top-auto max-[1439px]:origin-bottom max-md:bottom-[-40px] max-md:scale-[0.97] md:max-[1439px]:bottom-[-124px] md:max-[1439px]:scale-[0.92]">
         <svg
           width="291.229"
           height="292.315"
