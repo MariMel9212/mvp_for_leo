@@ -20,7 +20,7 @@ function StepCopy({ title, text }: { title: string; text: string }) {
 
 function ArtWell({ children, className = "" }: { children: ReactNode; className?: string }) {
   return (
-    <div className={`relative mt-2 h-[176px] overflow-hidden max-md:absolute max-md:inset-x-0 max-md:top-[148px] max-md:bottom-0 max-md:z-0 max-md:mt-0 max-md:h-auto max-md:bg-[#e4eefc] min-[1440px]:absolute min-[1440px]:inset-0 min-[1440px]:mt-0 min-[1440px]:h-auto min-[1440px]:overflow-visible${className ? ` ${className}` : ""}`}>
+    <div className={`relative mt-2 h-[176px] overflow-hidden max-md:absolute max-md:inset-x-0 max-md:top-[148px] max-md:bottom-0 max-md:z-0 max-md:mt-0 max-md:h-auto max-md:rounded-t-[40px] max-md:bg-[rgba(228,238,252,0.55)] min-[1440px]:absolute min-[1440px]:inset-0 min-[1440px]:mt-0 min-[1440px]:h-auto min-[1440px]:overflow-visible${className ? ` ${className}` : ""}`}>
       {children}
     </div>
   );

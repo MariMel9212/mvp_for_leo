@@ -291,6 +291,25 @@
   animation-play-state: paused;
 }
 
+/* Mobile rest pose matches frame 993:1658. Desktop keeps the inline delays. */
+@media (max-width: 767px) {
+  .criterion-track[data-row="0"] {
+    animation-delay: -6.16s !important;
+  }
+
+  .criterion-track[data-row="1"] {
+    animation-delay: -21.34s !important;
+  }
+
+  .criterion-track[data-row="2"] {
+    animation-delay: -19.29s !important;
+  }
+
+  .criterion-track[data-row="3"] {
+    animation-delay: -34.4s !important;
+  }
+}
+
 .scan-source,
 .scan-reveal {
   position: absolute;

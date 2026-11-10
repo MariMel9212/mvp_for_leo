@@ -364,12 +364,14 @@ function CriterionPill({ label, clear, grain }: { label: string; clear: boolean;
 }
 
 function CriterionRow({
+  row,
   top,
   delay,
   grain,
   items,
   clear,
 }: {
+  row: number;
   top: number;
   delay: string;
   grain: number;
@@ -378,7 +380,7 @@ function CriterionRow({
 }) {
   return (
     <div className="absolute right-0 left-0 overflow-hidden" style={{ top, height: pillHeight }}>
-      <div className="criterion-track" style={{ animationDelay: delay }}>
+      <div className="criterion-track" data-row={row} style={{ animationDelay: delay }}>
         {[0, 1].map((copy) => (
           <div key={copy} className="flex" style={{ gap: pillGap, paddingRight: pillGap }}>
             {items.map((label) => (
@@ -405,13 +407,13 @@ export function CoverageScan() {
     >
       <style>{`.scan-grain{background-image:${hiddenGrain.image};background-repeat:repeat-x;background-size:${hiddenGrain.width}px 35.1px}`}</style>
       <div className="scan-source">
-        {rows.map((row) => (
-          <CriterionRow key={row.top} top={row.top} delay={row.delay} grain={row.grain} items={row.items} clear={false} />
+        {rows.map((row, index) => (
+          <CriterionRow key={row.top} row={index} top={row.top} delay={row.delay} grain={row.grain} items={row.items} clear={false} />
         ))}
       </div>
       <div className="scan-reveal">
-        {rows.map((row) => (
-          <CriterionRow key={row.top} top={row.top} delay={row.delay} grain={row.grain} items={row.items} clear />
+        {rows.map((row, index) => (
+          <CriterionRow key={row.top} row={index} top={row.top} delay={row.delay} grain={row.grain} items={row.items} clear />
         ))}
       </div>
       <div
