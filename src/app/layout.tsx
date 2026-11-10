@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Google_Sans, Inter } from "next/font/google";
 import Script from "next/script";
+import { asset } from "@/lib/base-path";
 import "./globals.css";
 
 const googleSans = Google_Sans({
@@ -23,10 +24,12 @@ export const metadata: Metadata = {
     "Подбор проверенных реабилитационных центров для лечения и восстановления при зависимостях.",
   icons: {
     icon: [
-      { url: "/tab-icon.png", type: "image/png", sizes: "32x32" },
-      { url: "/tab-icon-192.png", type: "image/png", sizes: "192x192" },
+      { url: asset("/favicon.ico"), type: "image/x-icon" },
+      { url: asset("/tab-icon.png"), type: "image/png", sizes: "32x32" },
+      { url: asset("/tab-icon-192.png"), type: "image/png", sizes: "192x192" },
     ],
-    apple: [{ url: "/apple-icon.png", sizes: "180x180", type: "image/png" }],
+    apple: [{ url: asset("/apple-icon.png"), sizes: "180x180", type: "image/png" }],
+    shortcut: asset("/favicon.ico"),
   },
 };
 
