@@ -6,7 +6,7 @@ import { tie } from "@/lib/tie";
 const format = tie("Детокс, стационарная реабилитация или последовательное прохождение нескольких этапов");
 
 const cardClass =
-  "relative w-full shrink-0 snap-start overflow-hidden rounded-[26px] bg-[#f2f8fe] shadow-[0_6px_16px_rgba(36,74,127,0.05)] max-md:w-[calc(100vw-56px)] md:shrink md:snap-none min-[1440px]:w-[383px]";
+  "relative w-full shrink-0 snap-start overflow-hidden rounded-[26px] bg-white shadow-[0_6px_16px_rgba(36,74,127,0.05)] max-md:w-[calc(100vw-56px)] md:shrink md:snap-none min-[1440px]:w-[383px] min-[1440px]:bg-[#f2f8fe]";
 
 const cardStyle = {
   backgroundImage:
@@ -35,11 +35,7 @@ export function RecoverySteps() {
     <section id="shagi" className="relative mt-16 w-full max-md:mt-8 min-[1440px]:mt-[120px]">
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-y-0 left-1/2 w-screen -translate-x-1/2"
-        style={{
-          backgroundColor: "#fdfdfd",
-          backgroundImage: "linear-gradient(180deg, rgba(210,222,243,0.25) 0%, rgba(222,234,255,0.25) 100%)",
-        }}
+        className="pointer-events-none absolute inset-y-0 left-1/2 w-screen -translate-x-1/2 bg-[#d2def3] min-[1440px]:bg-[#fdfdfd] min-[1440px]:[background-image:linear-gradient(180deg,rgba(210,222,243,0.25)_0%,rgba(222,234,255,0.25)_100%)]"
       />
       <div className="relative mx-auto flex w-full max-w-[1440px] flex-col gap-8 px-[120px] pt-8 pb-8 max-md:gap-0 max-md:pt-0 max-md:pb-4 max-[1439px]:px-4 min-[1440px]:gap-[52px] min-[1440px]:py-[34px]">
         <h2 className="text-40 font-medium max-md:w-[calc(100vw-56px)] max-md:text-28 md:max-[1439px]:text-[32px] md:max-[1439px]:leading-[40px]">
