@@ -22,8 +22,40 @@ export const profmedCenter: CenterPageData = {
   ],
   schedule: [],
   staff: {
-    kind: "counts",
-    counts: [{ count: "20+", role: "Врачей: наркологи, психиатры, психологи, реаниматологи" }],
+    kind: "people",
+    summary: "Наркологи, психиатры, психологи и аддиктологи.",
+    people: [
+      {
+        name: "Невматулина Румия Захарьяновна",
+        role: "Главный врач, психиатр-нарколог, психотерапевт",
+        photo: "/centers/profmed/staff/nevmatulina.webp",
+      },
+      {
+        name: "Рацко Алексей Андреевич",
+        role: "Заместитель президента клиники, клинический психолог, аддиктолог",
+        photo: "/centers/profmed/staff/ratsko.webp",
+      },
+      {
+        name: "Назаров Иван Дмитриевич",
+        role: "Аддиктолог, консультант по химической зависимости",
+        photo: "/centers/profmed/staff/nazarov.webp",
+      },
+      {
+        name: "Крылова Анна Владимировна",
+        role: "Реаниматолог, нарколог, анестезиолог, токсиколог, трансфузиолог",
+        photo: "/centers/profmed/staff/krylova.webp",
+      },
+      {
+        name: "Бондарева Рита Сергеевна",
+        role: "Заместитель главного врача",
+        photo: "/centers/profmed/staff/bondareva.webp",
+      },
+      {
+        name: "Корхов Марк Сергеевич",
+        role: "Руководитель реабилитационного центра, клинический психолог",
+        photo: "/centers/profmed/staff/korkhov.webp",
+      },
+    ],
   },
   features: [
     "Анонимно, без учёта",
