@@ -158,7 +158,7 @@ function CheckFilter({
 
 function CallBanner({ compact = false }: { compact?: boolean }) {
   const linkClass = compact
-    ? "relative h-[96px] w-full overflow-hidden rounded-[16px] border border-[rgba(0,0,0,0.04)] bg-[rgba(255,255,255,0.8)] [&>div]:bottom-[-4px] [&>div]:origin-bottom-right [&>div]:scale-[0.4]"
+    ? "relative h-[96px] w-full overflow-hidden rounded-[16px] border border-[rgba(0,0,0,0.04)] bg-[rgba(255,255,255,0.8)] [&>div]:right-[52px] [&>div]:bottom-[-4px] [&>div]:origin-bottom-right [&>div]:scale-[0.4]"
     : "relative h-[136px] w-full overflow-hidden rounded-[20px] border border-[rgba(0,0,0,0.04)] bg-[rgba(255,255,255,0.8)] md:h-[213px] min-[1440px]:w-[588px]";
 
   return (
