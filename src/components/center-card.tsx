@@ -23,6 +23,22 @@ export type CatalogCenter = {
 export const catalogCenters: CatalogCenter[] = [
   {
     title: "Реабилитационный центр",
+    course: "Детоксикация и реабилитация",
+    place: "Чехов",
+    slides: [
+      { src: "/centers/narkolog/sauna.webp", className: "cover" },
+      { src: "/centers/narkolog/house.webp", className: "cover" },
+      { src: "/centers/narkolog/room.webp", className: "cover" },
+      { src: "/centers/narkolog/group.webp", className: "cover" },
+    ],
+    kind: "rehab",
+    dependencies: ["alco", "narco"],
+    teen: false,
+    aftercare: true,
+    href: "/uchrezhdeniya/vyhod-est",
+  },
+  {
+    title: "Реабилитационный центр",
     course: "Авторская методика",
     price: "от 120 000 ₽ / мес",
     place: "Подмосковье",
@@ -54,22 +70,6 @@ export const catalogCenters: CatalogCenter[] = [
     aftercare: true,
     badge: { label: "Подходит для подростков", className: "w-[188px] bg-[#e1f300]" },
     href: "/uchrezhdeniya/obraz-mysli",
-  },
-  {
-    title: "Реабилитационный центр",
-    course: "Детоксикация и реабилитация",
-    place: "Чехов",
-    slides: [
-      { src: "/centers/narkolog/house.webp", className: "cover" },
-      { src: "/centers/narkolog/room.webp", className: "cover" },
-      { src: "/centers/narkolog/dining.webp", className: "cover" },
-      { src: "/centers/narkolog/group.webp", className: "cover" },
-    ],
-    kind: "rehab",
-    dependencies: ["alco", "narco"],
-    teen: false,
-    aftercare: true,
-    href: "/uchrezhdeniya/vyhod-est",
   },
   {
     title: "Клиника",
