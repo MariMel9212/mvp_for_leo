@@ -79,7 +79,7 @@ export const catalogCenters: CatalogCenter[] = [
     titleLines: ["Детокс клиника", "в Химках"],
     course: "Сутки от 15 000 ₽",
     price: "от 15 000 ₽ / сутки",
-    place: "Химки",
+    place: "Московская область",
     slides: [
       { src: "/centers/profmed/ward.webp", className: "cover" },
       { src: "/centers/profmed/consult.webp", className: "cover" },
