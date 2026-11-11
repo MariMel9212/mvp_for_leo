@@ -17,6 +17,7 @@ export type CenterPhoto = {
 export type CenterAmenity = {
   icon: AmenityIconName;
   label: string;
+  preview?: boolean;
 };
 
 export type CenterScheduleItem = {

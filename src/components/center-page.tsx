@@ -19,8 +19,8 @@ export function CenterPage({ center }: { center: CenterPageData }) {
   const [galleryOpen, setGalleryOpen] = useState(false);
   const [amenitiesOpen, setAmenitiesOpen] = useState(false);
   const [staffOpen, setStaffOpen] = useState(false);
-  const previewAmenities = center.amenities.slice(0, previewAmenityCount);
-  const hasMoreAmenities = center.amenities.length > previewAmenityCount;
+  const previewAmenities = center.amenities.filter((item) => item.preview !== false).slice(0, previewAmenityCount);
+  const hasMoreAmenities = previewAmenities.length < center.amenities.length;
 
   useEffect(() => {
     if (!galleryOpen && !amenitiesOpen) return;
