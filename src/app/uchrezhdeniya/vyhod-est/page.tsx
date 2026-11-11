@@ -6,7 +6,7 @@ import { vyhodEstCenter } from "@/content/centers/vyhod-est";
 export const metadata: Metadata = {
   title: "Реабилитационный центр в Чехове — Leo",
   description:
-    "Реабилитационный центр в Чехове: детоксикация и реабилитация при алкогольной и наркотической зависимости, круглосуточно.",
+    "Реабилитационный центр в Чехове: программа 12 шагов, проживание, постлечебная поддержка. От 65 000 ₽.",
 };
 
 export default function VyhodEstPage() {

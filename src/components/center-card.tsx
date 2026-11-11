@@ -24,7 +24,7 @@ export const catalogCenters: CatalogCenter[] = [
   {
     title: "Реабилитационный центр в Чехове",
     titleLines: ["Реабилитационный центр", "в Чехове"],
-    course: "Детоксикация и реабилитация",
+    course: "Программа 12 шагов",
     place: "Московская область",
     slides: [
       { src: "/centers/narkolog/house.webp", className: "cover" },
@@ -33,7 +33,7 @@ export const catalogCenters: CatalogCenter[] = [
       { src: "/centers/narkolog/group.webp", className: "cover" },
     ],
     kind: "rehab",
-    dependencies: ["alco", "narco"],
+    dependencies: ["alco", "narco", "game"],
     teen: false,
     aftercare: true,
     href: "/uchrezhdeniya/vyhod-est",
