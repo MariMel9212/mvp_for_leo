@@ -24,7 +24,7 @@ export const catalogCenters: CatalogCenter[] = [
   {
     title: "Реабилитационный центр в Чехове",
     titleLines: ["Реабилитационный центр", "в Чехове"],
-    course: "Программа 12 шагов",
+    course: "Курс от 2 до 6 недель",
     place: "Московская область",
     slides: [
       { src: "/centers/narkolog/house.webp", className: "cover" },
@@ -41,7 +41,7 @@ export const catalogCenters: CatalogCenter[] = [
   {
     title: "Образовательный центр в Троицке",
     titleLines: ["Образовательный центр", "в Троицке"],
-    course: "Программа «Пифагора»",
+    course: "Курс от 1 месяца",
     place: "Троицк",
     slides: [
       { src: "/centers/troitsk/house.webp", className: "cover" },
@@ -59,7 +59,7 @@ export const catalogCenters: CatalogCenter[] = [
   {
     title: "Реабилитационный центр в Москве",
     titleLines: ["Реабилитационный центр", "в Москве"],
-    course: "Авторская программа",
+    course: "Курс от 3 до 9 месяцев",
     price: "от 120 000 ₽ / мес",
     place: "Новая Москва",
     slides: [
@@ -77,7 +77,7 @@ export const catalogCenters: CatalogCenter[] = [
   {
     title: "Детокс клиника в Химках",
     titleLines: ["Детокс клиника", "в Химках"],
-    course: "Снятие запоя и ломки",
+    course: "Курс от 3 до 5 дней",
     price: "от 15 000 ₽ / сутки",
     place: "Московская область",
     slides: [
