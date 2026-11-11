@@ -20,7 +20,7 @@ export const vyhodEstCenter: CenterPageData = {
     { icon: "gym", label: "Тренажёрный зал" },
     { icon: "bath", label: "Баня" },
     { icon: "group", label: "Группы" },
-    { icon: "rooms", label: "Комнаты" },
+    { icon: "rooms", label: "Общие комнаты" },
     { icon: "dining", label: "Столовая" },
   ],
   schedule: [
