@@ -92,14 +92,13 @@ export const catalogCenters: CatalogCenter[] = [
 ];
 
 export function CenterCard({ center }: { center: CatalogCenter }) {
-  const className =
-    "relative flex h-full w-full flex-col overflow-hidden rounded-[14px] drop-shadow-[0_0_5px_rgba(91,90,90,0.08)]";
+  const className = "relative block w-full drop-shadow-[0_0_5px_rgba(91,90,90,0.08)]";
   const card = (
-    <>
-      <div className="h-[400px] shrink-0 overflow-hidden rounded-t-[14px] bg-white">
+    <div className="flex w-full min-h-min flex-col overflow-hidden rounded-[14px]">
+      <div className="relative h-[400px] shrink-0 overflow-hidden rounded-t-[14px] bg-white">
         <CenterPhoto slides={center.slides} frameClassName="h-[396px]" />
       </div>
-      <div className="relative z-20 -mt-[28px] flex flex-1 flex-col">
+      <div className="relative z-20 -mt-[28px] flex shrink-0 grow flex-col">
         <div className="relative h-[28px] w-full">
           {center.badge ? (
             <span
@@ -109,7 +108,7 @@ export function CenterCard({ center }: { center: CatalogCenter }) {
             </span>
           ) : null}
         </div>
-        <div className="flex min-h-[166px] flex-1 flex-col gap-[8px] rounded-b-[14px] bg-white px-[12px] pt-[8px] pb-[14px]">
+        <div className="flex min-h-[166px] shrink-0 grow flex-col gap-[8px] rounded-b-[14px] bg-white px-[12px] pt-[8px] pb-[14px]">
           <h2 className={`${center.titleLines ? "w-full" : "w-full max-w-[283px]"} text-[22px] leading-[28px] font-medium text-[#0a0d14]`}>
             {center.titleLines ? (
               <>
@@ -127,7 +126,7 @@ export function CenterCard({ center }: { center: CatalogCenter }) {
           {center.price ? <p className="text-16 text-black">{center.price}</p> : null}
         </div>
       </div>
-    </>
+    </div>
   );
 
   if (!center.href) return <article className={className}>{card}</article>;

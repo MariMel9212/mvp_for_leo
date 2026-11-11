@@ -47,15 +47,15 @@ export function CenterPhoto({
     >
       {cover ? (
         slides.map((slide, slideIndex) => (
-          <picture key={slide.src} className="contents">
+          <picture key={slide.src} className="absolute inset-0">
             <source media="(min-width: 1100px)" srcSet={asset(slide.src)} />
             <img
               alt=""
               src={asset(mobilePhoto(slide.src))}
               decoding="async"
               fetchPriority={slideIndex === 0 ? "high" : "low"}
-              className={`absolute inset-0 h-full w-full object-cover object-center transition-opacity duration-500 ease-out ${
-                slideIndex === index ? "z-10 opacity-100" : "opacity-0"
+              className={`h-full w-full object-cover object-center transition-opacity duration-500 ease-out ${
+                slideIndex === index ? "relative z-10 opacity-100" : "opacity-0"
               }`}
             />
           </picture>
