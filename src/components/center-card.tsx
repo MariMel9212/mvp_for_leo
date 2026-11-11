@@ -98,11 +98,11 @@ export const catalogCenters: CatalogCenter[] = [
 export function CenterCard({ center }: { center: CatalogCenter }) {
   const className = "relative block w-full drop-shadow-[0px_8px_10px_rgba(91,90,90,0.08)]";
   const card = (
-    <div className="relative h-[534px] w-full">
-      <div className="absolute top-0 right-0 left-0 h-[400px] overflow-hidden rounded-tl-[14px] rounded-tr-[14px] bg-white">
+    <div className="relative h-[494px] w-full md:h-[534px]">
+      <div className="absolute top-0 right-0 left-0 h-[360px] overflow-hidden rounded-tl-[14px] rounded-tr-[14px] bg-white md:h-[400px]">
         <CenterPhoto slides={center.slides} frameClassName="bottom-0" />
       </div>
-      <div className="absolute top-[372px] right-0 left-0 z-20">
+      <div className="absolute top-[332px] right-0 left-0 z-20 md:top-[372px]">
         <div className="flex h-[28px] items-start">
           {center.badge ? (
             <span
