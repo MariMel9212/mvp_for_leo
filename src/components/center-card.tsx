@@ -39,10 +39,10 @@ export const catalogCenters: CatalogCenter[] = [
     href: "/uchrezhdeniya/vyhod-est",
   },
   {
-    title: "Реабилитационно-образовательный центр",
-    titleLines: ["Реабилитационно-", "образовательный центр"],
+    title: "Образовательный центр в Троицке",
+    titleLines: ["Образовательный центр", "в Троицке"],
     course: "Индивидуальная программа",
-    place: "Москва",
+    place: "Троицк",
     slides: [
       { src: "/centers/troitsk/house.webp", className: "cover" },
       { src: "/centers/troitsk/attic.webp", className: "cover" },
