@@ -1,8 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import { Fragment, useEffect, useId, useState } from "react";
 import { InstitutionArt, ProgramArt } from "@/components/banner-art";
+import { CallRequestModal } from "@/components/call-request-modal";
 import { CenterCard, catalogCenters, type CatalogCenter, type CenterDependency, type CenterKind } from "@/components/center-card";
 import { asset } from "@/lib/base-path";
 
@@ -157,9 +157,10 @@ function CheckFilter({
 }
 
 function CallBanner({ compact = false }: { compact?: boolean }) {
+  const [topic, setTopic] = useState<string | null>(null);
   const linkClass = compact
-    ? "relative h-[96px] w-full overflow-hidden rounded-[16px] border border-[rgba(0,0,0,0.04)] bg-[rgba(255,255,255,0.8)] [&>div]:right-[52px] [&>div]:bottom-[-4px] [&>div]:origin-bottom-right [&>div]:scale-[0.4]"
-    : "relative h-[136px] w-full overflow-hidden rounded-[20px] border border-[rgba(0,0,0,0.04)] bg-[rgba(255,255,255,0.8)] md:h-[213px] min-[1440px]:w-[588px]";
+    ? "relative h-[96px] w-full cursor-pointer overflow-hidden rounded-[16px] border border-[rgba(0,0,0,0.04)] bg-[rgba(255,255,255,0.8)] p-0 text-left font-[inherit] text-[#27292d] [&>div]:right-[52px] [&>div]:bottom-[-4px] [&>div]:origin-bottom-right [&>div]:scale-[0.4]"
+    : "relative h-[136px] w-full cursor-pointer overflow-hidden rounded-[20px] border border-[rgba(0,0,0,0.04)] bg-[rgba(255,255,255,0.8)] p-0 text-left font-[inherit] text-[#27292d] md:h-[213px] min-[1440px]:w-[588px]";
 
   return (
     <section
@@ -190,7 +191,7 @@ function CallBanner({ compact = false }: { compact?: boolean }) {
             : "mt-[48px] flex flex-col items-stretch gap-4 min-[1440px]:flex-row min-[1440px]:items-center min-[1440px]:justify-between"
         }
       >
-        <Link href="/#zayavka" className={linkClass}>
+        <button type="button" onClick={() => setTopic("Подобрать учреждение")} className={linkClass}>
           <span className={`relative z-10 flex items-center justify-between ${compact ? "px-4 py-3" : "px-[20px] py-[19px]"}`}>
             <span className={compact ? "max-w-[150px] text-[18px] leading-[24px] font-medium" : "max-w-[146px] text-24 font-medium md:max-w-none"}>
               Подобрать учреждение
@@ -200,8 +201,8 @@ function CallBanner({ compact = false }: { compact?: boolean }) {
             </span>
           </span>
           <InstitutionArt />
-        </Link>
-        <Link href="/#zayavka" className={linkClass}>
+        </button>
+        <button type="button" onClick={() => setTopic("Подбрать программу")} className={linkClass}>
           <span className={`relative z-10 flex items-center justify-between ${compact ? "px-4 py-3" : "px-[20px] py-[19px]"}`}>
             <span className={compact ? "max-w-[150px] text-[18px] leading-[24px] font-medium" : "max-w-[146px] text-24 font-medium md:max-w-none"}>
               Подбрать программу
@@ -211,8 +212,9 @@ function CallBanner({ compact = false }: { compact?: boolean }) {
             </span>
           </span>
           <ProgramArt />
-        </Link>
+        </button>
       </div>
+      {topic ? <CallRequestModal topic={topic} onClose={() => setTopic(null)} /> : null}
     </section>
   );
 }

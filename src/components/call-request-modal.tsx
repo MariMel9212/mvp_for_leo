@@ -175,7 +175,7 @@ function Steps({ count, current }: { count: number; current: number }) {
   );
 }
 
-function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => void }) {
+export function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => void }) {
   const titleId = useId();
   const overlayRef = useRef<HTMLDivElement>(null);
   const dialogRef = useRef<HTMLDivElement>(null);
