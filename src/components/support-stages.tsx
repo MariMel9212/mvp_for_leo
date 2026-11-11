@@ -6,7 +6,7 @@ const cards = [
     text: "Поговорим о том, что происходит сейчас, и подскажем, какие шаги стоит предпринять в первую очередь",
     n: "1",
     className: "h-auto bg-white min-[1440px]:row-span-2 min-[1440px]:h-[540px]",
-    copyClass: "gap-[20px]",
+    copyClass: "gap-2 md:gap-[20px]",
     numberClass: "text-[#e3eefd] min-[1440px]:top-[414px] min-[1440px]:left-[336px]",
   },
   {
@@ -14,7 +14,7 @@ const cards = [
     text: "Подберём несколько вариантов с учётом состояния человека, региона, бюджета и\u00a0необходимых условий",
     n: "2",
     className: "h-auto bg-white min-[1440px]:h-[258px]",
-    copyClass: "gap-[20px]",
+    copyClass: "gap-2 md:gap-[20px]",
     numberClass: "text-[#e3eefd] min-[1440px]:top-[132px] min-[1440px]:left-[328px]",
   },
   {
@@ -22,7 +22,7 @@ const cards = [
     text: "Объясним различия между вариантами, ответим на вопросы и поможем выбрать подходящий формат помощи",
     n: "3",
     className: "h-auto bg-white min-[1440px]:h-[258px]",
-    copyClass: "gap-[28px]",
+    copyClass: "gap-2 md:gap-[28px]",
     numberClass: "text-[#e3eefd] min-[1440px]:top-[132px] min-[1440px]:left-[326px]",
   },
   {
@@ -31,7 +31,7 @@ const cards = [
     n: "4",
     className: "h-auto min-[1440px]:col-span-2 min-[1440px]:h-[258px]",
     style: { backgroundImage: "linear-gradient(107deg, rgba(222,234,255,0.7) 0%, rgba(58,159,248,0.294) 100%)" },
-    copyClass: "w-full gap-[28px] min-[1440px]:w-[399px]",
+    copyClass: "w-full gap-2 md:gap-[28px] min-[1440px]:w-[399px]",
     numberClass: "text-white/87 min-[1440px]:top-[132px] min-[1440px]:left-[727px]",
   },
 ];
