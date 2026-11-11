@@ -24,11 +24,11 @@ export const metadata: Metadata = {
     "Подбор проверенных реабилитационных центров для лечения и восстановления при зависимостях.",
   icons: {
     icon: [
-      { url: asset("/favicon-v10.svg"), type: "image/svg+xml", sizes: "any" },
-      { url: asset("/favicon-v10.ico"), type: "image/x-icon", sizes: "32x32" },
-      { url: asset("/brand/tab-v10.png"), type: "image/png", sizes: "32x32" },
+      { url: asset("/favicon-v11.svg"), type: "image/svg+xml", sizes: "any" },
+      { url: asset("/favicon-v11.ico"), type: "image/x-icon", sizes: "32x32" },
+      { url: asset("/brand/tab-v11.png"), type: "image/png", sizes: "32x32" },
     ],
-    apple: [{ url: asset("/brand/tab-v10-180.png"), sizes: "180x180", type: "image/png" }],
+    apple: [{ url: asset("/brand/tab-v11-180.png"), sizes: "180x180", type: "image/png" }],
   },
 };
 
