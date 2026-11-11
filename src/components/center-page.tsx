@@ -90,7 +90,7 @@ export function CenterPage({ center }: { center: CenterPageData }) {
                       <span className="mt-[2px] flex shrink-0">
                         <AmenityIcon name={item.icon} />
                       </span>
-                      <span className="text-16 font-medium">{tie(item.label)}</span>
+                      <span className="text-16 font-medium whitespace-pre-line">{tie(item.label)}</span>
                     </div>
                   ))}
                 </div>
@@ -376,7 +376,7 @@ function AmenitiesModal({
               <span className="mt-[2px] flex shrink-0">
                 <AmenityIcon name={item.icon} />
               </span>
-              <span className="text-16 font-medium">{tie(item.label)}</span>
+              <span className="text-16 font-medium whitespace-pre-line">{tie(item.label)}</span>
             </li>
           ))}
         </ul>
