@@ -67,6 +67,7 @@ export const obrazMysliCenter: CenterPageData = {
     "Индивидуальный подход",
     "Семейные сессии",
     "Группы для созависимых",
+    "Репетиторы по школьной программе",
   ],
   gallery: {
     main: {
