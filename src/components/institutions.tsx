@@ -313,7 +313,7 @@ export function Institutions() {
       {firstRows.length === 0 ? (
         <p className="mt-8 text-16 text-[#27292d] opacity-60">Нет учреждений по этим условиям</p>
       ) : (
-        <div className="mt-8 grid w-full grid-cols-3 gap-6 max-[1199px]:grid-cols-2 max-[639px]:grid-cols-1">
+        <div className="mt-8 grid w-full grid-cols-3 gap-6 max-[1199px]:grid-cols-2 max-[639px]:grid-cols-1 max-[639px]:gap-12">
           {firstRows.map((center, index) => (
             <Fragment key={`${center.title}-${index}`}>
               {index === 2 ? (
@@ -340,7 +340,7 @@ export function Institutions() {
         <CallBanner />
       </div>
       {rest.length > 0 ? (
-        <div className="mt-[50px] grid w-full grid-cols-3 gap-6 max-[1199px]:grid-cols-2 max-[639px]:grid-cols-1">
+        <div className="mt-[50px] grid w-full grid-cols-3 gap-6 max-[1199px]:grid-cols-2 max-[639px]:mt-12 max-[639px]:grid-cols-1 max-[639px]:gap-12">
           {rest.map((center, index) => (
             <CenterCard key={`${center.title}-rest-${index}`} center={center} />
           ))}
