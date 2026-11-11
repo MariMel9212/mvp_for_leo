@@ -70,7 +70,7 @@ export function SiteFooter() {
           <div className="flex flex-col gap-3 min-[800px]:flex-row min-[800px]:items-start min-[800px]:justify-between min-[800px]:gap-8">
             <p className="max-w-[720px]">{tie("Сервис помогает выбрать учреждение и самостоятельно не оказывает медицинскую помощь")}</p>
             <div className="flex flex-col gap-2 min-[800px]:items-end min-[800px]:text-right">
-              <p>{tie("Оператор персональных данных: ИП Мельничук Л. И.")}</p>
+              <p>{tie("Оператор персональных данных: MelniApps LLS")}</p>
               <Link href="/politika" className="w-fit underline-offset-2 hover:underline">
                 Политика обработки персональных данных
               </Link>
