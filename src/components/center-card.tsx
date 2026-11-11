@@ -63,9 +63,9 @@ export const catalogCenters: CatalogCenter[] = [
     price: "от 120 000 ₽ / мес",
     place: "Подмосковье",
     slides: [
+      { src: "/centers/klyuchi/single.webp", className: "cover" },
       { src: "/centers/klyuchi/pool.webp", className: "cover" },
       { src: "/centers/klyuchi/group.webp", className: "cover" },
-      { src: "/centers/klyuchi/single.webp", className: "cover" },
       { src: "/centers/klyuchi/dining.webp", className: "cover" },
     ],
     kind: "rehab",
