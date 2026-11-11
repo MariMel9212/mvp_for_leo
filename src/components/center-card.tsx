@@ -101,16 +101,17 @@ export function CenterCard({ center }: { center: CatalogCenter }) {
     <div className="relative h-[494px] w-full md:h-[534px]">
       <div className="absolute top-0 right-0 left-0 h-[360px] overflow-hidden rounded-tl-[14px] rounded-tr-[14px] bg-white md:h-[400px]">
         <CenterPhoto slides={center.slides} frameClassName="bottom-0" />
-        {center.badge ? (
-          <span
-            className={`absolute bottom-[12px] left-[12px] z-30 flex h-[28px] items-center rounded-[10px] px-[10px] text-[13px] leading-[20px] whitespace-nowrap text-[#27292d] ${center.badge.className}`}
-          >
-            {center.badge.label}
-          </span>
-        ) : null}
       </div>
       <div className="absolute top-[332px] right-0 left-0 z-20 md:top-[372px]">
-        <div className="h-[28px]" />
+        <div className="flex h-[28px] items-start">
+          {center.badge ? (
+            <span
+              className={`flex h-[28px] items-center rounded-tr-[14px] pt-[6px] pr-[10px] pb-[2px] pl-[12px] text-[13px] leading-[20px] whitespace-nowrap text-[#27292d] ${center.badge.className}`}
+            >
+              {center.badge.label}
+            </span>
+          ) : null}
+        </div>
         <div className="flex flex-col gap-[8px] rounded-bl-[14px] rounded-br-[14px] bg-white px-[12px] pt-[8px] pb-[14px] text-[#27292d]">
           <h2 className="w-[283px] max-w-full text-[22px] leading-[28px] font-medium">
             <span className="block">{tie(center.titleLines[0])}</span>
