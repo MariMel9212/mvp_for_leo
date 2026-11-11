@@ -20,12 +20,6 @@ export type CatalogCenter = {
   place?: string;
 };
 
-const dependencyLabel: Record<CenterDependency, string> = {
-  alco: "Алко",
-  narco: "Нарко",
-  game: "Игро",
-};
-
 export const catalogCenters: CatalogCenter[] = [
   {
     title: "Реабилитационный центр в Чехове",
@@ -101,13 +95,8 @@ export const catalogCenters: CatalogCenter[] = [
   },
 ];
 
-function typeLabel(center: CatalogCenter) {
-  return center.dependencies.map((item) => dependencyLabel[item]).join(" / ");
-}
-
 export function CenterCard({ center }: { center: CatalogCenter }) {
   const className = "relative block w-full drop-shadow-[0px_8px_10px_rgba(91,90,90,0.08)]";
-  const kind = typeLabel(center);
   const card = (
     <div className="relative h-[534px] w-full">
       <div className="absolute top-0 right-0 left-0 h-[400px] overflow-hidden rounded-tl-[14px] rounded-tr-[14px] bg-white">
@@ -115,14 +104,9 @@ export function CenterCard({ center }: { center: CatalogCenter }) {
       </div>
       <div className="absolute top-[372px] right-0 left-0 z-20">
         <div className="flex h-[28px] items-start">
-          {kind ? (
-            <span className="relative z-10 flex h-[28px] items-center rounded-tr-[14px] bg-white pt-[6px] pr-[10px] pb-[2px] pl-[12px] text-[13px] leading-[20px] whitespace-nowrap text-[#27292d]">
-              {kind}
-            </span>
-          ) : null}
           {center.badge ? (
             <span
-              className={`relative z-0 flex h-[28px] items-center rounded-tr-[14px] pt-[6px] pr-[10px] pb-[2px] text-[13px] leading-[20px] whitespace-nowrap text-[#27292d] ${kind ? "-ml-2 pl-[18px]" : "pl-[12px]"} ${center.badge.className}`}
+              className={`flex h-[28px] items-center rounded-tr-[14px] pt-[6px] pr-[10px] pb-[2px] pl-[12px] text-[13px] leading-[20px] whitespace-nowrap text-[#27292d] ${center.badge.className}`}
             >
               {center.badge.label}
             </span>
