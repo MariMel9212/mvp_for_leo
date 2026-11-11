@@ -106,34 +106,34 @@ function typeLabel(center: CatalogCenter) {
 }
 
 export function CenterCard({ center }: { center: CatalogCenter }) {
-  const className = "relative block w-full drop-shadow-[0_8px_10px_rgba(91,90,90,0.08)]";
+  const className = "relative block w-full drop-shadow-[0px_8px_10px_rgba(91,90,90,0.08)]";
   const kind = typeLabel(center);
   const card = (
-    <div className="flex w-full min-h-min flex-col overflow-hidden rounded-[14px]">
-      <div className="relative h-[400px] shrink-0 overflow-hidden rounded-t-[14px] bg-white">
-        <CenterPhoto slides={center.slides} frameClassName="h-[396px]" />
+    <div className="relative h-[534px] w-full">
+      <div className="absolute top-0 right-0 left-0 h-[400px] overflow-hidden rounded-tl-[14px] rounded-tr-[14px] bg-white">
+        <CenterPhoto slides={center.slides} frameClassName="bottom-0" />
       </div>
-      <div className="relative z-20 -mt-[28px] flex shrink-0 flex-col">
+      <div className="absolute top-[372px] right-0 left-0 z-20">
         <div className="flex h-[28px] items-start">
           {kind ? (
-            <span className="flex h-[28px] items-start rounded-tr-[14px] bg-white pt-[6px] pr-[10px] pb-[2px] pl-[12px] text-[13px] leading-[20px] text-[#27292d]">
+            <span className="relative z-10 flex h-[28px] items-center rounded-tr-[14px] bg-white pt-[6px] pr-[10px] pb-[2px] pl-[12px] text-[13px] leading-[20px] whitespace-nowrap text-[#27292d]">
               {kind}
             </span>
           ) : null}
           {center.badge ? (
             <span
-              className={`flex h-[28px] items-start rounded-tr-[14px] pt-[6px] pr-[10px] pb-[2px] text-[13px] leading-[20px] text-[#27292d] ${kind ? "-ml-2 pl-[18px]" : "pl-[12px]"} ${center.badge.className}`}
+              className={`relative z-0 flex h-[28px] items-center rounded-tr-[14px] pt-[6px] pr-[10px] pb-[2px] text-[13px] leading-[20px] whitespace-nowrap text-[#27292d] ${kind ? "-ml-2 pl-[18px]" : "pl-[12px]"} ${center.badge.className}`}
             >
               {center.badge.label}
             </span>
           ) : null}
         </div>
-        <div className="flex flex-col gap-[8px] rounded-b-[14px] bg-white px-[12px] pt-[8px] pb-[14px] text-[#27292d]">
-          <h2 className="w-full max-w-[283px] text-[22px] leading-[28px] font-medium">
+        <div className="flex flex-col gap-[8px] rounded-bl-[14px] rounded-br-[14px] bg-white px-[12px] pt-[8px] pb-[14px] text-[#27292d]">
+          <h2 className="w-[283px] max-w-full text-[22px] leading-[28px] font-medium">
             <span className="block">{tie(center.titleLines[0])}</span>
             <span className="block">{tie(center.titleLines[1])}</span>
           </h2>
-          <div className="flex w-full flex-col text-16 leading-[24px]">
+          <div className="flex w-full flex-col text-[16px] leading-[24px]">
             <p>{center.place ?? "Московская область"}</p>
             <p className="opacity-50">{tie(center.course)}</p>
           </div>
