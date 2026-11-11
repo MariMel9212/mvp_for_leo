@@ -25,7 +25,7 @@ export const catalogCenters: CatalogCenter[] = [
     title: "Реабилитационный центр в Чехове",
     titleLines: ["Реабилитационный центр", "в Чехове"],
     course: "Детоксикация и реабилитация",
-    place: "Подмосковье",
+    place: "Московская область",
     slides: [
       { src: "/centers/narkolog/house.webp", className: "cover" },
       { src: "/centers/narkolog/sauna.webp", className: "cover" },
