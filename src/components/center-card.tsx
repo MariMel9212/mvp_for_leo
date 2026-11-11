@@ -57,11 +57,11 @@ export const catalogCenters: CatalogCenter[] = [
     href: "/uchrezhdeniya/obraz-mysli",
   },
   {
-    title: "Реабилитационный центр в Подмосковье",
-    titleLines: ["Реабилитационный центр", "в Подмосковье"],
+    title: "Реабилитационный центр в Москве",
+    titleLines: ["Реабилитационный центр", "в Москве"],
     course: "Авторская методика",
     price: "от 120 000 ₽ / мес",
-    place: "Подмосковье",
+    place: "Новая Москва",
     slides: [
       { src: "/centers/klyuchi/single.webp", className: "cover" },
       { src: "/centers/klyuchi/pool.webp", className: "cover" },
