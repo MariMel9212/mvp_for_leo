@@ -59,7 +59,7 @@ export const catalogCenters: CatalogCenter[] = [
   {
     title: "Реабилитационный центр в Москве",
     titleLines: ["Реабилитационный центр", "в Москве"],
-    course: "Авторская методика",
+    course: "Авторская программа",
     price: "от 120 000 ₽ / мес",
     place: "Новая Москва",
     slides: [
@@ -77,7 +77,7 @@ export const catalogCenters: CatalogCenter[] = [
   {
     title: "Детокс клиника в Химках",
     titleLines: ["Детокс клиника", "в Химках"],
-    course: "Сутки от 15 000 ₽",
+    course: "Снятие запоя и ломки",
     price: "от 15 000 ₽ / сутки",
     place: "Московская область",
     slides: [
