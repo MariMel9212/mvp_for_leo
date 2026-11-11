@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { asset } from "@/lib/base-path";
 
 export type CenterSlide = {
@@ -23,9 +23,11 @@ function phaseOf(className: string) {
 export function CenterPhoto({
   slides,
   frameClassName,
+  badge,
 }: {
   slides: CenterSlide[];
   frameClassName: string;
+  badge?: ReactNode;
 }) {
   const [index, setIndex] = useState(0);
   const count = slides.length;
@@ -80,6 +82,7 @@ export function CenterPhoto({
           </picture>
         </>
       )}
+      {badge}
       <div className="pointer-events-none absolute top-[8px] left-1/2 z-20 flex -translate-x-1/2 items-center gap-[4px]">
         {slides.map((_, slideIndex) => (
           <span
