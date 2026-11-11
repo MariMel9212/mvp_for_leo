@@ -14,6 +14,7 @@ const previewAmenityCount = 6;
 
 export function CenterPage({ center }: { center: CenterPageData }) {
   const [aboutOpen, setAboutOpen] = useState(false);
+  const [openHint, setOpenHint] = useState<string | null>(null);
   const [scheduleOpen, setScheduleOpen] = useState(false);
   const [galleryOpen, setGalleryOpen] = useState(false);
   const [amenitiesOpen, setAmenitiesOpen] = useState(false);
@@ -41,9 +42,9 @@ export function CenterPage({ center }: { center: CenterPageData }) {
     <div className="mx-auto mt-6 w-full max-w-[1200px] px-0 pb-16 max-[1439px]:px-4 min-[1440px]:pb-[80px]">
       <GalleryCollage center={center} onOpen={() => setGalleryOpen(true)} />
 
-      <div className="mt-8 flex flex-col gap-8 min-[1100px]:flex-row min-[1100px]:items-start min-[1100px]:justify-between">
+      <div className="mt-8 flex flex-col gap-6 min-[1100px]:flex-row min-[1100px]:items-start min-[1100px]:justify-between min-[1100px]:gap-8">
         <div className="contents min-[1100px]:flex min-[1100px]:w-[612px] min-[1100px]:shrink-0 min-[1100px]:flex-col min-[1100px]:gap-[30px]">
-          <header className="order-1 flex flex-col gap-[16px] pb-[32px] min-[1100px]:border-b min-[1100px]:border-[rgba(0,0,0,0.04)] min-[1100px]:order-none">
+          <header className="order-1 flex flex-col gap-[16px] min-[1100px]:border-b min-[1100px]:border-[rgba(0,0,0,0.04)] min-[1100px]:pb-[32px] min-[1100px]:order-none">
             <div className="flex flex-col gap-[6px]">
               <h1 className="text-28 font-medium">{tie(center.title)}</h1>
               <p className="text-18">{center.region}</p>
@@ -152,23 +153,19 @@ export function CenterPage({ center }: { center: CenterPageData }) {
               <span className="flex items-center gap-[4px]">
                 {tie(fact.value)}
                 {fact.extra ? (
-                  <span className="group/extra relative">
-                    <button type="button" className="font-medium whitespace-nowrap opacity-70 outline-none hover:opacity-100">
-                      {fact.extra}
-                    </button>
-                    {fact.extraHint ? (
-                      <span className="absolute top-full right-0 z-20 hidden pt-[4px] group-hover/extra:block group-focus-within/extra:block">
-                        <span
-                          role="tooltip"
-                          className="block w-[280px] rounded-[10px] bg-white px-[12px] py-[8px] text-16 font-normal whitespace-normal text-[#27292d] shadow-[0_8px_24px_rgba(36,74,127,0.12)]"
-                        >
-                          {fact.extraHint}
-                        </span>
-                      </span>
-                    ) : null}
-                  </span>
+                  <button
+                    type="button"
+                    aria-expanded={openHint === fact.label}
+                    onClick={() => setOpenHint((current) => (current === fact.label ? null : fact.label))}
+                    className="font-medium whitespace-nowrap underline decoration-[rgba(39,41,45,0.45)] underline-offset-[3px]"
+                  >
+                    {fact.extra}
+                  </button>
                 ) : null}
               </span>
+              {fact.extraHint && openHint === fact.label ? (
+                <span className="block w-full max-w-[280px] text-16 leading-[22px] font-normal whitespace-normal">{fact.extraHint}</span>
+              ) : null}
             </p>
           ))}
         </aside>
