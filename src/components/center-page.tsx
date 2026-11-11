@@ -83,11 +83,13 @@ export function CenterPage({ center }: { center: CenterPageData }) {
             </div>
 
             {center.amenities.length ? (
-              <div className="@container flex flex-col gap-[8px]">
-                <div className="grid grid-cols-1 gap-x-8 gap-y-4 @[544px]:grid-cols-2">
+              <div className="flex flex-col gap-[8px]">
+                <div className="grid grid-cols-2 gap-x-3 gap-y-4">
                   {previewAmenities.map((item) => (
-                    <div key={item.label} className="flex min-w-0 items-center gap-[8px]">
-                      <AmenityIcon name={item.icon} />
+                    <div key={item.label} className="flex min-w-0 items-start gap-[6px]">
+                      <span className="mt-[2px] flex shrink-0">
+                        <AmenityIcon name={item.icon} />
+                      </span>
                       <span className="text-16 font-medium">{tie(item.label)}</span>
                     </div>
                   ))}
@@ -368,11 +370,13 @@ function AmenitiesModal({
           </h2>
           <CloseButton onClick={onClose} />
         </div>
-        <ul className="grid grid-cols-1 gap-x-[32px] gap-y-[16px] px-[26px] pb-[28px] min-[640px]:grid-cols-2">
+        <ul className="grid grid-cols-2 gap-x-3 gap-y-4 px-[26px] pb-[28px]">
           {amenities.map((item) => (
-            <li key={item.label} className="flex items-center gap-[8px]">
-              <AmenityIcon name={item.icon} />
-              <span className="text-16 font-medium">{item.label}</span>
+            <li key={item.label} className="flex min-w-0 items-start gap-[6px]">
+              <span className="mt-[2px] flex shrink-0">
+                <AmenityIcon name={item.icon} />
+              </span>
+              <span className="text-16 font-medium">{tie(item.label)}</span>
             </li>
           ))}
         </ul>
