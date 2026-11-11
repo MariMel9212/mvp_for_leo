@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useId, useState } from "react";
+import { Fragment, useEffect, useId, useState } from "react";
 import { InstitutionArt, ProgramArt } from "@/components/banner-art";
 import { CenterCard, catalogCenters, type CatalogCenter, type CenterDependency, type CenterKind } from "@/components/center-card";
 import { asset } from "@/lib/base-path";
@@ -156,34 +156,56 @@ function CheckFilter({
   );
 }
 
-function CallBanner() {
+function CallBanner({ compact = false }: { compact?: boolean }) {
+  const linkClass = compact
+    ? "relative h-[96px] w-full overflow-hidden rounded-[16px] border border-[rgba(0,0,0,0.04)] bg-[rgba(255,255,255,0.8)] [&>div]:bottom-[-4px] [&>div]:origin-bottom-right [&>div]:scale-[0.4]"
+    : "relative h-[136px] w-full overflow-hidden rounded-[20px] border border-[rgba(0,0,0,0.04)] bg-[rgba(255,255,255,0.8)] md:h-[213px] min-[1440px]:w-[588px]";
+
   return (
-    <section className="relative mt-[50px] overflow-hidden rounded-[34px] bg-gradient-to-b from-[rgba(222,234,255,0.45)] to-[rgba(210,222,243,0.45)] px-4 pt-[32px] pb-[26px] min-[1440px]:-mx-[22px] min-[1440px]:w-[1244px] min-[1440px]:px-[22px]">
-      <div className="mx-auto flex w-full max-w-[611px] flex-col items-center gap-[15px] text-center text-[#27292d]">
-        <h2 className="text-40 font-medium max-md:text-28 md:max-[1439px]:text-[32px] md:max-[1439px]:leading-[40px]">Запланируйте звонок, чтобы&nbsp;не&nbsp;ошибиться с&nbsp;выбором</h2>
-        <p className="text-16 opacity-60">
+    <section
+      className={
+        compact
+          ? "relative overflow-hidden rounded-[24px] bg-gradient-to-b from-[rgba(222,234,255,0.45)] to-[rgba(210,222,243,0.45)] px-4 pt-5 pb-4"
+          : "relative mt-[50px] overflow-hidden rounded-[34px] bg-gradient-to-b from-[rgba(222,234,255,0.45)] to-[rgba(210,222,243,0.45)] px-4 pt-[32px] pb-[26px] min-[1440px]:-mx-[22px] min-[1440px]:w-[1244px] min-[1440px]:px-[22px]"
+      }
+    >
+      <div className={`mx-auto flex w-full flex-col items-center text-center text-[#27292d] ${compact ? "gap-2" : "max-w-[611px] gap-[15px]"}`}>
+        <h2
+          className={
+            compact
+              ? "text-[22px] leading-[28px] font-medium"
+              : "text-40 font-medium max-md:text-28 md:max-[1439px]:text-[32px] md:max-[1439px]:leading-[40px]"
+          }
+        >
+          Запланируйте звонок, чтобы&nbsp;не&nbsp;ошибиться с&nbsp;выбором
+        </h2>
+        <p className={compact ? "text-[14px] leading-[20px] opacity-60" : "text-16 opacity-60"}>
           На бесплатной и анонимной консультации погрузимся в&nbsp;Вашу проблему и&nbsp;подберем подходящее учреждение
         </p>
       </div>
-      <div className="mt-[48px] flex flex-col items-stretch gap-4 min-[1440px]:flex-row min-[1440px]:items-center min-[1440px]:justify-between">
-        <Link
-          href="/#zayavka"
-          className="relative h-[136px] w-full overflow-hidden rounded-[20px] border border-[rgba(0,0,0,0.04)] bg-[rgba(255,255,255,0.8)] md:h-[213px] min-[1440px]:w-[588px]"
-        >
-          <span className="relative z-10 flex items-center justify-between px-[20px] py-[19px]">
-            <span className="max-w-[146px] text-24 font-medium md:max-w-none">Подобрать учреждение</span>
+      <div
+        className={
+          compact
+            ? "mt-4 flex flex-col items-stretch gap-3"
+            : "mt-[48px] flex flex-col items-stretch gap-4 min-[1440px]:flex-row min-[1440px]:items-center min-[1440px]:justify-between"
+        }
+      >
+        <Link href="/#zayavka" className={linkClass}>
+          <span className={`relative z-10 flex items-center justify-between ${compact ? "px-4 py-3" : "px-[20px] py-[19px]"}`}>
+            <span className={compact ? "max-w-[150px] text-[18px] leading-[24px] font-medium" : "max-w-[146px] text-24 font-medium md:max-w-none"}>
+              Подобрать учреждение
+            </span>
             <span className="flex size-[24px] items-center justify-center">
               <img alt="" src={asset("/icons/angle-right.svg")} width={7.286} height={13.414} />
             </span>
           </span>
           <InstitutionArt />
         </Link>
-        <Link
-          href="/#zayavka"
-          className="relative h-[136px] w-full overflow-hidden rounded-[20px] border border-[rgba(0,0,0,0.04)] bg-[rgba(255,255,255,0.8)] md:h-[213px] min-[1440px]:w-[588px]"
-        >
-          <span className="relative z-10 flex items-center justify-between px-[20px] py-[19px]">
-            <span className="max-w-[146px] text-24 font-medium md:max-w-none">Подбрать программу</span>
+        <Link href="/#zayavka" className={linkClass}>
+          <span className={`relative z-10 flex items-center justify-between ${compact ? "px-4 py-3" : "px-[20px] py-[19px]"}`}>
+            <span className={compact ? "max-w-[150px] text-[18px] leading-[24px] font-medium" : "max-w-[146px] text-24 font-medium md:max-w-none"}>
+              Подбрать программу
+            </span>
             <span className="flex size-[24px] items-center justify-center">
               <img alt="" src={asset("/icons/angle-right.svg")} width={7.286} height={13.414} />
             </span>
@@ -293,11 +315,30 @@ export function Institutions() {
       ) : (
         <div className="mt-8 grid w-full grid-cols-3 gap-6 max-[1199px]:grid-cols-2 max-[639px]:grid-cols-1">
           {firstRows.map((center, index) => (
-            <CenterCard key={`${center.title}-${index}`} center={center} />
+            <Fragment key={`${center.title}-${index}`}>
+              {index === 2 ? (
+                <div className="min-[640px]:hidden">
+                  <CallBanner compact />
+                </div>
+              ) : null}
+              <CenterCard center={center} />
+            </Fragment>
           ))}
+          {firstRows.length < 3 ? (
+            <div className="min-[640px]:hidden">
+              <CallBanner compact />
+            </div>
+          ) : null}
         </div>
       )}
-      <CallBanner />
+      {firstRows.length === 0 ? (
+        <div className="mt-8 min-[640px]:hidden">
+          <CallBanner compact />
+        </div>
+      ) : null}
+      <div className="max-[639px]:hidden">
+        <CallBanner />
+      </div>
       {rest.length > 0 ? (
         <div className="mt-[50px] grid w-full grid-cols-3 gap-6 max-[1199px]:grid-cols-2 max-[639px]:grid-cols-1">
           {rest.map((center, index) => (
