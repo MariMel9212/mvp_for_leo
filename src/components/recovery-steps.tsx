@@ -28,7 +28,7 @@ function ArtWell({ children, className = "" }: { children: ReactNode; className?
 
 export function RecoverySteps() {
   return (
-    <section id="shagi" className="relative mt-12 w-full md:max-[1439px]:mt-20 min-[1440px]:mt-[120px]">
+    <section id="shagi" className="relative mt-20 w-full md:max-[1439px]:mt-20 min-[1440px]:mt-[120px]">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-y-0 left-1/2 w-screen -translate-x-1/2 bg-[#f6f8fa]"
