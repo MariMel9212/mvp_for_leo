@@ -41,7 +41,7 @@ export const catalogCenters: CatalogCenter[] = [
   {
     title: "Образовательный центр в Троицке",
     titleLines: ["Образовательный центр", "в Троицке"],
-    course: "Индивидуальная программа",
+    course: "Программа «Пифагора»",
     place: "Троицк",
     slides: [
       { src: "/centers/troitsk/house.webp", className: "cover" },
