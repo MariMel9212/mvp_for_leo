@@ -12,6 +12,13 @@ const textAction =
 
 const previewAmenityCount = 6;
 
+function aboutParagraphs(about: CenterPageData["about"]) {
+  return `${about.lead}${about.rest}`
+    .split(/\n\n+/)
+    .map((paragraph) => paragraph.replace(/\s+/g, " ").trim())
+    .filter(Boolean);
+}
+
 export function CenterPage({ center }: { center: CenterPageData }) {
   const [aboutOpen, setAboutOpen] = useState(false);
   const [openHint, setOpenHint] = useState<string | null>(null);
@@ -61,10 +68,13 @@ export function CenterPage({ center }: { center: CenterPageData }) {
               <h2 className="text-24 font-medium">Про центр</h2>
               {aboutOpen ? (
                 <div className="flex flex-col gap-[8px]">
-                  <p className="text-16">
-                    {tie(center.about.lead)}
-                    {tie(center.about.rest)}
-                  </p>
+                  <div className="flex flex-col gap-[12px]">
+                    {aboutParagraphs(center.about).map((paragraph) => (
+                      <p key={paragraph} className="text-16">
+                        {tie(paragraph)}
+                      </p>
+                    ))}
+                  </div>
                   <button type="button" onClick={() => setAboutOpen(false)} className={textAction}>
                     Свернуть
                   </button>
@@ -73,7 +83,7 @@ export function CenterPage({ center }: { center: CenterPageData }) {
                 <div className="flex flex-col gap-[8px]">
                   <div>
                     <p className="h-[72px] overflow-hidden text-16 text-ellipsis">{tie(center.about.lead)}</p>
-                    <p className="truncate text-16 whitespace-pre">{tie(center.about.rest)}</p>
+                    <p className="truncate text-16 whitespace-pre">{tie(center.about.rest.replace(/\s+/g, " ").trim())}</p>
                   </div>
                   <button type="button" onClick={() => setAboutOpen(true)} className={textAction}>
                     Читать
