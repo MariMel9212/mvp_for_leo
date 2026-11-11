@@ -21,7 +21,6 @@ export const vyhodEstCenter: CenterPageData = {
     { icon: "bath", label: "Баня" },
     { icon: "group", label: "Группы" },
     { icon: "rooms", label: "Общие комнаты" },
-    { icon: "dining", label: "Столовая" },
   ],
   schedule: [
     { time: "08:50", event: "Подъём" },
