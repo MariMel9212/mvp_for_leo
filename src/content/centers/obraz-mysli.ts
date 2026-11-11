@@ -47,10 +47,8 @@ export const obrazMysliCenter: CenterPageData = {
   staff: {
     kind: "people",
     summary:
-      "12 специалистов: основатель, руководитель центра, руководитель психологической службы, клинический психолог, педагог\u2011психолог, врач-психиатр, 2 учебных куратора и 4 консультанта по коррекции поведения.",
+      "10 специалистов: руководитель психологической службы, клинический психолог, педагог\u2011психолог, врач-психиатр, 2 учебных куратора и 4 консультанта по коррекции поведения.",
     people: [
-      { name: "Руслан Молодцов", role: "Основатель Института психологии", photo: "/centers/troitsk/staff/molodtsov.webp" },
-      { name: "Михаил Анисимов", role: "Руководитель центра", photo: "/centers/troitsk/staff/anisimov.webp" },
       { name: "Ева Артамонова", role: "Руководитель психологической службы", photo: "/centers/troitsk/staff/artamonova.webp" },
       { name: "Мария Падурец", role: "Клинический психолог", photo: "/centers/troitsk/staff/padurets.jpg" },
       { name: "Владимир Земелькин", role: "Педагог\u2011психолог", photo: "/centers/troitsk/staff/zemelkin.webp" },
