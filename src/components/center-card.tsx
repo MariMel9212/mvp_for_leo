@@ -90,7 +90,7 @@ export const catalogCenters: CatalogCenter[] = [
     dependencies: ["alco", "narco", "game"],
     teen: false,
     aftercare: false,
-    badge: { label: "Детокс", className: "bg-[#deeaff]" },
+    badge: { label: "Медицинское наблюдение 24/7", className: "bg-[#deeaff]" },
     href: "/uchrezhdeniya/profmed",
   },
 ];
