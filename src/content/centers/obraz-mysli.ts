@@ -16,7 +16,7 @@ export const obrazMysliCenter: CenterPageData = {
   amenities: [
     { icon: "gym", label: "Спортивный зал" },
     { icon: "field", label: "Спортивная площадка" },
-    { icon: "classroom", label: "Учёба" },
+    { icon: "classroom", label: "Образовательные занятия" },
     { icon: "group", label: "Группы и тренинги" },
     { icon: "territory", label: "Частная территория" },
   ],
