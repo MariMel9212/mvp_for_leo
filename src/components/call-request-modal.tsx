@@ -215,8 +215,25 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
       : telegramReady(telegram) || phoneReady(phoneCode, phone);
   useEffect(() => {
     const previous = document.activeElement as HTMLElement | null;
-    const { overflow } = document.body.style;
-    document.body.style.overflow = "hidden";
+    const scrollY = window.scrollY;
+    const { body } = document;
+    const html = document.documentElement;
+    const previousBody = {
+      overflow: body.style.overflow,
+      position: body.style.position,
+      top: body.style.top,
+      left: body.style.left,
+      right: body.style.right,
+      width: body.style.width,
+    };
+    const previousHtmlOverflow = html.style.overflow;
+    body.style.overflow = "hidden";
+    body.style.position = "fixed";
+    body.style.top = `-${scrollY}px`;
+    body.style.left = "0";
+    body.style.right = "0";
+    body.style.width = "100%";
+    html.style.overflow = "hidden";
     const inerted: Element[] = [];
     let node: HTMLElement | null = dialogRef.current?.parentElement ?? null;
     while (node) {
@@ -248,11 +265,19 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
       if (!overlay || !viewport) return;
       if (!phone.matches) {
         overlay.style.top = "";
+        overlay.style.right = "";
+        overlay.style.bottom = "";
+        overlay.style.left = "";
+        overlay.style.width = "";
         overlay.style.height = "";
         return;
       }
-      overlay.style.top = `calc(${viewport.offsetTop}px - env(safe-area-inset-top, 0px))`;
-      overlay.style.height = `calc(${viewport.height}px + env(safe-area-inset-top, 0px))`;
+      overlay.style.left = "0";
+      overlay.style.right = "0";
+      overlay.style.bottom = "auto";
+      overlay.style.width = "100%";
+      overlay.style.top = `${viewport.offsetTop}px`;
+      overlay.style.height = `${viewport.height}px`;
     };
     pin();
     viewport?.addEventListener("resize", pin);
@@ -260,13 +285,24 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
     phone.addEventListener("change", pin);
     return () => {
       for (const element of inerted) element.removeAttribute("inert");
-      document.body.style.overflow = overflow;
+      body.style.overflow = previousBody.overflow;
+      body.style.position = previousBody.position;
+      body.style.top = previousBody.top;
+      body.style.left = previousBody.left;
+      body.style.right = previousBody.right;
+      body.style.width = previousBody.width;
+      html.style.overflow = previousHtmlOverflow;
+      window.scrollTo(0, scrollY);
       document.removeEventListener("keydown", onKey);
       viewport?.removeEventListener("resize", pin);
       viewport?.removeEventListener("scroll", pin);
       phone.removeEventListener("change", pin);
       if (overlay) {
         overlay.style.top = "";
+        overlay.style.right = "";
+        overlay.style.bottom = "";
+        overlay.style.left = "";
+        overlay.style.width = "";
         overlay.style.height = "";
       }
       previous?.focus();
@@ -333,7 +369,7 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
   const zoneLabel = zones.find((item) => item.id === zone)?.label ?? zones[1].label;
 
   return (
-    <div ref={overlayRef} className="fixed inset-0 z-50 flex items-end justify-center bg-[rgba(39,41,45,0.45)] max-md:top-[calc(env(safe-area-inset-top)*-1)] md:items-center md:p-[24px]">
+    <div ref={overlayRef} className="fixed inset-0 z-50 flex items-end justify-center overscroll-none bg-[rgba(39,41,45,0.45)] max-md:flex-col max-md:justify-end max-md:pt-3 md:items-center md:p-[24px]">
       <button type="button" aria-label="Закрыть" className="absolute inset-0 cursor-default" onClick={onClose} />
       <div
         ref={dialogRef}
@@ -341,7 +377,7 @@ function CallRequestModal({ topic, onClose }: { topic: string; onClose: () => vo
         aria-modal="true"
         aria-labelledby={titleId}
         tabIndex={-1}
-        className="mobile-sheet relative flex w-full max-w-[1100px] flex-col overflow-y-auto rounded-t-[21px] bg-white pb-[max(16px,env(safe-area-inset-bottom))] outline-none max-md:h-[calc(100%-12px)] max-md:max-h-[calc(100%-12px)] md:max-h-[calc(100dvh-32px)] md:rounded-[21px] md:pb-0 min-[1100px]:h-[650px] min-[1100px]:overflow-hidden"
+        className="mobile-sheet relative flex w-full max-w-[1100px] flex-col overflow-y-auto rounded-t-[21px] bg-white pb-[max(16px,env(safe-area-inset-bottom))] outline-none max-md:min-h-0 max-md:flex-1 md:max-h-[calc(100dvh-32px)] md:rounded-[21px] md:pb-0 min-[1100px]:h-[650px] min-[1100px]:overflow-hidden"
       >
         <div className="flex h-[44px] items-center justify-between px-4 pt-[20px] min-[1100px]:px-[26px]">
           {step === "format" || step === "done" ? (
