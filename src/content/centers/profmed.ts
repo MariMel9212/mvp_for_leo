@@ -18,7 +18,7 @@ export const profmedCenter: CenterPageData = {
     { icon: "rooms", label: "Палаты на 1, 2 и 4" },
     { icon: "dining", label: "Столовая" },
     { icon: "living", label: "Зона отдыха" },
-    { icon: "group", label: "Приём врача" },
+    { icon: "group", label: "Мед. персонал" },
   ],
   schedule: [],
   staff: {
