@@ -2,7 +2,7 @@ import type { CenterPageData } from "@/content/centers/types";
 
 export const obrazMysliCenter: CenterPageData = {
   title: "Реабилитационно-образовательный центр в Троицке",
-  region: "Троицк",
+  region: "Московская область",
   facts: [
     { label: "Для кого:", value: "подростки 14–17 лет" },
     { label: "Формат:", value: "с проживанием" },
