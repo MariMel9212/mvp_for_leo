@@ -45,9 +45,8 @@ export const klyuchiCenter: CenterPageData = {
   ],
   staff: {
     kind: "people",
-    summary: "Над случаем вместе работают психиатр-нарколог, психотерапевт и клинический психолог.",
+    summary: "Над случаем вместе работают психиатр-нарколог, руководитель программы и клинический психолог.",
     people: [
-      { name: "Руслан Молодцов", role: "Основатель центра, психотерапевт", photo: "/centers/troitsk/staff/molodtsov.webp" },
       { name: "Алексей Гитлевич", role: "Психиатр-нарколог", photo: "/centers/klyuchi/staff/gitlevich.webp" },
       { name: "Владислав Владимиров", role: "Руководитель программы", photo: "/centers/klyuchi/staff/vladimirov.webp" },
       { name: "Наталья Бычкова", role: "Клинический психолог", photo: "/centers/klyuchi/staff/bychkova.webp" },
