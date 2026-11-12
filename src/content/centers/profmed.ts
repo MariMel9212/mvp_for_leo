@@ -61,7 +61,7 @@ export const profmedCenter: CenterPageData = {
     "Анонимно, без учёта",
     "Выезд за 30 минут",
     "Круглосуточно",
-    "Лицензия на медицинскую помощь",
+    "Медицинская лицензия",
   ],
   gallery: {
     main: { src: "/centers/profmed/ward.webp", alt: "Палата стационара", frameClassName: cover },
