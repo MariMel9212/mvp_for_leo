@@ -42,7 +42,7 @@ export const catalogCenters: CatalogCenter[] = [
     title: "Образовательный центр в Троицке",
     titleLines: ["Образовательный центр", "в Троицке"],
     course: "Курс от 1 месяца",
-    place: "Троицк",
+    place: "Московская область",
     slides: [
       { src: "/centers/troitsk/house.webp", className: "cover" },
       { src: "/centers/troitsk/attic.webp", className: "cover" },
