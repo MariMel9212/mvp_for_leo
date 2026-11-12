@@ -3,8 +3,8 @@ import type { CenterPageData } from "@/content/centers/types";
 const cover = "absolute inset-0";
 
 export const profmedCenter: CenterPageData = {
-  title: "Клиника",
-  region: "Химки",
+  title: "Детокс клиника в Химках",
+  region: "Московская область",
   facts: [
     { label: "Направления:", value: "алкоголизм, наркомания", extra: "ещё 2", extraHint: "Игромания и психические расстройства" },
     { label: "Формат:", value: "стационар и на дому" },
