@@ -164,7 +164,7 @@ export function CenterPage({ center }: { center: CenterPageData }) {
               <span className="font-medium">{fact.label}</span>
               <span className="flex items-center gap-[4px]">
                 {tie(fact.value)}
-                {fact.extra ? (
+                {fact.extra && fact.extraHint ? (
                   <button
                     type="button"
                     aria-expanded={openHint === fact.label}
@@ -173,6 +173,8 @@ export function CenterPage({ center }: { center: CenterPageData }) {
                   >
                     {fact.extra}
                   </button>
+                ) : fact.extra ? (
+                  <span>{fact.extra}</span>
                 ) : null}
               </span>
               {fact.extraHint && openHint === fact.label ? (
