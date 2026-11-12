@@ -4,7 +4,7 @@ import { CenterPage } from "@/components/center-page";
 import { obrazMysliCenter } from "@/content/centers/obraz-mysli";
 
 export const metadata: Metadata = {
-  title: "Реабилитационно-образовательный центр — Leo",
+  title: "Реабилитационно-образовательный центр в Троицке — Leo",
   description:
     "Реабилитационно-образовательный центр «Образ Мысли» для подростков 14–17 лет в Троицке. Программа «Пифагора», проживание, 200 000 ₽ в месяц.",
 };
