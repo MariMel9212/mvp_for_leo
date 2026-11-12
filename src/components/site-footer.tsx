@@ -9,8 +9,8 @@ const sections = [
   { label: "Помощь по ситуации", href: "/#situacii" },
   { label: "Шаги выздоровления", href: "/#shagi" },
   { label: "Центры", href: "/uchrezhdeniya" },
-  { label: "Про подбор", href: "/#pro-podbor" },
-  { label: "Контакты", href: "/#zayavka" },
+  { label: "Как проверяем", href: "/#pro-podbor" },
+  { label: "Консультация", href: "/#zayavka" },
 ];
 
 function ConsultButton() {

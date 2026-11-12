@@ -7,8 +7,10 @@ import { CallRequestButton } from "@/components/call-request-modal";
 import { asset } from "@/lib/base-path";
 
 const links = [
-  { label: "Про подбор", href: "/#pro-podbor" },
-  { label: "Контакты", href: "/#zayavka" },
+  { label: "Центры", href: "/uchrezhdeniya" },
+  { label: "Помощь", href: "/#situacii" },
+  { label: "Как проверяем", href: "/#pro-podbor" },
+  { label: "Консультация", href: "/#zayavka" },
 ];
 
 function MenuIcon({ open }: { open: boolean }) {
@@ -109,13 +111,13 @@ export function SiteHeader({
         {menu && open ? (
           <nav
             aria-label="Разделы"
-            className="absolute top-[calc(100%+8px)] right-0 z-30 flex w-[180px] flex-col rounded-[12px] bg-white p-2 shadow-[0_8px_24px_rgba(39,41,45,0.12)] md:hidden"
+            className="absolute top-[calc(100%+8px)] right-0 z-30 flex w-max min-w-[180px] flex-col rounded-[12px] bg-white p-2 shadow-[0_8px_24px_rgba(39,41,45,0.12)] md:hidden"
           >
             {links.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="rounded-[8px] px-3 py-2 text-16 text-[#27292d]"
+                className="rounded-[8px] px-3 py-2 text-16 whitespace-nowrap text-[#27292d]"
                 onClick={() => setOpen(false)}
               >
                 {link.label}
@@ -141,7 +143,7 @@ export function SiteHeader({
       >
         <div className="flex w-full max-w-[1200px] items-center justify-between md:h-[44px]">
           {logo}
-          <nav aria-label="Разделы" className="hidden items-center gap-[42px] md:flex">
+          <nav aria-label="Разделы" className="hidden items-center gap-6 min-[1100px]:gap-[42px] md:flex">
             {links.map((link) => (
               <Link key={link.href} href={link.href} className="text-16 text-[#27292d]">
                 {link.label}
