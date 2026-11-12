@@ -20,8 +20,8 @@ export const klyuchiCenter: CenterPageData = {
     { icon: "bath", label: "Сауна" },
     { icon: "territory", label: "Загородный дом" },
     { icon: "rooms", label: "Комнаты на 1, 2 и 4" },
-    { icon: "dining", label: "Домашнее питание" },
-    { icon: "group", label: "Групповые занятия" },
+    { icon: "dining", label: "Домашняя кухня", preview: false },
+    { icon: "group", label: "Групповые занятия", preview: false },
   ],
   schedule: [
     { time: "10:20", event: "Групповое занятие" },
