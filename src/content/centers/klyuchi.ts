@@ -45,7 +45,7 @@ export const klyuchiCenter: CenterPageData = {
   ],
   staff: {
     kind: "people",
-    summary: "Над случаем вместе работают психиатр-нарколог, руководитель программы и клинический психолог.",
+    summary: "Руководитель программы, 4\u00A0консультанта, 2\u00A0врача\u2011психиатра, врач\u2011нарколог, врач\u2011анестезиолог\u2011реаниматолог, волонтёрский состав (количество меняется).",
     people: [
       { name: "Алексей Гитлевич", role: "Психиатр-нарколог", photo: "/centers/klyuchi/staff/gitlevich.webp" },
       { name: "Владислав Владимиров", role: "Руководитель программы", photo: "/centers/klyuchi/staff/vladimirov.webp" },
