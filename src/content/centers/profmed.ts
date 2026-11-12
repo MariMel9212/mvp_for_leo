@@ -16,7 +16,7 @@ export const profmedCenter: CenterPageData = {
   },
   amenities: [
     { icon: "rooms", label: "Палаты на 1, 2 и 4" },
-    { icon: "dining", label: "Столовая" },
+    { icon: "therapy", label: "Психотерапия" },
     { icon: "living", label: "Зона отдыха" },
     { icon: "group", label: "Мед. персонал" },
   ],
